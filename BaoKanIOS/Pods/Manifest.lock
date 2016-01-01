@@ -19,8 +19,6 @@ PODS:
   - RxCocoa (2.0.0-rc.0):
     - RxSwift (~> 2.0.0-rc)
   - RxSwift (2.0.0-rc.0)
-  - RxTests (2.0.0-rc.0):
-    - RxSwift (~> 2.0.0-rc)
   - SDCycleScrollView (1.3)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
@@ -33,7 +31,6 @@ DEPENDENCIES:
   - RxBlocking (~> 2.0.0-rc)
   - RxCocoa (~> 2.0.0-rc)
   - RxSwift (~> 2.0.0-rc)
-  - RxTests (~> 2.0.0-rc)
   - SDCycleScrollView (~> 1.3)
   - SDWebImage
   - SnapKit
@@ -44,7 +41,6 @@ SPEC CHECKSUMS:
   RxBlocking: 4ed027a5307c2c5bec9c89bf2da6c9e24ca3042c
   RxCocoa: 480daa33d88e6d21f4686b975dcf9f2ebe17ac25
   RxSwift: b8452e54c1da42dbd7e12167c606911c0cd29b49
-  RxTests: 018fd6a30bb3c85ec8b22568ddd83b156110fce4
   SDCycleScrollView: 90e43636fcc8e6a7f74e8b64d87418a8e96549b4
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c

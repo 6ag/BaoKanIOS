@@ -7,7 +7,6 @@ target 'BaoKanIOS' do
     pod 'RxSwift',    '~> 2.0.0-rc'
     pod 'RxCocoa',    '~> 2.0.0-rc'
     pod 'RxBlocking', '~> 2.0.0-rc'
-    pod 'RxTests',    '~> 2.0.0-rc'
     pod 'SnapKit'
     pod 'AFNetworking'
     pod 'SDWebImage'

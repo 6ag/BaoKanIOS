@@ -9,9 +9,20 @@
 /* Begin PBXBuildFile section */
 		755E8B5F4EF16AE272269967 /* Pods_BaoKanIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */; };
 		A50FF2001C26914500D2F040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50FF1FF1C26914500D2F040 /* Assets.xcassets */; };
-		A50FF2031C26914500D2F040 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */; };
 		A50FF20E1C26914500D2F040 /* BaoKanIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF20D1C26914500D2F040 /* BaoKanIOSTests.swift */; };
 		A50FF2191C26914500D2F040 /* BaoKanIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF2181C26914500D2F040 /* BaoKanIOSUITests.swift */; };
+		A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */; };
+		A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF6FE1C365919001E9F5A /* JFCommon.swift */; };
+		A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */; };
+		A56BF7031C36670D001E9F5A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7021C36670D001E9F5A /* JFNewsTableViewController.swift */; };
+		A56BF70B1C36C702001E9F5A /* LLFlowCurveProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7051C36C702001E9F5A /* LLFlowCurveProtocol.swift */; };
+		A56BF70C1C36C702001E9F5A /* LLFlowCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7061C36C702001E9F5A /* LLFlowCurveView.swift */; };
+		A56BF70D1C36C702001E9F5A /* LLFlowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7071C36C702001E9F5A /* LLFlowLayer.swift */; };
+		A56BF70E1C36C702001E9F5A /* LLFlowSlideMenuConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7081C36C702001E9F5A /* LLFlowSlideMenuConfig.swift */; };
+		A56BF70F1C36C702001E9F5A /* LLFlowSlideMenuEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7091C36C702001E9F5A /* LLFlowSlideMenuEnum.swift */; };
+		A56BF7101C36C702001E9F5A /* LLFlowSlideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF70A1C36C702001E9F5A /* LLFlowSlideMenuVC.swift */; };
+		A56BF7131C36C790001E9F5A /* JFLeftSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7111C36C790001E9F5A /* JFLeftSlideViewController.swift */; };
+		A56BF7141C36C790001E9F5A /* JFLeftSlideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56BF7121C36C790001E9F5A /* JFLeftSlideViewController.xib */; };
 		A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279921C36392F003C773D /* AppDelegate.swift */; };
 		A5B279C31C36392F003C773D /* JFBzoneViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B279981C36392F003C773D /* JFBzoneViewController.storyboard */; };
 		A5B279C41C36392F003C773D /* JFBzoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279991C36392F003C773D /* JFBzoneViewController.swift */; };
@@ -47,6 +58,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A56BF6FA1C3644A2001E9F5A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		01DC12B5E10B2F7F1E1B571D /* Pods-BaoKanIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.release.xcconfig"; sourceTree = "<group>"; };
 		78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaoKanIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +83,17 @@
 		A50FF2141C26914500D2F040 /* BaoKanIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaoKanIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF2181C26914500D2F040 /* BaoKanIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoKanIOSUITests.swift; sourceTree = "<group>"; };
 		A50FF21A1C26914500D2F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A56BF6FE1C365919001E9F5A /* JFCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommon.swift; sourceTree = "<group>"; };
+		A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFTopLabel.swift; sourceTree = "<group>"; };
+		A56BF7021C36670D001E9F5A /* JFNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsTableViewController.swift; sourceTree = "<group>"; };
+		A56BF7051C36C702001E9F5A /* LLFlowCurveProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowCurveProtocol.swift; sourceTree = "<group>"; };
+		A56BF7061C36C702001E9F5A /* LLFlowCurveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowCurveView.swift; sourceTree = "<group>"; };
+		A56BF7071C36C702001E9F5A /* LLFlowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowLayer.swift; sourceTree = "<group>"; };
+		A56BF7081C36C702001E9F5A /* LLFlowSlideMenuConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowSlideMenuConfig.swift; sourceTree = "<group>"; };
+		A56BF7091C36C702001E9F5A /* LLFlowSlideMenuEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowSlideMenuEnum.swift; sourceTree = "<group>"; };
+		A56BF70A1C36C702001E9F5A /* LLFlowSlideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowSlideMenuVC.swift; sourceTree = "<group>"; };
+		A56BF7111C36C790001E9F5A /* JFLeftSlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFLeftSlideViewController.swift; sourceTree = "<group>"; };
+		A56BF7121C36C790001E9F5A /* JFLeftSlideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFLeftSlideViewController.xib; sourceTree = "<group>"; };
 		A5B279921C36392F003C773D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B279981C36392F003C773D /* JFBzoneViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFBzoneViewController.storyboard; sourceTree = "<group>"; };
 		A5B279991C36392F003C773D /* JFBzoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFBzoneViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +206,19 @@
 			path = BaoKanIOSUITests;
 			sourceTree = "<group>";
 		};
+		A56BF7041C36C702001E9F5A /* FlowSlideMenuCore */ = {
+			isa = PBXGroup;
+			children = (
+				A56BF7051C36C702001E9F5A /* LLFlowCurveProtocol.swift */,
+				A56BF7061C36C702001E9F5A /* LLFlowCurveView.swift */,
+				A56BF7071C36C702001E9F5A /* LLFlowLayer.swift */,
+				A56BF7081C36C702001E9F5A /* LLFlowSlideMenuConfig.swift */,
+				A56BF7091C36C702001E9F5A /* LLFlowSlideMenuEnum.swift */,
+				A56BF70A1C36C702001E9F5A /* LLFlowSlideMenuVC.swift */,
+			);
+			path = FlowSlideMenuCore;
+			sourceTree = "<group>";
+		};
 		A5B279901C36392F003C773D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B279921C36392F003C773D /* AppDelegate.swift */,
+				A56BF6FE1C365919001E9F5A /* JFCommon.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -268,6 +316,8 @@
 			children = (
 				A5B2799E1C36392F003C773D /* JFNavigationController.swift */,
 				A5B2799F1C36392F003C773D /* JFTabBarController.swift */,
+				A56BF7111C36C790001E9F5A /* JFLeftSlideViewController.swift */,
+				A56BF7121C36C790001E9F5A /* JFLeftSlideViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -301,6 +351,7 @@
 			children = (
 				A5B279A41C36392F003C773D /* JFNewsViewController.storyboard */,
 				A5B279A51C36392F003C773D /* JFNewsViewController.swift */,
+				A56BF7021C36670D001E9F5A /* JFNewsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -315,6 +366,7 @@
 		A5B279A71C36392F003C773D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +482,7 @@
 		A5B279BD1C36392F003C773D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A56BF7041C36C702001E9F5A /* FlowSlideMenuCore */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -465,6 +518,7 @@
 				A50FF1F01C26914500D2F040 /* Resources */,
 				7471B2F23814B86FAF784EA0 /* Embed Pods Frameworks */,
 				9F962E4DC5E6CB3FC875A2E8 /* Copy Pods Resources */,
+				A56BF6FA1C3644A2001E9F5A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -560,9 +614,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */,
+				A56BF7141C36C790001E9F5A /* JFLeftSlideViewController.xib in Resources */,
 				A5B279C31C36392F003C773D /* JFBzoneViewController.storyboard in Resources */,
 				A5B279CB1C36392F003C773D /* JFReadViewController.storyboard in Resources */,
-				A50FF2031C26914500D2F040 /* LaunchScreen.storyboard in Resources */,
 				A5B279CD1C36392F003C773D /* JFRecViewController.storyboard in Resources */,
 				A5B279C71C36392F003C773D /* JFNewsViewController.storyboard in Resources */,
 				A50FF2001C26914500D2F040 /* Assets.xcassets in Resources */,
@@ -639,16 +694,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56BF70C1C36C702001E9F5A /* LLFlowCurveView.swift in Sources */,
 				A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */,
 				A5B279C41C36392F003C773D /* JFBzoneViewController.swift in Sources */,
+				A56BF70F1C36C702001E9F5A /* LLFlowSlideMenuEnum.swift in Sources */,
 				A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */,
+				A56BF7101C36C702001E9F5A /* LLFlowSlideMenuVC.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
+				A56BF7131C36C790001E9F5A /* JFLeftSlideViewController.swift in Sources */,
+				A56BF70B1C36C702001E9F5A /* LLFlowCurveProtocol.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
+				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
+				A56BF70E1C36C702001E9F5A /* LLFlowSlideMenuConfig.swift in Sources */,
 				A5B279C81C36392F003C773D /* JFNewsViewController.swift in Sources */,
+				A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */,
 				A5B279CE1C36392F003C773D /* JFRecViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
+				A56BF70D1C36C702001E9F5A /* LLFlowLayer.swift in Sources */,
+				A56BF7031C36670D001E9F5A /* JFNewsTableViewController.swift in Sources */,
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -791,6 +856,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -805,6 +871,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -24,8 +24,6 @@ class JFNetworkTool: NSObject {
         manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
     }
     
-    
-    
 }
 
 // MARK: - 各种网络请求
