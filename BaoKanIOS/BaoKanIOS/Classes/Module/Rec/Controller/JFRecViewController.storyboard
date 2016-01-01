@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eIy-b5-x3x">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--Rec View Controller-->
+        <scene sceneID="bEA-Ia-56H">
+            <objects>
+                <viewController id="YqF-iB-QXB" customClass="JFRecViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Wg-Pa-n7O"/>
+                        <viewControllerLayoutGuide type="bottom" id="0gf-0A-Kbk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5EE-C4-LR0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="j2q-v6-XHQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pl9-12-FMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792" y="405"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xox-oU-ZRj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eIy-b5-x3x" customClass="JFNavigationController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q7U-vc-sa5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YqF-iB-QXB" kind="relationship" relationship="rootViewController" id="gRN-5z-mWg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3A-1R-tYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260" y="405"/>
+        </scene>
+    </scenes>
+</document>
