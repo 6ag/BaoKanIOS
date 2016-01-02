@@ -17,12 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        JFProgressHUD.setupProgressHUD() // 配置HUD
+        setupRootViewController()        // 配置控制器
+        
+        return true
+    }
+    
+    private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let slideMenuController = LLFlowSlideMenuVC(mainViewController: JFTabBarController(), leftViewController: JFLeftSlideViewController())
         window?.rootViewController = slideMenuController
         window?.makeKeyAndVisible()
-        
-        return true
     }
     
     func applicationWillResignActive(application: UIApplication) {
