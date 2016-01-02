@@ -19,7 +19,7 @@ class JFNewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor(colorLiteralRed: Float(Float(arc4random_uniform(10)) / 10.0), green: 0, blue: 0, alpha: 0.5)
+        self.tableView.backgroundColor = UIColor(colorLiteralRed: Float(Float(arc4random_uniform(10)) / 10.0), green: 0.5, blue: 0.5, alpha: 1.0)
         
     }
     
