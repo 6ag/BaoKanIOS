@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AFNetworking
+import Alamofire
 
 class JFNetworkTool: NSObject {
     
@@ -16,14 +16,7 @@ class JFNetworkTool: NSObject {
     
     /// 网络工具类单例
     static let shareNetworkTool = JFNetworkTool()
-    private var manager: AFHTTPSessionManager
-    
-    override init() {
-        let baseURL = "http://wp.baokan.name/"
-        manager = AFHTTPSessionManager(baseURL: NSURL(string: baseURL))
-        manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
-    }
-    
+
 }
 
 // MARK: - 各种网络请求
@@ -38,12 +31,8 @@ extension JFNetworkTool {
      */
     func get(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
         
-        manager.GET(URLString, parameters: parameters, progress: { (progress) -> Void in
-            
-            }, success: { (_, result) -> Void in
-                finished(success: true, flag: false, result: result as? [String: AnyObject], error: nil)
-            }) { (_, error) -> Void in
-                finished(success: false, flag: false, result: nil, error: error)
+        Alamofire.request(.GET, URLString).response { request, response, data, error in
+            print(response)
         }
     }
     
@@ -55,13 +44,8 @@ extension JFNetworkTool {
      - parameter finished:   完成回调
      */
     func post(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
-        
-        manager.POST(URLString, parameters: parameters, progress: { (progress) -> Void in
-            
-            }, success: { (_, result) -> Void in
-                finished(success: true, flag: false, result: result as? [String: AnyObject], error: nil)
-            }) { (_, error) -> Void in
-                finished(success: false, flag: false, result: nil, error: error)
+        Alamofire.request(.GET, URLString).responseJSON { (response) -> Void in
+            print(response)
         }
     }
 }
