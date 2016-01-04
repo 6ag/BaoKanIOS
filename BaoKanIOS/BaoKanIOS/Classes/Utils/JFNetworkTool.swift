@@ -20,8 +20,18 @@ class JFNetworkTool: NSObject {
     
     override init() {
         let baseURL = "http://wp.baokan.name/"
-        manager = AFHTTPSessionManager(baseURL: NSURL(string: baseURL))
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        config.timeoutIntervalForRequest = 45
+        
+        manager = AFHTTPSessionManager(baseURL: NSURL(string: baseURL), sessionConfiguration: config)
+        manager.operationQueue.maxConcurrentOperationCount = 3
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.requestSerializer.stringEncoding = NSUTF8StringEncoding
         manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
+        manager.responseSerializer.acceptableContentTypes?.insert("text/html")
+        manager.responseSerializer.acceptableContentTypes?.insert("text/json")
+        manager.responseSerializer.acceptableContentTypes?.insert("application/json")
     }
     
 }
@@ -41,6 +51,7 @@ extension JFNetworkTool {
         manager.GET(URLString, parameters: parameters, progress: { (progress) -> Void in
             
             }, success: { (_, result) -> Void in
+                print(result)
                 finished(success: true, flag: false, result: result as? [String: AnyObject], error: nil)
             }) { (_, error) -> Void in
                 finished(success: false, flag: false, result: nil, error: error)

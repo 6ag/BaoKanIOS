@@ -21,6 +21,16 @@ class JFNewsTableViewController: UITableViewController {
         
         self.tableView.backgroundColor = UIColor(colorLiteralRed: Float(Float(arc4random_uniform(10)) / 10.0), green: 0.5, blue: 0.5, alpha: 1.0)
         
+        loadData()
+        
+    }
+    
+    private func loadData() {
+        JFNetworkTool.shareNetworkTool.get("http://blog.6ag.cn/wp-json/wp/v2/posts?per_page=1", parameters: nil) { (success, flag, result, error) -> () in
+            if success == true {
+                print(result)
+            }
+        }
     }
     
     // MARK: - Table view data source
