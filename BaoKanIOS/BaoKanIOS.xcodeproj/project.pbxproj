@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		755E8B5F4EF16AE272269967 /* Pods_BaoKanIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */; };
-		A50FF2001C26914500D2F040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50FF1FF1C26914500D2F040 /* Assets.xcassets */; };
 		A50FF20E1C26914500D2F040 /* BaoKanIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF20D1C26914500D2F040 /* BaoKanIOSTests.swift */; };
 		A50FF2191C26914500D2F040 /* BaoKanIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF2181C26914500D2F040 /* BaoKanIOSUITests.swift */; };
 		A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */; };
@@ -39,6 +38,8 @@
 		A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279BB1C36392F003C773D /* JFNetworkTool.swift */; };
 		A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279BC1C36392F003C773D /* JFProgressHUD.swift */; };
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
+		FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963C1C3A65E900046824 /* Assets.xcassets */; };
+		FBF0963F1C3A65E900046824 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963D1C3A65E900046824 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,9 +75,7 @@
 		01DC12B5E10B2F7F1E1B571D /* Pods-BaoKanIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.release.xcconfig"; sourceTree = "<group>"; };
 		78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaoKanIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF1F21C26914500D2F040 /* BaoKanIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoKanIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50FF1FF1C26914500D2F040 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		A50FF2021C26914500D2F040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A50FF2041C26914500D2F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		A50FF2091C26914500D2F040 /* BaoKanIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaoKanIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF20D1C26914500D2F040 /* BaoKanIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoKanIOSTests.swift; sourceTree = "<group>"; };
 		A50FF20F1C26914500D2F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +110,8 @@
 		A5B279BC1C36392F003C773D /* JFProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressHUD.swift; sourceTree = "<group>"; };
 		A5B279C11C36392F003C773D /* BaoKanIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaoKanIOS.xcdatamodel; sourceTree = "<group>"; };
 		CD8416C2AE2F58BAC0DC55D5 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FBF0963C1C3A65E900046824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = BaoKanIOS/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		FBF0963D1C3A65E900046824 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,9 +491,9 @@
 		A5B279BE1C36392F003C773D /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				A50FF1FF1C26914500D2F040 /* Assets.xcassets */,
+				FBF0963C1C3A65E900046824 /* Assets.xcassets */,
+				FBF0963D1C3A65E900046824 /* Info.plist */,
 				A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */,
-				A50FF2041C26914500D2F040 /* Info.plist */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -620,7 +621,8 @@
 				A5B279CB1C36392F003C773D /* JFReadViewController.storyboard in Resources */,
 				A5B279CD1C36392F003C773D /* JFRecViewController.storyboard in Resources */,
 				A5B279C71C36392F003C773D /* JFNewsViewController.storyboard in Resources */,
-				A50FF2001C26914500D2F040 /* Assets.xcassets in Resources */,
+				FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */,
+				FBF0963F1C3A65E900046824 /* Info.plist in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

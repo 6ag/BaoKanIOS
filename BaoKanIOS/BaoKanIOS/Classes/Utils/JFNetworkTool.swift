@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AFNetworking
+import Alamofire
 
 class JFNetworkTool: NSObject {
     
@@ -16,24 +16,6 @@ class JFNetworkTool: NSObject {
     
     /// 网络工具类单例
     static let shareNetworkTool = JFNetworkTool()
-    private var manager: AFHTTPSessionManager
-    
-    override init() {
-        let baseURL = "http://wp.baokan.name/"
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        config.timeoutIntervalForRequest = 45
-        
-        manager = AFHTTPSessionManager(baseURL: NSURL(string: baseURL), sessionConfiguration: config)
-        manager.operationQueue.maxConcurrentOperationCount = 3
-        manager.requestSerializer = AFJSONRequestSerializer()
-        manager.responseSerializer = AFJSONResponseSerializer()
-        manager.requestSerializer.stringEncoding = NSUTF8StringEncoding
-        manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
-        manager.responseSerializer.acceptableContentTypes?.insert("text/html")
-        manager.responseSerializer.acceptableContentTypes?.insert("text/json")
-        manager.responseSerializer.acceptableContentTypes?.insert("application/json")
-    }
-    
 }
 
 // MARK: - 各种网络请求
@@ -48,13 +30,8 @@ extension JFNetworkTool {
      */
     func get(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
         
-        manager.GET(URLString, parameters: parameters, progress: { (progress) -> Void in
-            
-            }, success: { (_, result) -> Void in
-                print(result)
-                finished(success: true, flag: false, result: result as? [String: AnyObject], error: nil)
-            }) { (_, error) -> Void in
-                finished(success: false, flag: false, result: nil, error: error)
+        Alamofire.request(.GET, URLString).response { request, response, data, error in
+            print(response)
         }
     }
     
@@ -66,13 +43,8 @@ extension JFNetworkTool {
      - parameter finished:   完成回调
      */
     func post(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
-        
-        manager.POST(URLString, parameters: parameters, progress: { (progress) -> Void in
-            
-            }, success: { (_, result) -> Void in
-                finished(success: true, flag: false, result: result as? [String: AnyObject], error: nil)
-            }) { (_, error) -> Void in
-                finished(success: false, flag: false, result: nil, error: error)
+        Alamofire.request(.GET, URLString).responseJSON { (response) -> Void in
+            print(response)
         }
     }
 }
