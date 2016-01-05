@@ -12,7 +12,7 @@ class JFNewsTableViewController: UITableViewController {
 
     var index: Int? {
         didSet {
-            print(index)
+//            print(index)
         }
     }
     
@@ -26,10 +26,8 @@ class JFNewsTableViewController: UITableViewController {
     }
     
     private func loadData() {
-        JFNetworkTool.shareNetworkTool.get("http://blog.6ag.cn/wp-json/wp/v2/posts?per_page=1", parameters: nil) { (success, flag, result, error) -> () in
-            if success == true {
-                print(result)
-            }
+        JFNetworkTool.shareNetworkTool.get("http://wp.baokan.name/api/get_page_index/", parameters: nil) { (success, result, error) -> () in
+            print(result)
         }
     }
     
