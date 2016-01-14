@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BaoKanIOS/Alamofire.framework"
+  install_framework "Pods-BaoKanIOS/MJRefresh.framework"
   install_framework "Pods-BaoKanIOS/RxBlocking.framework"
   install_framework "Pods-BaoKanIOS/RxCocoa.framework"
   install_framework "Pods-BaoKanIOS/RxSwift.framework"
@@ -96,6 +97,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BaoKanIOS/Alamofire.framework"
+  install_framework "Pods-BaoKanIOS/MJRefresh.framework"
   install_framework "Pods-BaoKanIOS/RxBlocking.framework"
   install_framework "Pods-BaoKanIOS/RxCocoa.framework"
   install_framework "Pods-BaoKanIOS/RxSwift.framework"

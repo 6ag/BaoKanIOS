@@ -57,7 +57,7 @@ class JFTabBarController: UITabBarController {
         childController.title = title
         childController.tabBarItem.title = title
         childController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
-        childController.tabBarItem.setTitleTextAttributes([NSFontAttributeName : UIFont.systemFontOfSize(13)], forState: UIControlState.Normal)
+        childController.tabBarItem.setTitleTextAttributes([NSFontAttributeName : UIFont.systemFontOfSize(12)], forState: UIControlState.Normal)
         childController.tabBarItem.image = UIImage(named: "\(imageName)_normal")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         childController.tabBarItem.selectedImage = UIImage(named: "\(imageName)_highlight")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         addChildViewController(childController)

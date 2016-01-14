@@ -88,7 +88,7 @@ class JFNewsViewController: UIViewController {
             
             // 默认控制器
             if i == 0 {
-                newsVc.index = i
+                newsVc.id = i
                 newsVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(newsVc.view)
             }
@@ -163,8 +163,8 @@ extension JFNewsViewController: UIScrollViewDelegate {
         contentScrollView.addSubview(newsVc.view)
         newsVc.view.frame = CGRect(x: CGFloat(Int(index)) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
-        // 这里传递数据
-        newsVc.index = Int(index)
+        // 这里传递数据  分类id
+        newsVc.id = Int(index)
         
     }
     

@@ -17,10 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        JFProgressHUD.setupProgressHUD() // 配置HUD
-        setupRootViewController()        // 配置控制器
+        setupGlobalStyle()        // 配置全局样式
+        setupRootViewController() // 配置控制器
         
         return true
+    }
+    
+    private func setupGlobalStyle() {
+        UIApplication.sharedApplication().statusBarHidden = false
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        JFProgressHUD.setupProgressHUD() // 配置HUD
     }
     
     private func setupRootViewController() {

@@ -10,6 +10,8 @@
 		755E8B5F4EF16AE272269967 /* Pods_BaoKanIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */; };
 		A50FF20E1C26914500D2F040 /* BaoKanIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF20D1C26914500D2F040 /* BaoKanIOSTests.swift */; };
 		A50FF2191C26914500D2F040 /* BaoKanIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FF2181C26914500D2F040 /* BaoKanIOSUITests.swift */; };
+		A5309C271C47719900455EB8 /* JFPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5309C261C47719900455EB8 /* JFPostModel.swift */; };
+		A5309C2B1C478CE400455EB8 /* JFNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */; };
 		A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */; };
 		A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF6FE1C365919001E9F5A /* JFCommon.swift */; };
 		A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */; };
@@ -82,6 +84,8 @@
 		A50FF2141C26914500D2F040 /* BaoKanIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaoKanIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF2181C26914500D2F040 /* BaoKanIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoKanIOSUITests.swift; sourceTree = "<group>"; };
 		A50FF21A1C26914500D2F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5309C261C47719900455EB8 /* JFPostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPostModel.swift; sourceTree = "<group>"; };
+		A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsCell.swift; sourceTree = "<group>"; };
 		A56BF6FE1C365919001E9F5A /* JFCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommon.swift; sourceTree = "<group>"; };
 		A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFTopLabel.swift; sourceTree = "<group>"; };
 		A56BF7021C36670D001E9F5A /* JFNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsTableViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 		A5B279941C36392F003C773D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5309C261C47719900455EB8 /* JFPostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */,
+				A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -710,7 +716,9 @@
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
 				A56BF70E1C36C702001E9F5A /* LLFlowSlideMenuConfig.swift in Sources */,
+				A5309C2B1C478CE400455EB8 /* JFNewsCell.swift in Sources */,
 				A5B279C81C36392F003C773D /* JFNewsViewController.swift in Sources */,
+				A5309C271C47719900455EB8 /* JFPostModel.swift in Sources */,
 				A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */,
 				A5B279CE1C36392F003C773D /* JFRecViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,

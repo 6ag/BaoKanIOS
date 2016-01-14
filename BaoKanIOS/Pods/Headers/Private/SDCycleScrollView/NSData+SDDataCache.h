@@ -1,1 +1,0 @@
-../../../SDCycleScrollView/SDCycleScrollView/Lib/SDCycleScrollView/NSData+SDDataCache.h

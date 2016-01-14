@@ -13,6 +13,7 @@ target 'BaoKanIOS' do
     pod 'SDCycleScrollView','~> 1.3'
     pod 'Alamofire'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+    pod 'MJRefresh'
 end
 
 target 'BaoKanIOSTests' do

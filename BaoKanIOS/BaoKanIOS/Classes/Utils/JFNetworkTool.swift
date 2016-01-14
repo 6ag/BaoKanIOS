@@ -29,9 +29,9 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func get(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
+    func get(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) -> () {
         
-        Alamofire.request(.GET, URLString).response { request, response, data, error in
+        Alamofire.request(.GET, URLString, parameters: parameters).response { request, response, data, error in
             if data != nil {
                 if let jsonString = String(data: data!, encoding: NSUTF8StringEncoding) {
                     if let dataFromString = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
@@ -61,9 +61,9 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func post(URLString: String, parameters: AnyObject?, finished: NetworkFinished) -> () {
+    func post(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) -> () {
         
-        Alamofire.request(.POST, URLString).response { request, response, data, error in
+        Alamofire.request(.POST, URLString, parameters: parameters).response { request, response, data, error in
             if data != nil {
                 if let jsonString = String(data: data!, encoding: NSUTF8StringEncoding) {
                     if let dataFromString = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
