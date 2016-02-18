@@ -13,7 +13,7 @@ import SwiftyJSON
 class JFNetworkTool: NSObject {
     
     /// 网络请求回调闭包 success:是否成功  flag:预留参数  result:字典数据 error:错误信息
-    typealias NetworkFinished = (success: Bool, result: [String: JSON]?, error: NSError?) -> ()
+    typealias NetworkFinished = (success: Bool, result: JSON?, error: NSError?) -> ()
     
     /// 网络工具类单例
     static let shareNetworkTool = JFNetworkTool()
@@ -29,26 +29,18 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func get(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) -> () {
+    func get(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
-        Alamofire.request(.GET, URLString, parameters: parameters).response { request, response, data, error in
-            if data != nil {
-                if let jsonString = String(data: data!, encoding: NSUTF8StringEncoding) {
-                    if let dataFromString = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                        if let result = JSON(data: dataFromString).dictionary {
-                            finished(success: true, result: result, error: nil)
-                            return
-                        }
-                        finished(success: false, result: nil, error: error)
-                        return
-                    }
-                    finished(success: false, result: nil, error: error)
-                    return
+        Alamofire.request(.GET, URLString, parameters: parameters).responseJSON { (response) -> Void in
+            if let data = response.data {
+                let json = JSON(data: data)
+                if json["err_msg"].string == "success" {
+                    finished(success: true, result: json, error: nil)
+                } else {
+                    finished(success: false, result: nil, error: response.result.error)
                 }
-                finished(success: false, result: nil, error: error)
-                return
             } else {
-                finished(success: false, result: nil, error: error)
+                finished(success: false, result: nil, error: response.result.error)
             }
         }
         
@@ -61,26 +53,18 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func post(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) -> () {
+    func post(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
-        Alamofire.request(.POST, URLString, parameters: parameters).response { request, response, data, error in
-            if data != nil {
-                if let jsonString = String(data: data!, encoding: NSUTF8StringEncoding) {
-                    if let dataFromString = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                        if let result = JSON(data: dataFromString).dictionary {
-                            finished(success: true, result: result, error: nil)
-                            return
-                        }
-                        finished(success: false, result: nil, error: error)
-                        return
-                    }
-                    finished(success: false, result: nil, error: error)
-                    return
+        Alamofire.request(.POST, URLString, parameters: parameters).responseJSON { (response) -> Void in
+            if let data = response.data {
+                let json = JSON(data: data)
+                if json["err_msg"].string == "success" {
+                    finished(success: true, result: json, error: nil)
+                } else {
+                    finished(success: false, result: nil, error: response.result.error)
                 }
-                finished(success: false, result: nil, error: error)
-                return
             } else {
-                finished(success: false, result: nil, error: error)
+                finished(success: false, result: nil, error: response.result.error)
             }
         }
 

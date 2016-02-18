@@ -19,3 +19,5 @@ let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 
  /// 屏幕bounds
 let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
+
+let BASE_URL = "http://www.baokan.name/"

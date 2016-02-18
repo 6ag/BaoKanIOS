@@ -8,18 +8,19 @@
 
 import UIKit
 import SDCycleScrollView
+import MJRefresh
 
 class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
-    /// 分类id
-    var id: Int? {
+    /// 分类数据 （父id, 本身id）
+    var classData: (classid: Int, id: Int)? {
         didSet {
-            loadNews(70, page: 1)
+            loadNews(classData!.classid, id: classData!.id, pageIndex: 1)
         }
     }
     
     /// 模型数组
-    var postArray: [JFPostModel] = []
+    var postArray: [JFArticleModel] = []
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
@@ -30,6 +31,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 100
         prepareScrollView()
+        
     }
     
     /**
@@ -53,68 +55,73 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     /**
      根据分类id、页码加载数据
      
-     - parameter categoryId: 分类id
-     - parameter page:       页码
+     - parameter classid:   分类id
+     - parameter pageIndex: 页码
      */
-    private func loadNews(categoryId: Int, page: Int) {
+    private func loadNews(classid: Int, id: Int, pageIndex: Int) {
         
         let parameters = [
-            "id" : categoryId,
-            "page" : page
+            "table" : "news",
+            "classid" : classid,
+            "id" : id,
+            "pageIndex" : pageIndex
         ]
         
         JFProgressHUD.showWithStatus("正在加载")
-        JFNetworkTool.shareNetworkTool.get("http://wp.baokan.name/api/get_category_posts", parameters: parameters) { (success, result, error) -> () in
+        JFNetworkTool.shareNetworkTool.get("http://www.baokan.name/e/api/getNewsList.php", parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             JFProgressHUD.dismiss()
             if success == true {
+                
                 if let successResult = result {
+                    print(successResult)
                     
-                    // 返回条数
-                    for index in 0..<successResult["count"]!.intValue {
+                    let data = successResult["data"][0].arrayValue
+                    
+                    for article in data {
                         
-                        let postDict = successResult["posts"]!.arrayValue[index].dictionaryValue
-                        
-                        // 取出需要的数据
-                        let title = postDict["title"]!.stringValue
-                        let content = postDict["content"]!.stringValue
-                        let date = postDict["date"]!.stringValue
-                        let thumbnailUrl = postDict["thumbnail"]!.stringValue
-                        let views = postDict["custom_fields"]!.dictionaryValue["views"]!.arrayValue.first!.stringValue
-                        let comment_count = postDict["comment_count"]!.stringValue
-                        let id = postDict["id"]!.stringValue
-                        let nickname = postDict["author"]!.dictionaryValue["nickname"]!.stringValue
-                        
-                        let dict = [
-                            "title" : title,
-                            "content" : content,
-                            "date" : date,
-                            "thumbnailUrl" : thumbnailUrl,
-                            "views" : views,
-                            "comment_count" : comment_count,
-                            "id": id,
-                            "nickname" : nickname
+                        var dict = [
+                            "title" : article["title"].string!,          // 文章标题
+                            "bclassid" : article["bclassid"].string!,    // 终极栏目id
+                            "classid" : article["classid"].string!,      // 当前子分类
+                            "newstime" : article["newstime"].string!,    // 发布时间
+                            "created_at" : article["created_at"].string!,// 创建文章时间戳
+                            "username" : article["username"].string!,    // 用户名
+                            "onclick" : article["onclick"].string!,      // 点击量
+                            "smalltext" : article["smalltext"].string!,  // 简介
+                            "id" : article["id"].string!,                // 文章id
+                            "classname" : article["classname"].string!,  // 分类名称
+                            "table" : article["table"].string!,          // 数据表名
+                            "titleurl" : "\(BASE_URL)\(article["titleurl"].string!)", // 文章url
                         ]
                         
-                        // 字典转模型
-                        let postModel = JFPostModel(dict: dict)
-                        
-                        // 如果字典中不包含模型对象才存入
-                        if self.postArray.contains(postModel) == false {
-                            self.postArray.append(postModel)
+                        // 标题图片可能无值
+                        if article["titlepic"].string != nil {
+                            dict["titlepic"] = article["titlepic"].string!
+                            
+                            let postModel = JFArticleModel(dict: dict)
+                            
+                            // 如果字典中不包含模型对象才存入
+                            if self.postArray.contains(postModel) == false {
+                                self.postArray.append(postModel)
+                            }
+                            
+                        } else {
+                            // 如果无图，就跳过
+                            continue
                         }
                         
                     }
                     
+                    // 刷新表格
+                    self.tableView.reloadData()
+                    
+                } else {
+                    print("error:\(error)")
                 }
                 
-                // 刷新表格
-                self.tableView.reloadData()
-                
-            } else {
-                print("error:\(error)")
             }
-            
         }
+        
     }
     
     // MARK: - Table view data source
@@ -135,49 +142,11 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         return cell
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-    return true
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    */
     
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
     
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
     
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }

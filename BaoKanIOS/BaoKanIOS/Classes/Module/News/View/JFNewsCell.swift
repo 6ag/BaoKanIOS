@@ -11,12 +11,12 @@ import SDWebImage
 
 class JFNewsCell: UITableViewCell {
     
-    var postModel: JFPostModel? {
+    var postModel: JFArticleModel? {
         didSet {
-            iconView.sd_setImageWithURL(NSURL(string: postModel!.thumbnailUrl!), placeholderImage: UIImage(named: "navigation_logo"))
+            iconView.sd_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholderImage: UIImage(named: "navigation_logo"))
             titleLabel.text = postModel!.title
-            dateLabel.text = postModel!.date
-            readCountLabel.text = "阅读量: \(postModel!.views!)"
+            dateLabel.text = postModel!.newstime
+            readCountLabel.text = "阅读量: \(postModel!.onclick!)"
         }
     }
     

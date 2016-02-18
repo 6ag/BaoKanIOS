@@ -19,7 +19,7 @@ class JFNewsViewController: UIViewController {
     /// 标签按钮旁的加号按钮
     @IBOutlet weak var addButton: UIButton!
     // 顶部标签数组
-    private var topTitles: [String]?
+    private var topTitles: [[String : String]]?
     
     // MARK: - 视图生命周期
     override func viewDidLoad() {
@@ -48,11 +48,18 @@ class JFNewsViewController: UIViewController {
     private func addContent() {
         
         // 初始化标签数组
-        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("topTitles") as? [String] {
+        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("topTitles") as? [[String : String]] {
             self.topTitles = topTitles;
         } else {
             // 如果本地没有数据则初始化并保存到本地
-            let topTitles = ["头条", "业界", "行情", "专题", "独家", "传统文学", "企业", "作家风采", "访谈", "维权", "业者动态", "活动", "风月", "八卦", "社会", "图文", "游戏", "影视动画", "政策", "写作指导", "求职招聘", "征稿", "写作素材", "软件", "数据", "专栏"]
+            let topTitles = [
+                ["classid" : "1", "id" : "2", "classname": "网文快讯"],
+                ["classid" : "1", "id" : "12", "classname": "网文ＩＰ"],
+                ["classid" : "1", "id" : "21", "classname": "媒体视角"],
+                ["classid" : "1", "id" : "394", "classname": "传统文学"],
+                ["classid" : "1", "id" : "395", "classname": "热门专题"],
+                ["classid" : "1", "id" : "396", "classname": "独家报道"]
+            ]
             NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "topTitles")
             self.topTitles = topTitles
         }
@@ -63,7 +70,7 @@ class JFNewsViewController: UIViewController {
         for var i = 0; i < topTitles?.count; i++ {
             
             let label = JFTopLabel()
-            label.text = topTitles![i]
+            label.text = topTitles![i]["classname"]
             label.tag = i
             label.scale = i == 0 ? 1.0 : 0.0
             label.userInteractionEnabled = true
@@ -88,7 +95,7 @@ class JFNewsViewController: UIViewController {
             
             // 默认控制器
             if i == 0 {
-                newsVc.id = i
+                newsVc.classData = (Int(topTitles![0]["classid"]!)!, Int(topTitles![0]["id"]!)!)
                 newsVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(newsVc.view)
             }
@@ -128,10 +135,10 @@ extension JFNewsViewController: UIScrollViewDelegate {
     // 滚动结束后触发 代码导致
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         
-        let index = scrollView.contentOffset.x / scrollView.frame.size.width
+        let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         
         // 滚动标题栏
-        let titleLabel = topScrollView.subviews[Int(index)]
+        let titleLabel = topScrollView.subviews[index]
         var offsetX = titleLabel.center.x - topScrollView.frame.size.width * 0.5
         let offsetMax = topScrollView.contentSize.width - topScrollView.frame.size.width
         
@@ -146,14 +153,14 @@ extension JFNewsViewController: UIScrollViewDelegate {
         
         // 恢复其他label缩放
         for var i = 0; i < topTitles?.count; i++ {
-            if i != Int(index) {
+            if i != index {
                 let topLabel = topScrollView.subviews[i] as! JFTopLabel
                 topLabel.scale = 0.0
             }
         }
         
         // 获取需要展示的控制器
-        let newsVc = childViewControllers[Int(index)] as! JFNewsTableViewController
+        let newsVc = childViewControllers[index] as! JFNewsTableViewController
         
         // 如果已经展示则直接返回
         if newsVc.view.superview != nil {
@@ -161,10 +168,10 @@ extension JFNewsViewController: UIScrollViewDelegate {
         }
         
         contentScrollView.addSubview(newsVc.view)
-        newsVc.view.frame = CGRect(x: CGFloat(Int(index)) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
+        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
-        // 这里传递数据  分类id
-        newsVc.id = Int(index)
+        // 传递分类数据
+        newsVc.classData = (Int(topTitles![index]["classid"]!)!, Int(topTitles![index]["id"]!)!)
         
     }
     
