@@ -14,8 +14,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
 {
     
     /// 分类数据 （父id, 本身id）
-    var classData: (classid: Int, id: Int)?
-        {
+    var classData: (classid: Int, id: Int)? {
         didSet {
             if pageIndex == 1 {
                 tableView.mj_header.beginRefreshing()
@@ -27,7 +26,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     var pageIndex = 1;
     
     /// 模型数组
-    var postArray: [JFArticleListModel] = []
+    var articleList: [JFArticleListModel] = []
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
@@ -91,7 +90,6 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     private func loadNews(classid: Int, id: Int, pageIndex: Int, method: Int)
     {
-        print(id)
         let parameters = [
             "table" : "news",
             "classid" : classid,
@@ -99,9 +97,8 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             "pageIndex" : pageIndex,
         ]
         
-        JFNetworkTool.shareNetworkTool.get("http://www.baokan.name/e/api/getNewsList.php", parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+        JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             if success == true {
-                
                 if let successResult = result {
                     
                     let data = successResult["data"][0].arrayValue.reverse()
@@ -111,7 +108,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         var dict = [
                             "title" : article["title"].string!,          // 文章标题
                             "bclassid" : article["bclassid"].string!,    // 终极栏目id
-                            "classid" : article["classid"].string!,      // 当前子分类
+                            "classid" : article["classid"].string!,      // 当前子分类id
                             "newstime" : article["newstime"].string!,    // 发布时间
                             "created_at" : article["created_at"].string!,// 创建文章时间戳
                             "username" : article["username"].string!,    // 用户名
@@ -130,14 +127,14 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                             let postModel = JFArticleListModel(dict: dict)
                             
                             // 如果字典中不包含模型对象才存入
-                            if self.postArray.contains(postModel) == false {
+                            if self.articleList.contains(postModel) == false {
                                 
                                 if method == 0 {
                                     // 下拉加载最新
-                                    self.postArray.insert(postModel, atIndex: 0)
+                                    self.articleList.insert(postModel, atIndex: 0)
                                 } else {
                                     // 上拉加载更多
-                                    self.postArray.append(postModel)
+                                    self.articleList.append(postModel)
                                 }
                                 
                             }
@@ -173,19 +170,25 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return postArray.count
+        return articleList.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFNewsCell
-        cell.postModel = postArray[indexPath.row]
+        cell.postModel = articleList[indexPath.row]
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        // 请求文章详情数据
+        let currentListModel = articleList[indexPath.row]
+        let detailVc = UIStoryboard(name: "JFNewsDetailViewController", bundle: nil).instantiateInitialViewController() as! JFNewsDetailViewController
+        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
     
     

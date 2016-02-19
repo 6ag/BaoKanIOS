@@ -31,7 +31,7 @@ extension JFNetworkTool {
      */
     func get(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
-        Alamofire.request(.GET, URLString, parameters: parameters).responseJSON { (response) -> Void in
+        Alamofire.request(.GET, "\(BASE_URL)\(URLString)", parameters: parameters).responseJSON { (response) -> Void in
             if let data = response.data {
                 let json = JSON(data: data)
                 if json["err_msg"].string == "success" {

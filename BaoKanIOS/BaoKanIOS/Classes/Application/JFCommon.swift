@@ -9,7 +9,10 @@
 import UIKit
 
 /// 导航栏背景颜色 - （红色）
-let NAVIGATIONBAR_COLOR = UIColor(colorLiteralRed: 222/255.0, green: 48/255.0, blue: 49/255.0, alpha: 1)
+let NAVIGATIONBAR_RED_COLOR = UIColor.colorWithRGB(222, g: 48, b: 49)
+
+/// 导航栏背景颜色 - (白色)
+let NAVIGATIONBAR_WHITE_COLOR = UIColor.colorWithRGB(244, g: 244, b: 244)
 
  /// 屏幕宽度
 let SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
@@ -20,4 +23,4 @@ let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
  /// 屏幕bounds
 let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
 
-let BASE_URL = "http://www.baokan.name/"
+let BASE_URL = "http://www.baokan.name/e/api/"

@@ -10,12 +10,29 @@ import UIKit
 
 class JFNavigationController: UINavigationController {
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
+        changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
+    }
+    
+    private func changeBarTintColor(color: UIColor)
+    {
         // 设置全局导航栏
-        let navBar = UINavigationBar.appearance()
-        navBar.barTintColor = NAVIGATIONBAR_COLOR
+//        let navBar = UINavigationBar.appearance()
+//        navBar.barTintColor = color
+//        navBar.translucent = false
+//        navBar.barStyle = UIBarStyle.Black
+//        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        navBar.shadowImage = UIImage()
+//        navBar.titleTextAttributes = [
+//            "NSForegroundColorAttributeName" : UIColor.whiteColor(),
+//            "NSFontAttributeName" : UIFont.systemFontOfSize(22)
+//        ]
+        
+        let navBar = navigationBar
+        navBar.barTintColor = color
         navBar.translucent = false
         navBar.barStyle = UIBarStyle.Black
         navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -24,7 +41,6 @@ class JFNavigationController: UINavigationController {
             "NSForegroundColorAttributeName" : UIColor.whiteColor(),
             "NSFontAttributeName" : UIFont.systemFontOfSize(22)
         ]
-        
     }
     
     /**
@@ -33,18 +49,41 @@ class JFNavigationController: UINavigationController {
      - parameter viewController: 即将压入栈的控制器
      - parameter animated:       是否动画
      */
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(viewController: UIViewController, animated: Bool)
+    {
+        if viewControllers.count > 0 {
+            viewController.hidesBottomBarWhenPushed = true
+            changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
+            UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        } else {
+            viewController.hidesBottomBarWhenPushed = false
+        }
+        
         super.pushViewController(viewController, animated: animated)
         
         // 压入栈后创建返回按钮
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top_navigation_back"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "top_navigation_back")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal),
+            style: UIBarButtonItemStyle.Done,
+            target: self,
+            action: "back"
+        )
+    }
+    
+    override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+        
+        changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        return super.popViewControllerAnimated(animated)
     }
     
     /**
      全局返回操作
      */
-    private func back() {
-        self.popViewControllerAnimated(true)
+    @objc private func back()
+    {
+        popViewControllerAnimated(true)
     }
     
 }
