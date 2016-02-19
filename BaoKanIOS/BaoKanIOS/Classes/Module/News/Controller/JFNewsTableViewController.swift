@@ -104,14 +104,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                 
                 if let successResult = result {
                     
-                    print(successResult["pageIndex"].string)
-                    print(successResult["data"][0].arrayValue)
-                    
-                    let data = successResult["data"][0].arrayValue
-//                    
-//                    for var i = data.count - 1; i > 0; i-- {
-//                        
-//                    }
+                    let data = successResult["data"][0].arrayValue.reverse()
                     
                     for article in data {
                         
