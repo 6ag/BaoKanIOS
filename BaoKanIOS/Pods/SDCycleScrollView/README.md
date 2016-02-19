@@ -1,28 +1,19 @@
 # SDCycleScrollView（新建QQ交流群：185534916）
-## ☆☆☆ “iOS第一轮播图” ☆☆☆
-### 提示：昨天（2016.01.06）升级了pod上的代码版本，pagecontrol的小圆点自定义接口改为：
+## ☆☆☆ “iOS第一图片轮播器” ☆☆☆
 
-/** 当前分页控件小圆标颜色 */
+### 更改记录：
 
-@property (nonatomic, strong) UIColor *currentPageDotColor;
+2016.01.21 -- 修复加载时出现item size zero提示问题
 
-/** 其他分页控件小圆标颜色 */
+2016.01.15 -- 兼容assets存放的本地图片
 
-@property (nonatomic, strong) UIColor *pageDotColor;
+2016.01.06 -- 0.图片管理使用SDWebImage；1.优化内存，提升性能；2.添加图片contentmode接口；3.block监听点击接口；4.滚动到某张图片监听；5.增加自定义图片pageControl接口；6.其他等等。其中有一处接口改动：pagecontrol的小圆点自定义接口改为：currentPageDotColor、pageDotColor、currentPageDotImage、pageDotImage。
 
-/** 当前分页控件小圆标图片 */
-
-@property (nonatomic, strong) UIImage *currentPageDotImage;
-
-/** 其他分页控件小圆标图片 */
-
-@property (nonatomic, strong) UIImage *pageDotImage;
-
-
-
-无限循环自动图片轮播器(一步设置即可使用)
+           
+### 无限循环自动图片轮播器(一步设置即可使用)
 
      // 网络加载图片的轮播器
+     SDCycleScrollView *cycleScrollView = [cycleScrollViewWithFrame:frame delegate:delegate placeholderImage:placeholderImage];
      cycleScrollView.imageURLStringsGroup = imagesURLStrings;
      
      // 本地加载图片的轮播器
@@ -37,7 +28,7 @@
  
 #PS:
  
- 现已支持cocoapods导入：pod 'SDCycleScrollView','~> 1.5'
+ 现已支持cocoapods导入：pod 'SDCycleScrollView','~> 1.6'
  
  
  如需更详细的设置，参考如下：

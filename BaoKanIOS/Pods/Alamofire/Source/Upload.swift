@@ -1,6 +1,6 @@
 // Upload.swift
 //
-// Copyright (c) 2014–2015 Alamofire Software Foundation (http://alamofire.org/)
+// Copyright (c) 2014–2016 Alamofire Software Foundation (http://alamofire.org/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -359,6 +359,8 @@ extension Request {
             totalBytesSent: Int64,
             totalBytesExpectedToSend: Int64)
         {
+            if initialResponseTime == nil { initialResponseTime = CFAbsoluteTimeGetCurrent() }
+
             if let taskDidSendBodyData = taskDidSendBodyData {
                 taskDidSendBodyData(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend)
             } else {

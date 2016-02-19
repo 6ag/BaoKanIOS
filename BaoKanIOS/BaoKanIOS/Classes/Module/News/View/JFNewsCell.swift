@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import SDWebImage
+import YYWebImage
 
 class JFNewsCell: UITableViewCell {
     
-    var postModel: JFArticleModel? {
+    var postModel: JFArticleListModel? {
         didSet {
-            iconView.sd_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholderImage: UIImage(named: "navigation_logo"))
+//            iconView.sd_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholderImage: UIImage(named: "navigation_logo"), options: SDWebImageOptions.DelayPlaceholder)
+            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), options: YYWebImageOptions.ShowNetworkActivity)
             titleLabel.text = postModel!.title
             dateLabel.text = postModel!.newstime
             readCountLabel.text = "阅读量: \(postModel!.onclick!)"
@@ -67,7 +68,8 @@ class JFNewsCell: UITableViewCell {
     // MARK: - 懒加载
     private lazy var iconView: UIImageView = {
         let iconView = UIImageView()
-        
+        iconView.contentMode = UIViewContentMode.ScaleAspectFill
+        iconView.layer.masksToBounds = true
         return iconView
     }()
     private lazy var titleLabel: UILabel = {

@@ -1,5 +1,5 @@
 //
-//  JFArticleModel.swift
+//  JFArticleListModel.swift
 //  BaoKanIOS
 //
 //  Created by jianfeng on 16/1/14.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JFArticleModel: NSObject {
+class JFArticleListModel: NSObject {
     
     /// 作者昵称
     var username: String?

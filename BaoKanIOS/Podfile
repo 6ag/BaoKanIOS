@@ -8,7 +8,7 @@ target 'BaoKanIOS' do
     pod 'RxCocoa',    '~> 2.0.0-rc'
     pod 'RxBlocking', '~> 2.0.0-rc'
     pod 'SnapKit'
-    pod 'SDWebImage'
+    pod 'YYWebImage'
     pod 'SVProgressHUD'
     pod 'SDCycleScrollView','~> 1.3'
     pod 'Alamofire'

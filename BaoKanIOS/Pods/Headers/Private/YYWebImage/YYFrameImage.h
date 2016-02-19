@@ -1,0 +1,1 @@
+../../../YYWebImage/YYWebImage/Image/YYFrameImage.h

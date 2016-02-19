@@ -10,34 +10,46 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate {
+class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate
+{
     
     /// 分类数据 （父id, 本身id）
-    var classData: (classid: Int, id: Int)? {
+    var classData: (classid: Int, id: Int)?
+        {
         didSet {
-            loadNews(classData!.classid, id: classData!.id, pageIndex: 1)
+            if pageIndex == 1 {
+                tableView.mj_header.beginRefreshing()
+            }
         }
     }
     
+    // 页码
+    var pageIndex = 1;
+    
     /// 模型数组
-    var postArray: [JFArticleModel] = []
+    var postArray: [JFArticleListModel] = []
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 100
         prepareScrollView()
         
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: "updateNewData")
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: "loadMoreData")
+        
     }
     
     /**
      准备头部轮播
      */
-    private func prepareScrollView() {
+    private func prepareScrollView()
+    {
         let scrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150), delegate: self, placeholderImage: UIImage(named: "photoview_image_default_white"))
         scrollView.currentPageDotColor = UIColor.redColor()
         scrollView.pageDotColor = UIColor.blackColor()
@@ -48,34 +60,58 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.tableHeaderView = scrollView
     }
     
-    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int)
+    {
         print("点击了第\(index)张图")
+    }
+    
+    /**
+     下拉加载最新数据
+     */
+    @objc private func updateNewData()
+    {
+        loadNews(classData!.classid, id: classData!.id, pageIndex: 1, method: 0)
+    }
+    
+    /**
+     上拉加载更多数据
+     */
+    @objc private func loadMoreData()
+    {
+        loadNews(classData!.classid, id: classData!.id, pageIndex: ++pageIndex, method: 1)
     }
     
     /**
      根据分类id、页码加载数据
      
-     - parameter classid:   分类id
-     - parameter pageIndex: 页码
+     - parameter classid:   父类栏目id
+     - parameter id:        当前栏目id
+     - parameter pageIndex: 当前页码
+     - parameter method:    加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(classid: Int, id: Int, pageIndex: Int) {
-        
+    private func loadNews(classid: Int, id: Int, pageIndex: Int, method: Int)
+    {
+        print(id)
         let parameters = [
             "table" : "news",
             "classid" : classid,
             "id" : id,
-            "pageIndex" : pageIndex
+            "pageIndex" : pageIndex,
         ]
         
-        JFProgressHUD.showWithStatus("正在加载")
         JFNetworkTool.shareNetworkTool.get("http://www.baokan.name/e/api/getNewsList.php", parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
-            JFProgressHUD.dismiss()
             if success == true {
                 
                 if let successResult = result {
-                    print(successResult)
+                    
+                    print(successResult["pageIndex"].string)
+                    print(successResult["data"][0].arrayValue)
                     
                     let data = successResult["data"][0].arrayValue
+//                    
+//                    for var i = data.count - 1; i > 0; i-- {
+//                        
+//                    }
                     
                     for article in data {
                         
@@ -98,11 +134,19 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         if article["titlepic"].string != nil {
                             dict["titlepic"] = article["titlepic"].string!
                             
-                            let postModel = JFArticleModel(dict: dict)
+                            let postModel = JFArticleListModel(dict: dict)
                             
                             // 如果字典中不包含模型对象才存入
                             if self.postArray.contains(postModel) == false {
-                                self.postArray.append(postModel)
+                                
+                                if method == 0 {
+                                    // 下拉加载最新
+                                    self.postArray.insert(postModel, atIndex: 0)
+                                } else {
+                                    // 上拉加载更多
+                                    self.postArray.append(postModel)
+                                }
+                                
                             }
                             
                         } else {
@@ -111,6 +155,9 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         }
                         
                     }
+                    
+                    self.tableView.mj_header.endRefreshing()
+                    self.tableView.mj_footer.endRefreshing()
                     
                     // 刷新表格
                     self.tableView.reloadData()
@@ -126,23 +173,25 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return postArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFNewsCell
-        
         cell.postModel = postArray[indexPath.row]
-        
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

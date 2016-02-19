@@ -1,19 +1,20 @@
 PODS:
-  - Alamofire (3.1.4)
+  - Alamofire (3.2.0)
   - MJRefresh (3.1.0)
   - RxBlocking (2.0.0):
     - RxSwift (~> 2.0)
   - RxCocoa (2.0.0):
     - RxSwift (~> 2.0)
   - RxSwift (2.0.0)
-  - SDCycleScrollView (1.6):
+  - SDCycleScrollView (1.61):
     - SDWebImage (~> 3.7)
-  - SDWebImage (3.7.4):
-    - SDWebImage/Core (= 3.7.4)
-  - SDWebImage/Core (3.7.4)
-  - SnapKit (0.18.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SnapKit (0.19.1)
   - SVProgressHUD (1.1.3)
   - SwiftyJSON (2.3.2)
+  - YYWebImage (0.9.13)
 
 DEPENDENCIES:
   - Alamofire
@@ -22,10 +23,10 @@ DEPENDENCIES:
   - RxCocoa (~> 2.0.0-rc)
   - RxSwift (~> 2.0.0-rc)
   - SDCycleScrollView (~> 1.3)
-  - SDWebImage
   - SnapKit
   - SVProgressHUD
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - YYWebImage
 
 EXTERNAL SOURCES:
   SwiftyJSON:
@@ -33,19 +34,20 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
-    :commit: 929539eb6a3304eaa9153ca44041a78b85bf2ee5
+    :commit: 42bdb102d2624b143c07850ebdc1537d5b6579b6
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601
-  SDCycleScrollView: 436ccec76258f9f280365af5c07b289a71382601
-  SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
-  SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c
+  SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  YYWebImage: c0825e5595bac2e972cdce0f305a7cd04f3185f7
 
 COCOAPODS: 0.39.0

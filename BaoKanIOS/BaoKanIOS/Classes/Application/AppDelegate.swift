@@ -15,21 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
         
         return true
     }
     
-    private func setupGlobalStyle() {
+    private func setupGlobalStyle()
+    {
         UIApplication.sharedApplication().statusBarHidden = false
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         JFProgressHUD.setupProgressHUD() // 配置HUD
     }
     
-    private func setupRootViewController() {
+    private func setupRootViewController()
+    {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let slideMenuController = LLFlowSlideMenuVC(mainViewController: JFTabBarController(), leftViewController: JFLeftSlideViewController())
         window?.rootViewController = slideMenuController
