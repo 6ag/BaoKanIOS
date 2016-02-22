@@ -29,6 +29,9 @@
 		A56BF7101C36C702001E9F5A /* LLFlowSlideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF70A1C36C702001E9F5A /* LLFlowSlideMenuVC.swift */; };
 		A56BF7131C36C790001E9F5A /* JFLeftSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF7111C36C790001E9F5A /* JFLeftSlideViewController.swift */; };
 		A56BF7141C36C790001E9F5A /* JFLeftSlideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56BF7121C36C790001E9F5A /* JFLeftSlideViewController.xib */; };
+		A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56ED56D1C7AB02F009B862D /* UIView+Extension.swift */; };
+		A56ED5701C7AB5CA009B862D /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = A56ED56F1C7AB5CA009B862D /* style.css */; };
+		A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56ED5711C7ABAB0009B862D /* String+Extension.swift */; };
 		A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279921C36392F003C773D /* AppDelegate.swift */; };
 		A5B279C31C36392F003C773D /* JFBzoneViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B279981C36392F003C773D /* JFBzoneViewController.storyboard */; };
 		A5B279C41C36392F003C773D /* JFBzoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279991C36392F003C773D /* JFBzoneViewController.swift */; };
@@ -107,6 +110,9 @@
 		A56BF70A1C36C702001E9F5A /* LLFlowSlideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLFlowSlideMenuVC.swift; sourceTree = "<group>"; };
 		A56BF7111C36C790001E9F5A /* JFLeftSlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFLeftSlideViewController.swift; sourceTree = "<group>"; };
 		A56BF7121C36C790001E9F5A /* JFLeftSlideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFLeftSlideViewController.xib; sourceTree = "<group>"; };
+		A56ED56D1C7AB02F009B862D /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		A56ED56F1C7AB5CA009B862D /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		A56ED5711C7ABAB0009B862D /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		A5B279921C36392F003C773D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B279981C36392F003C773D /* JFBzoneViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFBzoneViewController.storyboard; sourceTree = "<group>"; };
 		A5B279991C36392F003C773D /* JFBzoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFBzoneViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				A55CD9051C76EDF80087CA0A /* Color+Extension.swift */,
+				A56ED56D1C7AB02F009B862D /* UIView+Extension.swift */,
+				A56ED5711C7ABAB0009B862D /* String+Extension.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -523,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */,
+				A56ED56F1C7AB5CA009B862D /* style.css */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -642,6 +651,7 @@
 				A5B279CB1C36392F003C773D /* JFReadViewController.storyboard in Resources */,
 				A5B279CD1C36392F003C773D /* JFRecViewController.storyboard in Resources */,
 				A55CD9041C76EA170087CA0A /* JFNewsDetailViewController.storyboard in Resources */,
+				A56ED5701C7AB5CA009B862D /* style.css in Resources */,
 				A5B279C71C36392F003C773D /* JFNewsViewController.storyboard in Resources */,
 				FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */,
 				FBF0963F1C3A65E900046824 /* Info.plist in Resources */,
@@ -740,10 +750,12 @@
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */,
+				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				A5B279CE1C36392F003C773D /* JFRecViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
 				A56BF70D1C36C702001E9F5A /* LLFlowLayer.swift in Sources */,
 				A56BF7031C36670D001E9F5A /* JFNewsTableViewController.swift in Sources */,
+				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

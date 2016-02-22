@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hz5-hD-UIz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hz5-hD-UIz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -14,24 +14,24 @@
                         <viewControllerLayoutGuide type="bottom" id="fuU-RQ-tUC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rwb-V9-5e0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoview_image_default_white" translatesAutoresizingMaskIntoConstraints="NO" id="HvU-g6-pnF">
-                                <rect key="frame" x="0.0" y="249" width="320" height="70"/>
+                                <rect key="frame" x="0.0" y="265" width="600" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Xk1-DA-fQL"/>
                                 </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-ZM-xaJ" userLabel="topScrollView">
-                                <rect key="frame" x="0.0" y="64" width="280" height="40"/>
+                                <rect key="frame" x="0.0" y="64" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cvn-BJ-qt9"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-2X-T8b">
-                                <rect key="frame" x="280" y="64" width="40" height="40"/>
+                                <rect key="frame" x="560" y="64" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Myr-FY-0Ym"/>
@@ -40,7 +40,7 @@
                                 <state key="normal" image="channel_nav_plus"/>
                             </button>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-EV-o5G" userLabel="contentScrollView">
-                                <rect key="frame" x="0.0" y="104" width="320" height="464"/>
+                                <rect key="frame" x="0.0" y="104" width="600" height="496"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="mqn-Xd-dLs" id="nNF-bf-4ZL"/>
@@ -66,7 +66,7 @@
                     <navigationItem key="navigationItem" title="新闻" id="UN2-ep-CMR">
                         <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="mnf-GN-Ue4">
                             <button key="customView" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Apf-Ah-TU7">
-                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <rect key="frame" x="20" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="top_navigation_menuicon"/>
                                 <state key="highlighted" image="top_navigation_menuicon_highlighted"/>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xIM-ra-rAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="692" y="370"/>
+            <point key="canvasLocation" x="1297.5" y="390.84507042253517"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AFD-bS-gwD">
@@ -102,7 +102,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Js1-Lo-eVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236" y="370"/>
+            <point key="canvasLocation" x="442.5" y="390.84507042253517"/>
         </scene>
     </scenes>
     <resources>
