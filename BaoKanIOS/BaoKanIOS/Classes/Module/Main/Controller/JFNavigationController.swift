@@ -19,18 +19,6 @@ class JFNavigationController: UINavigationController {
     
     private func changeBarTintColor(color: UIColor)
     {
-        // 设置全局导航栏
-//        let navBar = UINavigationBar.appearance()
-//        navBar.barTintColor = color
-//        navBar.translucent = false
-//        navBar.barStyle = UIBarStyle.Black
-//        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-//        navBar.shadowImage = UIImage()
-//        navBar.titleTextAttributes = [
-//            "NSForegroundColorAttributeName" : UIColor.whiteColor(),
-//            "NSFontAttributeName" : UIFont.systemFontOfSize(22)
-//        ]
-        
         let navBar = navigationBar
         navBar.barTintColor = color
         navBar.translucent = false
@@ -38,7 +26,7 @@ class JFNavigationController: UINavigationController {
         navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         navBar.shadowImage = UIImage()
         navBar.titleTextAttributes = [
-            "NSForegroundColorAttributeName" : UIColor.whiteColor(),
+            "NSForegroundColorAttributeName" : UIColor.blackColor(),
             "NSFontAttributeName" : UIFont.systemFontOfSize(22)
         ]
     }

@@ -35,6 +35,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.whiteColor()
         
     }
@@ -51,7 +52,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         case 1:
             return 1
         case 2:
-            return 5
+            return otherLinks.count
         default:
             break
         }
@@ -92,21 +93,15 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
             cell?.contentView.addSubview(webView)
             return cell!
         case 1:
-            let adButton = UIButton(type: UIButtonType.Custom)
-            adButton.setBackgroundImage(UIImage(named: "detail_ad_banner"), forState: UIControlState.Normal)
-            var cell = tableView.dequeueReusableCellWithIdentifier("detailAD")
+            var cell = tableView.dequeueReusableCellWithIdentifier("detailAD") as? JFDetailADCell
             if cell == nil {
-                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailAD")
+                cell = JFDetailADCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailAD")
             }
-            cell?.contentView.addSubview(adButton)
-            adButton.snp_makeConstraints(closure: { (make) -> Void in
-                make.edges.equalTo(UIEdgeInsets(top: 10, left: 10, bottom: -40, right: -10))
-            })
             return cell!
         case 2:
-            var cell = tableView.dequeueReusableCellWithIdentifier("detailHot") as? JFDetailOtherCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("detailOther") as? JFDetailOtherCell
             if cell == nil {
-                cell = JFDetailOtherCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailHot")
+                cell = JFDetailOtherCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailOther")
             }
             cell?.data = otherLinks[indexPath.row]
             return cell!
@@ -174,7 +169,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
             if success == true {
                 if let successResult = result {
                     
-//                    print(successResult)
+                    print(successResult)
                     
                     let otherLink = successResult["data"]["otherLink"].arrayValue
                     for link in otherLink {
@@ -198,7 +193,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
                         // 将字典添加到其他连接数组里，懒得搞模型
                         self.otherLinks.append(dict)
                         
-                        print( self.otherLinks)
+//                        print(self.otherLinks)
                     }
                     
                     let content = successResult["data"]["content"].dictionaryValue
@@ -210,7 +205,6 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
                         "titleurl" : "\(BASE_URL)\(content["titleurl"]!.string!)", // 文章url
                         "id" : content["id"]!.string!,                // 文章id
                         "classid" : content["classid"]!.string!,      // 当前子分类id
-                        
                     ]
                     
                     self.model = JFArticleDetailModel(dict: dict)

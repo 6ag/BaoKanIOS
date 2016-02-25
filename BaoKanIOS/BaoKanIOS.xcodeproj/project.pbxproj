@@ -401,8 +401,8 @@
 			children = (
 				A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */,
 				A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */,
-				A54D88541C7D62FD00EB41EA /* JFDetailOtherCell.swift */,
 				A54D88561C7D709700EB41EA /* JFDetailADCell.swift */,
+				A54D88541C7D62FD00EB41EA /* JFDetailOtherCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

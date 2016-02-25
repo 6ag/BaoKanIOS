@@ -121,7 +121,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         ]
                         
                         // 标题图片可能无值
-                        if article["titlepic"].string != nil {
+                        if article["titlepic"].string != "" {
                             dict["titlepic"] = article["titlepic"].string!
                             
                             let postModel = JFArticleListModel(dict: dict)

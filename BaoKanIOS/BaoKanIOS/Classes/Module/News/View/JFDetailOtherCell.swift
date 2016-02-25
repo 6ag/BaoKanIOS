@@ -9,7 +9,8 @@
 import UIKit
 import YYWebImage
 
-class JFDetailOtherCell: UITableViewCell {
+class JFDetailOtherCell: UITableViewCell
+{
     
     var data: [String : String]? {
         didSet {
@@ -18,21 +19,24 @@ class JFDetailOtherCell: UITableViewCell {
         }
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+    {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // 准备uI
         prepareUI()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
     /**
      准备UI
      */
-    private func prepareUI() {
+    private func prepareUI()
+    {
         contentView.addSubview(myImageView)
         contentView.addSubview(myTitleLabel)
         
@@ -44,6 +48,7 @@ class JFDetailOtherCell: UITableViewCell {
         
         myTitleLabel.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(myImageView.snp_right).offset(10)
+            make.right.equalTo(-10)
             make.centerY.equalTo(contentView)
         }
     }
@@ -54,6 +59,9 @@ class JFDetailOtherCell: UITableViewCell {
     }()
     lazy var myTitleLabel: UILabel = {
         let myTitleLabel = UILabel()
+        myTitleLabel.numberOfLines = 0
+        myTitleLabel.textColor = UIColor.colorWithRGB(0, g: 5, b: 5)
+        myTitleLabel.font = UIFont.systemFontOfSize(15)
         return myTitleLabel
     }()
     
