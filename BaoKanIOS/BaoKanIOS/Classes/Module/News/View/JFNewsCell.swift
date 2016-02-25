@@ -13,7 +13,6 @@ class JFNewsCell: UITableViewCell {
     
     var postModel: JFArticleListModel? {
         didSet {
-//            iconView.sd_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholderImage: UIImage(named: "navigation_logo"), options: SDWebImageOptions.DelayPlaceholder)
             iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), options: YYWebImageOptions.ShowNetworkActivity)
             titleLabel.text = postModel!.title
             dateLabel.text = postModel!.newstime

@@ -9,8 +9,9 @@
 import UIKit
 
 class JFTabBarController: UITabBarController {
-
-    override func viewDidLoad() {
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         // 配置tabBar图标颜色
@@ -18,13 +19,13 @@ class JFTabBarController: UITabBarController {
         
         // 添加所有子控制器
         addAllChildViewController()
-        
     }
     
     /**
      添加所有子控制器
      */
-    private func addAllChildViewController() {
+    private func addAllChildViewController()
+    {
         // 新闻
         let newsVc = UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(newsVc, title: "新闻", imageName: "tabbar_icon_news")
@@ -53,7 +54,8 @@ class JFTabBarController: UITabBarController {
      - parameter title:           标题
      - parameter imageName:       图片
      */
-    private func addChildViewController(childController: UIViewController, title: String, imageName: String) {
+    private func addChildViewController(childController: UIViewController, title: String, imageName: String)
+    {
         childController.title = title
         childController.tabBarItem.title = title
         childController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)

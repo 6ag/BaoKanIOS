@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import YYWebImage
 
-class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource {
-    
+class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource
+{
     /// 文章详情请求参数
     var articleParam: (classid: String, id: String)? {
         didSet {
             loadNewsDetail(articleParam!.classid, id: articleParam!.id)
         }
     }
+    
+    /// 其他文章连接
+    var otherLinks = [[String : String]]()
     
     /// 详情页面模型
     var model: JFArticleDetailModel? {
@@ -35,21 +39,81 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1;
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("detailCell")
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailCell")
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 5
+        default:
+            break
         }
-        cell?.contentView.addSubview(webView)
-        return cell!
+        return 0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return webView.height
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        switch indexPath.section {
+        case 0:
+            return webView.height
+        case 1:
+            return 180
+        case 2:
+            return 60
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        switch indexPath.section {
+        case 0:
+            var cell = tableView.dequeueReusableCellWithIdentifier("detailContent")
+            if cell == nil {
+                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailContent")
+            }
+            cell?.contentView.addSubview(webView)
+            return cell!
+        case 1:
+            let adButton = UIButton(type: UIButtonType.Custom)
+            adButton.setBackgroundImage(UIImage(named: "detail_ad_banner"), forState: UIControlState.Normal)
+            var cell = tableView.dequeueReusableCellWithIdentifier("detailAD")
+            if cell == nil {
+                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailAD")
+            }
+            cell?.contentView.addSubview(adButton)
+            adButton.snp_makeConstraints(closure: { (make) -> Void in
+                make.edges.equalTo(UIEdgeInsets(top: 10, left: 10, bottom: -40, right: -10))
+            })
+            return cell!
+        case 2:
+            var cell = tableView.dequeueReusableCellWithIdentifier("detailHot") as? JFDetailOtherCell
+            if cell == nil {
+                cell = JFDetailOtherCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailHot")
+            }
+            cell?.data = otherLinks[indexPath.row]
+            return cell!
+        default:
+            break
+        }
+        return UITableViewCell()
     }
     
     /**
@@ -70,7 +134,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         html.appendContentsOf("<body style=\"background:#F6F6F6\">")
         html.appendContentsOf("<div class=\"title\">\(model.title!)</div>")
         html.appendContentsOf("<div class=\"time\">\(model.lastdotime!.timeStampToString())</div>")
-        html.appendContentsOf("\(model.newstext!)")
+        html.appendContentsOf("<div class=\"container\">\(model.newstext!)</div>")
         html.appendContentsOf("</body>")
         
         html.appendContentsOf("</html>")
@@ -110,9 +174,34 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
             if success == true {
                 if let successResult = result {
                     
-                    print(successResult)
-                    let content = successResult["data"]["content"].dictionaryValue
+//                    print(successResult)
                     
+                    let otherLink = successResult["data"]["otherLink"].arrayValue
+                    for link in otherLink {
+                        
+                        var dict = [
+                            "classid" : link["classid"].string!,
+                            "id" : link["id"].string!,
+                            "title" : link["title"].string!
+                        ]
+                        
+                        // 标题图片不一定有值
+                        if let titlepic = link["titlepic"].string {
+                            if titlepic != "" {
+                                dict["titlepic"] = "\(BASE_URL)\(titlepic)"
+                            } else {
+                                dict["titlepic"] = "\(BASE_URL)\(link["notimg"].string!)"
+                            }
+                            
+                        }
+                        
+                        // 将字典添加到其他连接数组里，懒得搞模型
+                        self.otherLinks.append(dict)
+                        
+                        print( self.otherLinks)
+                    }
+                    
+                    let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
                         "title" : content["title"]!.string!,          // 文章标题
                         "username" : content["username"]!.string!,    // 用户名
@@ -121,9 +210,11 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
                         "titleurl" : "\(BASE_URL)\(content["titleurl"]!.string!)", // 文章url
                         "id" : content["id"]!.string!,                // 文章id
                         "classid" : content["classid"]!.string!,      // 当前子分类id
+                        
                     ]
                     
                     self.model = JFArticleDetailModel(dict: dict)
+                    
                 }
             } else {
                 print("error:\(error)")

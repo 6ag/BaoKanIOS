@@ -13,6 +13,8 @@
 		A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5309C261C47719900455EB8 /* JFArticleListModel.swift */; };
 		A5309C2B1C478CE400455EB8 /* JFNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */; };
 		A53A4FEC1C76B4C3008BFD78 /* JFArticleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A4FEB1C76B4C3008BFD78 /* JFArticleDetailModel.swift */; };
+		A54D88551C7D62FD00EB41EA /* JFDetailOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D88541C7D62FD00EB41EA /* JFDetailOtherCell.swift */; };
+		A54D88571C7D709700EB41EA /* JFDetailADCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D88561C7D709700EB41EA /* JFDetailADCell.swift */; };
 		A55CD9001C76D1FC0087CA0A /* JFNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CD8FF1C76D1FC0087CA0A /* JFNewsDetailViewController.swift */; };
 		A55CD9021C76E47E0087CA0A /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CD9011C76E47E0087CA0A /* api.swift */; };
 		A55CD9041C76EA170087CA0A /* JFNewsDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A55CD9031C76EA170087CA0A /* JFNewsDetailViewController.storyboard */; };
@@ -95,6 +97,8 @@
 		A5309C261C47719900455EB8 /* JFArticleListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleListModel.swift; sourceTree = "<group>"; };
 		A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsCell.swift; sourceTree = "<group>"; };
 		A53A4FEB1C76B4C3008BFD78 /* JFArticleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleDetailModel.swift; sourceTree = "<group>"; };
+		A54D88541C7D62FD00EB41EA /* JFDetailOtherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherCell.swift; sourceTree = "<group>"; };
+		A54D88561C7D709700EB41EA /* JFDetailADCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailADCell.swift; sourceTree = "<group>"; };
 		A55CD8FF1C76D1FC0087CA0A /* JFNewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsDetailViewController.swift; sourceTree = "<group>"; };
 		A55CD9011C76E47E0087CA0A /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		A55CD9031C76EA170087CA0A /* JFNewsDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFNewsDetailViewController.storyboard; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 			children = (
 				A56BF7001C365EE3001E9F5A /* JFTopLabel.swift */,
 				A5309C2A1C478CE400455EB8 /* JFNewsCell.swift */,
+				A54D88541C7D62FD00EB41EA /* JFDetailOtherCell.swift */,
+				A54D88561C7D709700EB41EA /* JFDetailADCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -743,12 +749,14 @@
 				A55CD9021C76E47E0087CA0A /* api.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
+				A54D88551C7D62FD00EB41EA /* JFDetailOtherCell.swift in Sources */,
 				A56BF70E1C36C702001E9F5A /* LLFlowSlideMenuConfig.swift in Sources */,
 				A5309C2B1C478CE400455EB8 /* JFNewsCell.swift in Sources */,
 				A5B279C81C36392F003C773D /* JFNewsViewController.swift in Sources */,
 				A55CD9001C76D1FC0087CA0A /* JFNewsDetailViewController.swift in Sources */,
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
+				A54D88571C7D709700EB41EA /* JFDetailADCell.swift in Sources */,
 				A56BF7011C365EE3001E9F5A /* JFTopLabel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				A5B279CE1C36392F003C773D /* JFRecViewController.swift in Sources */,

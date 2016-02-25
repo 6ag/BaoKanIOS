@@ -18,5 +18,9 @@
 .img-responsive {
     text-align: center;
     margin-bottom: 10px;
-    width: 90%;
+    width: 98%;
+}
+
+.container {
+    width: 100%;
 }

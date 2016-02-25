@@ -13,7 +13,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
@@ -33,7 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupRootViewController()
     {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        // 第一个版本屏蔽tabBar
         let slideMenuController = LLFlowSlideMenuVC(mainViewController: JFTabBarController(), leftViewController: JFLeftSlideViewController())
+        
+//        let slideMenuController = LLFlowSlideMenuVC(mainViewController: UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!, leftViewController: JFLeftSlideViewController())
         window?.rootViewController = slideMenuController
         window?.makeKeyAndVisible()
     }
