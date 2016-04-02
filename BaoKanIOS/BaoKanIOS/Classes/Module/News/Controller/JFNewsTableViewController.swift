@@ -39,9 +39,13 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.rowHeight = 100
         prepareScrollView()
         
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: "updateNewData")
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: "loadMoreData")
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     /**

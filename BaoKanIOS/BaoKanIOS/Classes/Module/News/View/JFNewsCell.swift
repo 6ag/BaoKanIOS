@@ -32,7 +32,7 @@ class JFNewsCell: UITableViewCell {
     }
     
     /**
-      准备UI
+     准备UI
      */
     private func prepareUI() {
         

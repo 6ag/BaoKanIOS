@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JFNewsBottomBar" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOV-3V-RC8">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUL-T0-4x1" userLabel="Back">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_back_normal"/>
+                            <connections>
+                                <action selector="didTappedBackButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ph8-kI-LAG"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhf-80-ImR" userLabel="Edit">
+                            <rect key="frame" x="64" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_edit_selected"/>
+                            <connections>
+                                <action selector="didTappedEditButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="JMf-GC-3eZ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-Ts-jCo" userLabel="Collection">
+                            <rect key="frame" x="128" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_collection_selected"/>
+                            <connections>
+                                <action selector="didTappedCollectButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="KDe-ie-Gl6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Vs-qKK" userLabel="Share">
+                            <rect key="frame" x="192" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_share_selected"/>
+                            <connections>
+                                <action selector="didTappedShareButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ice-cz-sOL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5h-0G-nc5" userLabel="Font">
+                            <rect key="frame" x="256" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_font_selected"/>
+                            <connections>
+                                <action selector="didTappedFontButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="gYR-CD-oE0"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XOV-3V-RC8" secondAttribute="trailing" id="9TT-5H-ge1"/>
+                <constraint firstAttribute="bottom" secondItem="XOV-3V-RC8" secondAttribute="bottom" id="HHl-v1-IeB"/>
+                <constraint firstItem="XOV-3V-RC8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UK0-UZ-LNl"/>
+                <constraint firstItem="XOV-3V-RC8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jU5-vs-vnq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="910" y="477"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bottom_bar_back_normal" width="40" height="40"/>
+        <image name="bottom_bar_collection_selected" width="44" height="44"/>
+        <image name="bottom_bar_edit_selected" width="30" height="30"/>
+        <image name="bottom_bar_font_selected" width="26" height="26"/>
+        <image name="bottom_bar_share_selected" width="44" height="44"/>
+    </resources>
+</document>

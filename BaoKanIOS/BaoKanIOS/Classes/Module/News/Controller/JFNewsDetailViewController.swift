@@ -9,17 +9,15 @@
 import UIKit
 import YYWebImage
 
-class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource
+class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource, JFNewsBottomBarDelegate
 {
+    // MARK: - 属性
     /// 文章详情请求参数
     var articleParam: (classid: String, id: String)? {
         didSet {
             loadNewsDetail(articleParam!.classid, id: articleParam!.id)
         }
     }
-    
-    /// 其他文章连接
-    var otherLinks = [[String : String]]()
     
     /// 详情页面模型
     var model: JFArticleDetailModel? {
@@ -29,23 +27,114 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         }
     }
     
+    /// 其他文章连接
+    var otherLinks = [[String : String]]()
+    
     /// tableView
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewDidLoad()
-    {
+    /// 底部条
+    var bottomBarView: JFNewsBottomBar!
+    /// 顶部条
+    var topBarView: UIView!
+    
+    var contentOffsetY: CGFloat = 0.0
+    
+    // MARK: - 生命周期
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        topBarView = UIView()
+        topBarView.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
+        UIApplication.sharedApplication().keyWindow?.addSubview(topBarView)
+        topBarView.snp_makeConstraints { (make) in
+            make.left.right.top.equalTo(0)
+            make.height.equalTo(20)
+        }
+        
+        // 创建BottomBar
+        bottomBarView = NSBundle.mainBundle().loadNibNamed("JFNewsBottomBar", owner: nil, options: nil).last as! JFNewsBottomBar
+        view.addSubview(bottomBarView)
+        bottomBarView.delegate = self
+        bottomBarView.snp_makeConstraints { (make) in
+            make.left.right.bottom.equalTo(0)
+            make.height.equalTo(44)
+        }
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        topBarView.removeFromSuperview()
+    }
+    
+    // MARK: - 底部条操作
+    // 开始拖拽视图
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        contentOffsetY = scrollView.contentOffset.y
+    }
+    
+    // 手指离开屏幕开始滚动
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if (scrollView.dragging) {
+            if scrollView.contentOffset.y - contentOffsetY > 5.0 {
+                // 向上拖拽 隐藏
+                bottomBarView.snp_updateConstraints(closure: { (make) in
+                    make.bottom.equalTo(44)
+                })
+                UIView.animateWithDuration(0.25, animations: { 
+                    self.view.layoutIfNeeded()
+                })
+            } else if contentOffsetY - scrollView.contentOffset.y > 5.0 {
+                // 向下拖拽 显示
+                bottomBarView.snp_updateConstraints(closure: { (make) in
+                    make.bottom.equalTo(0)
+                })
+                UIView.animateWithDuration(0.25, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
+            
+        }
+    }
+    
+    func didTappedBackButton(button: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func didTappedEditButton(button: UIButton) {
+        
+    }
+    
+    func didTappedCollectButton(button: UIButton) {
+        
+    }
+    
+    func didTappedShareButton(button: UIButton) {
+        
+    }
+    
+    func didTappedFontButton(button: UIButton) {
+        
+    }
+    
+    // MARK: - UITableView委托
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
@@ -59,8 +148,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         return 0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return webView.height
@@ -82,8 +170,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         return 5
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             var cell = tableView.dequeueReusableCellWithIdentifier("detailContent")
@@ -111,13 +198,13 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         return UITableViewCell()
     }
     
+    // MARK: - 网络请求
     /**
      加载webView内容
      
      - parameter model: 新闻模型
      */
-    func loadWebViewContent(model: JFArticleDetailModel)
-    {
+    func loadWebViewContent(model: JFArticleDetailModel) {
         // 内容页html
         var html = ""
         html.appendContentsOf("<html>")
@@ -157,13 +244,12 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
      - parameter classid: 当前子分类id
      - parameter id:      文章id
      */
-    func loadNewsDetail(classid: String, id: String)
-    {
+    func loadNewsDetail(classid: String, id: String) {
         let parameters = [
             "table" : "news",
             "classid" : classid,
             "id" : id,
-        ]
+            ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
@@ -193,7 +279,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
                         // 将字典添加到其他连接数组里，懒得搞模型
                         self.otherLinks.append(dict)
                         
-//                        print(self.otherLinks)
+                        //                        print(self.otherLinks)
                     }
                     
                     let content = successResult["data"]["content"].dictionaryValue
@@ -216,6 +302,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         }
     }
     
+    // MARK: - 懒加载
     /// webView
     lazy var webView: UIWebView = {
         let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
