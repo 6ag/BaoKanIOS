@@ -9,7 +9,7 @@
 import UIKit
 
 /// 导航栏背景颜色 - （红色）
-let NAVIGATIONBAR_RED_COLOR = UIColor.colorWithRGB(222, g: 48, b: 49)
+let NAVIGATIONBAR_RED_COLOR = UIColor.colorWithRGB(200, g: 40, b: 47)
 
 /// 导航栏背景颜色 - (白色)
 let NAVIGATIONBAR_WHITE_COLOR = UIColor.colorWithRGB(244, g: 244, b: 244)

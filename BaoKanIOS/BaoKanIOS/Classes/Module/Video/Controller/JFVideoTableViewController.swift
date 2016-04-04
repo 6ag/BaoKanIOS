@@ -1,5 +1,5 @@
 //
-//  JFNewsTableViewController.swift
+//  JFVideoTableViewController.swift
 //  BaoKanIOS
 //
 //  Created by jianfeng on 16/1/1.
@@ -10,7 +10,7 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate
+class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelegate
 {
     
     /// 分类数据 （父id, 本身id）
@@ -35,7 +35,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     {
         super.viewDidLoad()
         
-        tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
+        tableView.registerClass(JFVideoCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 100
         prepareScrollView()
         
@@ -100,6 +100,8 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
+                    
+                    print(result)
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     
@@ -175,7 +177,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFNewsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFVideoCell
         cell.postModel = articleList[indexPath.row]
         return cell
     }
@@ -185,10 +187,10 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // 请求文章详情数据
-        let currentListModel = articleList[indexPath.row]
-        let detailVc = UIStoryboard(name: "JFNewsDetailViewController", bundle: nil).instantiateInitialViewController() as! JFNewsDetailViewController
-        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
-        self.navigationController?.pushViewController(detailVc, animated: true)
+//        let currentListModel = articleList[indexPath.row]
+//        let detailVc = UIStoryboard(name: "JFNewsDetailViewController", bundle: nil).instantiateInitialViewController() as! JFNewsDetailViewController
+//        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
+//        self.navigationController?.pushViewController(detailVc, animated: true)
     }
     
     

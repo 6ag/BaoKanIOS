@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--新闻-->
+        <!--视频-->
         <scene sceneID="ckc-Uq-vFg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqn-Xd-dLs" customClass="JFNewsViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqn-Xd-dLs" customClass="JFVideoViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tUK-om-XoJ"/>
                         <viewControllerLayoutGuide type="bottom" id="fuU-RQ-tUC"/>
@@ -24,7 +24,7 @@
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-ZM-xaJ" userLabel="topScrollView">
                                 <rect key="frame" x="0.0" y="64" width="560" height="40"/>
-                                <color key="backgroundColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cvn-BJ-qt9"/>
                                 </constraints>
@@ -62,7 +62,7 @@
                             <constraint firstItem="fNF-2X-T8b" firstAttribute="leading" secondItem="V3q-ZM-xaJ" secondAttribute="trailing" id="wWM-gn-utu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="新闻" id="UN2-ep-CMR"/>
+                    <navigationItem key="navigationItem" title="视频" id="UN2-ep-CMR"/>
                     <connections>
                         <outlet property="addButton" destination="fNF-2X-T8b" id="gbC-s0-6WO"/>
                         <outlet property="contentScrollView" destination="FHU-EV-o5G" id="CSU-ks-opV"/>

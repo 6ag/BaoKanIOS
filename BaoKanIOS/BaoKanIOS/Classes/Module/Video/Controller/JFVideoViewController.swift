@@ -1,5 +1,5 @@
 //
-//  JFNewsViewController.swift
+//  JFVideoViewController.swift
 //  BaoKanIOS
 //
 //  Created by jianfeng on 15/12/20.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class JFNewsViewController: UIViewController
+class JFVideoViewController: UIViewController
 {
     /// 顶部标签按钮区域
     @IBOutlet weak var topScrollView: UIScrollView!
@@ -70,36 +70,23 @@ class JFNewsViewController: UIViewController
     private func addContent()
     {
         // 初始化标签数组
-        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("newsTopTitles") as? [[String : String]] {
+        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("videoTopTitles") as? [[String : String]] {
             self.topTitles = topTitles;
         } else {
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
-                ["bclassid" : "1", "classid" : "2", "classname": "网文快讯"],
-                ["bclassid" : "1", "classid" : "21", "classname": "媒体视角"],
-                ["bclassid" : "1", "classid" : "12", "classname": "网文IP"],
-                ["bclassid" : "1", "classid" : "396", "classname": "独家报道"],
-                ["bclassid" : "1", "classid" : "394", "classname": "传统文学"],
-                ["bclassid" : "30", "classid" : "32", "classname": "高端访谈"],
-                ["bclassid" : "30", "classid" : "33", "classname": "作家风采"],
-                ["bclassid" : "30", "classid" : "34", "classname": "维权在线"],
-                ["bclassid" : "30", "classid" : "51", "classname": "精彩活动"],
-                ["bclassid" : "30", "classid" : "212", "classname": "业者动态"],
-                ["bclassid" : "30", "classid" : "264", "classname": "企业资讯"],
-                ["bclassid" : "54", "classid" : "56", "classname": "影视动画"],
-                ["bclassid" : "54", "classid" : "57", "classname": "娱乐八卦"],
-                ["bclassid" : "54", "classid" : "58", "classname": "社会杂谈"],
-                ["bclassid" : "54", "classid" : "132", "classname": "风花雪月"],
-                ["bclassid" : "54", "classid" : "419", "classname": "体育竞技"],
-                ["bclassid" : "281", "classid" : "281", "classname": "游戏世界"],
-                ["bclassid" : "98", "classid" : "102", "classname": "政策解读"],
-                ["bclassid" : "98", "classid" : "111", "classname": "写作指导"],
-                ["bclassid" : "98", "classid" : "119", "classname": "求职招聘"],
-                ["bclassid" : "98", "classid" : "115", "classname": "征稿信息"],
-                ["bclassid" : "198", "classid" : "199", "classname": "写作素材"],
-                ["bclassid" : "198", "classid" : "203", "classname": "数据中心"]
-            ]
-            NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "newsTopTitles")
+                ["bclassid" : "317", "classid" : "325", "classname": "精彩节目"],
+                ["bclassid" : "317", "classid" : "337", "classname": "新闻采访"],
+                ["bclassid" : "317", "classid" : "342", "classname": "人物访谈"],
+                ["bclassid" : "317", "classid" : "344", "classname": "广告宣传"],
+                ["bclassid" : "317", "classid" : "348", "classname": "视频快讯"],
+                ["bclassid" : "317", "classid" : "365", "classname": "百家讲坛"],
+                ["bclassid" : "317", "classid" : "371", "classname": "社会新闻"],
+                ["bclassid" : "317", "classid" : "375", "classname": "游戏视频"],
+                ["bclassid" : "317", "classid" : "391", "classname": "影视动画"],
+                ["bclassid" : "317", "classid" : "435", "classname": "数据新闻"]
+                ]
+            NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "videoTopTitles")
             self.topTitles = topTitles
         }
         
@@ -129,14 +116,14 @@ class JFNewsViewController: UIViewController
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedTopLabel(_:))))
             
             // 添加控制器
-            let newsVc = JFNewsTableViewController()
-            addChildViewController(newsVc)
+            let videoVc = JFVideoTableViewController()
+            addChildViewController(videoVc)
             
             // 默认控制器
             if i == 0 {
-                newsVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
-                newsVc.view.frame = contentScrollView.bounds
-                contentScrollView.addSubview(newsVc.view)
+                videoVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
+                videoVc.view.frame = contentScrollView.bounds
+                contentScrollView.addSubview(videoVc.view)
             }
         }
         
@@ -169,7 +156,7 @@ class JFNewsViewController: UIViewController
 }
 
 // MARK: - scrollView代理方法
-extension JFNewsViewController: UIScrollViewDelegate
+extension JFVideoViewController: UIScrollViewDelegate
 {
     // 滚动结束后触发 代码导致
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView)
@@ -199,18 +186,18 @@ extension JFNewsViewController: UIScrollViewDelegate
         }
         
         // 获取需要展示的控制器
-        let newsVc = childViewControllers[index] as! JFNewsTableViewController
+        let videoVc = childViewControllers[index] as! JFVideoTableViewController
         
         // 如果已经展示则直接返回
-        if newsVc.view.superview != nil {
+        if videoVc.view.superview != nil {
             return
         }
         
-        contentScrollView.addSubview(newsVc.view)
-        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
+        contentScrollView.addSubview(videoVc.view)
+        videoVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        newsVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
+        videoVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
     }
     
     // 滚动结束 手势导致

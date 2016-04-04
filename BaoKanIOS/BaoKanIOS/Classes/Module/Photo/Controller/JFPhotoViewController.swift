@@ -1,5 +1,5 @@
 //
-//  JFNewsViewController.swift
+//  JFPhotoViewController.swift
 //  BaoKanIOS
 //
 //  Created by jianfeng on 15/12/20.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class JFNewsViewController: UIViewController
+class JFPhotoViewController: UIViewController
 {
     /// 顶部标签按钮区域
     @IBOutlet weak var topScrollView: UIScrollView!
@@ -53,8 +53,8 @@ class JFNewsViewController: UIViewController
     
     // MARK: - 各种自定义方法
     /**
-    准备视图
-    */
+     准备视图
+     */
     private func prepareUI()
     {
         navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
@@ -70,36 +70,58 @@ class JFNewsViewController: UIViewController
     private func addContent()
     {
         // 初始化标签数组
-        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("newsTopTitles") as? [[String : String]] {
+        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("photoTopTitles") as? [[String : String]] {
             self.topTitles = topTitles;
         } else {
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
-                ["bclassid" : "1", "classid" : "2", "classname": "网文快讯"],
-                ["bclassid" : "1", "classid" : "21", "classname": "媒体视角"],
-                ["bclassid" : "1", "classid" : "12", "classname": "网文IP"],
-                ["bclassid" : "1", "classid" : "396", "classname": "独家报道"],
-                ["bclassid" : "1", "classid" : "394", "classname": "传统文学"],
-                ["bclassid" : "30", "classid" : "32", "classname": "高端访谈"],
-                ["bclassid" : "30", "classid" : "33", "classname": "作家风采"],
-                ["bclassid" : "30", "classid" : "34", "classname": "维权在线"],
-                ["bclassid" : "30", "classid" : "51", "classname": "精彩活动"],
-                ["bclassid" : "30", "classid" : "212", "classname": "业者动态"],
-                ["bclassid" : "30", "classid" : "264", "classname": "企业资讯"],
-                ["bclassid" : "54", "classid" : "56", "classname": "影视动画"],
-                ["bclassid" : "54", "classid" : "57", "classname": "娱乐八卦"],
-                ["bclassid" : "54", "classid" : "58", "classname": "社会杂谈"],
-                ["bclassid" : "54", "classid" : "132", "classname": "风花雪月"],
-                ["bclassid" : "54", "classid" : "419", "classname": "体育竞技"],
-                ["bclassid" : "281", "classid" : "281", "classname": "游戏世界"],
-                ["bclassid" : "98", "classid" : "102", "classname": "政策解读"],
-                ["bclassid" : "98", "classid" : "111", "classname": "写作指导"],
-                ["bclassid" : "98", "classid" : "119", "classname": "求职招聘"],
-                ["bclassid" : "98", "classid" : "115", "classname": "征稿信息"],
-                ["bclassid" : "198", "classid" : "199", "classname": "写作素材"],
-                ["bclassid" : "198", "classid" : "203", "classname": "数据中心"]
+                [
+                    "bclassid" : "319",
+                    "classid" : "322",
+                    "classname": "图话网文"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "338",
+                    "classname": "娱乐八卦"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "345",
+                    "classname": "封面素材"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "350",
+                    "classname": "美女模特"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "354",
+                    "classname": "社会百态"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "357",
+                    "classname": "旅游视野"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "366",
+                    "classname": "游戏图库"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "433",
+                    "classname": "军事图秀"
+                ],
+                [
+                    "bclassid" : "319",
+                    "classid" : "434",
+                    "classname": "封面展示"
+                ]
             ]
-            NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "newsTopTitles")
+            NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "photoTopTitles")
             self.topTitles = topTitles
         }
         
@@ -129,14 +151,14 @@ class JFNewsViewController: UIViewController
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedTopLabel(_:))))
             
             // 添加控制器
-            let newsVc = JFNewsTableViewController()
-            addChildViewController(newsVc)
+            let photoVc = JFPhotoTableViewController()
+            addChildViewController(photoVc)
             
             // 默认控制器
             if i == 0 {
-                newsVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
-                newsVc.view.frame = contentScrollView.bounds
-                contentScrollView.addSubview(newsVc.view)
+                photoVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
+                photoVc.view.frame = contentScrollView.bounds
+                contentScrollView.addSubview(photoVc.view)
             }
         }
         
@@ -169,7 +191,7 @@ class JFNewsViewController: UIViewController
 }
 
 // MARK: - scrollView代理方法
-extension JFNewsViewController: UIScrollViewDelegate
+extension JFPhotoViewController: UIScrollViewDelegate
 {
     // 滚动结束后触发 代码导致
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView)
@@ -199,18 +221,18 @@ extension JFNewsViewController: UIScrollViewDelegate
         }
         
         // 获取需要展示的控制器
-        let newsVc = childViewControllers[index] as! JFNewsTableViewController
+        let photoVc = childViewControllers[index] as! JFPhotoTableViewController
         
         // 如果已经展示则直接返回
-        if newsVc.view.superview != nil {
+        if photoVc.view.superview != nil {
             return
         }
         
-        contentScrollView.addSubview(newsVc.view)
-        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
+        contentScrollView.addSubview(photoVc.view)
+        photoVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        newsVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
+        photoVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
     }
     
     // 滚动结束 手势导致

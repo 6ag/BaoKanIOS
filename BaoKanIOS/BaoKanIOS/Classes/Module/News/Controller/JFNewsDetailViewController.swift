@@ -55,7 +55,7 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         
         topBarView = UIView()
         topBarView.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
-        UIApplication.sharedApplication().keyWindow?.addSubview(topBarView)
+        view.addSubview(topBarView)
         topBarView.snp_makeConstraints { (make) in
             make.left.right.top.equalTo(0)
             make.height.equalTo(20)
@@ -106,6 +106,20 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
                 })
             }
             
+        }
+    }
+    
+    // 滚动减速结束
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        // 滚动到底部后 显示
+        if case let space = scrollView.contentOffset.y + SCREEN_HEIGHT - scrollView.contentSize.height where space > -5 && space < 5 {
+            bottomBarView.snp_updateConstraints(closure: { (make) in
+                make.bottom.equalTo(0)
+            })
+            UIView.animateWithDuration(0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
     }
     
@@ -216,7 +230,9 @@ class JFNewsDetailViewController: UIViewController, UIWebViewDelegate, UITableVi
         html.appendContentsOf("<body style=\"background:#F6F6F6\">")
         html.appendContentsOf("<div class=\"title\">\(model.title!)</div>")
         html.appendContentsOf("<div class=\"time\">\(model.lastdotime!.timeStampToString())</div>")
-        html.appendContentsOf("<div class=\"container\">\(model.newstext!)</div>")
+        
+        // 拼接内容主体时替换图片前的缩进
+        html.appendContentsOf("<div class=\"container\">\(model.newstext!.stringByReplacingOccurrencesOfString("<p style=\"text-indent: 2em; text-align: center;\"><img", withString: "<p style=\"text-align: center;\"><img"))</div>")
         html.appendContentsOf("</body>")
         
         html.appendContentsOf("</html>")

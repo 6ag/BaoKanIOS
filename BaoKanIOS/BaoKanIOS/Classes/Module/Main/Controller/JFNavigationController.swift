@@ -54,7 +54,7 @@ class JFNavigationController: UINavigationController {
             image: UIImage(named: "top_navigation_back")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal),
             style: UIBarButtonItemStyle.Done,
             target: self,
-            action: "back"
+            action: #selector(back)
         )
     }
     

@@ -32,11 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupRootViewController()
     {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-//        let slideMenuController = LLFlowSlideMenuVC(mainViewController: JFTabBarController(), leftViewController: JFLeftSlideViewController())
-        // 第一个版本屏蔽tabBar
-        let slideMenuController = LLFlowSlideMenuVC(mainViewController: UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!, leftViewController: JFLeftSlideViewController())
-        window?.rootViewController = slideMenuController
+        window?.rootViewController = JFTabBarController()
         window?.makeKeyAndVisible()
     }
     

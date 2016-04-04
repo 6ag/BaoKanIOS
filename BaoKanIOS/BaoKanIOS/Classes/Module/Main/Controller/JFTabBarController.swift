@@ -15,7 +15,7 @@ class JFTabBarController: UITabBarController {
         super.viewDidLoad()
         
         // 配置tabBar图标颜色
-        tabBar.tintColor = UIColor.redColor()
+        tabBar.tintColor = NAVIGATIONBAR_RED_COLOR
         
         // 添加所有子控制器
         addAllChildViewController()
@@ -30,17 +30,17 @@ class JFTabBarController: UITabBarController {
         let newsVc = UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(newsVc, title: "新闻", imageName: "tabbar_icon_news")
         
+        // 图秀
+        let recVc = UIStoryboard.init(name: "JFPhotoViewController", bundle: nil).instantiateInitialViewController()!
+        addChildViewController(recVc, title: "图秀", imageName: "tabbar_icon_media")
+        
+        // 视频
+        let bzoneVc = UIStoryboard.init(name: "JFVideoViewController", bundle: nil).instantiateInitialViewController()!
+        addChildViewController(bzoneVc, title: "视频", imageName: "tabbar_icon_bar")
+        
         // 阅读
         let readVc = UIStoryboard.init(name: "JFReadViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(readVc, title: "阅读", imageName: "tabbar_icon_reader")
-        
-        // 娱乐
-        let recVc = UIStoryboard.init(name: "JFRecViewController", bundle: nil).instantiateInitialViewController()!
-        addChildViewController(recVc, title: "娱乐", imageName: "tabbar_icon_media")
-        
-        // 社区
-        let bzoneVc = UIStoryboard.init(name: "JFBzoneViewController", bundle: nil).instantiateInitialViewController()!
-        addChildViewController(bzoneVc, title: "社区", imageName: "tabbar_icon_bar")
         
         // 我
         let profileVc = UIStoryboard.init(name: "JFProfileViewController", bundle: nil).instantiateInitialViewController()!
