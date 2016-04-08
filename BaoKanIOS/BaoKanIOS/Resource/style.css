@@ -22,6 +22,9 @@
 }
 
 .container {
+    background: #FFFFFF;
+}
+
+.content {
     width: 100%;
-    color: #000000;
 }

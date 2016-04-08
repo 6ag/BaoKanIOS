@@ -26,7 +26,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     var pageIndex = 1;
     
     /// 模型数组
-    var articleList: [JFArticleListModel] = []
+    var photoList: [JFArticleListModel] = []
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
@@ -35,9 +35,9 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     {
         super.viewDidLoad()
         
-        tableView.registerClass(JFPhotoCell.self, forCellReuseIdentifier: newsReuseIdentifier)
-        tableView.rowHeight = 100
-        
+        tableView.registerClass(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
+        tableView.rowHeight = 240
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
         
@@ -109,14 +109,14 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
                             let postModel = JFArticleListModel(dict: dict)
                             
                             // 如果字典中不包含模型对象才存入
-                            if self.articleList.contains(postModel) == false {
+                            if self.photoList.contains(postModel) == false {
                                 
                                 if method == 0 {
                                     // 下拉加载最新
-                                    self.articleList.insert(postModel, atIndex: 0)
+                                    self.photoList.insert(postModel, atIndex: 0)
                                 } else {
                                     // 上拉加载更多
-                                    self.articleList.append(postModel)
+                                    self.photoList.append(postModel)
                                 }
                                 
                             }
@@ -152,25 +152,23 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return articleList.count
+        return photoList.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFPhotoCell
-        cell.postModel = articleList[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFPhotoListCell
+        cell.postModel = photoList[indexPath.row]
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-//        // 请求文章详情数据
-//        let currentListModel = articleList[indexPath.row]
-//        let detailVc = UIStoryboard(name: "JFNewsDetailViewController", bundle: nil).instantiateInitialViewController() as! JFNewsDetailViewController
-//        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
-//        self.navigationController?.pushViewController(detailVc, animated: true)
+        // 请求文章详情数据
+        let currentListModel = photoList[indexPath.row]
+        let detailVc = JFPhotoDetailViewController(collectionViewLayout: UICollectionViewLayout())
+        detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
     
     

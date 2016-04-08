@@ -14,26 +14,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
+        setupJPush(launchOptions) // 配置极光推送
         
         return true
     }
     
-    private func setupGlobalStyle()
-    {
+    /**
+     配置极光推送
+     */
+    private func setupJPush(launchOptions: [NSObject: AnyObject]?) {
+        
+        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
+        
+        JPUSHService.setupWithOption(launchOptions, appKey: "8e0c2d457d44144fd2a6dc52", channel: "jpush", apsForProduction: true)
+    }
+    
+    /**
+     全局样式
+     */
+    private func setupGlobalStyle() {
         UIApplication.sharedApplication().statusBarHidden = false
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         JFProgressHUD.setupProgressHUD() // 配置HUD
     }
     
-    private func setupRootViewController()
-    {
+    /**
+     根控制器
+     */
+    private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = JFTabBarController()
         window?.makeKeyAndVisible()
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        print("didRegisterForRemoteNotificationsWithDeviceToken")
+        // 注册deviceToken
+        JPUSHService.registerDeviceToken(deviceToken)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        print("didReceiveRemoteNotification:fetchCompletionHandler")
+        // 处理远程通知
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.NewData)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("did Fail To Register For Remote Notifications With Error: \(error)")
     }
     
     func applicationWillResignActive(application: UIApplication) {

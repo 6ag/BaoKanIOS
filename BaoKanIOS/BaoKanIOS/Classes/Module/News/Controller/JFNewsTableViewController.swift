@@ -186,7 +186,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         
         // 请求文章详情数据
         let currentListModel = articleList[indexPath.row]
-        let detailVc = UIStoryboard(name: "JFNewsDetailViewController", bundle: nil).instantiateInitialViewController() as! JFNewsDetailViewController
+        let detailVc = JFNewsDetailViewController()
         detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
         self.navigationController?.pushViewController(detailVc, animated: true)
     }

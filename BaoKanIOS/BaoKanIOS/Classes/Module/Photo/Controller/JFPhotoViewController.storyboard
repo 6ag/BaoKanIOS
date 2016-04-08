@@ -24,14 +24,14 @@
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-ZM-xaJ" userLabel="topScrollView">
                                 <rect key="frame" x="0.0" y="64" width="560" height="40"/>
-                                <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83137254901960778" green="0.23921568627450979" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cvn-BJ-qt9"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-2X-T8b">
                                 <rect key="frame" x="560" y="64" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Myr-FY-0Ym"/>
                                     <constraint firstAttribute="width" constant="40" id="kmt-ii-9xV"/>

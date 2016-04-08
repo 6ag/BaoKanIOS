@@ -75,16 +75,56 @@ class JFVideoViewController: UIViewController
         } else {
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
-                ["bclassid" : "317", "classid" : "325", "classname": "精彩节目"],
-                ["bclassid" : "317", "classid" : "337", "classname": "新闻采访"],
-                ["bclassid" : "317", "classid" : "342", "classname": "人物访谈"],
-                ["bclassid" : "317", "classid" : "344", "classname": "广告宣传"],
-                ["bclassid" : "317", "classid" : "348", "classname": "视频快讯"],
-                ["bclassid" : "317", "classid" : "365", "classname": "百家讲坛"],
-                ["bclassid" : "317", "classid" : "371", "classname": "社会新闻"],
-                ["bclassid" : "317", "classid" : "375", "classname": "游戏视频"],
-                ["bclassid" : "317", "classid" : "391", "classname": "影视动画"],
-                ["bclassid" : "317", "classid" : "435", "classname": "数据新闻"]
+                [
+                    "bclassid" : "317",
+                    "classid" : "325",
+                    "classname": "精彩节目"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "337",
+                    "classname": "新闻采访"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "342",
+                    "classname": "人物访谈"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "344",
+                    "classname": "广告宣传"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "348",
+                    "classname": "视频快讯"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "365",
+                    "classname": "百家讲坛"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "371",
+                    "classname": "社会新闻"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "375",
+                    "classname": "游戏视频"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "391",
+                    "classname": "影视动画"
+                ],
+                [
+                    "bclassid" : "317",
+                    "classid" : "435",
+                    "classname": "数据新闻"
+                ]
                 ]
             NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "videoTopTitles")
             self.topTitles = topTitles
