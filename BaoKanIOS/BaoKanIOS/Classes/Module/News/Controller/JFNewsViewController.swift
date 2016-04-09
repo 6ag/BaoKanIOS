@@ -76,117 +76,94 @@ class JFNewsViewController: UIViewController
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
                 [
-                    "bclassid" : "1",
                     "classid" : "2",
                     "classname": "网文快讯"
                 ],
                 [
-                    "bclassid" : "1",
                     "classid" : "21",
                     "classname": "媒体视角"
                 ],
                 [
-                    "bclassid" : "1",
                     "classid" : "12",
                     "classname": "网文IP"
                 ],
                 [
-                    "bclassid" : "1",
                     "classid" : "396",
                     "classname": "独家报道"
                 ],
                 [
-                    "bclassid" : "1",
                     "classid" : "394",
                     "classname": "传统文学"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "32",
                     "classname": "高端访谈"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "33",
                     "classname": "作家风采"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "34",
                     "classname": "维权在线"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "51",
                     "classname": "精彩活动"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "212",
                     "classname": "业者动态"
                 ],
                 [
-                    "bclassid" : "30",
                     "classid" : "264",
                     "classname": "企业资讯"
                 ],
                 [
-                    "bclassid" : "54",
                     "classid" : "56",
                     "classname": "影视动画"
                 ],
                 [
-                    "bclassid" : "54",
                     "classid" : "57",
                     "classname": "娱乐八卦"
                 ],
                 [
-                    "bclassid" : "54",
                     "classid" : "58",
                     "classname": "社会杂谈"
                 ],
                 [
-                    "bclassid" : "54",
                     "classid" : "132",
                     "classname": "风花雪月"
                 ],
                 [
-                    "bclassid" : "54",
                     "classid" : "419",
                     "classname": "体育竞技"
                 ],
                 [
-                    "bclassid" : "281",
                     "classid" : "281",
                     "classname": "游戏世界"
                 ],
                 [
-                    "bclassid" : "98",
                     "classid" : "102",
                     "classname": "政策解读"
                 ],
                 [
-                    "bclassid" : "98",
                     "classid" : "111",
                     "classname": "写作指导"
                 ],
                 [
-                    "bclassid" : "98",
                     "classid" : "119",
                     "classname": "求职招聘"
                 ],
                 [
-                    "bclassid" : "98",
                     "classid" : "115",
                     "classname": "征稿信息"
                 ],
                 [
-                    "bclassid" : "198",
                     "classid" : "199",
                     "classname": "写作素材"
                 ],
                 [
-                    "bclassid" : "198",
                     "classid" : "203",
                     "classname": "数据中心"
                 ]
@@ -226,7 +203,7 @@ class JFNewsViewController: UIViewController
             
             // 默认控制器
             if i == 0 {
-                newsVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
+                newsVc.classid = Int(topTitles![0]["classid"]!)
                 newsVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(newsVc.view)
             }
@@ -302,7 +279,7 @@ extension JFNewsViewController: UIScrollViewDelegate
         newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        newsVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
+        newsVc.classid = Int(topTitles![0]["classid"]!)
     }
     
     // 滚动结束 手势导致

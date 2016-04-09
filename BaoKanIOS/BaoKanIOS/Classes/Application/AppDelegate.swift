@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
-        setupJPush(launchOptions) // 配置极光推送
+//        setupJPush(launchOptions) // 配置极光推送
         
         return true
     }
@@ -55,15 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("didRegisterForRemoteNotificationsWithDeviceToken")
         // 注册deviceToken
-        JPUSHService.registerDeviceToken(deviceToken)
+//        JPUSHService.registerDeviceToken(deviceToken)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         print("didReceiveRemoteNotification:fetchCompletionHandler")
         // 处理远程通知
-        JPUSHService.handleRemoteNotification(userInfo)
-        completionHandler(UIBackgroundFetchResult.NewData)
+//        JPUSHService.handleRemoteNotification(userInfo)
+//        completionHandler(UIBackgroundFetchResult.NewData)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

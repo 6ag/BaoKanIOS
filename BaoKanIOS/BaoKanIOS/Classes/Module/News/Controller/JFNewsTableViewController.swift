@@ -13,8 +13,8 @@ import MJRefresh
 class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate
 {
     
-    /// 分类数据 （父id, 本身id）
-    var classData: (bclassid: Int, classid: Int)? {
+    /// 分类数据
+    var classid: Int? {
         didSet {
             if pageIndex == 1 {
                 tableView.mj_header.beginRefreshing()
@@ -69,7 +69,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     @objc private func updateNewData()
     {
-        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: 1, method: 0)
+        loadNews(classid!, pageIndex: 1, method: 0)
     }
     
     /**
@@ -77,29 +77,29 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     @objc private func loadMoreData()
     {
-        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: ++pageIndex, method: 1)
+        loadNews(classid!, pageIndex: ++pageIndex, method: 1)
     }
     
     /**
      根据分类id、页码加载数据
      
-     - parameter bclassid:   父类栏目id
      - parameter classid:    当前栏目id
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(bclassid: Int, classid: Int, pageIndex: Int, method: Int)
+    private func loadNews(classid: Int, pageIndex: Int, method: Int)
     {
         let parameters = [
             "table" : "news",
-            "classid" : bclassid,
-            "id" : classid,
-            "pageIndex" : pageIndex,
+            "classid" : classid,
+            "pageIndex" : pageIndex
         ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
+                    
+                    print(result)
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     

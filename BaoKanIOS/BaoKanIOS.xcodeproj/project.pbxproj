@@ -29,13 +29,7 @@
 		A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279BC1C36392F003C773D /* JFProgressHUD.swift */; };
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
-		B2DD3F951CB7BCF80092C717 /* jpush-ios-2.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F931CB7BCF80092C717 /* jpush-ios-2.1.5.a */; };
-		B2DD3F9B1CB7BDC20092C717 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */; };
-		B2DD3F9D1CB7BDCF0092C717 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */; };
-		B2DD3F9F1CB7BDDB0092C717 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9E1CB7BDDB0092C717 /* CoreTelephony.framework */; };
-		B2DD3FA11CB7BDE50092C717 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA01CB7BDE50092C717 /* SystemConfiguration.framework */; };
 		B2DD3FA31CB7BDF60092C717 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA21CB7BDF60092C717 /* libz.tbd */; };
-		B2DD3FA51CB7BE050092C717 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA41CB7BE050092C717 /* Security.framework */; };
 		B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF821CB222560081745A /* JFNewsDetailViewController.swift */; };
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
 		B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */; };
@@ -57,6 +51,16 @@
 		B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */; };
 		B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */; };
 		B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */; };
+		B2FD99FC1CB95EC20005B8AF /* jpush-ios-2.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F931CB7BCF80092C717 /* jpush-ios-2.1.5.a */; };
+		B2FD99FD1CB95F480005B8AF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */; };
+		B2FD99FE1CB95F510005B8AF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */; };
+		B2FD99FF1CB95F5A0005B8AF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9E1CB7BDDB0092C717 /* CoreTelephony.framework */; };
+		B2FD9A001CB95F630005B8AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA01CB7BDE50092C717 /* SystemConfiguration.framework */; };
+		B2FD9A021CB95F6C0005B8AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */; };
+		B2FD9A041CB95F760005B8AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FD9A031CB95F760005B8AF /* Foundation.framework */; };
+		B2FD9A061CB95F7F0005B8AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FD9A051CB95F7F0005B8AF /* UIKit.framework */; };
+		B2FD9A071CB95F870005B8AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA41CB7BE050092C717 /* Security.framework */; };
+		B2FD9A091CB95F900005B8AF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FD9A081CB95F900005B8AF /* AdSupport.framework */; };
 		FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963C1C3A65E900046824 /* Assets.xcassets */; };
 		FBF0963F1C3A65E900046824 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963D1C3A65E900046824 /* Info.plist */; };
 /* End PBXBuildFile section */
@@ -149,6 +153,10 @@
 		B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailModel.swift; sourceTree = "<group>"; };
 		B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleDetailModel.swift; sourceTree = "<group>"; };
 		B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailCell.swift; sourceTree = "<group>"; };
+		B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B2FD9A031CB95F760005B8AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B2FD9A051CB95F7F0005B8AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B2FD9A081CB95F900005B8AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CD8416C2AE2F58BAC0DC55D5 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF0963C1C3A65E900046824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = BaoKanIOS/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		FBF0963D1C3A65E900046824 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -159,14 +167,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2DD3FA51CB7BE050092C717 /* Security.framework in Frameworks */,
+				B2FD9A091CB95F900005B8AF /* AdSupport.framework in Frameworks */,
+				B2FD9A071CB95F870005B8AF /* Security.framework in Frameworks */,
+				B2FD9A061CB95F7F0005B8AF /* UIKit.framework in Frameworks */,
+				B2FD9A041CB95F760005B8AF /* Foundation.framework in Frameworks */,
+				B2FD9A021CB95F6C0005B8AF /* CoreGraphics.framework in Frameworks */,
+				B2FD9A001CB95F630005B8AF /* SystemConfiguration.framework in Frameworks */,
+				B2FD99FF1CB95F5A0005B8AF /* CoreTelephony.framework in Frameworks */,
+				B2FD99FE1CB95F510005B8AF /* CoreFoundation.framework in Frameworks */,
+				B2FD99FD1CB95F480005B8AF /* CFNetwork.framework in Frameworks */,
+				B2FD99FC1CB95EC20005B8AF /* jpush-ios-2.1.5.a in Frameworks */,
 				B2DD3FA31CB7BDF60092C717 /* libz.tbd in Frameworks */,
-				B2DD3FA11CB7BDE50092C717 /* SystemConfiguration.framework in Frameworks */,
-				B2DD3F9F1CB7BDDB0092C717 /* CoreTelephony.framework in Frameworks */,
-				B2DD3F9D1CB7BDCF0092C717 /* CoreFoundation.framework in Frameworks */,
-				B2DD3F9B1CB7BDC20092C717 /* CFNetwork.framework in Frameworks */,
 				755E8B5F4EF16AE272269967 /* Pods_BaoKanIOS.framework in Frameworks */,
-				B2DD3F951CB7BCF80092C717 /* jpush-ios-2.1.5.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +211,10 @@
 		77621BEC203E4898E8E2D6B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2FD9A081CB95F900005B8AF /* AdSupport.framework */,
+				B2FD9A051CB95F7F0005B8AF /* UIKit.framework */,
+				B2FD9A031CB95F760005B8AF /* Foundation.framework */,
+				B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */,
 				B2DD3FA41CB7BE050092C717 /* Security.framework */,
 				B2DD3FA21CB7BDF60092C717 /* libz.tbd */,
 				B2DD3FA01CB7BDE50092C717 /* SystemConfiguration.framework */,
@@ -931,6 +947,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -953,6 +970,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

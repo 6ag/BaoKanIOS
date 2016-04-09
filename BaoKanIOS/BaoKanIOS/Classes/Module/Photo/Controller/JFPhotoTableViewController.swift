@@ -13,8 +13,8 @@ import MJRefresh
 class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelegate
 {
     
-    /// 分类数据 （父id, 本身id）
-    var classData: (bclassid: Int, classid: Int)? {
+    /// 分类数据
+    var classid: Int? {
         didSet {
             if pageIndex == 1 {
                 tableView.mj_header.beginRefreshing()
@@ -48,7 +48,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
      */
     @objc private func updateNewData()
     {
-        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: 1, method: 0)
+        loadNews(classid!, pageIndex: 1, method: 0)
     }
     
     /**
@@ -56,23 +56,21 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
      */
     @objc private func loadMoreData()
     {
-        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: ++pageIndex, method: 1)
+        loadNews(classid!, pageIndex: ++pageIndex, method: 1)
     }
     
     /**
      根据分类id、页码加载数据
      
-     - parameter bclassid:   父类栏目id
      - parameter classid:    当前栏目id
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(bclassid: Int, classid: Int, pageIndex: Int, method: Int)
+    private func loadNews(classid: Int, pageIndex: Int, method: Int)
     {
         let parameters = [
             "table" : "photo",
-            "classid" : bclassid,
-            "id" : classid,
+            "classid" : classid,
             "pageIndex" : pageIndex,
         ]
         

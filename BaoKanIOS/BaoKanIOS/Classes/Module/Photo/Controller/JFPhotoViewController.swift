@@ -76,47 +76,38 @@ class JFPhotoViewController: UIViewController
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
                 [
-                    "bclassid" : "319",
                     "classid" : "322",
                     "classname": "图话网文"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "338",
                     "classname": "娱乐八卦"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "345",
                     "classname": "封面素材"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "350",
                     "classname": "美女模特"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "354",
                     "classname": "社会百态"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "357",
                     "classname": "旅游视野"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "366",
                     "classname": "游戏图库"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "433",
                     "classname": "军事图秀"
                 ],
                 [
-                    "bclassid" : "319",
                     "classid" : "434",
                     "classname": "封面展示"
                 ]
@@ -156,7 +147,7 @@ class JFPhotoViewController: UIViewController
             
             // 默认控制器
             if i == 0 {
-                photoVc.classData = (Int(topTitles![0]["bclassid"]!)!, Int(topTitles![0]["classid"]!)!)
+                photoVc.classid = Int(topTitles![0]["classid"]!)
                 photoVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(photoVc.view)
             }
@@ -232,7 +223,7 @@ extension JFPhotoViewController: UIScrollViewDelegate
         photoVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        photoVc.classData = (Int(topTitles![index]["bclassid"]!)!, Int(topTitles![index]["classid"]!)!)
+        photoVc.classid = Int(topTitles![0]["classid"]!)
     }
     
     // 滚动结束 手势导致

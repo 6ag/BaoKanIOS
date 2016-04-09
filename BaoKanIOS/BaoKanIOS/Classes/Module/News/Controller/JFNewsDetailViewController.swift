@@ -147,7 +147,7 @@ class JFNewsDetailViewController: UIViewController
             if success == true {
                 if let successResult = result {
                     
-//                    print(successResult)
+                    print(successResult)
                     
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
@@ -230,7 +230,10 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
         
         // 拼接内容主体时替换图片前的缩进
         var contentString = model.newstext!.stringByReplacingOccurrencesOfString("<p style=\"text-indent: 2em; text-align: center;\"><img", withString: "<p style=\"text-align: center;\"><img")
-        contentString = model.newstext!.stringByReplacingOccurrencesOfString("<p style=\"text-indent:2em;text-align:center;\"><img", withString: "<p style=\"text-align: center;\"><img")
+        contentString = contentString.stringByReplacingOccurrencesOfString("<p style=\"text-indent:2em;text-align:center;\"><img", withString: "<p style=\"text-align: center;\"><img")
+        if contentString.hasSuffix("<p><br /></p>") == true {
+            contentString = contentString.stringByReplacingOccurrencesOfString("<p><br /></p>", withString: "")
+        }
         
         html.appendContentsOf("<div class=\"content\">\(contentString)</div>")
         html.appendContentsOf("</body>")
@@ -246,7 +249,7 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
      */
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        let height = Int(webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight")!)! + 20
+        let height = Int(webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight")!)! + 60
         let frame = webView.frame
         webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height))
         tableView.reloadData()
