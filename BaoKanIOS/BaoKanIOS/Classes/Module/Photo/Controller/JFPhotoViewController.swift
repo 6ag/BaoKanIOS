@@ -119,8 +119,7 @@ class JFPhotoViewController: UIViewController
         // 布局用的左边距
         var leftMargin: CGFloat = 0
         
-        for var i = 0; i < topTitles?.count; i += 1 {
-            
+        for i in 0..<topTitles!.count {
             let label = JFTopLabel()
             label.text = topTitles![i]["classname"]
             label.tag = i
@@ -151,6 +150,7 @@ class JFPhotoViewController: UIViewController
                 photoVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(photoVc.view)
             }
+            
         }
         
         // 内容区域滚动范围
@@ -203,8 +203,9 @@ extension JFPhotoViewController: UIScrollViewDelegate
         // 滚动顶部标题
         topScrollView.setContentOffset(CGPoint(x: offsetX, y: topScrollView.contentOffset.y), animated: true)
         
+        
         // 恢复其他label缩放
-        for var i = 0; i < topTitles?.count; i += 1 {
+        for i in 0..<topTitles!.count {
             if i != index {
                 let topLabel = topScrollView.subviews[i] as! JFTopLabel
                 topLabel.scale = 0.0
@@ -223,7 +224,7 @@ extension JFPhotoViewController: UIScrollViewDelegate
         photoVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        photoVc.classid = Int(topTitles![0]["classid"]!)
+        photoVc.classid = Int(topTitles![index]["classid"]!)
     }
     
     // 滚动结束 手势导致

@@ -99,7 +99,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             if success == true {
                 if let successResult = result {
                     
-                    print(result)
+//                    print(result)
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     
@@ -132,6 +132,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                                 if method == 0 {
                                     // 下拉加载最新
                                     self.articleList.insert(postModel, atIndex: 0)
+                                    
                                 } else {
                                     // 上拉加载更多
                                     self.articleList.append(postModel)

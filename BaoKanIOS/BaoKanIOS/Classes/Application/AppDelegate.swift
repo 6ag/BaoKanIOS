@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+let appKey = "8e0c2d457d44144fd2a6dc52"
+let channel = "Publish channel"
+let isProduction = true
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -27,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      配置极光推送
      */
     private func setupJPush(launchOptions: [NSObject: AnyObject]?) {
-        
-        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
-        
-        JPUSHService.setupWithOption(launchOptions, appKey: "8e0c2d457d44144fd2a6dc52", channel: "jpush", apsForProduction: true)
+//        
+//        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
+//        
+//        JPUSHService.setupWithOption(launchOptions, appKey: appKey, channel: channel, apsForProduction: isProduction)
     }
     
     /**
@@ -53,7 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-        print("didRegisterForRemoteNotificationsWithDeviceToken")
+//        print("get the deviceToken  \(deviceToken)")
+//        NSNotificationCenter.defaultCenter().postNotificationName("DidRegisterRemoteNotification", object: deviceToken)
         // 注册deviceToken
 //        JPUSHService.registerDeviceToken(deviceToken)
     }
@@ -64,10 +69,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 处理远程通知
 //        JPUSHService.handleRemoteNotification(userInfo)
 //        completionHandler(UIBackgroundFetchResult.NewData)
+//        NSNotificationCenter.defaultCenter().postNotificationName("AddNotificationCount", object: nil)  //把  要addnotificationcount
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("did Fail To Register For Remote Notifications With Error: \(error)")
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+//        JPUSHService.showLocalNotificationAtFront(notification, identifierKey: nil)
     }
     
     func applicationWillResignActive(application: UIApplication) {

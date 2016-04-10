@@ -19,7 +19,6 @@ class JFPhotoDetailModel: NSObject {
     /// 图片url
     var picurl: String?
 
-    
     /**
      字典转模型构造方法
      */
@@ -29,4 +28,5 @@ class JFPhotoDetailModel: NSObject {
     }
     
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    
 }

@@ -279,7 +279,7 @@ extension JFNewsViewController: UIScrollViewDelegate
         newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        newsVc.classid = Int(topTitles![0]["classid"]!)
+        newsVc.classid = Int(topTitles![index]["classid"]!)
     }
     
     // 滚动结束 手势导致

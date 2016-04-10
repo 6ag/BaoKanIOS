@@ -133,7 +133,7 @@ class JFVideoViewController: UIViewController
         // 布局用的左边距
         var leftMargin: CGFloat = 0
         
-        for var i = 0; i < topTitles?.count; i += 1 {
+        for i in 0..<topTitles!.count {
             
             let label = JFTopLabel()
             label.text = topTitles![i]["classname"]
@@ -218,7 +218,7 @@ extension JFVideoViewController: UIScrollViewDelegate
         topScrollView.setContentOffset(CGPoint(x: offsetX, y: topScrollView.contentOffset.y), animated: true)
         
         // 恢复其他label缩放
-        for var i = 0; i < topTitles?.count; i += 1 {
+        for i in 0..<topTitles!.count {
             if i != index {
                 let topLabel = topScrollView.subviews[i] as! JFTopLabel
                 topLabel.scale = 0.0
