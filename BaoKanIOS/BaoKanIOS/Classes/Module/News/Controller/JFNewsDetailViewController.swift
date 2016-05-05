@@ -231,15 +231,18 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
         // 拼接内容主体时替换图片前的缩进
         var contentString = model.newstext!.stringByReplacingOccurrencesOfString("<p style=\"text-indent: 2em; text-align: center;\"><img", withString: "<p style=\"text-align: center;\"><img")
         contentString = contentString.stringByReplacingOccurrencesOfString("<p style=\"text-indent:2em;text-align:center;\"><img", withString: "<p style=\"text-align: center;\"><img")
-        if contentString.hasSuffix("<p><br /></p>") == true {
-            contentString = contentString.stringByReplacingOccurrencesOfString("<p><br /></p>", withString: "")
-        }
+        contentString = contentString.stringByReplacingOccurrencesOfString("<p style=\"TEXT-ALIGN: center; TEXT-INDENT: 2em\">", withString: "<p style=\"TEXT-ALIGN: center;\">")
+        contentString = contentString.stringByReplacingOccurrencesOfString("<p style=\"TEXT-ALIGN:center;TEXT-INDENT:2em\">", withString: "<p style=\"TEXT-ALIGN:center;\">")
+        contentString = contentString.stringByReplacingOccurrencesOfString("<p><br /></p>", withString: "")
         
         html.appendContentsOf("<div class=\"content\">\(contentString)</div>")
         html.appendContentsOf("</body>")
         html.appendContentsOf("</html>")
         
+        print("html = \(html)")
+        
         webView.loadHTMLString(html, baseURL: nil)
+        
     }
     
     /**

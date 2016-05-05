@@ -43,6 +43,10 @@ class JFNewsViewController: UIViewController
             make.left.right.top.equalTo(0)
             make.height.equalTo(20)
         }
+        
+        for i in (0...9).reverse() {
+            print("i = \(i)")
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -175,7 +179,7 @@ class JFNewsViewController: UIViewController
         // 布局用的左边距
         var leftMargin: CGFloat = 0
         
-        for var i = 0; i < topTitles?.count; i += 1 {
+        for i in 0..<topTitles!.count {
             
             let label = JFTopLabel()
             label.text = topTitles![i]["classname"]
@@ -228,13 +232,6 @@ class JFNewsViewController: UIViewController
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
     
-    /**
-     左边导航栏按钮点击事件
-     */
-    @IBAction func didTappedTopLeftButton()
-    {
-        
-    }
 }
 
 // MARK: - scrollView代理方法
@@ -260,7 +257,7 @@ extension JFNewsViewController: UIScrollViewDelegate
         topScrollView.setContentOffset(CGPoint(x: offsetX, y: topScrollView.contentOffset.y), animated: true)
         
         // 恢复其他label缩放
-        for var i = 0; i < topTitles?.count; i += 1 {
+        for i in 0..<topTitles!.count {
             if i != index {
                 let topLabel = topScrollView.subviews[i] as! JFTopLabel
                 topLabel.scale = 0.0

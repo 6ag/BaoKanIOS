@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     private func setupJPush(launchOptions: [NSObject: AnyObject]?) {
 //        
-//        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
-//        
+//        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
+//
 //        JPUSHService.setupWithOption(launchOptions, appKey: appKey, channel: channel, apsForProduction: isProduction)
     }
     

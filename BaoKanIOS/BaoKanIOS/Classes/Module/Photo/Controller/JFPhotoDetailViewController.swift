@@ -25,7 +25,6 @@ class JFPhotoDetailViewController: UICollectionViewController {
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.itemSize = CGSize(width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-//        myLayout.minimumInteritemSpacing = 10
         myLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         super.init(collectionViewLayout: myLayout)
         

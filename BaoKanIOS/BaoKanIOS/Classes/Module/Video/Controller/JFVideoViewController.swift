@@ -186,13 +186,6 @@ class JFVideoViewController: UIViewController
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
     
-    /**
-     左边导航栏按钮点击事件
-     */
-    @IBAction func didTappedTopLeftButton()
-    {
-        
-    }
 }
 
 // MARK: - scrollView代理方法
