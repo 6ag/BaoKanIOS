@@ -8,13 +8,27 @@
 
 import UIKit
 
-class JFNavigationController: UINavigationController {
+class JFNavigationController: UINavigationController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
+        
+        let target = interactivePopGestureRecognizer?.delegate
+        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
+        pan.delegate = self
+        view.addGestureRecognizer(pan)
+        interactivePopGestureRecognizer?.enabled = false
+    }
+    
+    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
+        if childViewControllers.count == 1 {
+            return false
+        } else {
+            return true
+        }
     }
     
     private func changeBarTintColor(color: UIColor)

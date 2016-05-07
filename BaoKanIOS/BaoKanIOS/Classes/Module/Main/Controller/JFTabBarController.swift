@@ -39,8 +39,8 @@ class JFTabBarController: UITabBarController {
         addChildViewController(bzoneVc, title: "视频", imageName: "tabbar_icon_bar")
         
         // 阅读
-        let readVc = UIStoryboard.init(name: "JFReadViewController", bundle: nil).instantiateInitialViewController()!
-        addChildViewController(readVc, title: "阅读", imageName: "tabbar_icon_reader")
+//        let readVc = UIStoryboard.init(name: "JFReadViewController", bundle: nil).instantiateInitialViewController()!
+//        addChildViewController(readVc, title: "阅读", imageName: "tabbar_icon_reader")
         
         // 我
         let profileVc = UIStoryboard.init(name: "JFProfileViewController", bundle: nil).instantiateInitialViewController()!
