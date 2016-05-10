@@ -56,7 +56,8 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
      */
     @objc private func loadMoreData()
     {
-        loadNews(classid!, pageIndex: ++pageIndex, method: 1)
+        pageIndex += 1
+        loadNews(classid!, pageIndex: pageIndex, method: 1)
     }
     
     /**
@@ -164,12 +165,9 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     {
         // 请求文章详情数据
         let currentListModel = photoList[indexPath.row]
-        let detailVc = JFPhotoDetailViewController(collectionViewLayout: UICollectionViewLayout())
+        let detailVc = JFPhotoDetailViewController()
         detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
-    
-    
-    
     
 }

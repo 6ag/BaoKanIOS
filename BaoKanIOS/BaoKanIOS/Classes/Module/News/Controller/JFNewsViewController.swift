@@ -43,10 +43,6 @@ class JFNewsViewController: UIViewController
             make.left.right.top.equalTo(0)
             make.height.equalTo(20)
         }
-        
-        for i in (0...9).reverse() {
-            print("i = \(i)")
-        }
     }
     
     override func viewDidDisappear(animated: Bool) {

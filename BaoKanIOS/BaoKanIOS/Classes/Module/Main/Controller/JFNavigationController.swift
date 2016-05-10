@@ -16,20 +16,21 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         
         changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
         
-        let target = interactivePopGestureRecognizer?.delegate
-        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
-        pan.delegate = self
-        view.addGestureRecognizer(pan)
-        interactivePopGestureRecognizer?.enabled = false
+        // 加上后 collectionViewController有bug
+//        let target = interactivePopGestureRecognizer?.delegate
+//        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
+//        pan.delegate = self
+//        view.addGestureRecognizer(pan)
+//        interactivePopGestureRecognizer?.enabled = false
     }
     
-    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
-        if childViewControllers.count == 1 {
-            return false
-        } else {
-            return true
-        }
-    }
+//    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
+//        if childViewControllers.count == 1 {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
     
     private func changeBarTintColor(color: UIColor)
     {
