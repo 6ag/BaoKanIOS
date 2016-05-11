@@ -24,6 +24,14 @@ class JFPhotoDetailViewController: UICollectionViewController {
     // 导航栏/背景颜色
     let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
     
+    /// 当前页显示的文字数据
+    var currentPageData: (page: Int, text: String)? {
+        didSet {
+            captionLabel.text = "\(currentPageData!.page)/\(photoModels.count)  \(currentPageData!.text)"
+            updateBottomBgViewConstraint()
+        }
+    }
+    
     init() {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.itemSize = CGSize(width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT)
@@ -142,6 +150,16 @@ class JFPhotoDetailViewController: UICollectionViewController {
         }
     }
     
+    // 滚动停止后调用，判断当然显示的第一张图片
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        print(scrollView.contentOffset)
+        
+        let page = Int(scrollView.contentOffset.x / SCREEN_WIDTH)
+        let model = photoModels[page]
+        
+        currentPageData = (page + 1, model.text!)
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoModels.count
     }
@@ -151,11 +169,6 @@ class JFPhotoDetailViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier, forIndexPath: indexPath) as! JFPhotoDetailCell
         cell.model = photoModels[indexPath.item]
         return cell
-    }
-    
-    // 滚动停止后调用，判断当然显示的第一张图片
-    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
     }
     
     /**
@@ -187,6 +200,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
                         self.photoModels.append(model)
                     }
                     
+                    self.scrollViewDidEndDecelerating(self.collectionView!)
                     // 刷新视图
                     self.collectionView?.reloadData()
                 }
@@ -251,14 +265,13 @@ class JFPhotoDetailViewController: UICollectionViewController {
         captionLabel.textColor = UIColor(red:0.945,  green:0.945,  blue:0.945, alpha:1)
         captionLabel.numberOfLines = 0
         captionLabel.font = UIFont.systemFontOfSize(15)
-        captionLabel.text = "1/25  2016年1月23日“2015年掌阅科技年会暨年度表彰大会”于北京古北水镇旅游度假区盛大启幕。现场汇集了数百名新老员工以及嘉宾，气氛热烈。"
         return captionLabel
     }()
     
     /// 底部工具条
     lazy var bottomToolView: UIView = {
         let bottomToolView = UIView()
-        bottomToolView.backgroundColor = self.bgColor
+        bottomToolView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.8)
         return bottomToolView
     }()
     
