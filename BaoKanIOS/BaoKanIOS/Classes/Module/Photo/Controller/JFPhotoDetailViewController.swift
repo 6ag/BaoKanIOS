@@ -59,12 +59,18 @@ class JFPhotoDetailViewController: UICollectionViewController {
         bottomToolView.removeFromSuperview()
     }
     
-    func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
-        print("didTappedRightBarButtonItem")
-    }
-    
+    /**
+     准备UI
+     */
     private func prepareUI() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top_navigation_more")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(didTappedRightBarButtonItem(_:)))
+        
+        let rightButton = UIButton(type: UIButtonType.Custom)
+        rightButton.titleLabel?.font = UIFont.systemFontOfSize(16)
+        rightButton.setTitle("举报", forState: UIControlState.Normal)
+        rightButton.setTitleColor(UIColor(red:0.545,  green:0.545,  blue:0.545, alpha:1), forState: UIControlState.Normal)
+        rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        rightButton.sizeToFit()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
         collectionView?.frame = CGRect(x: 0, y: -64, width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT + 64)
         collectionView?.pagingEnabled = true
@@ -72,6 +78,11 @@ class JFPhotoDetailViewController: UICollectionViewController {
         collectionView?.registerClass(JFPhotoDetailCell.self, forCellWithReuseIdentifier: photoIdentifier)
         
         UIApplication.sharedApplication().keyWindow?.addSubview(bottomToolView)
+        bottomToolView.addSubview(commentButton)
+        bottomToolView.addSubview(starButton)
+        bottomToolView.addSubview(shareButton)
+        bottomToolView.addSubview(fontButton)
+        
         UIApplication.sharedApplication().keyWindow?.addSubview(bottomBgView)
         bottomBgView.addSubview(captionLabel)
         
@@ -93,6 +104,31 @@ class JFPhotoDetailViewController: UICollectionViewController {
         }
         
         updateBottomBgViewConstraint()
+        
+        commentButton.snp_makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
+            make.width.equalTo(bottomToolView.width - 220)
+        }
+        
+        starButton.snp_makeConstraints { (make) in
+            make.left.equalTo(commentButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+        
+        shareButton.snp_makeConstraints { (make) in
+            make.left.equalTo(starButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+        
+        fontButton.snp_makeConstraints { (make) in
+            make.left.equalTo(shareButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
     }
     
     /**
@@ -104,27 +140,6 @@ class JFPhotoDetailViewController: UICollectionViewController {
         bottomBgView.snp_updateConstraints { (make) in
             make.height.equalTo(captionLabel.height + 20)
         }
-    }
-    
-    /**
-     详情视图界面tap事件，在这隐藏或显示除图片外的UI
-     */
-    func didTappedPhotoDetailView(tap: UITapGestureRecognizer) -> Void {
-        
-        let alpha: CGFloat = UIApplication.sharedApplication().statusBarHidden == false ? 0 : 1
-        
-        UIView.animateWithDuration(0.25) {
-            // 状态栏
-            UIApplication.sharedApplication().statusBarHidden = !UIApplication.sharedApplication().statusBarHidden
-            
-            // 导航栏
-            self.navigationController?.navigationBar.alpha = alpha
-            
-            // 底部视图
-            self.bottomBgView.alpha = alpha
-            self.bottomToolView.alpha = alpha
-        }
-        
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -181,6 +196,47 @@ class JFPhotoDetailViewController: UICollectionViewController {
         }
     }
     
+    // MARK: - 各种tap事件
+    /**
+     详情视图界面tap事件，在这隐藏或显示除图片外的UI
+     */
+    func didTappedPhotoDetailView(tap: UITapGestureRecognizer) -> Void {
+        
+        let alpha: CGFloat = UIApplication.sharedApplication().statusBarHidden == false ? 0 : 1
+        
+        UIView.animateWithDuration(0.25) {
+            // 状态栏
+            UIApplication.sharedApplication().statusBarHidden = !UIApplication.sharedApplication().statusBarHidden
+            
+            // 导航栏
+            self.navigationController?.navigationBar.alpha = alpha
+            
+            // 底部视图
+            self.bottomBgView.alpha = alpha
+            self.bottomToolView.alpha = alpha
+        }
+    }
+    
+    func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
+        print("didTappedRightBarButtonItem")
+    }
+    
+    func didTappedCommentButton(button: UIButton) -> Void {
+        print("didTappedCommentButton")
+    }
+    
+    func didTappedStarButton(button: UIButton) -> Void {
+        print("didTappedStarButton")
+    }
+    
+    func didTappedShareButton(button: UIButton) -> Void {
+        print("didTappedShareButton")
+    }
+    
+    func didTappedFontButton(button: UIButton) -> Void {
+        print("didTappedFontButton")
+    }
+    
     // MARK: - 懒加载
     /// 底部文字透明背景视图
     lazy var bottomBgView: UIView = {
@@ -204,6 +260,38 @@ class JFPhotoDetailViewController: UICollectionViewController {
         let bottomToolView = UIView()
         bottomToolView.backgroundColor = self.bgColor
         return bottomToolView
+    }()
+    
+    /// 评论
+    lazy var commentButton: UIButton = {
+        let commentButton = UIButton(type: UIButtonType.Custom)
+        commentButton.setBackgroundImage(UIImage(named: "toolbar_light_comment"), forState: UIControlState.Normal)
+        commentButton.addTarget(self, action: #selector(didTappedCommentButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return commentButton
+    }()
+    
+    /// 收藏
+    lazy var starButton: UIButton = {
+        let starButton = UIButton(type: UIButtonType.Custom)
+        starButton.setBackgroundImage(UIImage(named: "article_item_favor"), forState: UIControlState.Normal)
+        starButton.addTarget(self, action: #selector(didTappedStarButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return starButton
+    }()
+    
+    /// 分享
+    lazy var shareButton: UIButton = {
+        let shareButton = UIButton(type: UIButtonType.Custom)
+        shareButton.setBackgroundImage(UIImage(named: "article_item_share"), forState: UIControlState.Normal)
+        shareButton.addTarget(self, action: #selector(didTappedShareButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return shareButton
+    }()
+    
+    /// 字体
+    lazy var fontButton: UIButton = {
+        let fontButton = UIButton(type: UIButtonType.Custom)
+        fontButton.setBackgroundImage(UIImage(named: "bottom_bar_font_normal"), forState: UIControlState.Normal)
+        fontButton.addTarget(self, action: #selector(didTappedFontButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return fontButton
     }()
     
 }
