@@ -34,8 +34,8 @@ class JFNewsViewController: UIViewController
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
         topBarView = UIView()
         topBarView.backgroundColor = NAVIGATIONBAR_RED_COLOR
         view.addSubview(topBarView)
@@ -47,7 +47,7 @@ class JFNewsViewController: UIViewController
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         topBarView.removeFromSuperview()
     }
     
@@ -57,11 +57,10 @@ class JFNewsViewController: UIViewController
     */
     private func prepareUI()
     {
-        navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
+//        navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
         
         // 添加内容
         addContent()
-        
     }
     
     /**
@@ -158,14 +157,6 @@ class JFNewsViewController: UIViewController
                 [
                     "classid" : "115",
                     "classname": "征稿信息"
-                ],
-                [
-                    "classid" : "199",
-                    "classname": "写作素材"
-                ],
-                [
-                    "classid" : "203",
-                    "classname": "数据中心"
                 ]
             ]
             NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "newsTopTitles")

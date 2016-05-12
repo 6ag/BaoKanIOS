@@ -147,7 +147,7 @@ class JFNewsDetailViewController: UIViewController
             if success == true {
                 if let successResult = result {
                     
-                    print(successResult)
+//                    print(successResult)
                     
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
@@ -183,27 +183,53 @@ class JFNewsDetailViewController: UIViewController
     
 }
 
-// MARK: - JFNewsBottomBarDelegate
-extension JFNewsDetailViewController: JFNewsBottomBarDelegate {
+// MARK: - JFNewsBottomBarDelegate、JFCommentCommitViewDelegate
+extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitViewDelegate {
     
+    /**
+     底部返回按钮点击
+     */
     func didTappedBackButton(button: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    /**
+     底部编辑按钮点击
+     */
     func didTappedEditButton(button: UIButton) {
-        
+        let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
+        commentCommitView.delegate = self
+        commentCommitView.show()
     }
     
+    /**
+     底部收藏按钮点击
+     */
     func didTappedCollectButton(button: UIButton) {
         
     }
     
+    /**
+     底部分享按钮点击
+     */
     func didTappedShareButton(button: UIButton) {
         
     }
     
+    /**
+     底部字体按钮点击
+     */
     func didTappedFontButton(button: UIButton) {
         
+    }
+    
+    /**
+     点击了提交评论视图的发送按钮
+     
+     - parameter message: 评论信息
+     */
+    func didTappedSendButtonWithMessage(message: String) {
+        print(message)
     }
 }
 
@@ -239,10 +265,7 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
         html.appendContentsOf("</body>")
         html.appendContentsOf("</html>")
         
-        print("html = \(html)")
-        
         webView.loadHTMLString(html, baseURL: nil)
-        
     }
     
     /**

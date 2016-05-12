@@ -29,9 +29,9 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func get(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
+    func get(APIString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
-        Alamofire.request(.GET, "\(API_URL)\(URLString)", parameters: parameters).responseJSON { (response) -> Void in
+        Alamofire.request(.GET, "\(API_URL)\(APIString)", parameters: parameters).responseJSON { (response) -> Void in
             
             if let data = response.data {
                 let json = JSON(data: data)
@@ -54,9 +54,9 @@ extension JFNetworkTool {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func post(URLString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
+    func post(APIString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
-        Alamofire.request(.POST, URLString, parameters: parameters).responseJSON { (response) -> Void in
+        Alamofire.request(.POST, "\(API_URL)\(APIString)", parameters: parameters).responseJSON { (response) -> Void in
             if let data = response.data {
                 let json = JSON(data: data)
                 if json["err_msg"].string == "success" {

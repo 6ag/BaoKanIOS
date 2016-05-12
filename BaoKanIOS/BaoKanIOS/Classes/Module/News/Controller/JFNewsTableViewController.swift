@@ -40,7 +40,6 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
-        
     }
     
     /**

@@ -181,7 +181,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
         let parameters = [
             "table" : "news",
             "classid" : classid,
-            "id" : id,
+            "id" : id
             ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in

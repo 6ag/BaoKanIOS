@@ -23,3 +23,22 @@ let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.height
 /// 屏幕bounds
 let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
 
+/// 全局遮罩透明度
+let GLOBAL_SHADOW_ALPHA: CGFloat = 0.6
+
+/// 友盟APPKEY
+let UM_APP_KEY = "573454e4e0f55a81730013a9"
+
+/// 微信
+let WX_APP_ID = ""
+let WX_APP_SECRET = ""
+
+/// QQ
+let QQ_APP_ID = ""
+let QQ_APP_KEY = ""
+
+/// 微博
+let WB_APP_KEY = ""
+let WB_APP_SECRET = ""
+let WB_REDIRECT_URL = ""
+

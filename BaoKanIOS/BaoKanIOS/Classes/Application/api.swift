@@ -14,6 +14,9 @@ let BASE_URL = "http://www.baokan.name/"
 /// 基础url
 let API_URL = "\(BASE_URL)e/api/"
 
+/// 分类
+let GET_CLASS = "getNewsClass.php"
+
 /// 文章列表
 let ARTICLE_LIST = "getNewsList.php"
 
@@ -50,4 +53,4 @@ let ADD_DEL_FAVA = "addFava.php"
  /// 修改账号资料/找回密码
 let MODIFY_ACCOUNT_INFO = "publicActions.php"
 
-        
+
