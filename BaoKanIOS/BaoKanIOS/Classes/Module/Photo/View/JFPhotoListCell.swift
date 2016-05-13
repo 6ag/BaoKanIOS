@@ -11,7 +11,7 @@ import YYWebImage
 
 class JFPhotoListCell: UITableViewCell {
     
-    var cellHeight: CGFloat = 240
+    var cellHeight: CGFloat = 200
     
     var postModel: JFArticleListModel? {
         didSet {
@@ -78,7 +78,7 @@ class JFPhotoListCell: UITableViewCell {
         let windowCenter = window!.center
         let cellOffsetY = centerY - windowCenter.y
         let offsetDig = cellOffsetY / SCREEN_HEIGHT * 3
-        postModel!.offsetY = -offsetDig * (SCREEN_HEIGHT / 1.7 - 240) / 2
+        postModel!.offsetY = -offsetDig * (SCREEN_HEIGHT / 1.7 - self.cellHeight) / 6
         iconView.transform = CGAffineTransformMakeTranslation(0, postModel!.offsetY)
         return postModel!.offsetY
     }

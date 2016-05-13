@@ -34,7 +34,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
         super.viewDidLoad()
         
         tableView.registerClass(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
-        tableView.rowHeight = 240
+        tableView.rowHeight = 200
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
@@ -75,7 +75,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
                 
                 if let successResult = result {
                     
-                    print(result)
+//                    print(result)
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     
@@ -149,6 +149,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFPhotoListCell
         cell.postModel = photoList[indexPath.row]
+        cell.cellHeight = 200
         return cell
     }
     

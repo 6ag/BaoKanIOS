@@ -42,7 +42,10 @@ class JFPhotoDetailCell: UICollectionViewCell {
                 }
                 
                 // 设置图片的大小
-                self.layoutImageView(image)
+                if let img = image {
+                    self.layoutImageView(img)
+                }
+                
             }
             
         }
