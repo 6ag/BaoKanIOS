@@ -1,5 +1,17 @@
 # BaoKanIOS
 
-使用Swift语言、ecms编写的一款学习型应用
+### 项目介绍
 
-![image](https://github.com/6ag/BaoKanIOS/blob/master/baokanios.png)
+这个一款使用Swift编写的app，数据来自 [爆侃网文](http://www.baokan.name) ，这是我们自己运营的网文资讯类的门户网站。
+
+### 网文资讯
+
+![image](https://github.com/6ag/BaoKanIOS/blob/master/1.gif)
+
+### 网文图库
+
+![image](https://github.com/6ag/BaoKanIOS/blob/master/1.gif)
+
+### 还没写完呢。。
+
+

@@ -92,80 +92,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         navigationBarView.removeFromSuperview()
     }
     
-    /**
-     准备UI
-     */
-    private func prepareUI() {
-        
-        self.edgesForExtendedLayout = .None
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        UIApplication.sharedApplication().keyWindow?.addSubview(navigationBarView)
-        view.addSubview(collectionView)
-        UIApplication.sharedApplication().keyWindow?.addSubview(bottomToolView)
-        bottomToolView.addSubview(commentButton)
-        bottomToolView.addSubview(starButton)
-        bottomToolView.addSubview(shareButton)
-        bottomToolView.addSubview(fontButton)
-        UIApplication.sharedApplication().keyWindow?.addSubview(bottomBgView)
-        bottomBgView.addSubview(captionLabel)
-        
-        bottomToolView.snp_makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(44)
-        }
-        
-        bottomBgView.snp_makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.bottom.equalTo(bottomToolView.snp_top)
-            make.height.equalTo(20)
-        }
-        
-        captionLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(20)
-            make.top.equalTo(10)
-            make.width.equalTo(SCREEN_WIDTH - 40)
-        }
-        
-        updateBottomBgViewConstraint()
-        
-        commentButton.snp_makeConstraints { (make) in
-            make.left.equalTo(20)
-            make.top.equalTo(5)
-            make.bottom.equalTo(-5)
-            make.width.equalTo(bottomToolView.width - 220)
-        }
-        
-        starButton.snp_makeConstraints { (make) in
-            make.left.equalTo(commentButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-        
-        shareButton.snp_makeConstraints { (make) in
-            make.left.equalTo(starButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-        
-        fontButton.snp_makeConstraints { (make) in
-            make.left.equalTo(shareButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-    }
-    
-    /**
-     更新底部详情视图的高度
-     */
-    private func updateBottomBgViewConstraint() {
-        UIApplication.sharedApplication().keyWindow?.layoutIfNeeded()
-        
-        bottomBgView.snp_updateConstraints { (make) in
-            make.height.equalTo(captionLabel.height + 20)
-        }
-    }
-    
     // 滚动停止后调用，判断当然显示的第一张图片
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         print(scrollView.contentOffset)
@@ -285,6 +211,80 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     func didTappedFontButton(button: UIButton) -> Void {
         print("didTappedFontButton")
+    }
+    
+    /**
+     准备UI
+     */
+    private func prepareUI() {
+        
+        self.edgesForExtendedLayout = .None
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        UIApplication.sharedApplication().keyWindow?.addSubview(navigationBarView)
+        view.addSubview(collectionView)
+        UIApplication.sharedApplication().keyWindow?.addSubview(bottomToolView)
+        bottomToolView.addSubview(commentButton)
+        bottomToolView.addSubview(starButton)
+        bottomToolView.addSubview(shareButton)
+        bottomToolView.addSubview(fontButton)
+        UIApplication.sharedApplication().keyWindow?.addSubview(bottomBgView)
+        bottomBgView.addSubview(captionLabel)
+        
+        bottomToolView.snp_makeConstraints { (make) in
+            make.left.right.bottom.equalTo(0)
+            make.height.equalTo(40)
+        }
+        
+        bottomBgView.snp_makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(bottomToolView.snp_top)
+            make.height.equalTo(20)
+        }
+        
+        captionLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.top.equalTo(10)
+            make.width.equalTo(SCREEN_WIDTH - 40)
+        }
+        
+        updateBottomBgViewConstraint()
+        
+        commentButton.snp_makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
+            make.width.equalTo(bottomToolView.width - 220)
+        }
+        
+        starButton.snp_makeConstraints { (make) in
+            make.left.equalTo(commentButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+        
+        shareButton.snp_makeConstraints { (make) in
+            make.left.equalTo(starButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+        
+        fontButton.snp_makeConstraints { (make) in
+            make.left.equalTo(shareButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+    }
+    
+    /**
+     更新底部详情视图的高度
+     */
+    private func updateBottomBgViewConstraint() {
+        UIApplication.sharedApplication().keyWindow?.layoutIfNeeded()
+        
+        bottomBgView.snp_updateConstraints { (make) in
+            make.height.equalTo(captionLabel.height + 20)
+        }
     }
     
     // MARK: - 懒加载

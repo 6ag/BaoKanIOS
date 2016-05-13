@@ -72,11 +72,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             if success == true {
-                
                 if let successResult = result {
-                    
-//                    print(result)
-                    
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     for article in data {
@@ -158,7 +154,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
         let currentListModel = photoList[indexPath.row]
         let detailVc = JFPhotoDetailViewController()
         detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)
-        self.navigationController?.pushViewController(detailVc, animated: true)
+        navigationController?.pushViewController(detailVc, animated: true)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
