@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JFPhotoDetailViewController: UICollectionViewController {
+class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, JFPhotoDetailCellDelegate {
     
     // MARK: - 属性
     /// 文章详情请求参数
@@ -22,7 +22,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
     var photoModels = [JFPhotoDetailModel]()
     
     // 导航栏/背景颜色
-    let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
+    let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.9)
     
     /// 当前页显示的文字数据
     var currentPageData: (page: Int, text: String)? {
@@ -32,31 +32,55 @@ class JFPhotoDetailViewController: UICollectionViewController {
         }
     }
     
-    init() {
+    /// 内容视图
+    lazy var collectionView: UICollectionView = {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.itemSize = CGSize(width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT)
         myLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         myLayout.minimumLineSpacing = 0
-        super.init(collectionViewLayout: myLayout)
-    }
+        
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT), collectionViewLayout: myLayout)
+        collectionView.pagingEnabled = true
+        collectionView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.registerClass(JFPhotoDetailCell.self, forCellWithReuseIdentifier: self.photoIdentifier)
+        return collectionView
+    }()
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    /// 自定义导航栏
+    lazy var navigationBarView: UIView = {
+        let navigationBarView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
+        navigationBarView.backgroundColor = self.bgColor
+        
+        // 导航栏左边返回按钮
+        let leftButton = UIButton(type: UIButtonType.Custom)
+        leftButton.setImage(UIImage(named: "top_navigation_back"), forState: UIControlState.Normal)
+        leftButton.addTarget(self, action: #selector(didTappedLeftBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        leftButton.frame = CGRect(x: 20, y: 20, width: 40, height: 40)
+        
+        // 导航栏右边举报按钮
+        let rightButton = UIButton(type: UIButtonType.Custom)
+        rightButton.titleLabel?.font = UIFont.systemFontOfSize(16)
+        rightButton.setTitle("举报", forState: UIControlState.Normal)
+        rightButton.setTitleColor(UIColor(red:0.545, green:0.545, blue:0.545, alpha:1), forState: UIControlState.Normal)
+        rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        rightButton.frame = CGRect(x: SCREEN_WIDTH - 60, y: 20, width: 40, height: 40)
+        
+        navigationBarView.addSubview(leftButton)
+        navigationBarView.addSubview(rightButton)
+        
+        return navigationBarView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUI()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTappedPhotoDetailView(_:)))
-        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barTintColor = bgColor
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
@@ -72,25 +96,16 @@ class JFPhotoDetailViewController: UICollectionViewController {
      */
     private func prepareUI() {
         
-        let rightButton = UIButton(type: UIButtonType.Custom)
-        rightButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        rightButton.setTitle("举报", forState: UIControlState.Normal)
-        rightButton.setTitleColor(UIColor(red:0.545,  green:0.545,  blue:0.545, alpha:1), forState: UIControlState.Normal)
-        rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        rightButton.sizeToFit()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        self.edgesForExtendedLayout = .None
+        self.automaticallyAdjustsScrollViewInsets = false
         
-        collectionView?.frame = CGRect(x: 0, y: -64, width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT + 64)
-        collectionView?.pagingEnabled = true
-        collectionView?.backgroundColor = bgColor
-        collectionView?.registerClass(JFPhotoDetailCell.self, forCellWithReuseIdentifier: photoIdentifier)
-        
+        UIApplication.sharedApplication().keyWindow?.addSubview(navigationBarView)
+        view.addSubview(collectionView)
         UIApplication.sharedApplication().keyWindow?.addSubview(bottomToolView)
         bottomToolView.addSubview(commentButton)
         bottomToolView.addSubview(starButton)
         bottomToolView.addSubview(shareButton)
         bottomToolView.addSubview(fontButton)
-        
         UIApplication.sharedApplication().keyWindow?.addSubview(bottomBgView)
         bottomBgView.addSubview(captionLabel)
         
@@ -151,7 +166,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
     }
     
     // 滚动停止后调用，判断当然显示的第一张图片
-    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         print(scrollView.contentOffset)
         
         let page = Int(scrollView.contentOffset.x / SCREEN_WIDTH)
@@ -160,13 +175,14 @@ class JFPhotoDetailViewController: UICollectionViewController {
         currentPageData = (page + 1, model.text!)
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoModels.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier, forIndexPath: indexPath) as! JFPhotoDetailCell
+        cell.delegate = self
         cell.model = photoModels[indexPath.item]
         return cell
     }
@@ -182,7 +198,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
             "table" : "news",
             "classid" : classid,
             "id" : id
-            ]
+        ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
@@ -200,9 +216,9 @@ class JFPhotoDetailViewController: UICollectionViewController {
                         self.photoModels.append(model)
                     }
                     
-                    self.scrollViewDidEndDecelerating(self.collectionView!)
+                    self.scrollViewDidEndDecelerating(self.collectionView)
                     // 刷新视图
-                    self.collectionView?.reloadData()
+                    self.collectionView.reloadData()
                 }
             } else {
                 print("error:\(error)")
@@ -210,25 +226,45 @@ class JFPhotoDetailViewController: UICollectionViewController {
         }
     }
     
-    // MARK: - 各种tap事件
+    // MARK: - JFPhotoDetailCellDelegate
     /**
-     详情视图界面tap事件，在这隐藏或显示除图片外的UI
+     单击事件
      */
-    func didTappedPhotoDetailView(tap: UITapGestureRecognizer) -> Void {
-        
+    func didOneTappedPhotoDetailView(scrollView: UIScrollView) -> Void {
         let alpha: CGFloat = UIApplication.sharedApplication().statusBarHidden == false ? 0 : 1
         
-        UIView.animateWithDuration(0.25) {
+        UIView.animateWithDuration(0.25, animations: {
             // 状态栏
             UIApplication.sharedApplication().statusBarHidden = !UIApplication.sharedApplication().statusBarHidden
-            
-            // 导航栏
-            self.navigationController?.navigationBar.alpha = alpha
             
             // 底部视图
             self.bottomBgView.alpha = alpha
             self.bottomToolView.alpha = alpha
+            
+            // 顶部导航栏
+            self.navigationBarView.alpha = alpha
+        }) { (_) in
+            
         }
+    }
+    
+    /**
+     双击事件
+     */
+    func didDoubleTappedPhotoDetailView(scrollView: UIScrollView, touchPoint: CGPoint) -> Void {
+        
+        if scrollView.zoomScale <= 1.0 {
+            let scaleX = touchPoint.x + scrollView.contentOffset.x
+            let scaleY = touchPoint.y + scrollView.contentOffset.y
+            scrollView.zoomToRect(CGRect(x: scaleX, y: scaleY, width: 10, height: 10), animated: true)
+        } else {
+            scrollView.setZoomScale(1.0, animated: true)
+        }
+    }
+    
+    // MARK: - 各种tap事件
+    func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
+        print("didTappedLeftBarButtonItem")
     }
     
     func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
@@ -255,7 +291,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
     /// 底部文字透明背景视图
     lazy var bottomBgView: UIView = {
         let bottomBgView = UIView()
-        bottomBgView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.8)
+        bottomBgView.backgroundColor = self.bgColor
         return bottomBgView
     }()
     
@@ -271,7 +307,7 @@ class JFPhotoDetailViewController: UICollectionViewController {
     /// 底部工具条
     lazy var bottomToolView: UIView = {
         let bottomToolView = UIView()
-        bottomToolView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.8)
+        bottomToolView.backgroundColor = self.bgColor
         return bottomToolView
     }()
     

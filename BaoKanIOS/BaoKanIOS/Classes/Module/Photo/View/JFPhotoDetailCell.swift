@@ -9,7 +9,15 @@
 import UIKit
 import YYWebImage
 
+protocol JFPhotoDetailCellDelegate {
+    
+    func didOneTappedPhotoDetailView(scrollView: UIScrollView) -> Void
+    func didDoubleTappedPhotoDetailView(scrollView: UIScrollView, touchPoint: CGPoint) -> Void
+}
+
 class JFPhotoDetailCell: UICollectionViewCell {
+    
+    var delegate: JFPhotoDetailCellDelegate?
     
     var model: JFPhotoDetailModel? {
         didSet {
@@ -87,6 +95,17 @@ class JFPhotoDetailCell: UICollectionViewCell {
     
     private func prepareUI() {
         
+        // 添加单击双击事件
+        let oneTap = UITapGestureRecognizer(target: self, action: #selector(didOneTappedPhotoDetailView(_:)))
+        addGestureRecognizer(oneTap)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTappedPhotoDetailView(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
+        
+        // 如果监听到双击事件，单击事件则不触发
+        oneTap.requireGestureRecognizerToFail(doubleTap)
+        
         // 添加控件
         scrollView.addSubview(picImageView)
         contentView.addSubview(scrollView)
@@ -145,4 +164,20 @@ extension JFPhotoDetailCell: UIScrollViewDelegate {
             scrollView.contentInset = UIEdgeInsets(top: offestY, left: offestX, bottom: offestY, right: offestX)
         }
     }
+    
+    /**
+     图秀详情界面单击事件，隐藏除去图片外的所有UI
+     */
+    func didOneTappedPhotoDetailView(tap: UITapGestureRecognizer) -> Void {
+        delegate?.didOneTappedPhotoDetailView(scrollView)
+    }
+    
+    /**
+     图秀详情界面双击事件，缩放
+     */
+    func didDoubleTappedPhotoDetailView(tap: UITapGestureRecognizer) -> Void {
+        let touchPoint = tap.locationInView(self)
+        delegate?.didDoubleTappedPhotoDetailView(scrollView, touchPoint: touchPoint)
+    }
+    
 }
