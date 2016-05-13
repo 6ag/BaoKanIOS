@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="208" y="432"/>
         </scene>
-        <!--我-->
+        <!--Profile View Controller-->
         <scene sceneID="RcX-sb-my3">
             <objects>
                 <tableViewController id="TMq-FC-I6h" customClass="JFProfileViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                             <outlet property="delegate" destination="TMq-FC-I6h" id="a2M-2G-9vM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我" id="bwL-Bi-vuT"/>
+                    <navigationItem key="navigationItem" id="bwL-Bi-vuT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EN4-7Y-5XI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

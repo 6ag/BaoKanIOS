@@ -30,6 +30,11 @@
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
 		B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */; };
+		B2BD226B1CE57873009E0877 /* JFCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */; };
+		B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */; };
+		B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */; };
+		B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */; };
+		B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22721CE584DF009E0877 /* JFProgressView.swift */; };
 		B2DD3FA31CB7BDF60092C717 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA21CB7BDF60092C717 /* libz.tbd */; };
 		B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF821CB222560081745A /* JFNewsDetailViewController.swift */; };
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
@@ -158,6 +163,11 @@
 		A5B279C11C36392F003C773D /* BaoKanIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaoKanIOS.xcdatamodel; sourceTree = "<group>"; };
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCollectionTableViewController.swift; sourceTree = "<group>"; };
+		B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
+		B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
+		B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDutyViewController.swift; sourceTree = "<group>"; };
+		B2BD22721CE584DF009E0877 /* JFProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressView.swift; sourceTree = "<group>"; };
 		B2DD3F961CB7BD4C0092C717 /* BaoKanIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaoKanIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -497,6 +507,10 @@
 				A5B279AA1C36392F003C773D /* JFProfileViewController.storyboard */,
 				A5B279AB1C36392F003C773D /* JFProfileViewController.swift */,
 				B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */,
+				B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */,
+				B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */,
+				B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */,
+				B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -652,6 +666,7 @@
 		B2E3DFAB1CB228900081745A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B2BD22721CE584DF009E0877 /* JFProgressView.swift */,
 				B2E3DFB01CB228900081745A /* JFPhotoListCell.swift */,
 				B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */,
 			);
@@ -1054,17 +1069,21 @@
 				B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */,
 				B2FC6E061CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift in Sources */,
 				B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */,
+				B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
 				B2E3DFCD1CB228900081745A /* JFVideoTableViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
+				B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */,
 				B2E3DF971CB222560081745A /* JFTopLabel.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
 				B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */,
 				B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */,
 				A55CD9021C76E47E0087CA0A /* api.swift in Sources */,
+				B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */,
 				B2E3DF921CB222560081745A /* JFDetailADCell.swift in Sources */,
 				B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
+				B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				B2FC6E001CDB883E00DAC654 /* JFProfileCellGroupModel.swift in Sources */,
@@ -1074,6 +1093,7 @@
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */,
+				B2BD226B1CE57873009E0877 /* JFCollectionTableViewController.swift in Sources */,
 				B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */,
 				B2E3DFD41CB228900081745A /* JFVideoCell.swift in Sources */,
 				B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */,

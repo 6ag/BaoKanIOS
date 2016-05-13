@@ -24,7 +24,8 @@ class JFPhotoDetailCell: UICollectionViewCell {
             
             // 显示下载指示器
             indicator.startAnimating()
-            picImageView.yy_setImageWithURL(NSURL(string: model!.picurl!), placeholder: UIImage(named: "photoview_image_default_white"), options: YYWebImageOptions.ShowNetworkActivity) { (image, url, type, stage, error) in
+            
+            picImageView.yy_setImageWithURL(NSURL(string: model!.picurl!), placeholder: nil, options: YYWebImageOptions.ShowNetworkActivity) { (image, url, type, stage, error) in
                 self.indicator.stopAnimating()
                 
                 if error != nil {
