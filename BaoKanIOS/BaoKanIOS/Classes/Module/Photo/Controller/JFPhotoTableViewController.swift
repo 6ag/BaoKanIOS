@@ -10,8 +10,7 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelegate
-{
+class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
     /// 分类数据
     var classid: Int? {
@@ -31,8 +30,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.registerClass(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
@@ -46,16 +44,14 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     /**
      下拉加载最新数据
      */
-    @objc private func updateNewData()
-    {
+    @objc private func updateNewData() {
         loadNews(classid!, pageIndex: 1, method: 0)
     }
     
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData()
-    {
+    @objc private func loadMoreData() {
         pageIndex += 1
         loadNews(classid!, pageIndex: pageIndex, method: 1)
     }
@@ -67,8 +63,7 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(classid: Int, pageIndex: Int, method: Int)
-    {
+    private func loadNews(classid: Int, pageIndex: Int, method: Int) {
         let parameters = [
             "table" : "photo",
             "classid" : classid,
@@ -143,31 +138,39 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     }
     
     // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
-    {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFPhotoListCell
         cell.postModel = photoList[indexPath.row]
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // 请求文章详情数据
         let currentListModel = photoList[indexPath.row]
         let detailVc = JFPhotoDetailViewController()
         detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)
         self.navigationController?.pushViewController(detailVc, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        (cell as! JFPhotoListCell).cellOffset()
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let array = tableView.visibleCells
+        for cell in array {
+            // 里面的图片跟随移动
+            (cell as! JFPhotoListCell).cellOffset()
+        }
+        
     }
     
 }

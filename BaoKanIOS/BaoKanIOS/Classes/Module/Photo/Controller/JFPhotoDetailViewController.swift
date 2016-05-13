@@ -89,6 +89,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         
         bottomBgView.removeFromSuperview()
         bottomToolView.removeFromSuperview()
+        navigationBarView.removeFromSuperview()
     }
     
     /**
@@ -203,7 +204,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-                    //                    print(successResult)
                     let morepic = successResult["data"]["content"]["morepic"].arrayValue
                     for picJSON in morepic {
                         let dict = [
@@ -264,7 +264,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     // MARK: - 各种tap事件
     func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
-        print("didTappedLeftBarButtonItem")
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
