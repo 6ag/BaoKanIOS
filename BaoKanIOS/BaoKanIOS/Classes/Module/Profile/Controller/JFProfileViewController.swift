@@ -31,10 +31,11 @@ class JFProfileViewController: JFBaseTableViewController {
         return headerView
     }()
     
+    let rightButton = UIButton(type: UIButtonType.Custom)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButton = UIButton(type: UIButtonType.Custom)
         rightButton.setTitle("设置", forState: UIControlState.Normal)
         rightButton.sizeToFit()
         rightButton.titleLabel?.font = UIFont.systemFontOfSize(15)
@@ -92,6 +93,16 @@ class JFProfileViewController: JFBaseTableViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        rightButton.hidden = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        rightButton.hidden = true
+    }
+    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
@@ -105,7 +116,7 @@ class JFProfileViewController: JFBaseTableViewController {
         let offsetY = scrollView.contentOffset.y
         
         // 导航栏渐变
-        navigationController?.navigationBar.alpha = offsetY / 200
+        navigationController?.navigationBar.alpha = offsetY / 100
         
         // 下拉放大头部视图
         if offsetY < 0 {
