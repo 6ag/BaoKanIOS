@@ -10,7 +10,7 @@
 
 ### 网文图库
 
-![image](https://github.com/6ag/BaoKanIOS/blob/master/1.gif)
+![image](https://github.com/6ag/BaoKanIOS/blob/master/2.gif)
 
 ### 还没写完呢。。
 
