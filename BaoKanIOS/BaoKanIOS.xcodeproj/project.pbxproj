@@ -30,11 +30,17 @@
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
 		B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */; };
-		B2BD226B1CE57873009E0877 /* JFCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */; };
 		B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */; };
 		B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */; };
 		B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */; };
 		B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22721CE584DF009E0877 /* JFProgressView.swift */; };
+		B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22771CE5DD5C009E0877 /* JFCollectionTableViewController.swift */; };
+		B2BD227F1CE5DDE0009E0877 /* JFLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD227D1CE5DDE0009E0877 /* JFLoginViewController.swift */; };
+		B2BD22801CE5DDE0009E0877 /* JFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BD227E1CE5DDE0009E0877 /* JFLoginViewController.xib */; };
+		B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22811CE5DDF3009E0877 /* JFRegisterViewController.swift */; };
+		B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BD22821CE5DDF3009E0877 /* JFRegisterViewController.xib */; };
+		B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CBAA691CEAEAD6007DA5B7 /* JFAccountModel.swift */; };
+		B2CBAA6C1CEB0645007DA5B7 /* JFLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */; };
 		B2DD3FA31CB7BDF60092C717 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA21CB7BDF60092C717 /* libz.tbd */; };
 		B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF821CB222560081745A /* JFNewsDetailViewController.swift */; };
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
@@ -163,11 +169,17 @@
 		A5B279C11C36392F003C773D /* BaoKanIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaoKanIOS.xcdatamodel; sourceTree = "<group>"; };
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCollectionTableViewController.swift; sourceTree = "<group>"; };
 		B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
 		B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
 		B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDutyViewController.swift; sourceTree = "<group>"; };
 		B2BD22721CE584DF009E0877 /* JFProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressView.swift; sourceTree = "<group>"; };
+		B2BD22771CE5DD5C009E0877 /* JFCollectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCollectionTableViewController.swift; sourceTree = "<group>"; };
+		B2BD227D1CE5DDE0009E0877 /* JFLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFLoginViewController.swift; sourceTree = "<group>"; };
+		B2BD227E1CE5DDE0009E0877 /* JFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFLoginViewController.xib; sourceTree = "<group>"; };
+		B2BD22811CE5DDF3009E0877 /* JFRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFRegisterViewController.swift; sourceTree = "<group>"; };
+		B2BD22821CE5DDF3009E0877 /* JFRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFRegisterViewController.xib; sourceTree = "<group>"; };
+		B2CBAA691CEAEAD6007DA5B7 /* JFAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFAccountModel.swift; sourceTree = "<group>"; };
+		B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFLoginButton.swift; path = BaoKanIOS/Classes/Model/JFLoginButton.swift; sourceTree = SOURCE_ROOT; };
 		B2DD3F961CB7BD4C0092C717 /* BaoKanIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaoKanIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -441,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				A5309C261C47719900455EB8 /* JFArticleListModel.swift */,
+				B2CBAA691CEAEAD6007DA5B7 /* JFAccountModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,10 +517,12 @@
 		A5B279A91C36392F003C773D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B2BD22761CE5DD5C009E0877 /* Collection */,
+				B2BD22781CE5DD5C009E0877 /* Login */,
+				B2BD22791CE5DD5C009E0877 /* Register */,
 				A5B279AA1C36392F003C773D /* JFProfileViewController.storyboard */,
 				A5B279AB1C36392F003C773D /* JFProfileViewController.swift */,
 				B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */,
-				B2BD226A1CE57873009E0877 /* JFCollectionTableViewController.swift */,
 				B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */,
 				B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */,
 				B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */,
@@ -531,6 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				B2FC6E071CDB88C900DAC654 /* JFProfileCell.swift */,
+				B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -604,6 +620,32 @@
 				A56ED56F1C7AB5CA009B862D /* style.css */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		B2BD22761CE5DD5C009E0877 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				B2BD22771CE5DD5C009E0877 /* JFCollectionTableViewController.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		B2BD22781CE5DD5C009E0877 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B2BD227D1CE5DDE0009E0877 /* JFLoginViewController.swift */,
+				B2BD227E1CE5DDE0009E0877 /* JFLoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B2BD22791CE5DD5C009E0877 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				B2BD22811CE5DDF3009E0877 /* JFRegisterViewController.swift */,
+				B2BD22821CE5DDF3009E0877 /* JFRegisterViewController.xib */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		B2E3DF7F1CB222560081745A /* News */ = {
@@ -985,6 +1027,8 @@
 				B2FFCAB91CE48B0600ADC54C /* UMSLoginViewController.xib in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
 				B2FFCABF1CE48B0600ADC54C /* WeiboSDK.bundle in Resources */,
+				B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */,
+				B2BD22801CE5DDE0009E0877 /* JFLoginViewController.xib in Resources */,
 				B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */,
 				B2E3DFC31CB228900081745A /* JFPhotoViewController.storyboard in Resources */,
 				B2FFCAC51CE48B0600ADC54C /* ios-social-sdk-shake.html in Resources */,
@@ -1089,22 +1133,26 @@
 				B2FC6E001CDB883E00DAC654 /* JFProfileCellGroupModel.swift in Sources */,
 				B2FC6E041CDB889000DAC654 /* JFProfileCellLabelModel.swift in Sources */,
 				B2FC6E081CDB88C900DAC654 /* JFProfileCell.swift in Sources */,
+				B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */,
 				B2FC6E021CDB885500DAC654 /* JFProfileCellArrowModel.swift in Sources */,
+				B2CBAA6C1CEB0645007DA5B7 /* JFLoginButton.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */,
-				B2BD226B1CE57873009E0877 /* JFCollectionTableViewController.swift in Sources */,
 				B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */,
 				B2E3DFD41CB228900081745A /* JFVideoCell.swift in Sources */,
 				B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
 				B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */,
 				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
+				B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */,
 				B2E3DF941CB222560081745A /* JFNewsBottomBar.swift in Sources */,
 				B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */,
 				B2E3DF931CB222560081745A /* JFDetailOtherCell.swift in Sources */,
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
+				B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */,
 				B2E3DFC41CB228900081745A /* JFPhotoViewController.swift in Sources */,
+				B2BD227F1CE5DDE0009E0877 /* JFLoginViewController.swift in Sources */,
 				B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

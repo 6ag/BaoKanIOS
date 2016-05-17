@@ -18,12 +18,13 @@ class JFProfileViewController: JFBaseTableViewController {
         imgView.snp_makeConstraints(closure: { (make) in
             make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         })
-        let headerIcon = UIButton(type: UIButtonType.Custom)
-        headerIcon.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
-        headerIcon.layer.cornerRadius = 40
-        headerIcon.layer.masksToBounds = true
-        headerView.addSubview(headerIcon)
-        headerIcon.snp_makeConstraints(closure: { (make) in
+        let avatarButton = UIButton(type: UIButtonType.Custom)
+        avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
+        avatarButton.layer.cornerRadius = 40
+        avatarButton.layer.masksToBounds = true
+        headerView.addSubview(avatarButton)
+        avatarButton.addTarget(self, action: #selector(didTappedAvatarButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        avatarButton.snp_makeConstraints(closure: { (make) in
             make.centerX.equalTo(headerView)
             make.centerY.equalTo(headerView)
             make.size.equalTo(CGSize(width: 80, height: 80))
@@ -31,14 +32,18 @@ class JFProfileViewController: JFBaseTableViewController {
         return headerView
     }()
     
-    let rightButton = UIButton(type: UIButtonType.Custom)
+    private lazy var rightButton: UIButton = {
+        let rightButton = UIButton(type: UIButtonType.Custom)
+        rightButton.setTitle("设置", forState: UIControlState.Normal)
+        rightButton.sizeToFit()
+        rightButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        rightButton.addTarget(self, action: #selector(didTappedSettingButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return rightButton
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rightButton.setTitle("设置", forState: UIControlState.Normal)
-        rightButton.sizeToFit()
-        rightButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         UIApplication.sharedApplication().keyWindow?.addSubview(rightButton)
         rightButton.snp_makeConstraints { (make) in
             make.right.equalTo(-20)
@@ -56,7 +61,6 @@ class JFProfileViewController: JFBaseTableViewController {
         redView.backgroundColor = UIColor.redColor()
         tableHeaderView.addSubview(redView)
         tableView.tableHeaderView = tableHeaderView
-        
         
         let group1CellModel1 = JFProfileCellArrowModel(title: "收藏", icon: "setting_star_icon", destinationVc: JFCollectionTableViewController.self)
         let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
@@ -123,5 +127,24 @@ class JFProfileViewController: JFBaseTableViewController {
             headerView.frame = CGRect(x: offsetY / 2, y: offsetY, width: SCREEN_WIDTH - offsetY, height: 180 - offsetY)
         }
     }
+    
+    // MARK: - 各种点击事件
+    /**
+     头像按钮点击
+     */
+    @objc private func didTappedAvatarButton(button: UIButton) {
+        let loginVc = JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)
+        presentViewController(loginVc, animated: true) { 
+            
+        }
+    }
+    
+    /**
+     设置按钮点击
+     */
+    @objc private func didTappedSettingButton(button: UIButton) {
+        
+    }
+    
     
 }

@@ -35,6 +35,7 @@ extension JFNetworkTool {
             
             if let data = response.data {
                 let json = JSON(data: data)
+//                print(json)
                 if json["err_msg"].string == "success" {
                     finished(success: true, result: json, error: nil)
                 } else {
@@ -68,6 +69,6 @@ extension JFNetworkTool {
                 finished(success: false, result: nil, error: response.result.error)
             }
         }
-
+        
     }
 }

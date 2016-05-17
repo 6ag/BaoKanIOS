@@ -42,3 +42,6 @@ let WB_APP_KEY = ""
 let WB_APP_SECRET = ""
 let WB_REDIRECT_URL = ""
 
+/// 检查是否登录的key 用户保存登录状态到偏好设置
+let IS_LOGIN = "isLogin"
+        

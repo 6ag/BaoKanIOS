@@ -18,14 +18,14 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
-    let photoIdentifier = "photoDetail"
-    var photoModels = [JFPhotoDetailModel]()
+    private let photoIdentifier = "photoDetail"
+    private var photoModels = [JFPhotoDetailModel]()
     
     // 导航栏/背景颜色
-    let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.9)
+    private let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.9)
     
     /// 当前页显示的文字数据
-    var currentPageData: (page: Int, text: String)? {
+    private var currentPageData: (page: Int, text: String)? {
         didSet {
             captionLabel.text = "\(currentPageData!.page)/\(photoModels.count)  \(currentPageData!.text)"
             updateBottomBgViewConstraint()
@@ -33,7 +33,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     /// 内容视图
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.itemSize = CGSize(width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT)
         myLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -49,7 +49,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 自定义导航栏
-    lazy var navigationBarView: UIView = {
+    private lazy var navigationBarView: UIView = {
         let navigationBarView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
         navigationBarView.backgroundColor = self.bgColor
         
@@ -120,7 +120,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
      - parameter classid: 当前子分类id
      - parameter id:      文章id
      */
-    func loadPhotoDetail(classid: String, id: String) {
+    @objc private func loadPhotoDetail(classid: String, id: String) {
         let parameters = [
             "table" : "news",
             "classid" : classid,
@@ -189,34 +189,34 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     // MARK: - 各种tap事件
-    func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
+    @objc private func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
+    @objc private func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
         print("didTappedRightBarButtonItem")
     }
     
-    func didTappedCommentButton(button: UIButton) -> Void {
+    @objc private func didTappedCommentButton(button: UIButton) -> Void {
         print("didTappedCommentButton")
     }
     
-    func didTappedStarButton(button: UIButton) -> Void {
+    @objc private func didTappedStarButton(button: UIButton) -> Void {
         print("didTappedStarButton")
     }
     
-    func didTappedShareButton(button: UIButton) -> Void {
+    @objc private func didTappedShareButton(button: UIButton) -> Void {
         print("didTappedShareButton")
     }
     
-    func didTappedFontButton(button: UIButton) -> Void {
+    @objc private func didTappedFontButton(button: UIButton) -> Void {
         print("didTappedFontButton")
     }
     
     /**
      准备UI
      */
-    private func prepareUI() {
+    @objc private func prepareUI() {
         
         self.edgesForExtendedLayout = .None
         self.automaticallyAdjustsScrollViewInsets = false
@@ -279,7 +279,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     /**
      更新底部详情视图的高度
      */
-    private func updateBottomBgViewConstraint() {
+    @objc private func updateBottomBgViewConstraint() {
         UIApplication.sharedApplication().keyWindow?.layoutIfNeeded()
         
         bottomBgView.snp_updateConstraints { (make) in
@@ -289,14 +289,14 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     // MARK: - 懒加载
     /// 底部文字透明背景视图
-    lazy var bottomBgView: UIView = {
+    private lazy var bottomBgView: UIView = {
         let bottomBgView = UIView()
         bottomBgView.backgroundColor = self.bgColor
         return bottomBgView
     }()
     
     /// 文字描述
-    lazy var captionLabel: UILabel = {
+    private lazy var captionLabel: UILabel = {
         let captionLabel = UILabel()
         captionLabel.textColor = UIColor(red:0.945,  green:0.945,  blue:0.945, alpha:1)
         captionLabel.numberOfLines = 0
@@ -305,14 +305,14 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 底部工具条
-    lazy var bottomToolView: UIView = {
+    private lazy var bottomToolView: UIView = {
         let bottomToolView = UIView()
         bottomToolView.backgroundColor = self.bgColor
         return bottomToolView
     }()
     
     /// 评论
-    lazy var commentButton: UIButton = {
+    private lazy var commentButton: UIButton = {
         let commentButton = UIButton(type: UIButtonType.Custom)
         commentButton.setBackgroundImage(UIImage(named: "toolbar_light_comment"), forState: UIControlState.Normal)
         commentButton.addTarget(self, action: #selector(didTappedCommentButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -320,7 +320,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 收藏
-    lazy var starButton: UIButton = {
+    private lazy var starButton: UIButton = {
         let starButton = UIButton(type: UIButtonType.Custom)
         starButton.setBackgroundImage(UIImage(named: "article_item_favor"), forState: UIControlState.Normal)
         starButton.addTarget(self, action: #selector(didTappedStarButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -328,7 +328,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 分享
-    lazy var shareButton: UIButton = {
+    private lazy var shareButton: UIButton = {
         let shareButton = UIButton(type: UIButtonType.Custom)
         shareButton.setBackgroundImage(UIImage(named: "article_item_share"), forState: UIControlState.Normal)
         shareButton.addTarget(self, action: #selector(didTappedShareButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -336,7 +336,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 字体
-    lazy var fontButton: UIButton = {
+    private lazy var fontButton: UIButton = {
         let fontButton = UIButton(type: UIButtonType.Custom)
         fontButton.setBackgroundImage(UIImage(named: "bottom_bar_font_normal"), forState: UIControlState.Normal)
         fontButton.addTarget(self, action: #selector(didTappedFontButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)

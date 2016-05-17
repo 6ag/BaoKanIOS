@@ -10,8 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class JFNewsViewController: UIViewController
-{
+class JFNewsViewController: UIViewController {
     /// 顶部标签按钮区域
     @IBOutlet weak var topScrollView: UIScrollView!
     /// 内容区域
@@ -24,8 +23,7 @@ class JFNewsViewController: UIViewController
     var topBarView: UIView!
     
     // MARK: - 视图生命周期
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         // 准备视图
@@ -55,8 +53,7 @@ class JFNewsViewController: UIViewController
     /**
     准备视图
     */
-    private func prepareUI()
-    {
+    private func prepareUI() {
 //        navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
         
         // 添加内容
@@ -66,8 +63,7 @@ class JFNewsViewController: UIViewController
     /**
      添加顶部标题栏和控制器
      */
-    private func addContent()
-    {
+    private func addContent() {
         // 初始化标签数组
         if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("newsTopTitles") as? [[String : String]] {
             self.topTitles = topTitles;
@@ -213,8 +209,7 @@ class JFNewsViewController: UIViewController
     /**
      顶部标签的点击事件
      */
-    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer)
-    {
+    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer) {
         let titleLabel = gesture.view as! JFTopLabel
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
@@ -222,11 +217,10 @@ class JFNewsViewController: UIViewController
 }
 
 // MARK: - scrollView代理方法
-extension JFNewsViewController: UIScrollViewDelegate
-{
+extension JFNewsViewController: UIScrollViewDelegate {
+    
     // 滚动结束后触发 代码导致
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView)
-    {
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         
         // 滚动标题栏
@@ -267,14 +261,12 @@ extension JFNewsViewController: UIScrollViewDelegate
     }
     
     // 滚动结束 手势导致
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView)
-    {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
     // 正在滚动
-    func scrollViewDidScroll(scrollView: UIScrollView)
-    {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         let value = abs(scrollView.contentOffset.x / scrollView.frame.width)
         
         let leftIndex = Int(value)
