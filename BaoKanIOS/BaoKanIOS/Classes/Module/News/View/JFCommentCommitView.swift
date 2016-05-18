@@ -12,12 +12,11 @@ protocol JFCommentCommitViewDelegate {
     func didTappedSendButtonWithMessage(message: String) -> Void
 }
 
-class JFCommentCommitView: UIView {
+class JFCommentCommitView: UIView, UITextViewDelegate {
     
     var delegate: JFCommentCommitViewDelegate?
-    
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textView: UITextView!
-    
     let bgView = UIView(frame: SCREEN_BOUNDS)
     
     /**
@@ -32,6 +31,7 @@ class JFCommentCommitView: UIView {
      */
     @IBAction func didTappedSendButton(sender: UIButton) {
         delegate?.didTappedSendButtonWithMessage(textView.text)
+        dismiss()
     }
     
     /**
@@ -50,7 +50,7 @@ class JFCommentCommitView: UIView {
         UIView.animateWithDuration(0.25, animations: {
             self.transform = CGAffineTransformMakeTranslation(0, -480)
         }) { (_) in
-            
+            self.textView.delegate = self
         }
     }
     
@@ -66,6 +66,16 @@ class JFCommentCommitView: UIView {
             }) { (_) in
                 self.bgView.removeFromSuperview()
                 self.removeFromSuperview()
+        }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        if textView.text.characters.count >= 3 {
+            sendButton.enabled = true
+            sendButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        } else {
+            sendButton.enabled = false
+            sendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         }
     }
 

@@ -72,6 +72,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="sendButton" destination="0eK-8H-DIX" id="Rub-ey-tR6"/>
                 <outlet property="textView" destination="86M-wp-sxa" id="JDs-MJ-H8J"/>
             </connections>
             <point key="canvasLocation" x="588.5" y="404"/>

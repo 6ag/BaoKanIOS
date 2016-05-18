@@ -13,7 +13,7 @@ protocol JFNewsBottomBarDelegate {
     func didTappedEditButton(button: UIButton)
     func didTappedCollectButton(button: UIButton)
     func didTappedShareButton(button: UIButton)
-    func didTappedFontButton(button: UIButton)
+    func didTappedCommentButton(button: UIButton)
 }
 
 class JFNewsBottomBar : UIView {
@@ -28,6 +28,10 @@ class JFNewsBottomBar : UIView {
         delegate?.didTappedEditButton(button)
     }
     
+    @IBAction func didTappedCommentButton(button: UIButton) {
+        delegate?.didTappedCommentButton(button)
+    }
+    
     @IBAction func didTappedCollectButton(button: UIButton) {
         delegate?.didTappedCollectButton(button)
     }
@@ -35,10 +39,5 @@ class JFNewsBottomBar : UIView {
     @IBAction func didTappedShareButton(button: UIButton) {
         delegate?.didTappedShareButton(button)
     }
-    
-    @IBAction func didTappedFontButton(button: UIButton) {
-        delegate?.didTappedFontButton(button)
-    }
-    
     
 }

@@ -147,7 +147,7 @@ class JFNewsDetailViewController: UIViewController
             if success == true {
                 if let successResult = result {
                     
-//                    print(successResult)
+                    print(successResult)
                     
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
@@ -197,9 +197,23 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      底部编辑按钮点击
      */
     func didTappedEditButton(button: UIButton) {
-        let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
-        commentCommitView.delegate = self
-        commentCommitView.show()
+        if JFAccountModel.shareAccount().isLogin {
+            let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
+            commentCommitView.delegate = self
+            commentCommitView.show()
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: {
+                
+            })
+        }
+        
+    }
+    
+    /**
+     底部评论按钮点击
+     */
+    func didTappedCommentButton(button: UIButton) {
+        
     }
     
     /**
@@ -217,19 +231,24 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
     }
     
     /**
-     底部字体按钮点击
-     */
-    func didTappedFontButton(button: UIButton) {
-        
-    }
-    
-    /**
      点击了提交评论视图的发送按钮
      
      - parameter message: 评论信息
      */
     func didTappedSendButtonWithMessage(message: String) {
         print(message)
+        
+        let parameters = [
+            "classid" : articleParam!.classid,
+            "id" : articleParam!.id,
+            "userid" : JFAccountModel.shareAccount().id,
+            "username" : JFAccountModel.shareAccount().username!,
+            "saytext" : message
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(result)
+        }
     }
 }
 

@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupGlobalStyle() {
         UIApplication.sharedApplication().statusBarHidden = false
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        JFProgressHUD.setupProgressHUD() // 配置HUD
+        JFProgressHUD.setupHUD() // 配置HUD
     }
     
     /**

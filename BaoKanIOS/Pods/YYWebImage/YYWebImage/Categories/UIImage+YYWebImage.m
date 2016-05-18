@@ -49,11 +49,18 @@ static CGRect _YYCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewConten
                 rect.size = CGSizeZero;
             } else {
                 CGFloat scale;
-                if (size.width / size.height < rect.size.width / rect.size.height &&
-                    mode == UIViewContentModeScaleAspectFit) {
-                    scale = rect.size.height / size.height;
+                if (mode == UIViewContentModeScaleAspectFit) {
+                    if (size.width / size.height < rect.size.width / rect.size.height) {
+                        scale = rect.size.height / size.height;
+                    } else {
+                        scale = rect.size.width / size.width;
+                    }
                 } else {
-                    scale = rect.size.width / size.width;
+                    if (size.width / size.height < rect.size.width / rect.size.height) {
+                        scale = rect.size.width / size.width;
+                    } else {
+                        scale = rect.size.height / size.height;
+                    }
                 }
                 size.width *= scale;
                 size.height *= scale;
@@ -214,7 +221,7 @@ static NSTimeInterval _yy_CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef 
             CFRelease(imageRef);
             return nil;
         }
-        UIImage *image = image = [UIImage imageWithCGImage:decoded scale:scale orientation:UIImageOrientationUp];
+        UIImage *image = [UIImage imageWithCGImage:decoded scale:scale orientation:UIImageOrientationUp];
         CGImageRelease(imageRef);
         CGImageRelease(decoded);
         if (!image) {
@@ -351,6 +358,15 @@ static NSTimeInterval _yy_CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef 
                              borderWidth:(CGFloat)borderWidth
                              borderColor:(UIColor *)borderColor
                           borderLineJoin:(CGLineJoin)borderLineJoin {
+    
+    if (corners != UIRectCornerAllCorners) {
+        UIRectCorner tmp = 0;
+        if (corners & UIRectCornerTopLeft) tmp |= UIRectCornerBottomLeft;
+        if (corners & UIRectCornerTopRight) tmp |= UIRectCornerBottomRight;
+        if (corners & UIRectCornerBottomLeft) tmp |= UIRectCornerTopLeft;
+        if (corners & UIRectCornerBottomRight) tmp |= UIRectCornerTopRight;
+        corners = tmp;
+    }
     
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGContextRef context = UIGraphicsGetCurrentContext();

@@ -48,15 +48,7 @@ class JFAccountModel: NSObject {
     
     /// 是否登录 只读计算型属性可以省略get和大括号
     var isLogin: Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGIN)
-    }
-    
-    /**
-     初始化账户模型
-     */
-    init(dict: [String : AnyObject]) {
-        super.init()
-        setValuesForKeysWithDictionary(dict)
+        return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGIN) && username != nil
     }
     
     /**

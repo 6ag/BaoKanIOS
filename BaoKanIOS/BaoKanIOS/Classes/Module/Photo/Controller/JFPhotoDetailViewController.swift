@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, JFPhotoDetailCellDelegate {
+class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, JFPhotoDetailCellDelegate, JFCommentCommitViewDelegate {
     
     // MARK: - 属性
     /// 文章详情请求参数
@@ -75,7 +75,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         prepareUI()
     }
     
@@ -84,17 +83,8 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        bottomBgView.removeFromSuperview()
-        bottomToolView.removeFromSuperview()
-        navigationBarView.removeFromSuperview()
-    }
-    
     // 滚动停止后调用，判断当然显示的第一张图片
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
         
         let page = Int(scrollView.contentOffset.x / SCREEN_WIDTH)
         let model = photoModels[page]
@@ -121,6 +111,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
      - parameter id:      文章id
      */
     @objc private func loadPhotoDetail(classid: String, id: String) {
+        
         let parameters = [
             "table" : "news",
             "classid" : classid,
@@ -188,6 +179,26 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
+    /**
+     点击了提交评论视图的发送按钮
+     
+     - parameter message: 评论信息
+     */
+    func didTappedSendButtonWithMessage(message: String) {
+        
+        let parameters = [
+            "classid" : photoParam!.classid,
+            "id" : photoParam!.id,
+            "userid" : JFAccountModel.shareAccount().id,
+            "username" : JFAccountModel.shareAccount().username!,
+            "saytext" : message
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(result)
+        }
+    }
+    
     // MARK: - 各种tap事件
     @objc private func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
         navigationController?.popViewControllerAnimated(true)
@@ -195,6 +206,20 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     @objc private func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
         print("didTappedRightBarButtonItem")
+        JFProgressHUD.showInfoWithStatus("举报成功，谢谢您的支持")
+    }
+    
+    @objc private func didTappedEditButton(button: UIButton) -> Void {
+        
+        if JFAccountModel.shareAccount().isLogin {
+            let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
+            commentCommitView.delegate = self
+            commentCommitView.show()
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: {
+                
+            })
+        }
     }
     
     @objc private func didTappedCommentButton(button: UIButton) -> Void {
@@ -209,10 +234,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         print("didTappedShareButton")
     }
     
-    @objc private func didTappedFontButton(button: UIButton) -> Void {
-        print("didTappedFontButton")
-    }
-    
     /**
      准备UI
      */
@@ -221,14 +242,15 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         self.edgesForExtendedLayout = .None
         self.automaticallyAdjustsScrollViewInsets = false
         
-        UIApplication.sharedApplication().keyWindow?.addSubview(navigationBarView)
         view.addSubview(collectionView)
-        UIApplication.sharedApplication().keyWindow?.addSubview(bottomToolView)
+        
+        view.addSubview(navigationBarView)
+        view.addSubview(bottomToolView)
+        bottomToolView.addSubview(editButton)
         bottomToolView.addSubview(commentButton)
         bottomToolView.addSubview(starButton)
         bottomToolView.addSubview(shareButton)
-        bottomToolView.addSubview(fontButton)
-        UIApplication.sharedApplication().keyWindow?.addSubview(bottomBgView)
+        view.addSubview(bottomBgView)
         bottomBgView.addSubview(captionLabel)
         
         bottomToolView.snp_makeConstraints { (make) in
@@ -250,11 +272,17 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         
         updateBottomBgViewConstraint()
         
-        commentButton.snp_makeConstraints { (make) in
+        editButton.snp_makeConstraints { (make) in
             make.left.equalTo(20)
             make.top.equalTo(5)
             make.bottom.equalTo(-5)
             make.width.equalTo(bottomToolView.width - 220)
+        }
+        
+        commentButton.snp_makeConstraints { (make) in
+            make.left.equalTo(editButton.snp_right).offset(30)
+            make.centerY.equalTo(bottomToolView)
+            make.size.equalTo(CGSize(width: 30, height: 30))
         }
         
         starButton.snp_makeConstraints { (make) in
@@ -268,20 +296,14 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
             make.centerY.equalTo(bottomToolView)
             make.size.equalTo(CGSize(width: 30, height: 30))
         }
-        
-        fontButton.snp_makeConstraints { (make) in
-            make.left.equalTo(shareButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
     }
     
     /**
      更新底部详情视图的高度
      */
     @objc private func updateBottomBgViewConstraint() {
-        UIApplication.sharedApplication().keyWindow?.layoutIfNeeded()
         
+        view.layoutIfNeeded()
         bottomBgView.snp_updateConstraints { (make) in
             make.height.equalTo(captionLabel.height + 20)
         }
@@ -311,10 +333,18 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         return bottomToolView
     }()
     
+    /// 编辑
+    private lazy var editButton: UIButton = {
+        let editButton = UIButton(type: UIButtonType.Custom)
+        editButton.setBackgroundImage(UIImage(named: "toolbar_light_comment"), forState: UIControlState.Normal)
+        editButton.addTarget(self, action: #selector(didTappedEditButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return editButton
+    }()
+    
     /// 评论
     private lazy var commentButton: UIButton = {
         let commentButton = UIButton(type: UIButtonType.Custom)
-        commentButton.setBackgroundImage(UIImage(named: "toolbar_light_comment"), forState: UIControlState.Normal)
+        commentButton.setBackgroundImage(UIImage(named: "bottom_bar_comment_normal"), forState: UIControlState.Normal)
         commentButton.addTarget(self, action: #selector(didTappedCommentButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         return commentButton
     }()
@@ -333,14 +363,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         shareButton.setBackgroundImage(UIImage(named: "article_item_share"), forState: UIControlState.Normal)
         shareButton.addTarget(self, action: #selector(didTappedShareButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         return shareButton
-    }()
-    
-    /// 字体
-    private lazy var fontButton: UIButton = {
-        let fontButton = UIButton(type: UIButtonType.Custom)
-        fontButton.setBackgroundImage(UIImage(named: "bottom_bar_font_normal"), forState: UIControlState.Normal)
-        fontButton.addTarget(self, action: #selector(didTappedFontButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return fontButton
     }()
     
 }

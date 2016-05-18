@@ -17,6 +17,7 @@
 #import "YYWebImageManager.h"
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Submits a block for execution on a main queue and waits until the block completes.
@@ -39,24 +40,28 @@ extern const NSTimeInterval _YYWebImageProgressiveFadeTime;
  */
 @interface _YYWebImageSetter : NSObject
 /// Current image url.
-@property (nonatomic, readonly) NSURL *imageURL;
+@property (nullable, nonatomic, readonly) NSURL *imageURL;
+/// Current sentinel.
+@property (nonatomic, readonly) int32_t sentinel;
 
-/// Create new operation for web image.
-- (void)setOperationWithSentinel:(int32_t)sentinel
-                             url:(NSURL *)imageURL
-                         options:(YYWebImageOptions)options
-                         manager:(YYWebImageManager *)manager
-                        progress:(YYWebImageProgressBlock)progress
-                       transform:(YYWebImageTransformBlock)transform
-                      completion:(YYWebImageCompletionBlock)completion;
+/// Create new operation for web image and return a sentinel value.
+- (int32_t)setOperationWithSentinel:(int32_t)sentinel
+                                url:(nullable NSURL *)imageURL
+                            options:(YYWebImageOptions)options
+                            manager:(YYWebImageManager *)manager
+                           progress:(nullable YYWebImageProgressBlock)progress
+                          transform:(nullable YYWebImageTransformBlock)transform
+                         completion:(nullable YYWebImageCompletionBlock)completion;
 
 /// Cancel and return a sentinel value. The imageURL will be set to nil.
 - (int32_t)cancel;
 
 /// Cancel and return a sentinel value. The imageURL will be set to new value.
-- (int32_t)cancelWithNewURL:(NSURL *)imageURL;
+- (int32_t)cancelWithNewURL:(nullable NSURL *)imageURL;
 
 /// A queue to set operation.
 + (dispatch_queue_t)setterQueue;
 
 @end
+
+NS_ASSUME_NONNULL_END

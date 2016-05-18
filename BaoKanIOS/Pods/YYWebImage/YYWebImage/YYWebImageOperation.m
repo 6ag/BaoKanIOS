@@ -20,9 +20,6 @@
 #import "YYImage.h"
 #endif
 
-#if __has_include("YYDispatchQueuePool.h")
-#import "YYDispatchQueuePool.h"
-#endif
 
 #define MIN_PROGRESSIVE_TIME_INTERVAL 0.2
 #define MIN_PROGRESSIVE_BLUR_TIME_INTERVAL 0.4
@@ -216,9 +213,6 @@ static void URLInBlackListAdd(NSURL *url) {
 
 /// Global image queue, used for image reading and decoding.
 + (dispatch_queue_t)_imageQueue {
-#ifdef YYDispatchQueuePool_h
-    return YYDispatchQueueGetForQOS(NSQualityOfServiceUtility);
-#else
     #define MAX_QUEUE_COUNT 16
     static int queueCount;
     static dispatch_queue_t queues[MAX_QUEUE_COUNT];
@@ -243,12 +237,11 @@ static void URLInBlackListAdd(NSURL *url) {
     if (cur < 0) cur = -cur;
     return queues[(cur) % queueCount];
     #undef MAX_QUEUE_COUNT
-#endif
 }
 
 - (instancetype)init {
     @throw [NSException exceptionWithName:@"YYWebImageOperation init error" reason:@"YYWebImageOperation must be initialized with a request. Use the designated initializer to init." userInfo:nil];
-    return [self initWithRequest:nil options:0 cache:nil cacheKey:nil progress:nil transform:nil completion:nil];
+    return [self initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]] options:0 cache:nil cacheKey:nil progress:nil transform:nil completion:nil];
 }
 
 - (instancetype)initWithRequest:(NSURLRequest *)request

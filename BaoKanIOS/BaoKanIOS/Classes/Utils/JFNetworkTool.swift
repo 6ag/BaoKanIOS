@@ -32,14 +32,13 @@ extension JFNetworkTool {
     func get(APIString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
         Alamofire.request(.GET, "\(API_URL)\(APIString)", parameters: parameters).responseJSON { (response) -> Void in
-            
+            print("\(API_URL)\(APIString)")
             if let data = response.data {
                 let json = JSON(data: data)
-//                print(json)
                 if json["err_msg"].string == "success" {
                     finished(success: true, result: json, error: nil)
                 } else {
-                    finished(success: false, result: nil, error: response.result.error)
+                    finished(success: false, result: json, error: response.result.error)
                 }
             } else {
                 finished(success: false, result: nil, error: response.result.error)
@@ -58,12 +57,13 @@ extension JFNetworkTool {
     func post(APIString: String, parameters: [String : AnyObject]?, finished: NetworkFinished) {
         
         Alamofire.request(.POST, "\(API_URL)\(APIString)", parameters: parameters).responseJSON { (response) -> Void in
+            print("\(API_URL)\(APIString)")
             if let data = response.data {
                 let json = JSON(data: data)
                 if json["err_msg"].string == "success" {
                     finished(success: true, result: json, error: nil)
                 } else {
-                    finished(success: false, result: nil, error: response.result.error)
+                    finished(success: false, result: json, error: response.result.error)
                 }
             } else {
                 finished(success: false, result: nil, error: response.result.error)

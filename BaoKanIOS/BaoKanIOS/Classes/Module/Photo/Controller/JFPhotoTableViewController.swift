@@ -73,6 +73,9 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
+                    
+                    print(successResult)
+                    
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     for article in data {

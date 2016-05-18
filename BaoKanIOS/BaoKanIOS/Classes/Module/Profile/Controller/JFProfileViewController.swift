@@ -133,10 +133,13 @@ class JFProfileViewController: JFBaseTableViewController {
      头像按钮点击
      */
     @objc private func didTappedAvatarButton(button: UIButton) {
-        let loginVc = JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)
-        presentViewController(loginVc, animated: true) { 
-            
+        
+        if JFAccountModel.shareAccount().isLogin {
+            print(JFAccountModel.shareAccount().username)
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
+        
     }
     
     /**

@@ -29,7 +29,13 @@ class JFLoginButton: UIButton {
         
         maskLayer.path = buttonPath.CGPath
         layer.mask = maskLayer
-        isReverse = !isReverse
+        
+        isReverse = true
+        maskLayer.addAnimation(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
+    }
+    
+    func endLoginAnimation() -> Void {
+        isReverse = false
         maskLayer.addAnimation(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
     }
     
@@ -52,9 +58,6 @@ class JFLoginButton: UIButton {
     }
     
     func updateRotate() -> Void {
-    
-        print("start = \(shapeLayer.strokeStart)")
-        print("end = \(shapeLayer.strokeEnd)")
         
         if (shapeLayer.strokeEnd > 1 && shapeLayer.strokeStart < 1) {
             shapeLayer.strokeStart += add
@@ -68,7 +71,7 @@ class JFLoginButton: UIButton {
     
     func shapePathAnimationWithFromPath(fromPath: UIBezierPath, toPath: UIBezierPath) -> CAAnimation {
         if isReverse {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { // 2
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
                 self.setupRotate()
             }
             let toCircleAnimation = animationWithKeyPath("path", duration: 0.5, fromValue: fromPath.CGPath, toValue: toPath.CGPath)

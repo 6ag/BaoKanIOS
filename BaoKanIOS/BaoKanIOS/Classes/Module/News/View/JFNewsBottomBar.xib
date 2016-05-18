@@ -27,25 +27,26 @@
                                 <action selector="didTappedEditButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="JMf-GC-3eZ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-Ts-jCo" userLabel="Collection">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5h-0G-nc5" userLabel="Comment">
                             <rect key="frame" x="128" y="0.0" width="64" height="44"/>
-                            <state key="normal" image="bottom_bar_collection_selected"/>
+                            <state key="normal" image="bottom_bar_comment_normal"/>
+                            <connections>
+                                <action selector="didTappedCommentButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="2db-8N-oAX"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-Ts-jCo" userLabel="Collection">
+                            <rect key="frame" x="192" y="0.0" width="64" height="44"/>
+                            <state key="normal" image="bottom_bar_collection_normal"/>
+                            <state key="selected" image="bottom_bar_collection_selected"/>
                             <connections>
                                 <action selector="didTappedCollectButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="KDe-ie-Gl6"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Vs-qKK" userLabel="Share">
-                            <rect key="frame" x="192" y="0.0" width="64" height="44"/>
+                            <rect key="frame" x="256" y="0.0" width="64" height="44"/>
                             <state key="normal" image="bottom_bar_share_selected"/>
                             <connections>
                                 <action selector="didTappedShareButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ice-cz-sOL"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5h-0G-nc5" userLabel="Font">
-                            <rect key="frame" x="256" y="0.0" width="64" height="44"/>
-                            <state key="normal" image="bottom_bar_font_selected"/>
-                            <connections>
-                                <action selector="didTappedFontButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="gYR-CD-oE0"/>
                             </connections>
                         </button>
                     </subviews>
@@ -65,9 +66,10 @@
     </objects>
     <resources>
         <image name="bottom_bar_back_normal" width="40" height="40"/>
+        <image name="bottom_bar_collection_normal" width="30" height="30"/>
         <image name="bottom_bar_collection_selected" width="44" height="44"/>
+        <image name="bottom_bar_comment_normal" width="30" height="30"/>
         <image name="bottom_bar_edit_selected" width="30" height="30"/>
-        <image name="bottom_bar_font_selected" width="26" height="26"/>
         <image name="bottom_bar_share_selected" width="44" height="44"/>
     </resources>
 </document>
