@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
 
 class JFNewsViewController: UIViewController {
     /// 顶部标签按钮区域
@@ -33,6 +32,7 @@ class JFNewsViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
         topBarView = UIView()
         topBarView.backgroundColor = NAVIGATIONBAR_RED_COLOR
@@ -54,7 +54,6 @@ class JFNewsViewController: UIViewController {
     准备视图
     */
     private func prepareUI() {
-//        navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
         
         // 添加内容
         addContent()
@@ -155,6 +154,7 @@ class JFNewsViewController: UIViewController {
                     "classname": "征稿信息"
                 ]
             ]
+            
             NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "newsTopTitles")
             self.topTitles = topTitles
         }

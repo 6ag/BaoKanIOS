@@ -57,7 +57,6 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
             changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
-            UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         } else {
             viewController.hidesBottomBarWhenPushed = false
         }
@@ -75,9 +74,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     
     override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
         
-        changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
+        changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
         return super.popViewControllerAnimated(animated)
     }
     

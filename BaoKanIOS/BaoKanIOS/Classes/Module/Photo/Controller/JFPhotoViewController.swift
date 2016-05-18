@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
 
 class JFPhotoViewController: UIViewController
 {
@@ -34,6 +33,8 @@ class JFPhotoViewController: UIViewController
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         topBarView = UIView()

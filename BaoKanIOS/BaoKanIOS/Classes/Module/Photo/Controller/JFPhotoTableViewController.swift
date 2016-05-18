@@ -68,13 +68,20 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
             "table" : "photo",
             "classid" : classid,
             "pageIndex" : pageIndex,
-        ]
+            ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+            
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            
             if success == true {
                 if let successResult = result {
                     
                     print(successResult)
+                    
+                    let minId = self.photoList.last?.id ?? "0"
+                    let maxId = self.photoList.first?.id ?? "0"
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     
@@ -101,17 +108,14 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
                             
                             let postModel = JFArticleListModel(dict: dict)
                             
-                            // 如果字典中不包含模型对象才存入
-                            if self.photoList.contains(postModel) == false {
-                                
-                                if method == 0 {
-                                    // 下拉加载最新
+                            if method == 0 {
+                                if Int(maxId) < Int(postModel.id!) {
                                     self.photoList.insert(postModel, atIndex: 0)
-                                } else {
-                                    // 上拉加载更多
+                                }
+                            } else {
+                                if Int(minId) > Int(postModel.id!) {
                                     self.photoList.append(postModel)
                                 }
-                                
                             }
                             
                         } else {
@@ -120,9 +124,6 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
                         }
                         
                     }
-                    
-                    self.tableView.mj_header.endRefreshing()
-                    self.tableView.mj_footer.endRefreshing()
                     
                     // 刷新表格
                     self.tableView.reloadData()

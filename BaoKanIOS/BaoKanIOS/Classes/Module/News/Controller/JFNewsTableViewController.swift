@@ -23,7 +23,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     }
     
     // 页码
-    var pageIndex = 1;
+    var pageIndex = 1
     
     /// 模型数组
     var articleList: [JFArticleListModel] = []
@@ -90,12 +90,17 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         ]
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+            
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            
             if success == true {
                 if let successResult = result {
                     
-//                    print(result)
-                    
                     let data = successResult["data"][0].arrayValue.reverse()
+                    
+                    let minId = self.articleList.last?.id ?? "0"
+                    let maxId = self.articleList.first?.id ?? "0"
                     
                     for article in data {
                         
@@ -116,22 +121,19 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         
                         // 标题图片可能无值
                         if article["titlepic"].string != "" {
+                            
                             dict["titlepic"] = article["titlepic"].string!
                             
                             let postModel = JFArticleListModel(dict: dict)
                             
-                            // 如果字典中不包含模型对象才存入
-                            if self.articleList.contains(postModel) == false {
-                                
-                                if method == 0 {
-                                    // 下拉加载最新
+                            if method == 0 {
+                                if Int(maxId) < Int(postModel.id!) {
                                     self.articleList.insert(postModel, atIndex: 0)
-                                    
-                                } else {
-                                    // 上拉加载更多
+                                }
+                            } else {
+                                if Int(minId) > Int(postModel.id!) {
                                     self.articleList.append(postModel)
                                 }
-                                
                             }
                             
                         } else {
@@ -140,9 +142,6 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         }
                         
                     }
-                    
-                    self.tableView.mj_header.endRefreshing()
-                    self.tableView.mj_footer.endRefreshing()
                     
                     // 刷新表格
                     self.tableView.reloadData()
@@ -159,6 +158,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
     

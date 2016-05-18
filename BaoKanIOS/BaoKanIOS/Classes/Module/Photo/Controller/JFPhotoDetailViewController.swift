@@ -223,7 +223,9 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     @objc private func didTappedCommentButton(button: UIButton) -> Void {
-        print("didTappedCommentButton")
+        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
+        commentVc.param = photoParam
+        navigationController?.pushViewController(commentVc, animated: true)
     }
     
     @objc private func didTappedStarButton(button: UIButton) -> Void {

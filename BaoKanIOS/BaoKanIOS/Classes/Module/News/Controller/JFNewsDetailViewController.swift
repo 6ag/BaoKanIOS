@@ -75,6 +75,7 @@ class JFNewsDetailViewController: UIViewController
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -213,7 +214,9 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      底部评论按钮点击
      */
     func didTappedCommentButton(button: UIButton) {
-        
+        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
+        commentVc.param = articleParam
+        navigationController?.pushViewController(commentVc, animated: true)
     }
     
     /**
