@@ -31,12 +31,13 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
     
+    var topScrollView: SDCycleScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 100
-        prepareScrollView()
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
@@ -46,18 +47,23 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      准备头部轮播
      */
     private func prepareScrollView() {
-        let scrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150), delegate: self, placeholderImage: UIImage(named: "photoview_image_default_white"))
-        scrollView.currentPageDotColor = UIColor.redColor()
-        scrollView.pageDotColor = UIColor.blackColor()
-        scrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
-        scrollView.imageURLStringsGroup = ["http://file.ynet.com/2/1601/14/10731063.jpg", "http://file.ynet.com/2/1601/14/10731063.jpg", "http://file.ynet.com/2/1601/14/10731063.jpg"]
-        scrollView.titlesGroup = ["测试轮播标题1", "测试轮播标题2", "测试轮播标题3"]
-        scrollView.autoScrollTimeInterval = 5
-        tableView.tableHeaderView = scrollView
+        
+        topScrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150), delegate: self, placeholderImage: UIImage(named: "photoview_image_default_white"))
+        topScrollView.currentPageDotColor = UIColor.redColor()
+        topScrollView.pageDotColor = UIColor.blackColor()
+        topScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
+        topScrollView.imageURLStringsGroup = [articleList[0].titlepic!, articleList[1].titlepic!, articleList[2].titlepic!]
+        topScrollView.titlesGroup = [articleList[0].title!, articleList[1].title!, articleList[2].title!]
+        topScrollView.autoScrollTimeInterval = 5
+        tableView.tableHeaderView = topScrollView
     }
     
     func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
-        print("点击了第\(index)张图")
+        
+        let currentListModel = articleList[index]
+        let detailVc = JFNewsDetailViewController()
+        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
     
     /**
@@ -143,8 +149,11 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         
                     }
                     
-                    // 刷新表格
+                    // 刷新数据
                     self.tableView.reloadData()
+                    if self.articleList.count >= 3 {
+                        self.prepareScrollView()
+                    }
                     
                 } else {
                     print("error:\(error)")
@@ -158,28 +167,36 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articleList.count
+        if articleList.count >= 3 {
+            return articleList.count + 3
+        } else {
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFNewsCell
-        cell.postModel = articleList[indexPath.row]
+        if articleList.count >= 3 {
+            cell.postModel = articleList[indexPath.row + 3]
+        }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        // 请求文章详情数据
-        let currentListModel = articleList[indexPath.row]
-        let detailVc = JFNewsDetailViewController()
-        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
-        self.navigationController?.pushViewController(detailVc, animated: true)
+        if articleList.count >= 3 {
+            // 请求文章详情数据
+            let currentListModel = articleList[indexPath.row + 3]
+            let detailVc = JFNewsDetailViewController()
+            detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
+            self.navigationController?.pushViewController(detailVc, animated: true)
+        }
+        
     }
     
 }

@@ -231,9 +231,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
             commentCommitView.delegate = self
             commentCommitView.show()
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: {
-                
-            })
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
         }
     }
     
