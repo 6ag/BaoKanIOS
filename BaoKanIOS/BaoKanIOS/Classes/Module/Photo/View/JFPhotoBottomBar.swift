@@ -18,6 +18,9 @@ protocol JFPhotoBottomBarDelegate {
 
 class JFPhotoBottomBar : UIView {
     
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var collectionButton: UIButton!
+    
     var delegate: JFPhotoBottomBarDelegate?
     
     @IBAction func didTappedBackButton(button: UIButton) {

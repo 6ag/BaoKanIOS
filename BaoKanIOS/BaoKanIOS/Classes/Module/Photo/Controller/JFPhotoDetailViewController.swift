@@ -104,21 +104,41 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
      */
     @objc private func loadPhotoDetail(classid: String, id: String) {
         
-        let parameters = [
-            "table" : "news",
-            "classid" : classid,
-            "id" : id
-        ]
+        var parameters = [String : AnyObject]()
+        
+        if JFAccountModel.shareAccount().isLogin {
+            parameters = [
+                "table" : "news",
+                "classid" : classid,
+                "id" : id,
+                "username" : JFAccountModel.shareAccount().username!,
+                "userid" : JFAccountModel.shareAccount().id,
+                "token" : JFAccountModel.shareAccount().token!,
+            ]
+        } else {
+            parameters = [
+                "table" : "news",
+                "classid" : classid,
+                "id" : id,
+            ]
+        }
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
+                    
+                    // 更新评论数量
+                    self.bottomToolView.commentButton.setTitle(successResult["data"]["content"]["plnum"].stringValue, forState: UIControlState.Normal)
+                    
+                    // 更新收藏状态
+                    self.bottomToolView.collectionButton.selected = successResult["data"]["content"]["havefava"].stringValue == "favorfill"
+                    
                     let morepic = successResult["data"]["content"]["morepic"].arrayValue
                     for picJSON in morepic {
                         let dict = [
-                            "title" : picJSON.dictionaryValue["title"]!.stringValue, // 图片标题
-                            "picurl" : picJSON.dictionaryValue["url"]!.stringValue,  // 图片url
-                            "text" : picJSON.dictionaryValue["caption"]!.stringValue // 图片文字描述
+                            "title" : picJSON["title"].stringValue, // 图片标题
+                            "picurl" : picJSON["url"].stringValue,  // 图片url
+                            "text" : picJSON["caption"].stringValue // 图片文字描述
                         ]
                         
                         let model = JFPhotoDetailModel(dict: dict)
@@ -133,6 +153,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
                 print("error:\(error)")
             }
         }
+        
     }
     
     // MARK: - JFPhotoDetailCellDelegate
@@ -224,6 +245,36 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     func didTappedCollectButton(button: UIButton) {
         
+        if JFAccountModel.shareAccount().isLogin {
+            
+            let parameters = [
+                "username" : JFAccountModel.shareAccount().username!,
+                "userid" : JFAccountModel.shareAccount().id,
+                "token" : JFAccountModel.shareAccount().token!,
+                "classid" : photoParam!.classid,
+                "id" : photoParam!.id
+            ]
+            
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+                if success {
+                    if let successResult = result {
+                        if successResult["result"]["status"].intValue == 1 {
+                            // 增加成功
+                            JFProgressHUD.showSuccessWithStatus("收藏成功")
+                            button.selected = true
+                        } else if successResult["result"]["status"].intValue == 3 {
+                            // 删除成功
+                            JFProgressHUD.showSuccessWithStatus("取消收藏")
+                            button.selected = false
+                        }
+                    }
+                } else {
+                    print(error)
+                }
+            }
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
+        }
     }
     
     func didTappedShareButton(button: UIButton) {
@@ -300,7 +351,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     }()
     
     /// 底部工具条
-    private lazy var bottomToolView: UIView = {
+    private lazy var bottomToolView: JFPhotoBottomBar = {
         let bottomToolView = NSBundle.mainBundle().loadNibNamed("JFPhotoBottomBar", owner: nil, options: nil).last as! JFPhotoBottomBar
         bottomToolView.backgroundColor = self.bgColor
         bottomToolView.delegate = self

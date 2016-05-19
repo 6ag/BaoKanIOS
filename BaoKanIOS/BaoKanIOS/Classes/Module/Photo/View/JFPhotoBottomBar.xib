@@ -36,7 +36,10 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgx-jM-Gkz" userLabel="Comment">
                             <rect key="frame" x="128" y="0.0" width="64" height="43"/>
-                            <state key="normal" image="bottom_bar_comment_normal"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="9" image="bottom_bar_comment_normal">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
                                 <action selector="didTappedCommentButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="F5U-xN-S6F"/>
                             </connections>
@@ -71,6 +74,10 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionButton" destination="x1r-RX-WVA" id="MZz-Z4-lUg"/>
+                <outlet property="commentButton" destination="xgx-jM-Gkz" id="6eo-GJ-1Hf"/>
+            </connections>
             <point key="canvasLocation" x="546" y="392"/>
         </view>
     </objects>
