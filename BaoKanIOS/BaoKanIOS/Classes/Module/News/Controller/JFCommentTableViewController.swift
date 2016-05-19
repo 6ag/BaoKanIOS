@@ -87,6 +87,10 @@ class JFCommentTableViewController: UITableViewController {
                     
                     print(data)
                     
+                    if data.count == 0 && self.commentList.count == 0 {
+                        return
+                    }
+                    
                     if data.count == 0 {
                         JFProgressHUD.showInfoWithStatus("没有更多评论")
                         return

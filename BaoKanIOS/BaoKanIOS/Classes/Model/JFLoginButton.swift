@@ -24,6 +24,7 @@ class JFLoginButton: UIButton {
      开始登录动画
      */
     func startLoginAnimation() -> Void {
+        enabled = false
         buttonPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height), cornerRadius: frame.size.width * 0.5)
         circlePath = UIBezierPath(roundedRect: CGRect(x: frame.size.width * 0.5 - frame.size.height * 0.5, y: 0, width: frame.size.height, height: frame.size.height), cornerRadius: frame.size.height * 0.5)
         
@@ -35,6 +36,7 @@ class JFLoginButton: UIButton {
     }
     
     func endLoginAnimation() -> Void {
+        enabled = true
         isReverse = false
         maskLayer.addAnimation(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
     }

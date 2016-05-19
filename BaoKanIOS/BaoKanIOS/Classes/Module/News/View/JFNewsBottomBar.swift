@@ -18,6 +18,9 @@ protocol JFNewsBottomBarDelegate {
 
 class JFNewsBottomBar : UIView {
     
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var collectionButton: UIButton!
+    
     var delegate: JFNewsBottomBarDelegate?
     
     @IBAction func didTappedBackButton(button: UIButton) {

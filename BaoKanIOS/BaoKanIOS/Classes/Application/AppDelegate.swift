@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
 
 let appKey = "8e0c2d457d44144fd2a6dc52"
 let channel = "Publish channel"
@@ -23,8 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
 //        setupJPush(launchOptions) // 配置极光推送
-        
+        setupKeyBoardManager()    // 配置键盘管理者
         return true
+    }
+    
+    /**
+     配置键盘管理者
+     */
+    private func setupKeyBoardManager() {
+        IQKeyboardManager.sharedManager().enable = true
     }
     
     /**

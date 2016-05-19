@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import pop
 
-class JFLoginViewController: UIViewController {
+class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate {
     
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var usernameView: UIView!
@@ -32,17 +33,34 @@ class JFLoginViewController: UIViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
-    // bbsbaokan
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    // MARK: - JFRegisterViewControllerDelegate
+    func registerSuccess(username: String, password: String) {
+        usernameField.text = username
+        passwordField.text = password
+        didChangeTextField(usernameField)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            self.didTappedLoginButton(self.loginButton)
+        }
+    }
+    
+    // 测试账号密码都是：bbsbaokan
     @IBAction func didTappedLoginButton(button: JFLoginButton) {
         
         view.endEditing(true)
         
-        // 开始登录动画
+        // 开始动画
         button.startLoginAnimation()
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
             
-            let parameters = ["username" : self.usernameField.text!, "password" : self.passwordField.text!]
+            let parameters = [
+                "username" : self.usernameField.text!,
+                "password" : self.passwordField.text!
+            ]
             
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (success, result, error) in
@@ -52,10 +70,12 @@ class JFLoginViewController: UIViewController {
                         JFAccountModel.shareAccount().setValuesForKeysWithDictionary(successResult["data"]["user"].dictionaryObject!)
                         JFAccountModel.shareAccount().login()
                     }
-                } else {
-                    print("登录失败")
+                } else if result != nil {
+                    JFProgressHUD.showInfoWithStatus(result!["data"]["info"].string!)
                 }
                 
+                // 结束动画
+                button.endLoginAnimation()
             }
         }
         
@@ -73,13 +93,13 @@ class JFLoginViewController: UIViewController {
     
     @IBAction func didTappedBackButton() {
         view.endEditing(true)
-        dismissViewControllerAnimated(true) { 
-            
-        }
+        dismissViewControllerAnimated(true) {}
     }
     
     @IBAction func didTappedRegisterButton(sender: UIButton) {
-        presentViewController(JFRegisterViewController(nibName: "JFRegisterViewController", bundle: nil), animated: true) {}
+        let registerVc = JFRegisterViewController(nibName: "JFRegisterViewController", bundle: nil)
+        registerVc.delegate = self
+        presentViewController(registerVc, animated: true) {}
     }
     
     @IBAction func didTappedForgotButton(sender: UIButton) {
@@ -97,7 +117,6 @@ class JFLoginViewController: UIViewController {
     @IBAction func didTappedSinaLoginButton(sender: UIButton) {
         print("微博登录")
     }
-    
     
 }
 

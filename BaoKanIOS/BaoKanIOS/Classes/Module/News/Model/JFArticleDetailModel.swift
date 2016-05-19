@@ -31,6 +31,12 @@ class JFArticleDetailModel: NSObject {
     /// 当前子分类id
     var classid: String?
     
+    /// 评论数量
+    var plnum: String?
+    
+    /// 是否收藏
+    var havefava: String?
+    
     /**
      字典转模型构造方法
      */

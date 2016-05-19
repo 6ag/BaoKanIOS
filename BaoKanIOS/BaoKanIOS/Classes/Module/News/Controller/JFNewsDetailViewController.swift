@@ -14,17 +14,19 @@ class JFNewsDetailViewController: UIViewController
 {
     // MARK: - 属性
     /// 文章详情请求参数
-    var articleParam: (classid: String, id: String)? {
-        didSet {
-            loadNewsDetail(articleParam!.classid, id: articleParam!.id)
-        }
-    }
+    var articleParam: (classid: String, id: String)?
     
     /// 详情页面模型
     var model: JFArticleDetailModel? {
         didSet {
             // 更新页面数据
             loadWebViewContent(model!)
+            
+            // 更新评论数量
+            bottomBarView.commentButton.setTitle(model!.plnum!, forState: UIControlState.Normal)
+            
+            // 更新收藏状态
+            bottomBarView.collectionButton.selected = model?.havefava == "favorfill"
         }
     }
     
@@ -78,6 +80,9 @@ class JFNewsDetailViewController: UIViewController
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        // 请求页面数据
+        loadNewsDetail(articleParam!.classid, id: articleParam!.id)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -139,11 +144,25 @@ class JFNewsDetailViewController: UIViewController
      - parameter id:      文章id
      */
     func loadNewsDetail(classid: String, id: String) {
-        let parameters = [
-            "table" : "news",
-            "classid" : classid,
-            "id" : id,
+        
+        var parameters = [String : AnyObject]()
+        
+        if JFAccountModel.shareAccount().isLogin {
+            parameters = [
+                "table" : "news",
+                "classid" : classid,
+                "id" : id,
+                "username" : JFAccountModel.shareAccount().username!,
+                "userid" : JFAccountModel.shareAccount().id,
+                "token" : JFAccountModel.shareAccount().token!,
             ]
+        } else {
+            parameters = [
+                "table" : "news",
+                "classid" : classid,
+                "id" : id,
+            ]
+        }
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
@@ -160,6 +179,8 @@ class JFNewsDetailViewController: UIViewController
                         "titleurl" : "\(BASE_URL)\(content["titleurl"]!.string!)", // 文章url
                         "id" : content["id"]!.string!,                // 文章id
                         "classid" : content["classid"]!.string!,      // 当前子分类id
+                        "plnum" : content["plnum"]!.string!,          // 评论数
+                        "havefava" : content["havefava"]!.string!     // 是否收藏  favor1 
                     ]
                     
                     self.model = JFArticleDetailModel(dict: dict)
@@ -208,7 +229,6 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
                 
             })
         }
-        
     }
     
     /**
@@ -225,6 +245,37 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      */
     func didTappedCollectButton(button: UIButton) {
         
+        if JFAccountModel.shareAccount().isLogin {
+            
+            let parameters = [
+                "username" : JFAccountModel.shareAccount().username!,
+                "userid" : JFAccountModel.shareAccount().id,
+                "token" : JFAccountModel.shareAccount().token!,
+                "classid" : articleParam!.classid,
+                "id" : articleParam!.id
+            ]
+            
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+                if success {
+                    if let successResult = result {
+                        if successResult["result"]["status"].intValue == 1 {
+                            // 增加成功
+                            JFProgressHUD.showSuccessWithStatus("收藏成功")
+                            button.selected = true
+                        } else if successResult["result"]["status"].intValue == 3 {
+                            // 删除成功
+                            JFProgressHUD.showSuccessWithStatus("取消收藏")
+                            button.selected = false
+                        }
+                    }
+                } else {
+                    print(error)
+                }
+            }
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
+        }
+        
     }
     
     /**
@@ -240,7 +291,6 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      - parameter message: 评论信息
      */
     func didTappedSendButtonWithMessage(message: String) {
-        print(message)
         
         let parameters = [
             "classid" : articleParam!.classid,

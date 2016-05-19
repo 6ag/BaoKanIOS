@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.4.0)
+  - IQKeyboardManagerSwift (4.0.3)
   - MJRefresh (3.1.0)
   - pop (1.0.9)
   - SDCycleScrollView (1.64):
@@ -20,6 +21,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.4.0)
+  - IQKeyboardManagerSwift
   - MJRefresh (~> 3.1.0)
   - pop (~> 1.0.9)
   - SDCycleScrollView (~> 1.3)
@@ -30,6 +32,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7

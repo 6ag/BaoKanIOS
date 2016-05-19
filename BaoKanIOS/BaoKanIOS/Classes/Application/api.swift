@@ -41,16 +41,18 @@ let LOGIN = "loginReq.php"
 /// 获取用户信息
 let GET_USERINFO = "checkLoginStamp.php"
 
- /// 获取用户收藏夹
+/// 获取用户收藏夹
 let GET_USER_FAVA = "getUserFava.php"
 
- /// 删除好友、收藏夹
+/// 删除好友、收藏夹
 let DEL_ACTIONS = "dellActions.php"
 
- /// 增加删除收藏
+/// 增加删除收藏
 let ADD_DEL_FAVA = "addFava.php"
 
- /// 修改账号资料/找回密码
+/// 修改账号资料/找回密码
 let MODIFY_ACCOUNT_INFO = "publicActions.php"
 
+/// 获取用户评论列表
+let GET_USER_COMMENT = "getUserComment.php"
 
