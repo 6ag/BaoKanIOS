@@ -63,9 +63,6 @@
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="20" y="0.0" width="300" height="44"/>
-                            </variation>
                             <connections>
                                 <action selector="didChangeTextField:" destination="-1" eventType="editingChanged" id="dcj-zQ-6lS"/>
                             </connections>
@@ -73,7 +70,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="vkY-to-v8I" firstAttribute="top" secondItem="w3Z-ak-SdY" secondAttribute="top" id="4Bs-ri-zXQ"/>
+                        <constraint firstAttribute="bottom" secondItem="vkY-to-v8I" secondAttribute="bottom" id="Yzc-cL-JEe"/>
+                        <constraint firstAttribute="trailing" secondItem="vkY-to-v8I" secondAttribute="trailing" constant="20" id="aio-DD-nrb"/>
                         <constraint firstAttribute="height" constant="44" id="moj-BA-CIC"/>
+                        <constraint firstItem="vkY-to-v8I" firstAttribute="leading" secondItem="w3Z-ak-SdY" secondAttribute="leading" constant="20" id="zg8-Ab-93i"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -86,6 +87,10 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="moj-BA-CIC"/>
+                            <exclude reference="4Bs-ri-zXQ"/>
+                            <exclude reference="Yzc-cL-JEe"/>
+                            <exclude reference="aio-DD-nrb"/>
+                            <exclude reference="zg8-Ab-93i"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
@@ -94,6 +99,10 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="moj-BA-CIC"/>
+                            <include reference="4Bs-ri-zXQ"/>
+                            <include reference="Yzc-cL-JEe"/>
+                            <include reference="aio-DD-nrb"/>
+                            <include reference="zg8-Ab-93i"/>
                         </mask>
                     </variation>
                 </view>
@@ -104,9 +113,6 @@
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="20" y="0.0" width="300" height="44"/>
-                            </variation>
                             <connections>
                                 <action selector="didChangeTextField:" destination="-1" eventType="editingChanged" id="EPQ-XI-dXA"/>
                             </connections>
@@ -115,6 +121,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="5nz-eW-iZs"/>
+                        <constraint firstItem="J1C-5O-bEL" firstAttribute="top" secondItem="if3-Tf-GPB" secondAttribute="top" id="Kzt-h2-C5V"/>
+                        <constraint firstAttribute="bottom" secondItem="J1C-5O-bEL" secondAttribute="bottom" id="hnH-UH-7yu"/>
+                        <constraint firstItem="J1C-5O-bEL" firstAttribute="leading" secondItem="if3-Tf-GPB" secondAttribute="leading" constant="20" id="yYp-qp-hCF"/>
+                        <constraint firstAttribute="trailing" secondItem="J1C-5O-bEL" secondAttribute="trailing" constant="20" id="zVG-QI-lcK"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -127,6 +137,10 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="5nz-eW-iZs"/>
+                            <exclude reference="Kzt-h2-C5V"/>
+                            <exclude reference="hnH-UH-7yu"/>
+                            <exclude reference="yYp-qp-hCF"/>
+                            <exclude reference="zVG-QI-lcK"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
@@ -135,6 +149,10 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="5nz-eW-iZs"/>
+                            <include reference="Kzt-h2-C5V"/>
+                            <include reference="hnH-UH-7yu"/>
+                            <include reference="yYp-qp-hCF"/>
+                            <include reference="zVG-QI-lcK"/>
                         </mask>
                     </variation>
                 </view>
@@ -297,27 +315,27 @@
                     <exclude reference="7nq-HZ-t5H"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="DMg-7a-6hS"/>
-                    <exclude reference="MYS-cP-Yit"/>
-                    <exclude reference="v6R-Dg-m4h"/>
-                    <exclude reference="z0r-3H-kIV"/>
                     <exclude reference="Svw-yb-Noo"/>
                     <exclude reference="pY7-nQ-0uT"/>
-                    <exclude reference="lUj-zv-TY4"/>
-                    <exclude reference="lpk-MQ-f32"/>
-                    <exclude reference="0dL-M5-fLr"/>
-                    <exclude reference="A40-oa-6lD"/>
-                    <exclude reference="kvw-F3-OqS"/>
-                    <exclude reference="CDm-DS-3to"/>
-                    <exclude reference="cFH-v9-1EA"/>
-                    <exclude reference="rRA-LX-Jef"/>
-                    <exclude reference="0UH-sP-RJH"/>
-                    <exclude reference="b7D-vB-30s"/>
-                    <exclude reference="j18-2q-caQ"/>
                     <exclude reference="0jw-dI-VgI"/>
                     <exclude reference="YiI-4P-vTE"/>
                     <exclude reference="abt-5G-dx9"/>
                     <exclude reference="joQ-lb-qLt"/>
+                    <exclude reference="0UH-sP-RJH"/>
+                    <exclude reference="b7D-vB-30s"/>
+                    <exclude reference="j18-2q-caQ"/>
+                    <exclude reference="DMg-7a-6hS"/>
+                    <exclude reference="MYS-cP-Yit"/>
+                    <exclude reference="v6R-Dg-m4h"/>
+                    <exclude reference="z0r-3H-kIV"/>
+                    <exclude reference="CDm-DS-3to"/>
+                    <exclude reference="cFH-v9-1EA"/>
+                    <exclude reference="rRA-LX-Jef"/>
+                    <exclude reference="0dL-M5-fLr"/>
+                    <exclude reference="A40-oa-6lD"/>
+                    <exclude reference="kvw-F3-OqS"/>
+                    <exclude reference="lUj-zv-TY4"/>
+                    <exclude reference="lpk-MQ-f32"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -331,27 +349,27 @@
                     <include reference="7nq-HZ-t5H"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="DMg-7a-6hS"/>
-                    <include reference="MYS-cP-Yit"/>
-                    <include reference="v6R-Dg-m4h"/>
-                    <include reference="z0r-3H-kIV"/>
                     <include reference="Svw-yb-Noo"/>
                     <include reference="pY7-nQ-0uT"/>
-                    <include reference="lUj-zv-TY4"/>
-                    <include reference="lpk-MQ-f32"/>
-                    <include reference="0dL-M5-fLr"/>
-                    <include reference="A40-oa-6lD"/>
-                    <include reference="kvw-F3-OqS"/>
-                    <include reference="CDm-DS-3to"/>
-                    <include reference="cFH-v9-1EA"/>
-                    <include reference="rRA-LX-Jef"/>
-                    <include reference="0UH-sP-RJH"/>
-                    <include reference="b7D-vB-30s"/>
-                    <include reference="j18-2q-caQ"/>
                     <include reference="0jw-dI-VgI"/>
                     <include reference="YiI-4P-vTE"/>
                     <include reference="abt-5G-dx9"/>
                     <include reference="joQ-lb-qLt"/>
+                    <include reference="0UH-sP-RJH"/>
+                    <include reference="b7D-vB-30s"/>
+                    <include reference="j18-2q-caQ"/>
+                    <include reference="DMg-7a-6hS"/>
+                    <include reference="MYS-cP-Yit"/>
+                    <include reference="v6R-Dg-m4h"/>
+                    <include reference="z0r-3H-kIV"/>
+                    <include reference="CDm-DS-3to"/>
+                    <include reference="cFH-v9-1EA"/>
+                    <include reference="rRA-LX-Jef"/>
+                    <include reference="0dL-M5-fLr"/>
+                    <include reference="A40-oa-6lD"/>
+                    <include reference="kvw-F3-OqS"/>
+                    <include reference="lUj-zv-TY4"/>
+                    <include reference="lpk-MQ-f32"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="357" y="453"/>

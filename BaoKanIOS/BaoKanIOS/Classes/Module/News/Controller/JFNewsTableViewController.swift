@@ -172,7 +172,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if articleList.count >= 3 {
-            return articleList.count + 3
+            return articleList.count - 3
         } else {
             return 0
         }
