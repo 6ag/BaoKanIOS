@@ -55,7 +55,7 @@ class JFArticleListModel: NSObject {
     /**
      字典转模型构造方法
      */
-    init(dict: [String : String]) {
+    init(dict: [String : AnyObject]) {
         super.init()
         setValuesForKeysWithDictionary(dict)
     }

@@ -34,13 +34,13 @@ let WX_APP_ID = ""
 let WX_APP_SECRET = ""
 
 /// QQ
-let QQ_APP_ID = ""
-let QQ_APP_KEY = ""
+let QQ_APP_ID = "1105411292"
+let QQ_APP_KEY = "WfKZYbDH68l7s9AU"
 
 /// 微博
-let WB_APP_KEY = ""
-let WB_APP_SECRET = ""
-let WB_REDIRECT_URL = ""
+let WB_APP_KEY = "1110293594"
+let WB_APP_SECRET = "6c5b97909709e89a72c0f949cc23f5f0"
+let WB_REDIRECT_URL = "https://blog.6ag.cn"
 
 /// 检查是否登录的key 用户保存登录状态到偏好设置
 let IS_LOGIN = "isLogin"

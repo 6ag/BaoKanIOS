@@ -111,18 +111,18 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                     for article in data {
                         
                         var dict = [
-                            "title" : article["title"].string!,          // 文章标题
-                            "bclassid" : article["bclassid"].string!,    // 终极栏目id
-                            "classid" : article["classid"].string!,      // 当前子分类id
-                            "newstime" : article["newstime"].string!,    // 发布时间
-                            "created_at" : article["created_at"].string!,// 创建文章时间戳
-                            "username" : article["username"].string!,    // 用户名
-                            "onclick" : article["onclick"].string!,      // 点击量
-                            "smalltext" : article["smalltext"].string!,  // 简介
-                            "id" : article["id"].string!,                // 文章id
-                            "classname" : article["classname"].string!,  // 分类名称
-                            "table" : article["table"].string!,          // 数据表名
-                            "titleurl" : "\(BASE_URL)\(article["titleurl"].string!)", // 文章url
+                            "title" : article["title"].stringValue,          // 文章标题
+                            "bclassid" : article["bclassid"].stringValue,    // 终极栏目id
+                            "classid" : article["classid"].stringValue,      // 当前子分类id
+                            "newstime" : article["newstime"].stringValue,    // 发布时间
+                            "created_at" : article["created_at"].stringValue,// 创建文章时间戳
+                            "username" : article["username"].stringValue,    // 用户名
+                            "onclick" : article["onclick"].stringValue,      // 点击量
+                            "smalltext" : article["smalltext"].stringValue,  // 简介
+                            "id" : article["id"].stringValue,                // 文章id
+                            "classname" : article["classname"].stringValue,  // 分类名称
+                            "table" : article["table"].stringValue,          // 数据表名
+                            "titleurl" : "\(BASE_URL)\(article["titleurl"].stringValue)", // 文章url
                         ]
                         
                         // 标题图片可能无值
