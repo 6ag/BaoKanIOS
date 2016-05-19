@@ -203,21 +203,21 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nq-HZ-t5H">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="RXV-BB-NXh"/>
                         <constraint firstAttribute="height" constant="30" id="iaz-Os-dNQ"/>
                     </constraints>
+                    <state key="normal" backgroundImage="cancel"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="iaz-Os-dNQ"/>
                             <exclude reference="RXV-BB-NXh"/>
+                            <exclude reference="iaz-Os-dNQ"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
                         <mask key="constraints">
-                            <include reference="iaz-Os-dNQ"/>
                             <include reference="RXV-BB-NXh"/>
+                            <include reference="iaz-Os-dNQ"/>
                         </mask>
                     </variation>
                     <connections>
@@ -256,24 +256,24 @@
                     <exclude reference="7nq-HZ-t5H"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="DMg-7a-6hS"/>
-                    <exclude reference="MYS-cP-Yit"/>
-                    <exclude reference="v6R-Dg-m4h"/>
-                    <exclude reference="z0r-3H-kIV"/>
                     <exclude reference="Svw-yb-Noo"/>
                     <exclude reference="pY7-nQ-0uT"/>
-                    <exclude reference="jTO-Y5-mul"/>
-                    <exclude reference="soA-eQ-aRL"/>
-                    <exclude reference="cFH-v9-1EA"/>
-                    <exclude reference="rRA-LX-Jef"/>
-                    <exclude reference="zpj-FO-KXj"/>
-                    <exclude reference="0UH-sP-RJH"/>
-                    <exclude reference="b7D-vB-30s"/>
-                    <exclude reference="j18-2q-caQ"/>
                     <exclude reference="0jw-dI-VgI"/>
                     <exclude reference="YiI-4P-vTE"/>
                     <exclude reference="abt-5G-dx9"/>
                     <exclude reference="joQ-lb-qLt"/>
+                    <exclude reference="0UH-sP-RJH"/>
+                    <exclude reference="b7D-vB-30s"/>
+                    <exclude reference="j18-2q-caQ"/>
+                    <exclude reference="DMg-7a-6hS"/>
+                    <exclude reference="MYS-cP-Yit"/>
+                    <exclude reference="v6R-Dg-m4h"/>
+                    <exclude reference="z0r-3H-kIV"/>
+                    <exclude reference="cFH-v9-1EA"/>
+                    <exclude reference="rRA-LX-Jef"/>
+                    <exclude reference="zpj-FO-KXj"/>
+                    <exclude reference="jTO-Y5-mul"/>
+                    <exclude reference="soA-eQ-aRL"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -286,30 +286,31 @@
                     <include reference="7nq-HZ-t5H"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="DMg-7a-6hS"/>
-                    <include reference="MYS-cP-Yit"/>
-                    <include reference="v6R-Dg-m4h"/>
-                    <include reference="z0r-3H-kIV"/>
                     <include reference="Svw-yb-Noo"/>
                     <include reference="pY7-nQ-0uT"/>
-                    <include reference="jTO-Y5-mul"/>
-                    <include reference="soA-eQ-aRL"/>
-                    <include reference="cFH-v9-1EA"/>
-                    <include reference="rRA-LX-Jef"/>
-                    <include reference="zpj-FO-KXj"/>
-                    <include reference="0UH-sP-RJH"/>
-                    <include reference="b7D-vB-30s"/>
-                    <include reference="j18-2q-caQ"/>
                     <include reference="0jw-dI-VgI"/>
                     <include reference="YiI-4P-vTE"/>
                     <include reference="abt-5G-dx9"/>
                     <include reference="joQ-lb-qLt"/>
+                    <include reference="0UH-sP-RJH"/>
+                    <include reference="b7D-vB-30s"/>
+                    <include reference="j18-2q-caQ"/>
+                    <include reference="DMg-7a-6hS"/>
+                    <include reference="MYS-cP-Yit"/>
+                    <include reference="v6R-Dg-m4h"/>
+                    <include reference="z0r-3H-kIV"/>
+                    <include reference="cFH-v9-1EA"/>
+                    <include reference="rRA-LX-Jef"/>
+                    <include reference="zpj-FO-KXj"/>
+                    <include reference="jTO-Y5-mul"/>
+                    <include reference="soA-eQ-aRL"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="357" y="453"/>
         </view>
     </objects>
     <resources>
+        <image name="cancel" width="32" height="32"/>
         <image name="login_background" width="320" height="567"/>
     </resources>
 </document>

@@ -154,11 +154,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvn-TP-HMe">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="6JO-A1-h96"/>
                         <constraint firstAttribute="width" constant="50" id="N98-5i-Ofg"/>
                     </constraints>
+                    <state key="normal" backgroundImage="account_snslogin_icon_1"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="25"/>
@@ -182,11 +182,11 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZA-9n-u09">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="0gF-lb-bcQ"/>
                         <constraint firstAttribute="height" constant="50" id="Sbt-Lh-19D"/>
                     </constraints>
+                    <state key="normal" backgroundImage="account_snslogin_icon_3"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="25"/>
@@ -210,11 +210,11 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPh-5k-e79">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="5bS-Wa-hZW"/>
                         <constraint firstAttribute="width" constant="50" id="kG7-dP-3jD"/>
                     </constraints>
+                    <state key="normal" backgroundImage="weixin"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="25"/>
@@ -279,7 +279,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="iax-kO-aW0"/>
-                        <constraint firstAttribute="height" constant="50" id="psU-L5-QkJ"/>
+                        <constraint firstAttribute="height" constant="50" id="psU-L5-QkJ">
+                            <variation key="widthClass=compact" constant="20"/>
+                        </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -296,11 +298,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orm-Gv-W4X">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ROR-7A-uTc"/>
                         <constraint firstAttribute="width" constant="30" id="uMD-wG-wUj"/>
                     </constraints>
+                    <state key="normal" backgroundImage="cancel"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="ROR-7A-uTc"/>
@@ -378,39 +380,39 @@
                     <exclude reference="orm-Gv-W4X"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="0c7-83-Vcd"/>
-                    <exclude reference="V75-Bh-Czq"/>
-                    <exclude reference="epu-Sp-SEA"/>
-                    <exclude reference="ttJ-XA-qBk"/>
-                    <exclude reference="qVF-Qk-6Zh"/>
-                    <exclude reference="xvf-ph-LbH"/>
-                    <exclude reference="wEs-79-puz"/>
-                    <exclude reference="ydx-3D-4ui"/>
-                    <exclude reference="GEa-OW-K5a"/>
-                    <exclude reference="aNt-wt-wNL"/>
-                    <exclude reference="cDe-VY-1op"/>
-                    <exclude reference="3O8-gV-3E5"/>
-                    <exclude reference="7sE-L2-Tr7"/>
-                    <exclude reference="PlU-BK-vYj"/>
-                    <exclude reference="kol-dv-I6T"/>
-                    <exclude reference="Qb8-Sq-yEb"/>
-                    <exclude reference="TQ3-WH-61t"/>
-                    <exclude reference="rZu-9U-fXx"/>
-                    <exclude reference="UXF-6c-6Lz"/>
-                    <exclude reference="Xqx-z6-JwA"/>
                     <exclude reference="lZA-PO-40T"/>
                     <exclude reference="NYq-vi-2kx"/>
                     <exclude reference="rcH-5p-zg3"/>
                     <exclude reference="s4N-iT-afy"/>
+                    <exclude reference="UXF-6c-6Lz"/>
+                    <exclude reference="Xqx-z6-JwA"/>
+                    <exclude reference="kol-dv-I6T"/>
                     <exclude reference="jsB-Ix-DnJ"/>
                     <exclude reference="nW3-NI-2HF"/>
+                    <exclude reference="3O8-gV-3E5"/>
+                    <exclude reference="7sE-L2-Tr7"/>
+                    <exclude reference="PlU-BK-vYj"/>
+                    <exclude reference="qVF-Qk-6Zh"/>
+                    <exclude reference="xvf-ph-LbH"/>
                     <exclude reference="M0a-wg-kbO"/>
                     <exclude reference="w2a-jy-0uZ"/>
+                    <exclude reference="gX8-Gf-zyT"/>
+                    <exclude reference="rn6-kM-bcj"/>
                     <exclude reference="CEt-f7-pDh"/>
                     <exclude reference="YBa-pf-f7K"/>
                     <exclude reference="jQ3-AF-1iT"/>
-                    <exclude reference="gX8-Gf-zyT"/>
-                    <exclude reference="rn6-kM-bcj"/>
+                    <exclude reference="GEa-OW-K5a"/>
+                    <exclude reference="aNt-wt-wNL"/>
+                    <exclude reference="cDe-VY-1op"/>
+                    <exclude reference="wEs-79-puz"/>
+                    <exclude reference="ydx-3D-4ui"/>
+                    <exclude reference="Qb8-Sq-yEb"/>
+                    <exclude reference="TQ3-WH-61t"/>
+                    <exclude reference="rZu-9U-fXx"/>
+                    <exclude reference="0c7-83-Vcd"/>
+                    <exclude reference="V75-Bh-Czq"/>
+                    <exclude reference="epu-Sp-SEA"/>
+                    <exclude reference="ttJ-XA-qBk"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -431,45 +433,49 @@
                     <include reference="orm-Gv-W4X"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0c7-83-Vcd"/>
-                    <include reference="V75-Bh-Czq"/>
-                    <include reference="epu-Sp-SEA"/>
-                    <include reference="ttJ-XA-qBk"/>
-                    <include reference="qVF-Qk-6Zh"/>
-                    <include reference="xvf-ph-LbH"/>
-                    <include reference="wEs-79-puz"/>
-                    <include reference="ydx-3D-4ui"/>
-                    <include reference="GEa-OW-K5a"/>
-                    <include reference="aNt-wt-wNL"/>
-                    <include reference="cDe-VY-1op"/>
-                    <include reference="3O8-gV-3E5"/>
-                    <include reference="7sE-L2-Tr7"/>
-                    <include reference="PlU-BK-vYj"/>
-                    <include reference="kol-dv-I6T"/>
-                    <include reference="Qb8-Sq-yEb"/>
-                    <include reference="TQ3-WH-61t"/>
-                    <include reference="rZu-9U-fXx"/>
-                    <include reference="UXF-6c-6Lz"/>
-                    <include reference="Xqx-z6-JwA"/>
                     <include reference="lZA-PO-40T"/>
                     <include reference="NYq-vi-2kx"/>
                     <include reference="rcH-5p-zg3"/>
                     <include reference="s4N-iT-afy"/>
+                    <include reference="UXF-6c-6Lz"/>
+                    <include reference="Xqx-z6-JwA"/>
+                    <include reference="kol-dv-I6T"/>
                     <include reference="jsB-Ix-DnJ"/>
                     <include reference="nW3-NI-2HF"/>
+                    <include reference="3O8-gV-3E5"/>
+                    <include reference="7sE-L2-Tr7"/>
+                    <include reference="PlU-BK-vYj"/>
+                    <include reference="qVF-Qk-6Zh"/>
+                    <include reference="xvf-ph-LbH"/>
                     <include reference="M0a-wg-kbO"/>
                     <include reference="w2a-jy-0uZ"/>
+                    <include reference="gX8-Gf-zyT"/>
+                    <include reference="rn6-kM-bcj"/>
                     <include reference="CEt-f7-pDh"/>
                     <include reference="YBa-pf-f7K"/>
                     <include reference="jQ3-AF-1iT"/>
-                    <include reference="gX8-Gf-zyT"/>
-                    <include reference="rn6-kM-bcj"/>
+                    <include reference="GEa-OW-K5a"/>
+                    <include reference="aNt-wt-wNL"/>
+                    <include reference="cDe-VY-1op"/>
+                    <include reference="wEs-79-puz"/>
+                    <include reference="ydx-3D-4ui"/>
+                    <include reference="Qb8-Sq-yEb"/>
+                    <include reference="TQ3-WH-61t"/>
+                    <include reference="rZu-9U-fXx"/>
+                    <include reference="0c7-83-Vcd"/>
+                    <include reference="V75-Bh-Czq"/>
+                    <include reference="epu-Sp-SEA"/>
+                    <include reference="ttJ-XA-qBk"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="496" y="461"/>
         </view>
     </objects>
     <resources>
+        <image name="account_snslogin_icon_1" width="20" height="20"/>
+        <image name="account_snslogin_icon_3" width="20" height="20"/>
+        <image name="cancel" width="32" height="32"/>
         <image name="login_background" width="320" height="567"/>
+        <image name="weixin" width="100" height="100"/>
     </resources>
 </document>

@@ -10,32 +10,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cvc-f6-6ar">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOV-3V-RC8">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="1" width="320" height="43"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUL-T0-4x1" userLabel="Back">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
-                            <state key="normal" image="bottom_bar_back_normal"/>
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_back_selected"/>
                             <connections>
                                 <action selector="didTappedBackButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ph8-kI-LAG"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhf-80-ImR" userLabel="Edit">
-                            <rect key="frame" x="64" y="0.0" width="64" height="44"/>
+                            <rect key="frame" x="64" y="0.0" width="64" height="43"/>
                             <state key="normal" image="bottom_bar_edit_selected"/>
                             <connections>
                                 <action selector="didTappedEditButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="JMf-GC-3eZ"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5h-0G-nc5" userLabel="Comment">
-                            <rect key="frame" x="128" y="0.0" width="64" height="44"/>
-                            <state key="normal" image="bottom_bar_comment_normal"/>
+                            <rect key="frame" x="128" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_comment_selected"/>
                             <connections>
                                 <action selector="didTappedCommentButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="2db-8N-oAX"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-Ts-jCo" userLabel="Collection">
-                            <rect key="frame" x="192" y="0.0" width="64" height="44"/>
+                            <rect key="frame" x="192" y="0.0" width="64" height="43"/>
                             <state key="normal" image="bottom_bar_collection_normal"/>
                             <state key="selected" image="bottom_bar_collection_selected"/>
                             <connections>
@@ -43,7 +47,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Vs-qKK" userLabel="Share">
-                            <rect key="frame" x="256" y="0.0" width="64" height="44"/>
+                            <rect key="frame" x="256" y="0.0" width="64" height="43"/>
                             <state key="normal" image="bottom_bar_share_selected"/>
                             <connections>
                                 <action selector="didTappedShareButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ice-cz-sOL"/>
@@ -54,10 +58,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Cvc-f6-6ar" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8l9-k8-pHc"/>
                 <constraint firstAttribute="trailing" secondItem="XOV-3V-RC8" secondAttribute="trailing" id="9TT-5H-ge1"/>
                 <constraint firstAttribute="bottom" secondItem="XOV-3V-RC8" secondAttribute="bottom" id="HHl-v1-IeB"/>
                 <constraint firstItem="XOV-3V-RC8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UK0-UZ-LNl"/>
-                <constraint firstItem="XOV-3V-RC8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jU5-vs-vnq"/>
+                <constraint firstItem="Cvc-f6-6ar" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eoS-EX-h3q"/>
+                <constraint firstItem="XOV-3V-RC8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="1" id="jU5-vs-vnq"/>
+                <constraint firstItem="XOV-3V-RC8" firstAttribute="top" secondItem="Cvc-f6-6ar" secondAttribute="bottom" id="x9v-VK-dem"/>
+                <constraint firstAttribute="trailing" secondItem="Cvc-f6-6ar" secondAttribute="trailing" id="yBY-PO-qdS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -65,10 +73,10 @@
         </view>
     </objects>
     <resources>
-        <image name="bottom_bar_back_normal" width="40" height="40"/>
+        <image name="bottom_bar_back_selected" width="40" height="40"/>
         <image name="bottom_bar_collection_normal" width="30" height="30"/>
         <image name="bottom_bar_collection_selected" width="44" height="44"/>
-        <image name="bottom_bar_comment_normal" width="30" height="30"/>
+        <image name="bottom_bar_comment_selected" width="30" height="30"/>
         <image name="bottom_bar_edit_selected" width="30" height="30"/>
         <image name="bottom_bar_share_selected" width="44" height="44"/>
     </resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="URf-ar-cMp" customClass="JFPhotoBottomBar" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uoq-QO-cjZ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.24705882352941178" green="0.23529411764705882" blue="0.22352941176470587" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ady-1D-X70"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="25L-jT-16l">
+                    <rect key="frame" x="0.0" y="1" width="320" height="43"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAz-8j-lMw" userLabel="Back">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_back_normal"/>
+                            <connections>
+                                <action selector="didTappedBackButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="CZ9-lP-f4j"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-hM-U9p" userLabel="Edit">
+                            <rect key="frame" x="64" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_edit_normal"/>
+                            <connections>
+                                <action selector="didTappedEditButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="uMI-VP-7jY"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgx-jM-Gkz" userLabel="Comment">
+                            <rect key="frame" x="128" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_comment_normal"/>
+                            <connections>
+                                <action selector="didTappedCommentButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="F5U-xN-S6F"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1r-RX-WVA" userLabel="Collection">
+                            <rect key="frame" x="192" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_collection_normal"/>
+                            <state key="selected" image="bottom_bar_collection_selected"/>
+                            <connections>
+                                <action selector="didTappedCollectButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="vj8-Ra-iBS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKt-gP-RDK" userLabel="Share">
+                            <rect key="frame" x="256" y="0.0" width="64" height="43"/>
+                            <state key="normal" image="bottom_bar_share_normal"/>
+                            <connections>
+                                <action selector="didTappedShareButton:" destination="URf-ar-cMp" eventType="touchUpInside" id="qwk-ta-oCd"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="0.11764705882352941" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="25L-jT-16l" secondAttribute="bottom" id="7EU-aX-Iwx"/>
+                <constraint firstItem="25L-jT-16l" firstAttribute="top" secondItem="URf-ar-cMp" secondAttribute="top" constant="1" id="H2W-Ps-Egx"/>
+                <constraint firstItem="25L-jT-16l" firstAttribute="leading" secondItem="URf-ar-cMp" secondAttribute="leading" id="Sp8-7W-7Ug"/>
+                <constraint firstItem="Uoq-QO-cjZ" firstAttribute="leading" secondItem="URf-ar-cMp" secondAttribute="leading" id="YPs-fV-2nI"/>
+                <constraint firstAttribute="trailing" secondItem="25L-jT-16l" secondAttribute="trailing" id="Ye1-hX-Jj4"/>
+                <constraint firstItem="Uoq-QO-cjZ" firstAttribute="top" secondItem="URf-ar-cMp" secondAttribute="top" id="fDL-2A-hdO"/>
+                <constraint firstAttribute="trailing" secondItem="Uoq-QO-cjZ" secondAttribute="trailing" id="tlK-JW-Cgi"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="546" y="392"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bottom_bar_back_normal" width="30" height="30"/>
+        <image name="bottom_bar_collection_normal" width="30" height="30"/>
+        <image name="bottom_bar_collection_selected" width="44" height="44"/>
+        <image name="bottom_bar_comment_normal" width="30" height="30"/>
+        <image name="bottom_bar_edit_normal" width="30" height="30"/>
+        <image name="bottom_bar_share_normal" width="30" height="30"/>
+    </resources>
+</document>

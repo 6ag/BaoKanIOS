@@ -8,6 +8,7 @@
 
 import UIKit
 import YYWebImage
+import MJRefresh
 
 class JFNewsDetailViewController: UIViewController
 {
@@ -250,7 +251,9 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         ]
         
         JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
-            print(result)
+            if success {
+                JFProgressHUD.showInfoWithStatus("评论成功")
+            }
         }
     }
 }

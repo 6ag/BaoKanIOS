@@ -29,6 +29,8 @@
 		A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279BC1C36392F003C773D /* JFProgressHUD.swift */; };
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
+		B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */; };
+		B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */; };
 		B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */; };
 		B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */; };
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
@@ -172,6 +174,8 @@
 		A5B279BC1C36392F003C773D /* JFProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressHUD.swift; sourceTree = "<group>"; };
 		A5B279C11C36392F003C773D /* BaoKanIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaoKanIOS.xcdatamodel; sourceTree = "<group>"; };
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
+		B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoBottomBar.swift; sourceTree = "<group>"; };
+		B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFPhotoBottomBar.xib; sourceTree = "<group>"; };
 		B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentTableViewController.swift; sourceTree = "<group>"; };
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
@@ -722,6 +726,8 @@
 				B2BD22721CE584DF009E0877 /* JFProgressView.swift */,
 				B2E3DFB01CB228900081745A /* JFPhotoListCell.swift */,
 				B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */,
+				B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */,
+				B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1038,6 +1044,7 @@
 				B2FFCAB81CE48B0600ADC54C /* UMShareEditViewControlleriPad.xib in Resources */,
 				B2FFCABB1CE48B0600ADC54C /* UMSShareListController.xib in Resources */,
 				B2FFCAB91CE48B0600ADC54C /* UMSLoginViewController.xib in Resources */,
+				B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
 				B2FFCABF1CE48B0600ADC54C /* WeiboSDK.bundle in Resources */,
 				B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */,
@@ -1168,6 +1175,7 @@
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
 				B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */,
 				B2E3DFC41CB228900081745A /* JFPhotoViewController.swift in Sources */,
+				B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */,
 				B2BD227F1CE5DDE0009E0877 /* JFLoginViewController.swift in Sources */,
 				B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */,
 			);

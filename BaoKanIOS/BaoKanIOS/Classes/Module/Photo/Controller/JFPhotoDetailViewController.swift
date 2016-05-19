@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, JFPhotoDetailCellDelegate, JFCommentCommitViewDelegate {
+class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, JFPhotoDetailCellDelegate, JFCommentCommitViewDelegate, JFPhotoBottomBarDelegate {
     
     // MARK: - 属性
     /// 文章详情请求参数
@@ -27,7 +27,8 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     /// 当前页显示的文字数据
     private var currentPageData: (page: Int, text: String)? {
         didSet {
-            captionLabel.text = "\(currentPageData!.page)/\(photoModels.count)  \(currentPageData!.text)"
+            topTitleLabel.text = "\(currentPageData!.page) / \(photoModels.count)"
+            captionLabel.text = "    \(currentPageData!.text)"
             updateBottomBgViewConstraint()
         }
     }
@@ -53,12 +54,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         let navigationBarView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
         navigationBarView.backgroundColor = self.bgColor
         
-        // 导航栏左边返回按钮
-        let leftButton = UIButton(type: UIButtonType.Custom)
-        leftButton.setImage(UIImage(named: "top_navigation_back"), forState: UIControlState.Normal)
-        leftButton.addTarget(self, action: #selector(didTappedLeftBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        leftButton.frame = CGRect(x: 20, y: 20, width: 40, height: 40)
-        
         // 导航栏右边举报按钮
         let rightButton = UIButton(type: UIButtonType.Custom)
         rightButton.titleLabel?.font = UIFont.systemFontOfSize(16)
@@ -66,10 +61,7 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         rightButton.setTitleColor(UIColor(red:0.545, green:0.545, blue:0.545, alpha:1), forState: UIControlState.Normal)
         rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         rightButton.frame = CGRect(x: SCREEN_WIDTH - 60, y: 20, width: 40, height: 40)
-        
-        navigationBarView.addSubview(leftButton)
         navigationBarView.addSubview(rightButton)
-        
         return navigationBarView
     }()
     
@@ -195,22 +187,24 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         ]
         
         JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
-            print(result)
+            if success {
+                JFProgressHUD.showInfoWithStatus("评论成功")
+            }
         }
     }
     
     // MARK: - 各种tap事件
-    @objc private func didTappedLeftBarButtonItem(item: UIBarButtonItem) -> Void {
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
     @objc private func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
         print("didTappedRightBarButtonItem")
         JFProgressHUD.showInfoWithStatus("举报成功，谢谢您的支持")
     }
     
-    @objc private func didTappedEditButton(button: UIButton) -> Void {
-        
+    // MARK: - JFPhotoBottomBarDelegate
+    func didTappedBackButton(button: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func didTappedEditButton(button: UIButton) {
         if JFAccountModel.shareAccount().isLogin {
             let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
             commentCommitView.delegate = self
@@ -222,18 +216,18 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
-    @objc private func didTappedCommentButton(button: UIButton) -> Void {
+    func didTappedCommentButton(button: UIButton) {
         let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
         commentVc.param = photoParam
         navigationController?.pushViewController(commentVc, animated: true)
     }
     
-    @objc private func didTappedStarButton(button: UIButton) -> Void {
-        print("didTappedStarButton")
+    func didTappedCollectButton(button: UIButton) {
+        
     }
     
-    @objc private func didTappedShareButton(button: UIButton) -> Void {
-        print("didTappedShareButton")
+    func didTappedShareButton(button: UIButton) {
+        
     }
     
     /**
@@ -245,15 +239,17 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         self.automaticallyAdjustsScrollViewInsets = false
         
         view.addSubview(collectionView)
-        
         view.addSubview(navigationBarView)
         view.addSubview(bottomToolView)
-        bottomToolView.addSubview(editButton)
-        bottomToolView.addSubview(commentButton)
-        bottomToolView.addSubview(starButton)
-        bottomToolView.addSubview(shareButton)
         view.addSubview(bottomBgView)
         bottomBgView.addSubview(captionLabel)
+        navigationBarView.addSubview(topTitleLabel)
+        
+        topTitleLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(navigationBarView)
+            make.top.equalTo(20)
+            make.size.equalTo(CGSize(width: 40, height: 40))
+        }
         
         bottomToolView.snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
@@ -273,31 +269,6 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         updateBottomBgViewConstraint()
-        
-        editButton.snp_makeConstraints { (make) in
-            make.left.equalTo(20)
-            make.top.equalTo(5)
-            make.bottom.equalTo(-5)
-            make.width.equalTo(bottomToolView.width - 220)
-        }
-        
-        commentButton.snp_makeConstraints { (make) in
-            make.left.equalTo(editButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-        
-        starButton.snp_makeConstraints { (make) in
-            make.left.equalTo(commentButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-        
-        shareButton.snp_makeConstraints { (make) in
-            make.left.equalTo(starButton.snp_right).offset(30)
-            make.centerY.equalTo(bottomToolView)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
     }
     
     /**
@@ -330,42 +301,18 @@ class JFPhotoDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     /// 底部工具条
     private lazy var bottomToolView: UIView = {
-        let bottomToolView = UIView()
+        let bottomToolView = NSBundle.mainBundle().loadNibNamed("JFPhotoBottomBar", owner: nil, options: nil).last as! JFPhotoBottomBar
         bottomToolView.backgroundColor = self.bgColor
+        bottomToolView.delegate = self
         return bottomToolView
     }()
     
-    /// 编辑
-    private lazy var editButton: UIButton = {
-        let editButton = UIButton(type: UIButtonType.Custom)
-        editButton.setBackgroundImage(UIImage(named: "toolbar_light_comment"), forState: UIControlState.Normal)
-        editButton.addTarget(self, action: #selector(didTappedEditButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return editButton
+    /// 顶部导航栏显示页码
+    private lazy var topTitleLabel: UILabel = {
+        let topTitleLabel = UILabel()
+        topTitleLabel.textColor = UIColor(red:0.945,  green:0.945,  blue:0.945, alpha:1)
+        topTitleLabel.font = UIFont.systemFontOfSize(15)
+        return topTitleLabel
     }()
-    
-    /// 评论
-    private lazy var commentButton: UIButton = {
-        let commentButton = UIButton(type: UIButtonType.Custom)
-        commentButton.setBackgroundImage(UIImage(named: "bottom_bar_comment_normal"), forState: UIControlState.Normal)
-        commentButton.addTarget(self, action: #selector(didTappedCommentButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return commentButton
-    }()
-    
-    /// 收藏
-    private lazy var starButton: UIButton = {
-        let starButton = UIButton(type: UIButtonType.Custom)
-        starButton.setBackgroundImage(UIImage(named: "article_item_favor"), forState: UIControlState.Normal)
-        starButton.addTarget(self, action: #selector(didTappedStarButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return starButton
-    }()
-    
-    /// 分享
-    private lazy var shareButton: UIButton = {
-        let shareButton = UIButton(type: UIButtonType.Custom)
-        shareButton.setBackgroundImage(UIImage(named: "article_item_share"), forState: UIControlState.Normal)
-        shareButton.addTarget(self, action: #selector(didTappedShareButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return shareButton
-    }()
-    
 }
 
