@@ -10,30 +10,27 @@ import UIKit
 
 class JFNavigationController: UINavigationController, UIGestureRecognizerDelegate {
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
         
-        // 加上后 collectionViewController有bug
-//        let target = interactivePopGestureRecognizer?.delegate
-//        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
-//        pan.delegate = self
-//        view.addGestureRecognizer(pan)
-//        interactivePopGestureRecognizer?.enabled = false
+        let target = interactivePopGestureRecognizer?.delegate
+        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
+        pan.delegate = self
+        view.addGestureRecognizer(pan)
+        interactivePopGestureRecognizer?.enabled = false
     }
     
-//    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
-//        if childViewControllers.count == 1 {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
+    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
+        if childViewControllers.count == 1 {
+            return false
+        } else {
+            return true
+        }
+    }
     
-    private func changeBarTintColor(color: UIColor)
-    {
+    private func changeBarTintColor(color: UIColor) {
         let navBar = navigationBar
         navBar.barTintColor = color
         navBar.translucent = false
@@ -52,8 +49,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
      - parameter viewController: 即将压入栈的控制器
      - parameter animated:       是否动画
      */
-    override func pushViewController(viewController: UIViewController, animated: Bool)
-    {
+    override func pushViewController(viewController: UIViewController, animated: Bool) {
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
             changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
@@ -81,8 +77,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     /**
      全局返回操作
      */
-    @objc private func back()
-    {
+    @objc private func back() {
         popViewControllerAnimated(true)
     }
     

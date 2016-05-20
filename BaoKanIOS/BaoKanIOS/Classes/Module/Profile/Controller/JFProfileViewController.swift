@@ -32,32 +32,16 @@ class JFProfileViewController: JFBaseTableViewController {
         return headerView
     }()
     
-    private lazy var rightButton: UIButton = {
-        let rightButton = UIButton(type: UIButtonType.Custom)
-        rightButton.setTitle("设置", forState: UIControlState.Normal)
-        rightButton.sizeToFit()
-        rightButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        rightButton.addTarget(self, action: #selector(didTappedSettingButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        return rightButton
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.sharedApplication().keyWindow?.addSubview(rightButton)
-        rightButton.snp_makeConstraints { (make) in
-            make.right.equalTo(-20)
-            make.top.equalTo(25)
-            make.size.equalTo(CGSize(width: 30, height: 30))
-        }
-        
         automaticallyAdjustsScrollViewInsets = true
-        headerView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 180)
+        headerView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150)
         tableView.addSubview(headerView)
         tableView.showsVerticalScrollIndicator = false
         
-        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 250))
-        let redView = UIView(frame: CGRect(x: 0, y: 180, width: SCREEN_WIDTH, height: 60))
+        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 210))
+        let redView = UIView(frame: CGRect(x: 0, y: 150, width: SCREEN_WIDTH, height: 60))
         redView.backgroundColor = UIColor.redColor()
         tableHeaderView.addSubview(redView)
         tableView.tableHeaderView = tableHeaderView
@@ -99,12 +83,12 @@ class JFProfileViewController: JFBaseTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        rightButton.hidden = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        rightButton.hidden = true
+        
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -118,9 +102,6 @@ class JFProfileViewController: JFBaseTableViewController {
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         
         let offsetY = scrollView.contentOffset.y
-        
-        // 导航栏渐变
-        navigationController?.navigationBar.alpha = offsetY / 100
         
         // 下拉放大头部视图
         if offsetY < 0 {
@@ -141,13 +122,5 @@ class JFProfileViewController: JFBaseTableViewController {
         }
         
     }
-    
-    /**
-     设置按钮点击
-     */
-    @objc private func didTappedSettingButton(button: UIButton) {
-        
-    }
-    
     
 }

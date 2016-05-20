@@ -32,6 +32,15 @@
 		B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */; };
 		B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */; };
 		B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */; };
+		B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB11CEEE3A10050FC3F /* JFProfileCellArrowModel.swift */; };
+		B238BBBA1CEEE3A10050FC3F /* JFProfileCellGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB21CEEE3A10050FC3F /* JFProfileCellGroupModel.swift */; };
+		B238BBBB1CEEE3A10050FC3F /* JFProfileCellLabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB31CEEE3A10050FC3F /* JFProfileCellLabelModel.swift */; };
+		B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB41CEEE3A10050FC3F /* JFProfileCellModel.swift */; };
+		B238BBBD1CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB51CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift */; };
+		B238BBBE1CEEE3A10050FC3F /* JFLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB71CEEE3A10050FC3F /* JFLoginButton.swift */; };
+		B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */; };
+		B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */; };
+		B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */; };
 		B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */; };
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
 		B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */; };
@@ -47,7 +56,6 @@
 		B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22811CE5DDF3009E0877 /* JFRegisterViewController.swift */; };
 		B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BD22821CE5DDF3009E0877 /* JFRegisterViewController.xib */; };
 		B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CBAA691CEAEAD6007DA5B7 /* JFAccountModel.swift */; };
-		B2CBAA6C1CEB0645007DA5B7 /* JFLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */; };
 		B2DD3FA31CB7BDF60092C717 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA21CB7BDF60092C717 /* libz.tbd */; };
 		B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF821CB222560081745A /* JFNewsDetailViewController.swift */; };
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
@@ -71,12 +79,6 @@
 		B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */; };
 		B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */; };
 		B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */; };
-		B2FC6DFE1CDB882E00DAC654 /* JFProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6DFD1CDB882E00DAC654 /* JFProfileCellModel.swift */; };
-		B2FC6E001CDB883E00DAC654 /* JFProfileCellGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6DFF1CDB883E00DAC654 /* JFProfileCellGroupModel.swift */; };
-		B2FC6E021CDB885500DAC654 /* JFProfileCellArrowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6E011CDB885500DAC654 /* JFProfileCellArrowModel.swift */; };
-		B2FC6E041CDB889000DAC654 /* JFProfileCellLabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6E031CDB889000DAC654 /* JFProfileCellLabelModel.swift */; };
-		B2FC6E061CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6E051CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift */; };
-		B2FC6E081CDB88C900DAC654 /* JFProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6E071CDB88C900DAC654 /* JFProfileCell.swift */; };
 		B2FE1C331CB9F71F001CCF99 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */; };
 		B2FE1C341CB9F728001CCF99 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */; };
 		B2FE1C351CB9F733001CCF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9E1CB7BDDB0092C717 /* CoreTelephony.framework */; };
@@ -178,6 +180,15 @@
 		B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoBottomBar.swift; sourceTree = "<group>"; };
 		B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFPhotoBottomBar.xib; sourceTree = "<group>"; };
 		B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		B238BBB11CEEE3A10050FC3F /* JFProfileCellArrowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellArrowModel.swift; sourceTree = "<group>"; };
+		B238BBB21CEEE3A10050FC3F /* JFProfileCellGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellGroupModel.swift; sourceTree = "<group>"; };
+		B238BBB31CEEE3A10050FC3F /* JFProfileCellLabelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellLabelModel.swift; sourceTree = "<group>"; };
+		B238BBB41CEEE3A10050FC3F /* JFProfileCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellModel.swift; sourceTree = "<group>"; };
+		B238BBB51CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellSwitchModel.swift; sourceTree = "<group>"; };
+		B238BBB71CEEE3A10050FC3F /* JFLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFLoginButton.swift; sourceTree = "<group>"; };
+		B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCell.swift; sourceTree = "<group>"; };
+		B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileHeaderView.swift; sourceTree = "<group>"; };
+		B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFProfileHeaderView.xib; sourceTree = "<group>"; };
 		B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentTableViewController.swift; sourceTree = "<group>"; };
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
 		B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
@@ -194,7 +205,6 @@
 		B2BD22811CE5DDF3009E0877 /* JFRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFRegisterViewController.swift; sourceTree = "<group>"; };
 		B2BD22821CE5DDF3009E0877 /* JFRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFRegisterViewController.xib; sourceTree = "<group>"; };
 		B2CBAA691CEAEAD6007DA5B7 /* JFAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFAccountModel.swift; sourceTree = "<group>"; };
-		B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFLoginButton.swift; path = BaoKanIOS/Classes/Model/JFLoginButton.swift; sourceTree = SOURCE_ROOT; };
 		B2DD3F961CB7BD4C0092C717 /* BaoKanIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaoKanIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -224,12 +234,6 @@
 		B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleDetailModel.swift; sourceTree = "<group>"; };
 		B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailCell.swift; sourceTree = "<group>"; };
 		B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFBaseTableViewController.swift; sourceTree = "<group>"; };
-		B2FC6DFD1CDB882E00DAC654 /* JFProfileCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCellModel.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCellModel.swift; sourceTree = SOURCE_ROOT; };
-		B2FC6DFF1CDB883E00DAC654 /* JFProfileCellGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCellGroupModel.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCellGroupModel.swift; sourceTree = SOURCE_ROOT; };
-		B2FC6E011CDB885500DAC654 /* JFProfileCellArrowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCellArrowModel.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCellArrowModel.swift; sourceTree = SOURCE_ROOT; };
-		B2FC6E031CDB889000DAC654 /* JFProfileCellLabelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCellLabelModel.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCellLabelModel.swift; sourceTree = SOURCE_ROOT; };
-		B2FC6E051CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCellSwitchModel.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCellSwitchModel.swift; sourceTree = SOURCE_ROOT; };
-		B2FC6E071CDB88C900DAC654 /* JFProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFProfileCell.swift; path = BaoKanIOS/Classes/Module/Profile/Controller/JFProfileCell.swift; sourceTree = SOURCE_ROOT; };
 		B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B2FD9A031CB95F760005B8AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2FD9A051CB95F7F0005B8AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -522,8 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				A5B279A91C36392F003C773D /* Controller */,
-				A5B279AC1C36392F003C773D /* Model */,
-				A5B279AD1C36392F003C773D /* View */,
+				B238BBB01CEEE3A10050FC3F /* Model */,
+				B238BBB61CEEE3A10050FC3F /* View */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -542,27 +546,6 @@
 				B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		A5B279AC1C36392F003C773D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B2FC6DFF1CDB883E00DAC654 /* JFProfileCellGroupModel.swift */,
-				B2FC6DFD1CDB882E00DAC654 /* JFProfileCellModel.swift */,
-				B2FC6E011CDB885500DAC654 /* JFProfileCellArrowModel.swift */,
-				B2FC6E031CDB889000DAC654 /* JFProfileCellLabelModel.swift */,
-				B2FC6E051CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A5B279AD1C36392F003C773D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B2FC6E071CDB88C900DAC654 /* JFProfileCell.swift */,
-				B2CBAA6B1CEB0645007DA5B7 /* JFLoginButton.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		A5B279AE1C36392F003C773D /* Read */ = {
@@ -634,6 +617,29 @@
 				A56ED56F1C7AB5CA009B862D /* style.css */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		B238BBB01CEEE3A10050FC3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B238BBB11CEEE3A10050FC3F /* JFProfileCellArrowModel.swift */,
+				B238BBB21CEEE3A10050FC3F /* JFProfileCellGroupModel.swift */,
+				B238BBB31CEEE3A10050FC3F /* JFProfileCellLabelModel.swift */,
+				B238BBB41CEEE3A10050FC3F /* JFProfileCellModel.swift */,
+				B238BBB51CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B238BBB61CEEE3A10050FC3F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B238BBB71CEEE3A10050FC3F /* JFLoginButton.swift */,
+				B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */,
+				B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */,
+				B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B2BD22761CE5DD5C009E0877 /* Collection */ = {
@@ -1050,6 +1056,7 @@
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
 				B2FFCABF1CE48B0600ADC54C /* WeiboSDK.bundle in Resources */,
 				B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */,
+				B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */,
 				B2BD22801CE5DDE0009E0877 /* JFLoginViewController.xib in Resources */,
 				B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */,
 				B2E3DFC31CB228900081745A /* JFPhotoViewController.storyboard in Resources */,
@@ -1129,11 +1136,12 @@
 				A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */,
 				B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */,
 				B2E3DFC91CB228900081745A /* JFPhotoListCell.swift in Sources */,
-				B2FC6DFE1CDB882E00DAC654 /* JFProfileCellModel.swift in Sources */,
+				B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */,
 				A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */,
+				B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */,
 				B2E3DF961CB222560081745A /* JFNewsCell.swift in Sources */,
+				B238BBBE1CEEE3A10050FC3F /* JFLoginButton.swift in Sources */,
 				B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */,
-				B2FC6E061CDB88AF00DAC654 /* JFProfileCellSwitchModel.swift in Sources */,
 				B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */,
 				B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
@@ -1144,30 +1152,30 @@
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
 				B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */,
 				B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */,
+				B238BBBD1CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift in Sources */,
 				A55CD9021C76E47E0087CA0A /* api.swift in Sources */,
 				B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */,
 				B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */,
 				B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */,
 				B2E3DF921CB222560081745A /* JFDetailADCell.swift in Sources */,
+				B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */,
 				B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
 				B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */,
-				B2FC6E001CDB883E00DAC654 /* JFProfileCellGroupModel.swift in Sources */,
-				B2FC6E041CDB889000DAC654 /* JFProfileCellLabelModel.swift in Sources */,
-				B2FC6E081CDB88C900DAC654 /* JFProfileCell.swift in Sources */,
 				B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */,
-				B2FC6E021CDB885500DAC654 /* JFProfileCellArrowModel.swift in Sources */,
-				B2CBAA6C1CEB0645007DA5B7 /* JFLoginButton.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */,
+				B238BBBB1CEEE3A10050FC3F /* JFProfileCellLabelModel.swift in Sources */,
 				B2E3DF8E1CB222560081745A /* JFNewsDetailViewController.swift in Sources */,
 				B2E3DFD41CB228900081745A /* JFVideoCell.swift in Sources */,
+				B238BBBA1CEEE3A10050FC3F /* JFProfileCellGroupModel.swift in Sources */,
 				B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
+				B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */,
 				B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */,
 				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
 				B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */,

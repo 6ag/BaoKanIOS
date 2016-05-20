@@ -110,10 +110,6 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
         print("QQ登录")
     }
     
-    @IBAction func didTappedWeixinLoginButton(sender: UIButton) {
-        print("微信登录")
-    }
-    
     @IBAction func didTappedSinaLoginButton(sender: UIButton) {
         print("微博登录")
     }

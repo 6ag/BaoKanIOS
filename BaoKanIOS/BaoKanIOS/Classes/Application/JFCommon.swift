@@ -30,8 +30,8 @@ let GLOBAL_SHADOW_ALPHA: CGFloat = 0.6
 let UM_APP_KEY = "573454e4e0f55a81730013a9"
 
 /// 微信
-let WX_APP_ID = ""
-let WX_APP_SECRET = ""
+let WX_APP_ID = "wx2e1f6f0887148b6c"
+let WX_APP_SECRET = "7ad13c3c6dae53e1584c205bf32146f9"
 
 /// QQ
 let QQ_APP_ID = "1105411292"

@@ -43,7 +43,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-Ts-jCo" userLabel="Collection">
                             <rect key="frame" x="192" y="0.0" width="64" height="43"/>
-                            <state key="normal" image="bottom_bar_collection_normal"/>
+                            <state key="normal" image="bottom_bar_collection_normal2"/>
                             <state key="selected" image="bottom_bar_collection_selected"/>
                             <connections>
                                 <action selector="didTappedCollectButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="KDe-ie-Gl6"/>
@@ -80,11 +80,11 @@
         </view>
     </objects>
     <resources>
-        <image name="bottom_bar_back_selected" width="40" height="40"/>
-        <image name="bottom_bar_collection_normal" width="30" height="30"/>
-        <image name="bottom_bar_collection_selected" width="44" height="44"/>
-        <image name="bottom_bar_comment_selected" width="30" height="30"/>
-        <image name="bottom_bar_edit_selected" width="30" height="30"/>
+        <image name="bottom_bar_back_selected" width="20" height="20"/>
+        <image name="bottom_bar_collection_normal2" width="22" height="22"/>
+        <image name="bottom_bar_collection_selected" width="24" height="24"/>
+        <image name="bottom_bar_comment_selected" width="22" height="22"/>
+        <image name="bottom_bar_edit_selected" width="20" height="20"/>
         <image name="bottom_bar_share_selected" width="44" height="44"/>
     </resources>
 </document>
