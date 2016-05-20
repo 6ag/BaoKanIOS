@@ -38,7 +38,9 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 100
         
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
+        let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
+        headerRefresh.lastUpdatedTimeLabel.hidden = true
+        tableView.mj_header = headerRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
     }
     

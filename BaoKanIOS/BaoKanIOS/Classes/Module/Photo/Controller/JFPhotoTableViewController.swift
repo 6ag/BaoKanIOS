@@ -36,7 +36,9 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
         tableView.registerClass(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 200
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
+        let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
+        headerRefresh.lastUpdatedTimeLabel.hidden = true
+        tableView.mj_header = headerRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
         
     }

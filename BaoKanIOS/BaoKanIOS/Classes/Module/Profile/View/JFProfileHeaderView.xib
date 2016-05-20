@@ -67,11 +67,35 @@
                         <constraint firstItem="PvA-R7-jJE" firstAttribute="leading" secondItem="rsS-JR-Dap" secondAttribute="leading" id="sPt-3D-A1Z"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录账号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZQ-BM-nPr">
+                    <rect key="frame" x="157" y="387" width="60" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4U-ni-wQF">
+                    <rect key="frame" x="152" y="302" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="Ndb-Hs-dr2"/>
+                        <constraint firstAttribute="width" constant="70" id="gTn-zh-KNc"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="default－portrait"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="35"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.83921568627450982" green="0.23137254901960785" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="rsS-JR-Dap" secondAttribute="trailing" id="67V-uu-lf8"/>
+                <constraint firstItem="CZQ-BM-nPr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Fd-ID-F6k"/>
+                <constraint firstItem="M4U-ni-wQF" firstAttribute="centerX" secondItem="CZQ-BM-nPr" secondAttribute="centerX" id="SXi-wG-sa0"/>
                 <constraint firstAttribute="bottom" secondItem="rsS-JR-Dap" secondAttribute="bottom" id="d5G-de-bXh"/>
+                <constraint firstItem="CZQ-BM-nPr" firstAttribute="top" secondItem="M4U-ni-wQF" secondAttribute="bottom" constant="15" id="k6v-eC-6ol"/>
+                <constraint firstItem="rsS-JR-Dap" firstAttribute="top" secondItem="CZQ-BM-nPr" secondAttribute="bottom" constant="30" id="pu0-Gh-jSA"/>
                 <constraint firstItem="rsS-JR-Dap" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tvW-EA-OXO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -79,4 +103,7 @@
             <point key="canvasLocation" x="456.5" y="288"/>
         </view>
     </objects>
+    <resources>
+        <image name="default－portrait" width="36" height="36"/>
+    </resources>
 </document>
