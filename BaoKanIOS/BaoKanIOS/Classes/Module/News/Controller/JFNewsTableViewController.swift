@@ -10,8 +10,7 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate
-{
+class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
     /// 分类数据
     var classid: Int? {

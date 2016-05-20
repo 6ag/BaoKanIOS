@@ -10,9 +10,11 @@ import UIKit
 import YYWebImage
 import MJRefresh
 
-class JFNewsDetailViewController: UIViewController
-{
+class JFNewsDetailViewController: UIViewController {
+    
     // MARK: - 属性
+    var contentOffsetY: CGFloat = 0.0
+    
     /// 文章详情请求参数
     var articleParam: (classid: String, id: String)?
     
@@ -23,56 +25,20 @@ class JFNewsDetailViewController: UIViewController
             loadWebViewContent(model!)
             
             // 更新评论数量
-            bottomBarView.commentButton.setTitle(model!.plnum!, forState: UIControlState.Normal)
+            if model!.plnum! != "0" {
+                bottomBarView.commentButton.setTitle(model!.plnum!, forState: UIControlState.Normal)
+            }
             
             // 更新收藏状态
             bottomBarView.collectionButton.selected = model?.havefava == "favorfill"
         }
     }
     
-    /// 底部条
-    var bottomBarView: JFNewsBottomBar!
-    /// 顶部条
-    var topBarView: UIView!
-    
-    var contentOffsetY: CGFloat = 0.0
-    
-    /// tableView
-    var tableView: UITableView!
-    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.view.addSubview(tableView)
-        
-        view.backgroundColor = UIColor.whiteColor()
-        topBarView = UIView()
-        topBarView.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
-        view.addSubview(topBarView)
-        
-        topBarView.snp_makeConstraints { (make) in
-            make.left.right.top.equalTo(0)
-            make.height.equalTo(20)
-        }
-        
-        // 创建BottomBar
-        bottomBarView = NSBundle.mainBundle().loadNibNamed("JFNewsBottomBar", owner: nil, options: nil).last as! JFNewsBottomBar
-        view.addSubview(bottomBarView)
-        
-        bottomBarView.delegate = self
-        bottomBarView.snp_makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(44)
-        }
-        
-        self.view.bringSubviewToFront(self.topBarView)
-        self.view.bringSubviewToFront(self.bottomBarView)
+        prepareUI()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -81,14 +47,34 @@ class JFNewsDetailViewController: UIViewController
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         navigationController?.setNavigationBarHidden(true, animated: true)
         
-        // 请求页面数据
-        loadNewsDetail(articleParam!.classid, id: articleParam!.id)
+        // 加载数据
+        updateData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
+    /**
+     准备UI
+     */
+    private func prepareUI() {
         
-        topBarView.removeFromSuperview()
+        view.backgroundColor = UIColor.whiteColor()
+        view.addSubview(tableView)
+        view.addSubview(topBarView)
+        view.addSubview(bottomBarView)
+        view.addSubview(activityView)
+        
+        topBarView.snp_makeConstraints { (make) in
+            make.left.right.top.equalTo(0)
+            make.height.equalTo(20)
+        }
+        bottomBarView.snp_makeConstraints { (make) in
+            make.left.right.bottom.equalTo(0)
+            make.height.equalTo(44)
+        }
+    }
+    
+    @objc private func updateData() {
+        // 请求页面数据
+        loadNewsDetail(articleParam!.classid, id: articleParam!.id)
     }
     
     // MARK: - 底部条操作
@@ -97,7 +83,9 @@ class JFNewsDetailViewController: UIViewController
         contentOffsetY = scrollView.contentOffset.y
     }
     
-    // 手指离开屏幕开始滚动
+    /**
+     手指滑动屏幕开始滚动
+     */
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if (scrollView.dragging) {
@@ -122,7 +110,9 @@ class JFNewsDetailViewController: UIViewController
         }
     }
     
-    // 滚动减速结束
+    /**
+     滚动减速结束
+     */
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
         // 滚动到底部后 显示
@@ -164,27 +154,29 @@ class JFNewsDetailViewController: UIViewController
             ]
         }
         
+        // 加载指示器
+        activityView.startAnimating()
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
+            // 移除指示器
+            self.activityView.stopAnimating()
+            
             if success == true {
                 if let successResult = result {
                     
-                    print(successResult)
-                    
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
-                        "title" : content["title"]!.string!,          // 文章标题
-                        "username" : content["username"]!.string!,    // 用户名
-                        "lastdotime" : content["lastdotime"]!.string!,// 最后编辑时间戳
-                        "newstext" : content["newstext"]!.string!,    // 文章内容
-                        "titleurl" : "\(BASE_URL)\(content["titleurl"]!.string!)", // 文章url
-                        "id" : content["id"]!.string!,                // 文章id
-                        "classid" : content["classid"]!.string!,      // 当前子分类id
-                        "plnum" : content["plnum"]!.string!,          // 评论数
-                        "havefava" : content["havefava"]!.string!     // 是否收藏  favor1 
+                        "title" : content["title"]!.stringValue,          // 文章标题
+                        "username" : content["username"]!.stringValue,    // 用户名
+                        "lastdotime" : content["lastdotime"]!.stringValue,// 最后编辑时间戳
+                        "newstext" : content["newstext"]!.stringValue,    // 文章内容
+                        "titleurl" : "\(BASE_URL)\(content["titleurl"]!.stringValue)", // 文章url
+                        "id" : content["id"]!.stringValue,                // 文章id
+                        "classid" : content["classid"]!.stringValue,      // 当前子分类id
+                        "plnum" : content["plnum"]!.stringValue,          // 评论数
+                        "havefava" : content["havefava"]!.stringValue     // 是否收藏  favor1
                     ]
                     
                     self.model = JFArticleDetailModel(dict: dict)
-                    
                 }
             } else {
                 print("error:\(error)")
@@ -193,8 +185,16 @@ class JFNewsDetailViewController: UIViewController
     }
     
     // MARK: - 懒加载
+    
+    /// 活动指示器
+    private lazy var activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityView.center = self.view.center
+        return activityView
+    }()
+    
     /// webView
-    lazy var webView: UIWebView = {
+    private lazy var webView: UIWebView = {
         let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         webView.delegate = self
         
@@ -204,6 +204,29 @@ class JFNewsDetailViewController: UIViewController
         return webView
     }()
     
+    /// 底部条
+    private lazy var bottomBarView: JFNewsBottomBar = {
+        let bottomBarView = NSBundle.mainBundle().loadNibNamed("JFNewsBottomBar", owner: nil, options: nil).last as! JFNewsBottomBar
+        bottomBarView.delegate = self
+        return bottomBarView
+    }()
+    
+    /// 顶部条
+    private lazy var topBarView: UIView = {
+        let topBarView = UIView()
+        topBarView.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
+        return topBarView
+    }()
+    
+    /// tableView
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        return tableView
+    }()
 }
 
 // MARK: - JFNewsBottomBarDelegate、JFCommentCommitViewDelegate
