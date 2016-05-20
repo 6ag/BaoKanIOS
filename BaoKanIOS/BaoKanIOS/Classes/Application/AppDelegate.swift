@@ -10,10 +10,6 @@ import UIKit
 import CoreData
 import IQKeyboardManagerSwift
 
-let appKey = "8e0c2d457d44144fd2a6dc52"
-let channel = "Publish channel"
-let isProduction = true
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
-//        setupJPush(launchOptions) // 配置极光推送
+        setupJPush(launchOptions) // 配置极光推送
         setupKeyBoardManager()    // 配置键盘管理者
         return true
     }
@@ -39,10 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      配置极光推送
      */
     private func setupJPush(launchOptions: [NSObject: AnyObject]?) {
-//        
-//        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
-//
-//        JPUSHService.setupWithOption(launchOptions, appKey: appKey, channel: channel, apsForProduction: isProduction)
+        
+        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue, categories: nil)
+        JPUSHService.setupWithOption(launchOptions, appKey: JPUSH_APP_KEY, channel: JPUSH_CHANNEL, apsForProduction: JPUSH_IS_PRODUCTION)
     }
     
     /**
@@ -65,19 +60,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-//        print("get the deviceToken  \(deviceToken)")
-//        NSNotificationCenter.defaultCenter().postNotificationName("DidRegisterRemoteNotification", object: deviceToken)
+        print("get the deviceToken  \(deviceToken)")
+        NSNotificationCenter.defaultCenter().postNotificationName("DidRegisterRemoteNotification", object: deviceToken)
         // 注册deviceToken
-//        JPUSHService.registerDeviceToken(deviceToken)
+        JPUSHService.registerDeviceToken(deviceToken)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         print("didReceiveRemoteNotification:fetchCompletionHandler")
         // 处理远程通知
-//        JPUSHService.handleRemoteNotification(userInfo)
-//        completionHandler(UIBackgroundFetchResult.NewData)
-//        NSNotificationCenter.defaultCenter().postNotificationName("AddNotificationCount", object: nil)  //把  要addnotificationcount
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.NewData)
+        NSNotificationCenter.defaultCenter().postNotificationName("AddNotificationCount", object: nil)  //把  要addnotificationcount
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -85,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        JPUSHService.showLocalNotificationAtFront(notification, identifierKey: nil)
+        JPUSHService.showLocalNotificationAtFront(notification, identifierKey: nil)
     }
     
     func applicationWillResignActive(application: UIApplication) {

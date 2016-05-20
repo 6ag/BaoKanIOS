@@ -42,6 +42,12 @@ let WB_APP_KEY = "1110293594"
 let WB_APP_SECRET = "6c5b97909709e89a72c0f949cc23f5f0"
 let WB_REDIRECT_URL = "https://blog.6ag.cn"
 
+/// 极光推送
+let JPUSH_APP_KEY = "8e0c2d457d44144fd2a6dc52"
+let JPUSH_MASTER_SECRET = "a33a60f6935a625c251e33d0"
+let JPUSH_CHANNEL = "Publish channel"
+let JPUSH_IS_PRODUCTION = true
+
 /// 检查是否登录的key 用户保存登录状态到偏好设置
 let IS_LOGIN = "isLogin"
         

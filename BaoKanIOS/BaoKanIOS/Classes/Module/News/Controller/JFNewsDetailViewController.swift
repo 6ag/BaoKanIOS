@@ -154,12 +154,8 @@ class JFNewsDetailViewController: UIViewController {
             ]
         }
         
-        // 加载指示器
         activityView.startAnimating()
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
-            // 移除指示器
-            self.activityView.stopAnimating()
-            
             if success == true {
                 if let successResult = result {
                     
@@ -178,6 +174,8 @@ class JFNewsDetailViewController: UIViewController {
                     
                     self.model = JFArticleDetailModel(dict: dict)
                 }
+                
+                self.activityView.stopAnimating()
             } else {
                 print("error:\(error)")
             }

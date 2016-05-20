@@ -8,6 +8,7 @@
 
 import UIKit
 import YYWebImage
+import SnapKit
 
 protocol JFPhotoDetailCellDelegate {
     
@@ -114,16 +115,13 @@ class JFPhotoDetailCell: UICollectionViewCell {
         contentView.addSubview(scrollView)
         contentView.addSubview(indicator)
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        indicator.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
         
-        // 背景scrollView
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[sv]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["sv" : scrollView]))
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[sv]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["sv" : scrollView]))
-        
-        // 进度指示器
-        contentView.addConstraint(NSLayoutConstraint(item: indicator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        contentView.addConstraint(NSLayoutConstraint(item: indicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        indicator.snp_makeConstraints { (make) in
+            make.center.equalTo(self)
+        }
     }
     
     // MARK: - 懒加载

@@ -85,7 +85,6 @@ class JFPhotoDetailViewController: UIViewController {
         
         activityView.startAnimating()
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
-            self.activityView.stopAnimating()
             
             if success == true {
                 if let successResult = result {
@@ -110,8 +109,8 @@ class JFPhotoDetailViewController: UIViewController {
                         self.photoModels.append(model)
                     }
                     
+                    self.activityView.stopAnimating()
                     self.scrollViewDidEndDecelerating(self.collectionView)
-                    // 刷新视图
                     self.collectionView.reloadData()
                 }
             } else {
@@ -189,6 +188,7 @@ class JFPhotoDetailViewController: UIViewController {
         myLayout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT), collectionViewLayout: myLayout)
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.pagingEnabled = true
         collectionView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
         collectionView.delegate = self

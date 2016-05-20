@@ -36,6 +36,7 @@
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
 		B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */; };
 		B28716C01CEC540800E1E3E5 /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */; };
+		B292E74D1CEEBE79005AA23A /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */; };
 		B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */; };
 		B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */; };
 		B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */; };
@@ -181,6 +182,8 @@
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
 		B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
 		B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
+		B292E74B1CEEBE79005AA23A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
 		B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
 		B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDutyViewController.swift; sourceTree = "<group>"; };
@@ -231,8 +234,6 @@
 		B2FD9A031CB95F760005B8AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2FD9A051CB95F7F0005B8AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B2FD9A081CB95F900005B8AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		B2FE1C301CB9F696001CCF99 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
-		B2FE1C311CB9F696001CCF99 /* jpush-ios-2.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.5.a"; sourceTree = "<group>"; };
 		B2FFCA6D1CE47B5F00ADC54C /* JFCommentCommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCommitView.swift; sourceTree = "<group>"; };
 		B2FFCA6F1CE47B6A00ADC54C /* JFCommentCommitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCommitView.xib; sourceTree = "<group>"; };
 		B2FFCA731CE48B0600ADC54C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
@@ -305,6 +306,7 @@
 			files = (
 				B2FFCAD11CE48ED600ADC54C /* ImageIO.framework in Frameworks */,
 				B2FFCACF1CE48DA800ADC54C /* CoreGraphics.framework in Frameworks */,
+				B292E74D1CEEBE79005AA23A /* jpush-ios-2.1.6.a in Frameworks */,
 				B2FFCACE1CE48D0000ADC54C /* libstdc++.tbd in Frameworks */,
 				B2FFCACC1CE48CDA00ADC54C /* libiconv.tbd in Frameworks */,
 				B2FFCACA1CE48CBF00ADC54C /* libsqlite3.tbd in Frameworks */,
@@ -779,8 +781,8 @@
 		B2FE1C2F1CB9F681001CCF99 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				B2FE1C301CB9F696001CCF99 /* JPUSHService.h */,
-				B2FE1C311CB9F696001CCF99 /* jpush-ios-2.1.5.a */,
+				B292E74B1CEEBE79005AA23A /* JPUSHService.h */,
+				B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */,
 			);
 			path = JPush;
 			sourceTree = "<group>";
