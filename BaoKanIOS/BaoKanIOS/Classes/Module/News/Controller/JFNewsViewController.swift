@@ -27,6 +27,8 @@ class JFNewsViewController: UIViewController {
         
         // 准备视图
         prepareUI()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveRemoteNotificationOfJPush(_:)), name: "didReceiveRemoteNotificationOfJPush", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,6 +49,25 @@ class JFNewsViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         topBarView.removeFromSuperview()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    /**
+     处理接收到的远程通知
+     */
+    func didReceiveRemoteNotificationOfJPush(notification: NSNotification) -> Void {
+        
+        // 跳转到指定的文章
+        if let userInfo = notification.object as? NSDictionary {
+            guard let classid = userInfo["classid"], let id = userInfo["id"] else {return}
+            let detailVc = JFNewsDetailViewController()
+            detailVc.articleParam = (classid as! String,id as! String)
+            navigationController?.pushViewController(detailVc, animated: true)
+        }
+        
     }
     
     // MARK: - 各种自定义方法

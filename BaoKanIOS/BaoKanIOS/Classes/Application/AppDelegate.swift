@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        print("didFinishLaunchingWithOptions")
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
         setupJPush(launchOptions) // 配置极光推送
@@ -66,17 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         JPUSHService.registerDeviceToken(deviceToken)
     }
     
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("did Fail To Register For Remote Notifications With Error: \(error)")
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-        print("didReceiveRemoteNotification:fetchCompletionHandler")
+        print("didReceiveRemoteNotification:fetchCompletionHandler \(userInfo)")
         // 处理远程通知
         JPUSHService.handleRemoteNotification(userInfo)
         completionHandler(UIBackgroundFetchResult.NewData)
-        NSNotificationCenter.defaultCenter().postNotificationName("AddNotificationCount", object: nil)  //把  要addnotificationcount
-    }
-    
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("did Fail To Register For Remote Notifications With Error: \(error)")
+        NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: userInfo)
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {

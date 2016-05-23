@@ -13,7 +13,6 @@
 		A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5309C261C47719900455EB8 /* JFArticleListModel.swift */; };
 		A55CD9021C76E47E0087CA0A /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CD9011C76E47E0087CA0A /* api.swift */; };
 		A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CD9051C76EDF80087CA0A /* Color+Extension.swift */; };
-		A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */; };
 		A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56BF6FE1C365919001E9F5A /* JFCommon.swift */; };
 		A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56ED56D1C7AB02F009B862D /* UIView+Extension.swift */; };
 		A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56ED5711C7ABAB0009B862D /* String+Extension.swift */; };
@@ -30,6 +29,9 @@
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
 		B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */; };
 		B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */; };
+		B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58BF1CF2D6EC000DA6EB /* JFFeatureViewController.swift */; };
+		B20D58C31CF2DE10000DA6EB /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */; };
+		B20D58C61CF2DEE5000DA6EB /* JFCommentListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58C51CF2DEE5000DA6EB /* JFCommentListTableViewController.swift */; };
 		B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */; };
 		B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB11CEEE3A10050FC3F /* JFProfileCellArrowModel.swift */; };
 		B238BBBA1CEEE3A10050FC3F /* JFProfileCellGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB21CEEE3A10050FC3F /* JFProfileCellGroupModel.swift */; };
@@ -41,12 +43,12 @@
 		B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */; };
 		B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */; };
 		B242D00C1CF2985900E974F1 /* JFProfileTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B242D00B1CF2985900E974F1 /* JFProfileTopButton.swift */; };
+		B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */; };
 		B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */; };
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
 		B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */; };
 		B28716C01CEC540800E1E3E5 /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */; };
 		B292E74D1CEEBE79005AA23A /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */; };
-		B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */; };
 		B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */; };
 		B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */; };
 		B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22721CE584DF009E0877 /* JFProgressView.swift */; };
@@ -152,7 +154,6 @@
 		01DC12B5E10B2F7F1E1B571D /* Pods-BaoKanIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.release.xcconfig"; sourceTree = "<group>"; };
 		78AE24D9060DB0DB52A08859 /* Pods_BaoKanIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaoKanIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF1F21C26914500D2F040 /* BaoKanIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoKanIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50FF2021C26914500D2F040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A50FF2091C26914500D2F040 /* BaoKanIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaoKanIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50FF20D1C26914500D2F040 /* BaoKanIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoKanIOSTests.swift; sourceTree = "<group>"; };
 		A50FF20F1C26914500D2F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -178,6 +179,9 @@
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoBottomBar.swift; sourceTree = "<group>"; };
 		B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFPhotoBottomBar.xib; sourceTree = "<group>"; };
+		B20D58BF1CF2D6EC000DA6EB /* JFFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFFeatureViewController.swift; sourceTree = "<group>"; };
+		B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
+		B20D58C51CF2DEE5000DA6EB /* JFCommentListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentListTableViewController.swift; sourceTree = "<group>"; };
 		B220AAED1CE1C424007FBBD2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B238BBB11CEEE3A10050FC3F /* JFProfileCellArrowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellArrowModel.swift; sourceTree = "<group>"; };
 		B238BBB21CEEE3A10050FC3F /* JFProfileCellGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCellGroupModel.swift; sourceTree = "<group>"; };
@@ -189,13 +193,13 @@
 		B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileHeaderView.swift; sourceTree = "<group>"; };
 		B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFProfileHeaderView.xib; sourceTree = "<group>"; };
 		B242D00B1CF2985900E974F1 /* JFProfileTopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileTopButton.swift; sourceTree = "<group>"; };
+		B242D00E1CF2D35900E974F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = BaoKanIOS/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentTableViewController.swift; sourceTree = "<group>"; };
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
 		B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
 		B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
 		B292E74B1CEEBE79005AA23A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
-		B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
 		B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
 		B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDutyViewController.swift; sourceTree = "<group>"; };
 		B2BD22721CE584DF009E0877 /* JFProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressView.swift; sourceTree = "<group>"; };
@@ -408,7 +412,6 @@
 			isa = PBXGroup;
 			children = (
 				A5B279BF1C36392F003C773D /* Resource */,
-				A5B279BE1C36392F003C773D /* Other */,
 				A5B279901C36392F003C773D /* Classes */,
 			);
 			path = BaoKanIOS;
@@ -502,6 +505,7 @@
 		A5B2799D1C36392F003C773D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B20D58BF1CF2D6EC000DA6EB /* JFFeatureViewController.swift */,
 				A5B2799E1C36392F003C773D /* JFNavigationController.swift */,
 				A5B2799F1C36392F003C773D /* JFTabBarController.swift */,
 			);
@@ -535,13 +539,14 @@
 		A5B279A91C36392F003C773D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B20D58C41CF2DE38000DA6EB /* Comment */,
+				B20D58C11CF2DE10000DA6EB /* Info */,
 				B2BD22761CE5DD5C009E0877 /* Collection */,
 				B2BD22781CE5DD5C009E0877 /* Login */,
 				B2BD22791CE5DD5C009E0877 /* Register */,
 				A5B279AA1C36392F003C773D /* JFProfileViewController.storyboard */,
 				A5B279AB1C36392F003C773D /* JFProfileViewController.swift */,
 				B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */,
-				B2BD226C1CE581B3009E0877 /* JFEditProfileViewController.swift */,
 				B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */,
 				B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */,
 			);
@@ -600,22 +605,31 @@
 			path = Vendor;
 			sourceTree = "<group>";
 		};
-		A5B279BE1C36392F003C773D /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				FBF0963C1C3A65E900046824 /* Assets.xcassets */,
-				FBF0963D1C3A65E900046824 /* Info.plist */,
-				A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
 		A5B279BF1C36392F003C773D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */,
+				FBF0963C1C3A65E900046824 /* Assets.xcassets */,
+				FBF0963D1C3A65E900046824 /* Info.plist */,
 				A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		B20D58C11CF2DE10000DA6EB /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		B20D58C41CF2DE38000DA6EB /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				B20D58C51CF2DEE5000DA6EB /* JFCommentListTableViewController.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		B238BBB01CEEE3A10050FC3F /* Model */ = {
@@ -1032,7 +1046,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2FFCAB51CE48B0600ADC54C /* UMSCommentInputController.xib in Resources */,
-				A56BF6FC1C364511001E9F5A /* LaunchScreen.storyboard in Resources */,
 				B2FFCA701CE47B6A00ADC54C /* JFCommentCommitView.xib in Resources */,
 				B2FFCABA1CE48B0600ADC54C /* UMSnsAccountViewController.xib in Resources */,
 				B2FFCAB61CE48B0600ADC54C /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1050,6 +1063,7 @@
 				B2E3DFCE1CB228900081745A /* JFVideoViewController.storyboard in Resources */,
 				B2FFCAB81CE48B0600ADC54C /* UMShareEditViewControlleriPad.xib in Resources */,
 				B2FFCABB1CE48B0600ADC54C /* UMSShareListController.xib in Resources */,
+				B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */,
 				B2FFCAB91CE48B0600ADC54C /* UMSLoginViewController.xib in Resources */,
 				B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
@@ -1133,6 +1147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */,
+				B20D58C61CF2DEE5000DA6EB /* JFCommentListTableViewController.swift in Sources */,
 				B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */,
 				B2E3DFC91CB228900081745A /* JFPhotoListCell.swift in Sources */,
 				B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */,
@@ -1146,6 +1161,7 @@
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
 				B2E3DFCD1CB228900081745A /* JFVideoTableViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
+				B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */,
 				B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */,
 				B2E3DF971CB222560081745A /* JFTopLabel.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
@@ -1160,11 +1176,11 @@
 				B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */,
 				B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
-				B2BD226D1CE581B3009E0877 /* JFEditProfileViewController.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */,
 				B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */,
+				B20D58C31CF2DE10000DA6EB /* JFEditProfileViewController.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */,
@@ -1223,13 +1239,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A50FF2011C26914500D2F040 /* LaunchScreen.storyboard */ = {
+		B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A50FF2021C26914500D2F040 /* Base */,
+				B242D00E1CF2D35900E974F1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		B2FFCA721CE48B0600ADC54C /* UMSocialLocalizable.strings */ = {

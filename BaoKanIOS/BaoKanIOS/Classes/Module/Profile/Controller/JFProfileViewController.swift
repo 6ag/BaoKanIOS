@@ -11,8 +11,6 @@ import YYWebImage
 
 class JFProfileViewController: JFBaseTableViewController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,12 +50,12 @@ class JFProfileViewController: JFBaseTableViewController {
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         
         groupModels = [group1, group2, group3]
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        updateHeaderData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -73,8 +71,21 @@ class JFProfileViewController: JFBaseTableViewController {
         return 10
     }
     
+    /**
+     更新头部数据
+     */
+    private func updateHeaderData() {
+        if JFAccountModel.shareAccount().isLogin {
+            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
+            headerView.nameLabel.text = JFAccountModel.shareAccount().username
+        } else {
+            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
+            headerView.nameLabel.text = "登录账号"
+        }
+    }
+    
     // MARK: - 各种点击事件
-    lazy var headerView: UIView = {
+    lazy var headerView: JFProfileHeaderView = {
         let headerView = NSBundle.mainBundle().loadNibNamed("JFProfileHeaderView", owner: nil, options: nil).last as! JFProfileHeaderView
         headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: -(SCREEN_HEIGHT * 2 - 265), width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 2)
@@ -86,23 +97,61 @@ class JFProfileViewController: JFBaseTableViewController {
 // MARK: - JFProfileHeaderViewDelegate
 extension JFProfileViewController: JFProfileHeaderViewDelegate {
     
+    /**
+     头像按钮点击
+     */
     func didTappedAvatarButton() {
         if JFAccountModel.shareAccount().isLogin {
-            print(JFAccountModel.shareAccount().username)
+            // 更换头像
+            let avaterAlertC = UIAlertController()
+            let selectPhoto = UIAlertAction(title: "相册选择", style: .Default, handler: { (action) in
+                
+            })
+            let takePhoto = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
+                
+            })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (action) in
+                
+            })
+            avaterAlertC.addAction(selectPhoto)
+            avaterAlertC.addAction(takePhoto)
+            avaterAlertC.addAction(cancel)
+            presentViewController(avaterAlertC, animated: true, completion: nil)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
     }
     
+    /**
+     收藏列表
+     */
     func didTappedCollectionButton() {
-        
+        if JFAccountModel.shareAccount().isLogin {
+            navigationController?.pushViewController(JFCollectionTableViewController(), animated: true)
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+        }
     }
     
+    /**
+     评论列表
+     */
     func didTappedCommentButton() {
-        
+        if JFAccountModel.shareAccount().isLogin {
+            navigationController?.pushViewController(JFCommentListTableViewController(), animated: true)
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+        }
     }
     
+    /**
+     修改个人信息
+     */
     func didTappedInfoButton() {
-        
+        if JFAccountModel.shareAccount().isLogin {
+            navigationController?.pushViewController(JFEditProfileViewController(), animated: true)
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+        }
     }
 }

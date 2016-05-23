@@ -30,6 +30,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
     
+    /// 顶部轮播
     var topScrollView: SDCycleScrollView!
     
     override func viewDidLoad() {
@@ -50,9 +51,9 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     private func prepareScrollView() {
         
         topScrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150), delegate: self, placeholderImage: UIImage(named: "photoview_image_default_white"))
-        topScrollView.currentPageDotColor = UIColor.redColor()
-        topScrollView.pageDotColor = UIColor.blackColor()
         topScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
+        topScrollView.pageDotColor = NAVIGATIONBAR_WHITE_COLOR
+        topScrollView.currentPageDotColor = NAVIGATIONBAR_RED_COLOR
         topScrollView.imageURLStringsGroup = [articleList[0].titlepic!, articleList[1].titlepic!, articleList[2].titlepic!]
         topScrollView.titlesGroup = [articleList[0].title!, articleList[1].title!, articleList[2].title!]
         topScrollView.autoScrollTimeInterval = 5
@@ -90,6 +91,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
     private func loadNews(classid: Int, pageIndex: Int, method: Int) {
+        
         let parameters = [
             "table" : "news",
             "classid" : classid,
