@@ -16,38 +16,62 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvA-R7-jJE" userLabel="item1">
                             <rect key="frame" x="0.0" y="0.0" width="125" height="65"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgd-fn-ej1">
-                                    <rect key="frame" x="47" y="18" width="30" height="30"/>
-                                    <state key="normal" title="收藏">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgd-fn-ej1" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="收藏" image="profile_topbar_collection">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="didTappedCollectionButton" destination="iN0-l3-epB" eventType="touchUpInside" id="q1R-Cm-sd8"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="centerX" secondItem="PvA-R7-jJE" secondAttribute="centerX" id="BSu-A5-dLb"/>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="centerY" secondItem="PvA-R7-jJE" secondAttribute="centerY" id="mcg-ZY-DKb"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CI-Go-PGc" userLabel="item2">
                             <rect key="frame" x="125" y="0.0" width="125" height="65"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSh-ZB-j0c">
-                                    <rect key="frame" x="47" y="18" width="30" height="30"/>
-                                    <state key="normal" title="评论">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSh-ZB-j0c" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="评论" image="profile_topbar_comment">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="didTappedCommentButton" destination="iN0-l3-epB" eventType="touchUpInside" id="8Ai-Ve-Abi"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="centerX" secondItem="3CI-Go-PGc" secondAttribute="centerX" id="AZg-bb-QOr"/>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="centerY" secondItem="3CI-Go-PGc" secondAttribute="centerY" id="GH6-YD-mwN"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-9a-cew" userLabel="item3">
                             <rect key="frame" x="250" y="0.0" width="125" height="65"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="788-jF-aZR">
-                                    <rect key="frame" x="47" y="18" width="30" height="30"/>
-                                    <state key="normal" title="资料">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="788-jF-aZR" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="资料" image="profile_topbar_info">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="didTappedInfoButton" destination="iN0-l3-epB" eventType="touchUpInside" id="TyS-5P-UXS"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="centerX" secondItem="zFW-9a-cew" secondAttribute="centerX" id="J3v-Hr-aaT"/>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="centerY" secondItem="zFW-9a-cew" secondAttribute="centerY" id="aCU-XP-dyf"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
@@ -86,6 +110,9 @@
                             <integer key="value" value="35"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didTappedAvatarButton" destination="iN0-l3-epB" eventType="touchUpInside" id="Ki4-0g-Aiw"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.83921568627450982" green="0.23137254901960785" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
@@ -100,10 +127,17 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="avatarButton" destination="M4U-ni-wQF" id="XMv-Q6-Q6z"/>
+                <outlet property="nameLabel" destination="CZQ-BM-nPr" id="nLR-EU-8qG"/>
+            </connections>
             <point key="canvasLocation" x="456.5" y="288"/>
         </view>
     </objects>
     <resources>
         <image name="default－portrait" width="36" height="36"/>
+        <image name="profile_topbar_collection" width="22" height="22"/>
+        <image name="profile_topbar_comment" width="22" height="22"/>
+        <image name="profile_topbar_info" width="22" height="22"/>
     </resources>
 </document>

@@ -8,14 +8,34 @@
 
 import UIKit
 
+protocol JFProfileHeaderViewDelegate {
+    
+    func didTappedAvatarButton()
+    func didTappedCollectionButton()
+    func didTappedCommentButton()
+    func didTappedInfoButton()
+}
+
 class JFProfileHeaderView: UIView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var avatarButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    var delegate: JFProfileHeaderViewDelegate?
+    
+    @IBAction func didTappedAvatarButton() {
+        delegate?.didTappedAvatarButton()
     }
-    */
-
+    
+    @IBAction func didTappedCollectionButton() {
+        delegate?.didTappedCollectionButton()
+    }
+    
+    @IBAction func didTappedCommentButton() {
+        delegate?.didTappedCommentButton()
+    }
+    
+    @IBAction func didTappedInfoButton() {
+        delegate?.didTappedInfoButton()
+    }
+    
 }

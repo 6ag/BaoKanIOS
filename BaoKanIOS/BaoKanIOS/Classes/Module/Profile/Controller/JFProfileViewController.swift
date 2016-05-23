@@ -11,11 +11,7 @@ import YYWebImage
 
 class JFProfileViewController: JFBaseTableViewController {
     
-    lazy var headerView: UIView = {
-        let headerView = NSBundle.mainBundle().loadNibNamed("JFProfileHeaderView", owner: nil, options: nil).last as! JFProfileHeaderView
-        headerView.frame = CGRect(x: 0, y: -(SCREEN_HEIGHT * 2 - 265), width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 2)
-        return headerView
-    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,17 +74,35 @@ class JFProfileViewController: JFBaseTableViewController {
     }
     
     // MARK: - 各种点击事件
-    /**
-     头像按钮点击
-     */
-    @objc private func didTappedAvatarButton(button: UIButton) {
-        
+    lazy var headerView: UIView = {
+        let headerView = NSBundle.mainBundle().loadNibNamed("JFProfileHeaderView", owner: nil, options: nil).last as! JFProfileHeaderView
+        headerView.delegate = self
+        headerView.frame = CGRect(x: 0, y: -(SCREEN_HEIGHT * 2 - 265), width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 2)
+        return headerView
+    }()
+    
+}
+
+// MARK: - JFProfileHeaderViewDelegate
+extension JFProfileViewController: JFProfileHeaderViewDelegate {
+    
+    func didTappedAvatarButton() {
         if JFAccountModel.shareAccount().isLogin {
             print(JFAccountModel.shareAccount().username)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
+    }
+    
+    func didTappedCollectionButton() {
         
     }
     
+    func didTappedCommentButton() {
+        
+    }
+    
+    func didTappedInfoButton() {
+        
+    }
 }

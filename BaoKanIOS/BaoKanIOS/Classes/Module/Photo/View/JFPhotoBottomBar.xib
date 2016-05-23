@@ -87,6 +87,6 @@
         <image name="bottom_bar_collection_selected" width="24" height="24"/>
         <image name="bottom_bar_comment_normal" width="22" height="22"/>
         <image name="bottom_bar_edit_normal" width="20" height="20"/>
-        <image name="bottom_bar_share_normal" width="30" height="30"/>
+        <image name="bottom_bar_share_normal" width="22" height="22"/>
     </resources>
 </document>
