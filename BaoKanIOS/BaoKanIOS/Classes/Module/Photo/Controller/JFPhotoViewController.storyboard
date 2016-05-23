@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hz5-hD-UIz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--图秀-->
@@ -16,6 +17,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVh-rT-fTe" userLabel="top">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="msE-c7-4eW"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="msE-c7-4eW"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="msE-c7-4eW"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoview_image_default_white" translatesAutoresizingMaskIntoConstraints="NO" id="HvU-g6-pnF">
                                 <rect key="frame" x="0.0" y="265" width="600" height="70"/>
                                 <constraints>
@@ -51,8 +69,12 @@
                             <constraint firstItem="FHU-EV-o5G" firstAttribute="top" secondItem="fNF-2X-T8b" secondAttribute="bottom" id="04j-Wk-wpa"/>
                             <constraint firstItem="V3q-ZM-xaJ" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="2Oa-Ga-56e"/>
                             <constraint firstItem="HvU-g6-pnF" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="6cV-2M-Lrb"/>
+                            <constraint firstItem="nVh-rT-fTe" firstAttribute="top" secondItem="fNF-2X-T8b" secondAttribute="bottom" id="8fQ-Rl-ZQY"/>
                             <constraint firstAttribute="trailing" secondItem="HvU-g6-pnF" secondAttribute="trailing" id="ECk-5a-11D"/>
+                            <constraint firstItem="nVh-rT-fTe" firstAttribute="top" secondItem="rwb-V9-5e0" secondAttribute="topMargin" id="JF6-JJ-tac"/>
+                            <constraint firstItem="nVh-rT-fTe" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="LZx-TS-hFa"/>
                             <constraint firstItem="HvU-g6-pnF" firstAttribute="centerY" secondItem="rwb-V9-5e0" secondAttribute="centerY" id="Nbg-WK-PcO"/>
+                            <constraint firstAttribute="trailing" secondItem="nVh-rT-fTe" secondAttribute="trailing" id="OYt-ev-Qdw"/>
                             <constraint firstAttribute="trailing" secondItem="fNF-2X-T8b" secondAttribute="trailing" id="VLx-QO-igl"/>
                             <constraint firstItem="fuU-RQ-tUC" firstAttribute="top" secondItem="FHU-EV-o5G" secondAttribute="bottom" id="ZBW-cO-yTr"/>
                             <constraint firstAttribute="trailing" secondItem="FHU-EV-o5G" secondAttribute="trailing" id="n0h-zf-Th1"/>
@@ -61,6 +83,28 @@
                             <constraint firstItem="V3q-ZM-xaJ" firstAttribute="top" secondItem="tUK-om-XoJ" secondAttribute="bottom" id="uv1-rx-JBN"/>
                             <constraint firstItem="fNF-2X-T8b" firstAttribute="leading" secondItem="V3q-ZM-xaJ" secondAttribute="trailing" id="wWM-gn-utu"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="nVh-rT-fTe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8fQ-Rl-ZQY"/>
+                                <exclude reference="JF6-JJ-tac"/>
+                                <exclude reference="LZx-TS-hFa"/>
+                                <exclude reference="OYt-ev-Qdw"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="nVh-rT-fTe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8fQ-Rl-ZQY"/>
+                                <include reference="JF6-JJ-tac"/>
+                                <include reference="LZx-TS-hFa"/>
+                                <include reference="OYt-ev-Qdw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="图秀" id="UN2-ep-CMR"/>
                     <connections>

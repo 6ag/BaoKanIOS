@@ -9,8 +9,8 @@
 import UIKit
 import SnapKit
 
-class JFPhotoViewController: UIViewController
-{
+class JFPhotoViewController: UIViewController {
+    
     /// 顶部标签按钮区域
     @IBOutlet weak var topScrollView: UIScrollView!
     /// 内容区域
@@ -19,12 +19,9 @@ class JFPhotoViewController: UIViewController
     @IBOutlet weak var addButton: UIButton!
     // 顶部标签数组
     private var topTitles: [[String : String]]?
-    /// 顶部条
-    var topBarView: UIView!
     
     // MARK: - 视图生命周期
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         // 准备视图
@@ -37,39 +34,22 @@ class JFPhotoViewController: UIViewController
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        topBarView = UIView()
-        topBarView.backgroundColor = NAVIGATIONBAR_RED_COLOR
-        view.addSubview(topBarView)
-        topBarView.snp_makeConstraints { (make) in
-            make.left.right.top.equalTo(0)
-            make.height.equalTo(20)
-        }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        topBarView.removeFromSuperview()
     }
     
     // MARK: - 各种自定义方法
     /**
      准备视图
      */
-    private func prepareUI()
-    {
-        navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo"))
+    private func prepareUI() {
         
         // 添加内容
         addContent()
-        
     }
     
     /**
      添加顶部标题栏和控制器
      */
-    private func addContent()
-    {
+    private func addContent() {
         // 初始化标签数组
         if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("photoTopTitles") as? [[String : String]] {
             self.topTitles = topTitles;
@@ -167,8 +147,7 @@ class JFPhotoViewController: UIViewController
     /**
      顶部标签的点击事件
      */
-    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer)
-    {
+    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer) {
         let titleLabel = gesture.view as! JFTopLabel
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
@@ -176,11 +155,10 @@ class JFPhotoViewController: UIViewController
 }
 
 // MARK: - scrollView代理方法
-extension JFPhotoViewController: UIScrollViewDelegate
-{
+extension JFPhotoViewController: UIScrollViewDelegate {
+    
     // 滚动结束后触发 代码导致
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView)
-    {
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         
         // 滚动标题栏
@@ -222,14 +200,12 @@ extension JFPhotoViewController: UIScrollViewDelegate
     }
     
     // 滚动结束 手势导致
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView)
-    {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
     // 正在滚动
-    func scrollViewDidScroll(scrollView: UIScrollView)
-    {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         let value = abs(scrollView.contentOffset.x / scrollView.frame.width)
         
         let leftIndex = Int(value)

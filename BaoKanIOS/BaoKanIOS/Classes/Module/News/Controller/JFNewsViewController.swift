@@ -18,8 +18,6 @@ class JFNewsViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     // 顶部标签数组
     private var topTitles: [[String : String]]?
-    /// 顶部条
-    var topBarView: UIView!
     
     // MARK: - 视图生命周期
     override func viewDidLoad() {
@@ -36,19 +34,6 @@ class JFNewsViewController: UIViewController {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
-        topBarView = UIView()
-        topBarView.backgroundColor = NAVIGATIONBAR_RED_COLOR
-        view.addSubview(topBarView)
-        topBarView.snp_makeConstraints { (make) in
-            make.left.right.top.equalTo(0)
-            make.height.equalTo(20)
-        }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        topBarView.removeFromSuperview()
     }
     
     deinit {
@@ -56,11 +41,10 @@ class JFNewsViewController: UIViewController {
     }
     
     /**
-     处理接收到的远程通知
+     处理接收到的远程通知，跳转到指定的文章
      */
     func didReceiveRemoteNotificationOfJPush(notification: NSNotification) -> Void {
         
-        // 跳转到指定的文章
         if let userInfo = notification.object as? NSDictionary {
             guard let classid = userInfo["classid"], let id = userInfo["id"] else {return}
             let detailVc = JFNewsDetailViewController()
