@@ -14,7 +14,7 @@
 
 ### 个人中心
 
-![image](https://github.com/6ag/BaoKanIOS/blob/master/3.jpg)
+![image](https://github.com/6ag/BaoKanIOS/blob/master/3.jpg =373x685)
 
 ### 还没写完呢。。
 
