@@ -109,9 +109,9 @@ class JFPhotoDetailViewController: UIViewController {
                         self.photoModels.append(model)
                     }
                     
-                    self.activityView.stopAnimating()
                     self.scrollViewDidEndDecelerating(self.collectionView)
                     self.collectionView.reloadData()
+                    self.activityView.stopAnimating()
                 }
             } else {
                 print("error:\(error)")

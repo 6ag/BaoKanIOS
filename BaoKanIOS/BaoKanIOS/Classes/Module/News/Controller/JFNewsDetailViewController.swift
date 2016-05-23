@@ -9,6 +9,7 @@
 import UIKit
 import YYWebImage
 import MJRefresh
+import WebKit
 
 class JFNewsDetailViewController: UIViewController {
     
@@ -49,6 +50,10 @@ class JFNewsDetailViewController: UIViewController {
         
         // 加载数据
         updateData()
+    }
+    
+    deinit {
+        print("文章详情释放了")
     }
     
     /**
@@ -174,8 +179,6 @@ class JFNewsDetailViewController: UIViewController {
                     
                     self.model = JFArticleDetailModel(dict: dict)
                 }
-                
-                self.activityView.stopAnimating()
             } else {
                 print("error:\(error)")
             }
@@ -192,13 +195,10 @@ class JFNewsDetailViewController: UIViewController {
     }()
     
     /// webView
-    private lazy var webView: UIWebView = {
-        let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-        webView.delegate = self
-        
-        // 禁止滚动
-        let scrollView = webView.subviews[0] as! UIScrollView
-        scrollView.scrollEnabled = false
+    private lazy var webView: WKWebView = {
+        let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        webView.navigationDelegate = self
+        webView.scrollView.scrollEnabled = false
         return webView
     }()
     
@@ -329,8 +329,8 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
     }
 }
 
-// MARK: - UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource
-extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate {
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     /**
      加载webView内容
@@ -338,11 +338,44 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
      - parameter model: 新闻模型
      */
     func loadWebViewContent(model: JFArticleDetailModel) {
+        
         // 内容页html
         var html = ""
         html.appendContentsOf("<html>")
         html.appendContentsOf("<head>")
-        html.appendContentsOf("<link rel=\"stylesheet\" href=\"\(NSBundle.mainBundle().URLForResource("style.css", withExtension: nil)!)\">")
+        html.appendContentsOf("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>")
+        
+        // css样式
+        let css = "<style type=\"text/css\">" +
+            ".title {" +
+                "text-align: left;" +
+                "font-size: 20px;" +
+                "color: #3c3c3c;" +
+                "font-weight: bold;" +
+                "margin-left: 10px;" +
+            "}" +
+            ".time {" +
+                "text-align: left;" +
+                "font-size: 15px;" +
+                "color: gray;" +
+                "margin-top: 7px;" +
+                "margin-bottom: 7px;" +
+                "margin-left: 10px;" +
+            "}" +
+            ".img-responsive {" +
+                "text-align: center;" +
+                "margin-bottom: 10px;" +
+                "width: 98%;" +
+            "}" +
+            ".container {" +
+                "background: #FFFFFF;" +
+            "}" +
+            ".content {" +
+                "width: 100%;" +
+            "}" +
+        "</style>"
+        
+        html.appendContentsOf(css)
         html.appendContentsOf("</head>")
         
         // body开始
@@ -364,19 +397,6 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
         webView.loadHTMLString(html, baseURL: nil)
     }
     
-    /**
-     webView加载完成回调
-     
-     - parameter webView: 加载完成的webView
-     */
-    func webViewDidFinishLoad(webView: UIWebView) {
-        
-        let height = Int(webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight")!)! + 60
-        let frame = webView.frame
-        webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height))
-        tableView.reloadData()
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -393,5 +413,20 @@ extension JFNewsDetailViewController: UIWebViewDelegate, UITableViewDataSource, 
         }
         cell?.contentView.addSubview(webView)
         return cell!
+    }
+}
+
+// MARK: - WKNavigationDelegate
+extension JFNewsDetailViewController: WKNavigationDelegate {
+    
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
+            if let height = result {
+                let frame = webView.frame
+                webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height as! NSNumber) + 60)
+                self.tableView.reloadData()
+                self.activityView.stopAnimating()
+            }
+        }
     }
 }
