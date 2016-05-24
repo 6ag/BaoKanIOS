@@ -43,6 +43,7 @@ class JFPhotoDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     /**

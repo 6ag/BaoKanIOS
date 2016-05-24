@@ -26,8 +26,9 @@ let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
 /// 全局遮罩透明度
 let GLOBAL_SHADOW_ALPHA: CGFloat = 0.6
 
-/// 友盟APPKEY
-let UM_APP_KEY = "573454e4e0f55a81730013a9"
+/// shareSDK
+let SHARESDK_APP_KEY = "132016f2c3a12"
+let SHARESDK_APP_SECRET = "3c94e6038eff8073d82b426d52288ca7"
 
 /// 微信
 let WX_APP_ID = "wx2e1f6f0887148b6c"

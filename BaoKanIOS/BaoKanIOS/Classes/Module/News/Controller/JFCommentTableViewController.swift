@@ -39,11 +39,6 @@ class JFCommentTableViewController: UITableViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
     /**
      下拉加载最新数据
      */

@@ -12,16 +12,51 @@ import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupGlobalStyle()        // 配置全局样式
         setupRootViewController() // 配置控制器
-        setupKeyBoardManager()    // 配置键盘管理者
-        setupJPush(application, launchOptions: launchOptions) // 配置极光推送
+        setupKeyBoardManager()    // 配置键盘管理
+        setupShareSDK()           // 配置shareSDK
+        setupJPush(launchOptions) // 配置JPUSH
         
         return true
+    }
+    
+    /**
+     配置shareSDK
+     */
+    private func setupShareSDK() -> Void {
+        ShareSDK.registerApp(SHARESDK_APP_KEY,
+                             activePlatforms: [
+                                SSDKPlatformType.TypeSinaWeibo.rawValue,
+                                SSDKPlatformType.TypeQQ.rawValue,
+                                SSDKPlatformType.TypeWechat.rawValue],
+                             onImport: {(platform : SSDKPlatformType) -> Void in
+                                switch platform {
+                                case SSDKPlatformType.TypeWechat:
+                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+                                case SSDKPlatformType.TypeQQ:
+                                    ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
+                                default:
+                                    break
+                                }},
+                             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
+                                switch platform {
+                                case SSDKPlatformType.TypeSinaWeibo:
+                                    appInfo.SSDKSetupSinaWeiboByAppKey(WB_APP_KEY, appSecret : WB_APP_SECRET, redirectUri : WB_REDIRECT_URL, authType : SSDKAuthTypeBoth)
+                                    break
+                                case SSDKPlatformType.TypeWechat:
+                                    appInfo.SSDKSetupWeChatByAppId(WX_APP_ID, appSecret: WX_APP_SECRET)
+                                    break
+                                case SSDKPlatformType.TypeQQ:
+                                    appInfo.SSDKSetupQQByAppId(QQ_APP_ID, appKey: QQ_APP_KEY, authType: SSDKAuthTypeBoth)
+                                    break
+                                default:
+                                    break
+                                }})
     }
     
     /**
@@ -29,23 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     private func setupKeyBoardManager() {
         IQKeyboardManager.sharedManager().enable = true
-    }
-    
-    /**
-     配置极光推送
-     */
-    private func setupJPush(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
-        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories: nil)
-        JPUSHService.setupWithOption(launchOptions, appKey: JPUSH_APP_KEY, channel: JPUSH_CHANNEL, apsForProduction: JPUSH_IS_PRODUCTION)
-        JPUSHService.crashLogON()
-        
-        if let options = launchOptions {
-            let userInfo = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
-            if let info = userInfo {
-                application.applicationIconBadgeNumber = 0
-                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: info)
-            }
-        }
     }
     
     /**
@@ -66,14 +84,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
+    /**
+     配置极光推送
+     */
+    private func setupJPush(launchOptions: [NSObject: AnyObject]?) {
+        JPUSHService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories: nil)
+        JPUSHService.setupWithOption(launchOptions, appKey: JPUSH_APP_KEY, channel: JPUSH_CHANNEL, apsForProduction: JPUSH_IS_PRODUCTION)
+        JPUSHService.crashLogON()
+        
+        // 延迟发送通知（app被杀死进程后收到通知，然后通过点击通知打开app在这个方法中发送通知）
+        performSelector(#selector(sendNotification(_:)), withObject: launchOptions, afterDelay: 1.5)
+    }
+    
+    /**
+     发送通知
+     */
+    @objc private func sendNotification(launchOptions: [NSObject: AnyObject]?) {
+        if let options = launchOptions {
+            let userInfo = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
+            if let info = userInfo {
+                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: info)
+            }
+        }
+    }
+    
+    /**
+     传递deviceToken注册远程通知
+     */
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         JPUSHService.registerDeviceToken(deviceToken)
     }
     
+    /**
+     注册远程通知失败
+     */
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("did Fail To Register For Remote Notifications With Error: \(error)")
     }
     
+    /**
+     iOS7后接收到远程通知
+     */
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         JPUSHService.handleRemoteNotification(userInfo)
@@ -99,6 +150,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    /**
+     接收到本地通知
+     */
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         JPUSHService.showLocalNotificationAtFront(notification, identifierKey: nil)
     }
@@ -106,34 +160,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         
     }
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
         
     }
-
+    
     func applicationWillEnterForeground(application: UIApplication) {
         
     }
-
+    
     func applicationDidBecomeActive(application: UIApplication) {
         
     }
-
+    
     func applicationWillTerminate(application: UIApplication) {
         self.saveContext()
     }
-
+    
     // MARK: - Core Data stack
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
-
+    
     lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource("BaoKanIOS", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
-
+    
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
@@ -144,7 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
-
+            
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
@@ -152,14 +206,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return coordinator
     }()
-
+    
     lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
-
+    
     // MARK: - Core Data Saving support
     func saveContext () {
         if managedObjectContext.hasChanges {
@@ -172,6 +226,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
 }
 
