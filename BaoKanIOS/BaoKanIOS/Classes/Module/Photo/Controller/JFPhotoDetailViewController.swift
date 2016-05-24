@@ -150,7 +150,7 @@ class JFPhotoDetailViewController: UIViewController {
         
         bottomToolView.snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
         
         bottomBgView.snp_makeConstraints { (make) in

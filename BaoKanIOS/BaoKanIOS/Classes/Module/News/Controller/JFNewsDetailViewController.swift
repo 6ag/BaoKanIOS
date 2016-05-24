@@ -73,7 +73,7 @@ class JFNewsDetailViewController: UIViewController {
         }
         bottomBarView.snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
-            make.height.equalTo(44)
+            make.height.equalTo(45)
         }
     }
     
