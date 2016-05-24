@@ -250,19 +250,6 @@ extension JFNewsViewController: UIScrollViewDelegate {
             }
         }
         
-        // 获取需要展示的控制器
-        let newsVc = childViewControllers[index] as! JFNewsTableViewController
-        
-        // 如果已经展示则直接返回
-        if newsVc.view.superview != nil {
-            return
-        }
-        
-        contentScrollView.addSubview(newsVc.view)
-        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
-        
-        // 传递分类数据
-        newsVc.classid = Int(topTitles![index]["classid"]!)
     }
     
     // 滚动结束 手势导致
@@ -287,6 +274,29 @@ extension JFNewsViewController: UIScrollViewDelegate {
             labelRight.scale = Float(scaleRight)
         }
         
+        // 计算子控制器数组角标
+        var index = (value - CGFloat(Int(value))) > 0 ? Int(value) + 1 : Int(value)
+        
+        // 控制器角标范围
+        if index > childViewControllers.count - 1 {
+            index = childViewControllers.count - 1
+        } else if index < 0 {
+            index = 0
+        }
+        
+        // 获取需要展示的控制器
+        let newsVc = childViewControllers[index] as! JFNewsTableViewController
+        
+        // 如果已经展示则直接返回
+        if newsVc.view.superview != nil {
+            return
+        }
+        
+        contentScrollView.addSubview(newsVc.view)
+        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
+        
+        // 传递分类数据
+        newsVc.classid = Int(topTitles![index]["classid"]!)
     }
     
 }
