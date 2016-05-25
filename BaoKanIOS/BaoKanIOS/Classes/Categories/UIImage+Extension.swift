@@ -24,4 +24,39 @@ extension UIImage {
         let newSize = CGSize(width: newWidth, height: newHeight)
         return newSize
     }
+    
+    /**
+     缩放图片到指定的尺寸
+     
+     - parameter newSize: 需要缩放的尺寸
+     
+     - returns: 返回缩放后的图片
+     */
+    func resizeImageWithNewSize(newSize: CGSize) -> UIImage {
+        
+        var rect = CGRectZero
+        let oldSize = self.size
+        
+        if newSize.width / newSize.height > oldSize.width / oldSize.height {
+            rect.size.width = newSize.height * oldSize.width / oldSize.height
+            rect.size.height = newSize.height
+            rect.origin.x = (newSize.width - rect.size.width) * 0.5
+            rect.origin.y = 0
+        } else {
+            rect.size.width = newSize.width
+            rect.size.height = newSize.width * oldSize.height / oldSize.width
+            rect.origin.x = 0
+            rect.origin.y = (newSize.height - rect.size.height) * 0.5
+        }
+        
+        UIGraphicsBeginImageContext(newSize)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
+        UIRectFill(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        self.drawInRect(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
 }

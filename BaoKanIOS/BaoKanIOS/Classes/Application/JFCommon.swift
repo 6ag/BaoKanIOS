@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// appStore中的应用id
+let APPLE_ID = "1115587250"
+
 /// 导航栏背景颜色 - （红色）
 let NAVIGATIONBAR_RED_COLOR = UIColor(red:0.831,  green:0.239,  blue:0.243, alpha:1)
 
@@ -39,7 +42,7 @@ let QQ_APP_ID = "1105411292"
 let QQ_APP_KEY = "WfKZYbDH68l7s9AU"
 
 /// 微博
-let WB_APP_KEY = "1110293594"
+let WB_APP_KEY = "2664017296"
 let WB_APP_SECRET = "6c5b97909709e89a72c0f949cc23f5f0"
 let WB_REDIRECT_URL = "https://blog.6ag.cn"
 

@@ -1268,7 +1268,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/Optional",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/QQSDK",
@@ -1280,16 +1279,38 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/JPush",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_5.1",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/UMSocial_Shake_Sdk",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"SDCycleScrollView\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"YYCache\"",
+					"-framework",
+					"\"YYImage\"",
+					"-framework",
+					"\"YYWebImage\"",
+					"-framework",
+					"\"pop\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";
@@ -1309,7 +1330,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/Optional",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/QQSDK",
@@ -1321,16 +1341,38 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/JPush",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_5.1",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/UMSocial_Shake_Sdk",
-					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"SDCycleScrollView\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"YYCache\"",
+					"-framework",
+					"\"YYImage\"",
+					"-framework",
+					"\"YYWebImage\"",
+					"-framework",
+					"\"pop\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";

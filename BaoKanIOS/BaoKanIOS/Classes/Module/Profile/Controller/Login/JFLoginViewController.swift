@@ -50,6 +50,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     // 测试账号密码都是：bbsbaokan
     @IBAction func didTappedLoginButton(button: JFLoginButton) {
         
+        view.userInteractionEnabled = false
         view.endEditing(true)
         
         // 开始动画
@@ -65,10 +66,11 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (success, result, error) in
                 if success {
-                    self.didTappedBackButton()
+                    print(result)
                     if let successResult = result {
                         JFAccountModel.shareAccount().setValuesForKeysWithDictionary(successResult["data"]["user"].dictionaryObject!)
                         JFAccountModel.shareAccount().login()
+                        self.didTappedBackButton()
                     }
                 } else if result != nil {
                     JFProgressHUD.showInfoWithStatus(result!["data"]["info"].string!)
@@ -76,6 +78,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
                 
                 // 结束动画
                 button.endLoginAnimation()
+                self.view.userInteractionEnabled = true
             }
         }
         
@@ -107,12 +110,61 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     }
     
     @IBAction func didTappedQQLoginButton(sender: UIButton) {
-        print("QQ登录")
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeQQ) { (state, user, error) in
+            if state == SSDKResponseState.Success {
+                self.SDKLoginHandle(user.nickname, avatar: user.rawData["figureurl_qq_2"] != nil ? user.rawData["figureurl_qq_2"]! as! String : user.icon, uid: user.uid)
+            } else {
+                print(state, error)
+            }
+        }
     }
     
     @IBAction func didTappedSinaLoginButton(sender: UIButton) {
-        print("微博登录")
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeSinaWeibo) { (state, user, error) in
+            if state == SSDKResponseState.Success {
+                self.SDKLoginHandle(user.nickname, avatar: user.rawData["avatar_hd"] != nil ? user.rawData["avatar_hd"]! as! String : user.icon, uid: user.uid)
+            } else {
+                print(state, error)
+            }
+        }
+    }
+    
+    /**
+     第三方登录授权处理
+     
+     - parameter nickname: 昵称
+     - parameter avatar:   头像url
+     - parameter uid:      唯一标识
+     */
+    func SDKLoginHandle(nickname: String, avatar: String, uid: String) -> Void {
+        
+        let string = uid.characters.count >= 12 ? (uid as NSString).substringToIndex(12) : uid
+        
+        let parameters = [
+            "username" : string,
+            "password" : string,
+            "email" : "\(string)@baokan.name"
+        ]
+        
+        JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
+            print(result)
+            if success {
+                self.usernameField.text = string
+                self.passwordField.text = string
+                self.didChangeTextField(self.passwordField)
+                self.didTappedLoginButton(self.loginButton)
+            } else if result != nil {
+                if result!["info"].stringValue == "此用户名已被注册" {
+                    self.usernameField.text = string
+                    self.passwordField.text = string
+                    self.didChangeTextField(self.passwordField)
+                    self.didTappedLoginButton(self.loginButton)
+                } else {
+                    JFProgressHUD.showInfoWithStatus(result!["info"].stringValue)
+                }
+                
+            }
+        }
     }
     
 }
-

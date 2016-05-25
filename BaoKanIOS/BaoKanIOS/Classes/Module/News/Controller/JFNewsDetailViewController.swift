@@ -163,7 +163,7 @@ class JFNewsDetailViewController: UIViewController {
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-                    
+                    print(successResult)
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
                         "title" : content["title"]!.stringValue,          // 文章标题
@@ -174,7 +174,9 @@ class JFNewsDetailViewController: UIViewController {
                         "id" : content["id"]!.stringValue,                // 文章id
                         "classid" : content["classid"]!.stringValue,      // 当前子分类id
                         "plnum" : content["plnum"]!.stringValue,          // 评论数
-                        "havefava" : content["havefava"]!.stringValue     // 是否收藏  favor1
+                        "havefava" : content["havefava"]!.stringValue,    // 是否收藏  favor1
+                        "smalltext" : content["smalltext"]!.stringValue,  // 文章简介
+                        "titlepic" : content["titlepic"]!.stringValue     // 标题图片
                     ]
                     
                     self.model = JFArticleDetailModel(dict: dict)
@@ -304,6 +306,41 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      */
     func didTappedShareButton(button: UIButton) {
         
+        // 从缓存中获取标题图片
+        guard let currentModel = model else {return}
+        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
+        
+        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+                                                images : image,
+                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                title : model?.title,
+                                                type : SSDKContentType.Auto)
+        
+        let items = [
+            SSDKPlatformType.TypeQQ.rawValue,
+            SSDKPlatformType.TypeWechat.rawValue,
+            SSDKPlatformType.TypeSinaWeibo.rawValue
+        ]
+        
+        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+            switch state {
+                
+            case SSDKResponseState.Success:
+                print("分享成功")
+            case SSDKResponseState.Fail:
+                print("分享失败,错误描述:\(error)")
+            case SSDKResponseState.Cancel:
+                print("取消分享")
+            default:
+                break
+            }
+        }
+        
     }
     
     /**
@@ -348,30 +385,30 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         // css样式
         let css = "<style type=\"text/css\">" +
             ".title {" +
-                "text-align: left;" +
-                "font-size: 20px;" +
-                "color: #3c3c3c;" +
-                "font-weight: bold;" +
-                "margin-left: 10px;" +
+            "text-align: left;" +
+            "font-size: 20px;" +
+            "color: #3c3c3c;" +
+            "font-weight: bold;" +
+            "margin-left: 10px;" +
             "}" +
             ".time {" +
-                "text-align: left;" +
-                "font-size: 15px;" +
-                "color: gray;" +
-                "margin-top: 7px;" +
-                "margin-bottom: 7px;" +
-                "margin-left: 10px;" +
+            "text-align: left;" +
+            "font-size: 15px;" +
+            "color: gray;" +
+            "margin-top: 7px;" +
+            "margin-bottom: 7px;" +
+            "margin-left: 10px;" +
             "}" +
             ".img-responsive {" +
-                "text-align: center;" +
-                "margin-bottom: 10px;" +
-                "width: 98%;" +
+            "text-align: center;" +
+            "margin-bottom: 10px;" +
+            "width: 98%;" +
             "}" +
             ".container {" +
-                "background: #FFFFFF;" +
+            "background: #FFFFFF;" +
             "}" +
             ".content {" +
-                "width: 100%;" +
+            "width: 100%;" +
             "}" +
         "</style>"
         

@@ -93,7 +93,7 @@ class JFRegisterViewController: UIViewController {
                     // 注册成功后回调成功
                     self.delegate?.registerSuccess(self.usernameField.text!, password: self.passwordField1.text!)
                 } else if result != nil {
-                    JFProgressHUD.showInfoWithStatus(result!["data"]["info"].string!)
+                    JFProgressHUD.showInfoWithStatus(result!["info"].stringValue)
                 }
                 // 结束动画
                 sender.endLoginAnimation()

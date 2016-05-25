@@ -37,6 +37,12 @@ class JFArticleDetailModel: NSObject {
     /// 是否收藏
     var havefava: String?
     
+    /// 文章简介
+    var smalltext: String?
+    
+    /// 标题图片
+    var titlepic: String?
+    
     /**
      字典转模型构造方法
      */

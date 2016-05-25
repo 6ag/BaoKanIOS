@@ -10,8 +10,7 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelegate
-{
+class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
     /// 分类数据 （父id, 本身id）
     var classData: (bclassid: Int, classid: Int)? {
@@ -31,8 +30,7 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.registerClass(JFVideoCell.self, forCellReuseIdentifier: newsReuseIdentifier)
@@ -47,8 +45,7 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
     /**
      准备头部轮播
      */
-    private func prepareScrollView()
-    {
+    private func prepareScrollView() {
         let scrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150), delegate: self, placeholderImage: UIImage(named: "photoview_image_default_white"))
         scrollView.currentPageDotColor = UIColor.redColor()
         scrollView.pageDotColor = UIColor.blackColor()
@@ -59,25 +56,23 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
         tableView.tableHeaderView = scrollView
     }
     
-    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int)
-    {
+    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
         print("点击了第\(index)张图")
     }
     
     /**
      下拉加载最新数据
      */
-    @objc private func updateNewData()
-    {
+    @objc private func updateNewData() {
         loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: 1, method: 0)
     }
     
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData()
-    {
-        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: ++pageIndex, method: 1)
+    @objc private func loadMoreData() {
+        pageIndex += 1
+        loadNews(classData!.bclassid, classid: classData!.classid, pageIndex: pageIndex, method: 1)
     }
     
     /**
@@ -88,8 +83,7 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(bclassid: Int, classid: Int, pageIndex: Int, method: Int)
-    {
+    private func loadNews(bclassid: Int, classid: Int, pageIndex: Int, method: Int) {
         let parameters = [
             "table" : "news",
             "classid" : bclassid,
@@ -165,25 +159,21 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
-    {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFVideoCell
         cell.postModel = articleList[indexPath.row]
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // 请求文章详情数据
@@ -192,8 +182,5 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
 //        detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
 //        self.navigationController?.pushViewController(detailVc, animated: true)
     }
-    
-    
-    
     
 }

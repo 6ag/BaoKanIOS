@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -55,7 +56,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVF-gx-bLC" userLabel="username">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bbsbaokan" placeholder="用户名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jLO-h7-d4o" userLabel="username">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jLO-h7-d4o" userLabel="username">
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -105,7 +106,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WQ-Hc-7ZT" userLabel="password">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bbsbaokan" placeholder="密码" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ijr-E0-xRx" userLabel="password">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ijr-E0-xRx" userLabel="password">
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -318,31 +319,31 @@
                     <exclude reference="Jvn-TP-HMe"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="0c7-83-Vcd"/>
-                    <exclude reference="V75-Bh-Czq"/>
-                    <exclude reference="epu-Sp-SEA"/>
-                    <exclude reference="ttJ-XA-qBk"/>
-                    <exclude reference="qVF-Qk-6Zh"/>
-                    <exclude reference="xvf-ph-LbH"/>
-                    <exclude reference="wEs-79-puz"/>
-                    <exclude reference="ydx-3D-4ui"/>
-                    <exclude reference="GEa-OW-K5a"/>
-                    <exclude reference="aNt-wt-wNL"/>
-                    <exclude reference="cDe-VY-1op"/>
+                    <exclude reference="5jt-2Q-KDI"/>
+                    <exclude reference="Ijg-ed-V3y"/>
+                    <exclude reference="5mX-Z0-3UO"/>
+                    <exclude reference="9Bz-NR-WDa"/>
+                    <exclude reference="QeQ-b0-08J"/>
+                    <exclude reference="17G-NU-hQV"/>
+                    <exclude reference="dc7-kR-DWa"/>
                     <exclude reference="3O8-gV-3E5"/>
                     <exclude reference="7sE-L2-Tr7"/>
                     <exclude reference="PlU-BK-vYj"/>
-                    <exclude reference="QeQ-b0-08J"/>
+                    <exclude reference="qVF-Qk-6Zh"/>
+                    <exclude reference="xvf-ph-LbH"/>
+                    <exclude reference="GEa-OW-K5a"/>
+                    <exclude reference="aNt-wt-wNL"/>
+                    <exclude reference="cDe-VY-1op"/>
+                    <exclude reference="wEs-79-puz"/>
+                    <exclude reference="ydx-3D-4ui"/>
                     <exclude reference="6YC-Ah-JDV"/>
                     <exclude reference="DU8-yR-TDC"/>
                     <exclude reference="YbR-vP-V8F"/>
                     <exclude reference="dX8-f9-WRo"/>
-                    <exclude reference="5mX-Z0-3UO"/>
-                    <exclude reference="9Bz-NR-WDa"/>
-                    <exclude reference="5jt-2Q-KDI"/>
-                    <exclude reference="Ijg-ed-V3y"/>
-                    <exclude reference="17G-NU-hQV"/>
-                    <exclude reference="dc7-kR-DWa"/>
+                    <exclude reference="0c7-83-Vcd"/>
+                    <exclude reference="V75-Bh-Czq"/>
+                    <exclude reference="epu-Sp-SEA"/>
+                    <exclude reference="ttJ-XA-qBk"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -359,31 +360,31 @@
                     <include reference="Jvn-TP-HMe"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0c7-83-Vcd"/>
-                    <include reference="V75-Bh-Czq"/>
-                    <include reference="epu-Sp-SEA"/>
-                    <include reference="ttJ-XA-qBk"/>
-                    <include reference="qVF-Qk-6Zh"/>
-                    <include reference="xvf-ph-LbH"/>
-                    <include reference="wEs-79-puz"/>
-                    <include reference="ydx-3D-4ui"/>
-                    <include reference="GEa-OW-K5a"/>
-                    <include reference="aNt-wt-wNL"/>
-                    <include reference="cDe-VY-1op"/>
+                    <include reference="5jt-2Q-KDI"/>
+                    <include reference="Ijg-ed-V3y"/>
+                    <include reference="5mX-Z0-3UO"/>
+                    <include reference="9Bz-NR-WDa"/>
+                    <include reference="QeQ-b0-08J"/>
+                    <include reference="17G-NU-hQV"/>
+                    <include reference="dc7-kR-DWa"/>
                     <include reference="3O8-gV-3E5"/>
                     <include reference="7sE-L2-Tr7"/>
                     <include reference="PlU-BK-vYj"/>
-                    <include reference="QeQ-b0-08J"/>
+                    <include reference="qVF-Qk-6Zh"/>
+                    <include reference="xvf-ph-LbH"/>
+                    <include reference="GEa-OW-K5a"/>
+                    <include reference="aNt-wt-wNL"/>
+                    <include reference="cDe-VY-1op"/>
+                    <include reference="wEs-79-puz"/>
+                    <include reference="ydx-3D-4ui"/>
                     <include reference="6YC-Ah-JDV"/>
                     <include reference="DU8-yR-TDC"/>
                     <include reference="YbR-vP-V8F"/>
                     <include reference="dX8-f9-WRo"/>
-                    <include reference="5mX-Z0-3UO"/>
-                    <include reference="9Bz-NR-WDa"/>
-                    <include reference="5jt-2Q-KDI"/>
-                    <include reference="Ijg-ed-V3y"/>
-                    <include reference="17G-NU-hQV"/>
-                    <include reference="dc7-kR-DWa"/>
+                    <include reference="0c7-83-Vcd"/>
+                    <include reference="V75-Bh-Czq"/>
+                    <include reference="epu-Sp-SEA"/>
+                    <include reference="ttJ-XA-qBk"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="496" y="461"/>

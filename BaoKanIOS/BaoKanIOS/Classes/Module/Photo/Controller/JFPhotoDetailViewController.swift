@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYWebImage
 
 class JFPhotoDetailViewController: UIViewController {
     
@@ -132,8 +133,7 @@ class JFPhotoDetailViewController: UIViewController {
      */
     @objc private func prepareUI() {
         
-        self.edgesForExtendedLayout = .None
-        self.automaticallyAdjustsScrollViewInsets = false
+        automaticallyAdjustsScrollViewInsets = false
         
         view.addSubview(collectionView)
         view.addSubview(navigationBarView)
@@ -273,10 +273,16 @@ extension JFPhotoDetailViewController: UICollectionViewDelegate, UICollectionVie
 // MARK: - JFCommentCommitViewDelegate, JFPhotoBottomBarDelegate
 extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBottomBarDelegate {
     
+    /**
+     返回
+     */
     func didTappedBackButton(button: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    /**
+     发布评论
+     */
     func didTappedEditButton(button: UIButton) {
         if JFAccountModel.shareAccount().isLogin {
             let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
@@ -287,12 +293,18 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
         }
     }
     
+    /**
+     评论列表
+     */
     func didTappedCommentButton(button: UIButton) {
         let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
         commentVc.param = photoParam
         navigationController?.pushViewController(commentVc, animated: true)
     }
     
+    /**
+     收藏
+     */
     func didTappedCollectButton(button: UIButton) {
         
         if JFAccountModel.shareAccount().isLogin {
@@ -327,8 +339,47 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
         }
     }
     
+    /**
+     分享
+     */
     func didTappedShareButton(button: UIButton) {
         
+        guard let page = currentPageData?.page else {return}
+        
+        // 从缓存中获取标题图片
+        let currentModel = photoModels[page - 1]
+        var image = YYImageCache.sharedCache().getImageForKey(currentModel.picurl!)
+        
+        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText(currentModel.text,
+                                                images : image,
+                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                title : currentModel.title,
+                                                type : SSDKContentType.Auto)
+        
+        let items = [
+            SSDKPlatformType.TypeQQ.rawValue,
+            SSDKPlatformType.TypeWechat.rawValue,
+            SSDKPlatformType.TypeSinaWeibo.rawValue
+        ]
+        
+        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+            switch state {
+                
+            case SSDKResponseState.Success:
+                print("分享成功")
+            case SSDKResponseState.Fail:
+                print("分享失败,错误描述:\(error)")
+            case SSDKResponseState.Cancel:
+                print("取消分享")
+            default:
+                break
+            }
+        }
     }
     
     /**
