@@ -66,6 +66,7 @@ class JFPhotoDetailViewController: UIViewController {
      */
     @objc private func loadPhotoDetail(classid: String, id: String) {
         
+        photoModels.removeAll()
         var parameters = [String : AnyObject]()
         
         if JFAccountModel.shareAccount().isLogin {
@@ -399,7 +400,7 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
         
         JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
             if success {
-                JFProgressHUD.showInfoWithStatus("评论成功")
+                self.loadPhotoDetail(self.photoParam!.classid, id: self.photoParam!.id)
             }
         }
     }

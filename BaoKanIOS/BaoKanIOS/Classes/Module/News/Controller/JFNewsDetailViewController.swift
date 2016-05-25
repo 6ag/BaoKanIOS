@@ -360,7 +360,8 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         
         JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
             if success {
-                JFProgressHUD.showInfoWithStatus("评论成功")
+                // 加载数据
+                self.updateData()
             }
         }
     }

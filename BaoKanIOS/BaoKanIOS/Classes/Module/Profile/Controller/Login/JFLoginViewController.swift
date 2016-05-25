@@ -17,6 +17,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: JFLoginButton!
+    var avatarString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +67,15 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (success, result, error) in
                 if success {
-                    print(result)
                     if let successResult = result {
                         JFAccountModel.shareAccount().setValuesForKeysWithDictionary(successResult["data"]["user"].dictionaryObject!)
                         JFAccountModel.shareAccount().login()
+                        
+                        // 如果有值说明是通过第三方登录的
+                        if let avatar = self.avatarString {
+                            JFAccountModel.shareAccount().avatarUrl = avatar
+                        }
+                        
                         self.didTappedBackButton()
                     }
                 } else if result != nil {
@@ -110,7 +116,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     }
     
     @IBAction func didTappedQQLoginButton(sender: UIButton) {
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeQQ) { (state, user, error) in
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeQQ, conditional: nil) { (state, user, error) in
             if state == SSDKResponseState.Success {
                 self.SDKLoginHandle(user.nickname, avatar: user.rawData["figureurl_qq_2"] != nil ? user.rawData["figureurl_qq_2"]! as! String : user.icon, uid: user.uid)
             } else {
@@ -120,7 +126,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     }
     
     @IBAction func didTappedSinaLoginButton(sender: UIButton) {
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeSinaWeibo) { (state, user, error) in
+        ShareSDK.getUserInfo(SSDKPlatformType.TypeSinaWeibo, conditional: nil) { (state, user, error) in
             if state == SSDKResponseState.Success {
                 self.SDKLoginHandle(user.nickname, avatar: user.rawData["avatar_hd"] != nil ? user.rawData["avatar_hd"]! as! String : user.icon, uid: user.uid)
             } else {
@@ -138,24 +144,26 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
      */
     func SDKLoginHandle(nickname: String, avatar: String, uid: String) -> Void {
         
+        avatarString = avatar
         let string = uid.characters.count >= 12 ? (uid as NSString).substringToIndex(12) : uid
+        let lowerString = string.lowercaseString
         
         let parameters = [
-            "username" : string,
+            "username" : lowerString,
             "password" : string,
-            "email" : "\(string)@baokan.name"
+            "email" : "\(lowerString)@baokan.name"
         ]
         
         JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
             print(result)
             if success {
-                self.usernameField.text = string
+                self.usernameField.text = lowerString
                 self.passwordField.text = string
                 self.didChangeTextField(self.passwordField)
                 self.didTappedLoginButton(self.loginButton)
             } else if result != nil {
                 if result!["info"].stringValue == "此用户名已被注册" {
-                    self.usernameField.text = string
+                    self.usernameField.text = lowerString
                     self.passwordField.text = string
                     self.didChangeTextField(self.passwordField)
                     self.didTappedLoginButton(self.loginButton)
