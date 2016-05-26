@@ -412,6 +412,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             "}" +
             ".content {" +
             "width: 100%;" +
+            "font-size: \(NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE))px;" +
             "}" +
         "</style>"
         
