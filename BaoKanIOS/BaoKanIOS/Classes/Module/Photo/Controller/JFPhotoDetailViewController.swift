@@ -26,7 +26,7 @@ class JFPhotoDetailViewController: UIViewController {
     private var currentPageData: (page: Int, text: String)? {
         didSet {
             topTitleLabel.text = "\(currentPageData!.page) / \(photoModels.count)"
-            captionLabel.text = "    \(currentPageData!.text)"
+            captionLabel.text = "\(currentPageData!.text)"
             updateBottomBgViewConstraint()
         }
     }
@@ -42,9 +42,12 @@ class JFPhotoDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     /**

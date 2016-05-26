@@ -29,6 +29,7 @@
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
 		B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */; };
 		B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */; };
+		B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20578A51CF68B6B004CE501 /* JFProfileFeedbackViewController.swift */; };
 		B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58BF1CF2D6EC000DA6EB /* JFFeatureViewController.swift */; };
 		B20D58C31CF2DE10000DA6EB /* JFEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */; };
 		B20D58C61CF2DEE5000DA6EB /* JFCommentListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D58C51CF2DEE5000DA6EB /* JFCommentListTableViewController.swift */; };
@@ -64,7 +65,6 @@
 		B29D53EC1CF45CB600CD3F0D /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53DF1CF45CB600CD3F0D /* ShareSDKConnector.framework */; };
 		B29D53EE1CF45DCB00CD3F0D /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53ED1CF45DCB00CD3F0D /* JavaScriptCore.framework */; };
 		B29D53F01CF45DD500CD3F0D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53EF1CF45DD500CD3F0D /* libicucore.tbd */; };
-		B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */; };
 		B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */; };
 		B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22721CE584DF009E0877 /* JFProgressView.swift */; };
 		B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BD22771CE5DD5C009E0877 /* JFCollectionTableViewController.swift */; };
@@ -170,6 +170,7 @@
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoBottomBar.swift; sourceTree = "<group>"; };
 		B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFPhotoBottomBar.xib; sourceTree = "<group>"; };
+		B20578A51CF68B6B004CE501 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
 		B20D58BF1CF2D6EC000DA6EB /* JFFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFFeatureViewController.swift; sourceTree = "<group>"; };
 		B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditProfileViewController.swift; sourceTree = "<group>"; };
 		B20D58C51CF2DEE5000DA6EB /* JFCommentListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentListTableViewController.swift; sourceTree = "<group>"; };
@@ -220,7 +221,6 @@
 		B29D53DF1CF45CB600CD3F0D /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
 		B29D53ED1CF45DCB00CD3F0D /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		B29D53EF1CF45DD500CD3F0D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
 		B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDutyViewController.swift; sourceTree = "<group>"; };
 		B2BD22721CE584DF009E0877 /* JFProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressView.swift; sourceTree = "<group>"; };
 		B2BD22771CE5DD5C009E0877 /* JFCollectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCollectionTableViewController.swift; sourceTree = "<group>"; };
@@ -515,8 +515,8 @@
 				A5B279AA1C36392F003C773D /* JFProfileViewController.storyboard */,
 				A5B279AB1C36392F003C773D /* JFProfileViewController.swift */,
 				B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */,
-				B2BD226E1CE5823A009E0877 /* JFProfileFeedbackViewController.swift */,
 				B2BD22701CE5829A009E0877 /* JFDutyViewController.swift */,
+				B20578A51CF68B6B004CE501 /* JFProfileFeedbackViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1081,13 +1081,13 @@
 				B238BBBE1CEEE3A10050FC3F /* JFLoginButton.swift in Sources */,
 				B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */,
 				B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */,
-				B2BD226F1CE5823A009E0877 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
 				B2E3DFCD1CB228900081745A /* JFVideoTableViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
 				B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */,
 				B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */,
 				B2E3DF971CB222560081745A /* JFTopLabel.swift in Sources */,
+				B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
 				B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */,
 				B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */,

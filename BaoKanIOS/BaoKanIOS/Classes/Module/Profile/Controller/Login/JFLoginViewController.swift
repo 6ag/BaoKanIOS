@@ -120,7 +120,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             if state == SSDKResponseState.Success {
                 self.SDKLoginHandle(user.nickname, avatar: user.rawData["figureurl_qq_2"] != nil ? user.rawData["figureurl_qq_2"]! as! String : user.icon, uid: user.uid)
             } else {
-                print(state, error)
+                self.didTappedBackButton()
             }
         }
     }
@@ -130,7 +130,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             if state == SSDKResponseState.Success {
                 self.SDKLoginHandle(user.nickname, avatar: user.rawData["avatar_hd"] != nil ? user.rawData["avatar_hd"]! as! String : user.icon, uid: user.uid)
             } else {
-                print(state, error)
+                self.didTappedBackButton()
             }
         }
     }
