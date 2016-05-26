@@ -13,11 +13,24 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
+        let navBar = navigationBar
+        navBar.barTintColor = NAVIGATIONBAR_WHITE_COLOR
+        navBar.translucent = false
+        navBar.barStyle = UIBarStyle.Black
+        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navBar.shadowImage = UIImage()
+        navBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(red:0.173,  green:0.173,  blue:0.173, alpha:1),
+            NSFontAttributeName : UIFont.systemFontOfSize(18)
+        ]
         
+        // 全屏返回手势
         panGestureBack()
     }
     
+    /**
+     全屏返回手势
+     */
     func panGestureBack() -> Void {
         let target = interactivePopGestureRecognizer?.delegate
         let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
@@ -26,25 +39,13 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         interactivePopGestureRecognizer?.enabled = false
     }
     
+    // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
         if childViewControllers.count == 1 {
             return false
         } else {
             return true
         }
-    }
-    
-    private func changeBarTintColor(color: UIColor) {
-        let navBar = navigationBar
-        navBar.barTintColor = color
-        navBar.translucent = false
-        navBar.barStyle = UIBarStyle.Black
-        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        navBar.shadowImage = UIImage()
-        navBar.titleTextAttributes = [
-            "NSForegroundColorAttributeName" : UIColor.blackColor(),
-            "NSFontAttributeName" : UIFont.systemFontOfSize(22)
-        ]
     }
     
     /**
@@ -56,7 +57,6 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     override func pushViewController(viewController: UIViewController, animated: Bool) {
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
-            changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
         } else {
             viewController.hidesBottomBarWhenPushed = false
         }
@@ -70,12 +70,6 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
             target: self,
             action: #selector(back)
         )
-    }
-    
-    override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
-        
-        changeBarTintColor(NAVIGATIONBAR_WHITE_COLOR)
-        return super.popViewControllerAnimated(animated)
     }
     
     /**

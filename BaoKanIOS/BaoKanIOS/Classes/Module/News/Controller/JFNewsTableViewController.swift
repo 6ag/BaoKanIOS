@@ -25,7 +25,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     var pageIndex = 1
     
     /// 模型数组
-    var articleList: [JFArticleListModel] = []
+    var articleList = [JFArticleListModel]()
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
@@ -105,7 +105,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             
             if success == true {
                 if let successResult = result {
-                    
+//                    print(successResult)
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     let minId = self.articleList.last?.id ?? "0"
@@ -192,7 +192,6 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if articleList.count >= 3 {
-            // 请求文章详情数据
             let currentListModel = articleList[indexPath.row + 3]
             let detailVc = JFNewsDetailViewController()
             detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)

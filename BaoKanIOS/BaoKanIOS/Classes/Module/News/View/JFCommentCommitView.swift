@@ -34,12 +34,17 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
         dismiss()
     }
     
+    @objc private func didTappedBgView(tap: UITapGestureRecognizer) {
+        dismiss()
+    }
+    
     /**
      弹出评论视图
      */
     func show() -> Void {
         
-        bgView.backgroundColor = UIColor(white: 0, alpha: GLOBAL_SHADOW_ALPHA)
+        bgView.backgroundColor = UIColor(white: 0, alpha: 0)
+        bgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedBgView(_:))))
         UIApplication.sharedApplication().keyWindow?.addSubview(bgView)
         
         frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
@@ -49,6 +54,7 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
         
         UIView.animateWithDuration(0.25, animations: {
             self.transform = CGAffineTransformMakeTranslation(0, -480)
+            self.bgView.backgroundColor = UIColor(white: 0, alpha: GLOBAL_SHADOW_ALPHA)
         }) { (_) in
             self.textView.delegate = self
         }
@@ -63,6 +69,7 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
         
         UIView.animateWithDuration(0.25, animations: {
             self.transform = CGAffineTransformIdentity
+            self.bgView.backgroundColor = UIColor(white: 0, alpha: 0)
             }) { (_) in
                 self.bgView.removeFromSuperview()
                 self.removeFromSuperview()

@@ -22,10 +22,10 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     }
     
     // 页码
-    var pageIndex = 1;
+    var pageIndex = 1
     
     /// 模型数组
-    var photoList: [JFArticleListModel] = []
+    var photoList = [JFArticleListModel]()
     
     /// 新闻cell重用标识符
     let newsReuseIdentifier = "newsReuseIdentifier"
@@ -156,7 +156,6 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 请求文章详情数据
         let currentListModel = photoList[indexPath.row]
         let detailVc = JFPhotoDetailViewController()
         detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)

@@ -17,12 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupGlobalStyle()        // 配置全局样式
+        setupGlobalData()         // 配置全局数据
         setupRootViewController() // 配置控制器
         setupKeyBoardManager()    // 配置键盘管理
         setupShareSDK()           // 配置shareSDK
         setupJPush(launchOptions) // 配置JPUSH
         
         return true
+    }
+    
+    /**
+     配置全局数据
+     */
+    private func setupGlobalData() {
+        // 设置初始正文字体大小
+        if NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE) == 0 {
+            // 字体 14小   16中   18大   20  22   24  共6个等级，可以用枚举列举使用
+            NSUserDefaults.standardUserDefaults().setInteger(16, forKey: CONTENT_FONT_SIZE)
+        }
     }
     
     /**

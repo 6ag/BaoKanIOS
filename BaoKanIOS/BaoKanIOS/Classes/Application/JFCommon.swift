@@ -17,6 +17,15 @@ let NAVIGATIONBAR_RED_COLOR = UIColor(red:0.831,  green:0.239,  blue:0.243, alph
 /// 导航栏背景颜色 - (白色)
 let NAVIGATIONBAR_WHITE_COLOR = UIColor.colorWithRGB(244, g: 244, b: 244)
 
+/// 控制器背景颜色
+let BACKGROUND_COLOR = UIColor(red:0.933,  green:0.933,  blue:0.933, alpha:1)
+
+/// 全局边距
+let MARGIN: CGFloat = 12
+
+/// 全局圆角
+let CORNER_RADIUS: CGFloat = 5
+
 /// 屏幕宽度
 let SCREEN_WIDTH = UIScreen.mainScreen().bounds.width
 
@@ -54,4 +63,7 @@ let JPUSH_IS_PRODUCTION = true
 
 /// 检查是否登录的key 用户保存登录状态到偏好设置
 let IS_LOGIN = "isLogin"
+
+/// 保存正文字体大小的key
+let CONTENT_FONT_SIZE = "contentFontSize"
         

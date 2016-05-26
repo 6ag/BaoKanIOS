@@ -20,11 +20,11 @@ class JFProfileViewController: JFBaseTableViewController {
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 275))
         tableView.tableHeaderView = tableHeaderView
         
-        let group1CellModel1 = JFProfileCellArrowModel(title: "离线阅读", icon: "setting_star_icon")
-        group1CellModel1.operation = { () -> Void in
-            print("离线阅读")
-        }
-        let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
+//        let group1CellModel1 = JFProfileCellArrowModel(title: "离线阅读", icon: "setting_star_icon")
+//        group1CellModel1.operation = { () -> Void in
+//            print("离线阅读")
+//        }
+//        let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
         
         let group2CellModel1 = JFProfileCellLabelModel(title: "清除缓存", icon: "setting_clear_icon", text: "\(String(format: "%.2f", CGFloat(YYImageCache.sharedCache().diskCache.totalCost()) / 1024 / 1024))M")
         group2CellModel1.operation = { () -> Void in
@@ -37,8 +37,13 @@ class JFProfileViewController: JFBaseTableViewController {
                 })
             })
         }
-        let group2CellModel2 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
-        let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2])
+        let group2CellModel2 = JFProfileCellArrowModel(title: "正文字体", icon: "setting_star_icon")
+        group2CellModel2.operation = { () -> Void in
+            let setFontSizeView = NSBundle.mainBundle().loadNibNamed("JFSetFontView", owner: nil, options: nil).last as! JFSetFontView
+            setFontSizeView.show()
+        }
+        let group2CellModel3 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
+        let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2, group2CellModel3])
         
         let group3CellModel1 = JFProfileCellArrowModel(title: "意见反馈", icon: "setting_feedback_icon", destinationVc: JFProfileFeedbackViewController.self)
         let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.self)
@@ -49,7 +54,7 @@ class JFProfileViewController: JFBaseTableViewController {
         let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String))
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         
-        groupModels = [group1, group2, group3]
+        groupModels = [group2, group3]
     }
     
     override func viewWillAppear(animated: Bool) {

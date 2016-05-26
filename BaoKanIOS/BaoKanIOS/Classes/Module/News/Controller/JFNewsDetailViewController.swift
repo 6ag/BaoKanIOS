@@ -354,7 +354,9 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
             "classid" : articleParam!.classid,
             "id" : articleParam!.id,
             "userid" : JFAccountModel.shareAccount().id,
+            "nomember" : "0",
             "username" : JFAccountModel.shareAccount().username!,
+            "token" : JFAccountModel.shareAccount().token!,
             "saytext" : message
         ]
         

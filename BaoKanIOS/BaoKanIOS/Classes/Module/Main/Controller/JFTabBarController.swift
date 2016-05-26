@@ -26,7 +26,7 @@ class JFTabBarController: UITabBarController {
     private func addAllChildViewController() {
         // 新闻
         let newsVc = UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!
-        addChildViewController(newsVc, title: "新闻", imageName: "tabbar_icon_news")
+        addChildViewController(newsVc, title: "资讯", imageName: "tabbar_icon_news")
         
         // 图秀
         let recVc = UIStoryboard.init(name: "JFPhotoViewController", bundle: nil).instantiateInitialViewController()!
