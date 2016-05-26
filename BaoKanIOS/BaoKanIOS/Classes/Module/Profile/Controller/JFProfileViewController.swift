@@ -19,12 +19,28 @@ class JFProfileViewController: JFBaseTableViewController {
         // 这个是用来占位的
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 275))
         tableView.tableHeaderView = tableHeaderView
-        
-//        let group1CellModel1 = JFProfileCellArrowModel(title: "离线阅读", icon: "setting_star_icon")
-//        group1CellModel1.operation = { () -> Void in
-//            print("离线阅读")
-//        }
-//        let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        prepareData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
+    /**
+     准备数据
+     */
+    private func prepareData() {
+        //        let group1CellModel1 = JFProfileCellArrowModel(title: "离线阅读", icon: "setting_star_icon")
+        //        group1CellModel1.operation = { () -> Void in
+        //            print("离线阅读")
+        //        }
+        //        let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
         
         let group2CellModel1 = JFProfileCellLabelModel(title: "清除缓存", icon: "setting_clear_icon", text: "\(String(format: "%.2f", CGFloat(YYImageCache.sharedCache().diskCache.totalCost()) / 1024 / 1024))M")
         group2CellModel1.operation = { () -> Void in
@@ -49,24 +65,52 @@ class JFProfileViewController: JFBaseTableViewController {
         let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.self)
         let group3CellModel3 = JFProfileCellArrowModel(title: "推荐给好友", icon: "setting_share_icon")
         group3CellModel3.operation = { () -> Void in
-            print("推荐给好友")
+            var image = UIImage(named: "launchScreen")
+            if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+                image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+            }
+            
+            let shareParames = NSMutableDictionary()
+            shareParames.SSDKSetupShareParamsByText("爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
+                                                    images : image,
+                                                    url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                    title : "爆侃网文",
+                                                    type : SSDKContentType.Auto)
+            
+            let items = [
+                SSDKPlatformType.TypeQQ.rawValue,
+                SSDKPlatformType.TypeWechat.rawValue,
+                SSDKPlatformType.TypeSinaWeibo.rawValue
+            ]
+            
+            ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+                switch state {
+                    
+                case SSDKResponseState.Success:
+                    print("分享成功")
+                case SSDKResponseState.Fail:
+                    print("分享失败,错误描述:\(error)")
+                case SSDKResponseState.Cancel:
+                    print("取消分享")
+                default:
+                    break
+                }
+            }
         }
         let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String))
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         
         groupModels = [group2, group3]
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        updateHeaderData()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        if JFAccountModel.shareAccount().isLogin {
+            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
+            headerView.nameLabel.text = JFAccountModel.shareAccount().username
+        } else {
+            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
+            headerView.nameLabel.text = "登录账号"
+        }
+        
+        tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -81,13 +125,7 @@ class JFProfileViewController: JFBaseTableViewController {
      更新头部数据
      */
     private func updateHeaderData() {
-        if JFAccountModel.shareAccount().isLogin {
-            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
-            headerView.nameLabel.text = JFAccountModel.shareAccount().username
-        } else {
-            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
-            headerView.nameLabel.text = "登录账号"
-        }
+        
     }
     
     // MARK: - 各种点击事件
