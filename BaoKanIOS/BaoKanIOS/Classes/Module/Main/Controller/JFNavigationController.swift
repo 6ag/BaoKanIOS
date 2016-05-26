@@ -15,6 +15,10 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         
         changeBarTintColor(NAVIGATIONBAR_RED_COLOR)
         
+        panGestureBack()
+    }
+    
+    func panGestureBack() -> Void {
         let target = interactivePopGestureRecognizer?.delegate
         let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
         pan.delegate = self

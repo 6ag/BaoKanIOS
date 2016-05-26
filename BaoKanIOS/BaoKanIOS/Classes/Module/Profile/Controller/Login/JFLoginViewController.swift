@@ -155,7 +155,6 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
         ]
         
         JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
-            print(result)
             if success {
                 self.usernameField.text = lowerString
                 self.passwordField.text = string

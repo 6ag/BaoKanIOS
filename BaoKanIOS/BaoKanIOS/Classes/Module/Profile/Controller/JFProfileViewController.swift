@@ -55,18 +55,13 @@ class JFProfileViewController: JFBaseTableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.setNavigationBarHidden(true, animated: true)
         updateHeaderData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -109,7 +104,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
     func didTappedAvatarButton() {
         if JFAccountModel.shareAccount().isLogin {
             // 更换头像
-            let avaterAlertC = UIAlertController()
+            let avaterAlertC = UIAlertController(title: "修改头像", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             let selectPhoto = UIAlertAction(title: "相册选择", style: .Default, handler: { (action) in
                 
             })
@@ -133,7 +128,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedCollectionButton() {
         if JFAccountModel.shareAccount().isLogin {
-            navigationController?.pushViewController(JFCollectionTableViewController(), animated: true)
+            navigationController?.pushViewController(JFCollectionTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
@@ -144,7 +139,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedCommentButton() {
         if JFAccountModel.shareAccount().isLogin {
-            navigationController?.pushViewController(JFCommentListTableViewController(), animated: true)
+            navigationController?.pushViewController(JFCommentListTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
@@ -155,7 +150,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedInfoButton() {
         if JFAccountModel.shareAccount().isLogin {
-            navigationController?.pushViewController(JFEditProfileViewController(), animated: true)
+            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }
