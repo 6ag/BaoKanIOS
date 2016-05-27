@@ -174,15 +174,15 @@ class JFCommentTableViewController: UITableViewController {
 // MARK: - JFCommentCellDelegate
 extension JFCommentTableViewController: JFCommentCellDelegate {
     func didTappedStarButton(button: UIButton, commentModel: JFCommentModel) {
+        button.selected = true
         
-        button.selected = !button.selected
         let parameters = [
             "classid" : commentModel.classid,
             "id" : commentModel.id,
             "plid" : commentModel.plid,
-            "dopl" : button.selected ? "zcnum" : "fdnum",
+            "dopl" : "1",
             "action" : "DoForPl"
-            ]
+        ]
         
         JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
             print(result)

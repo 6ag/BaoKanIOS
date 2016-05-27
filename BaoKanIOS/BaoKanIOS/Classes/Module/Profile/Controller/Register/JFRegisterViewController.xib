@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -259,10 +260,14 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nq-HZ-t5H">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="RXV-BB-NXh"/>
-                        <constraint firstAttribute="height" constant="30" id="iaz-Os-dNQ"/>
+                        <constraint firstAttribute="width" constant="30" id="RXV-BB-NXh">
+                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="30" id="iaz-Os-dNQ">
+                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                        </constraint>
                     </constraints>
-                    <state key="normal" backgroundImage="cancel"/>
+                    <state key="normal" backgroundImage="top_navigation_back_normal"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="RXV-BB-NXh"/>
@@ -289,7 +294,9 @@
                 <constraint firstItem="3q3-fM-G63" firstAttribute="top" secondItem="if3-Tf-GPB" secondAttribute="bottom" constant="20" id="CDm-DS-3to"/>
                 <constraint firstAttribute="trailing" secondItem="3c9-WF-cFh" secondAttribute="trailing" id="DMg-7a-6hS"/>
                 <constraint firstAttribute="bottom" secondItem="3c9-WF-cFh" secondAttribute="bottom" id="MYS-cP-Yit"/>
-                <constraint firstItem="7nq-HZ-t5H" firstAttribute="top" secondItem="wOf-XE-99I" secondAttribute="top" constant="30" id="Svw-yb-Noo"/>
+                <constraint firstItem="7nq-HZ-t5H" firstAttribute="top" secondItem="wOf-XE-99I" secondAttribute="top" constant="25" id="Svw-yb-Noo">
+                    <variation key="heightClass=regular-widthClass=compact" constant="35"/>
+                </constraint>
                 <constraint firstItem="mni-0R-m28" firstAttribute="top" secondItem="0Ky-ZD-7Vw" secondAttribute="bottom" constant="20" id="YiI-4P-vTE"/>
                 <constraint firstAttribute="bottom" secondItem="mni-0R-m28" secondAttribute="bottom" constant="150" id="abt-5G-dx9"/>
                 <constraint firstAttribute="trailing" secondItem="0Ky-ZD-7Vw" secondAttribute="trailing" constant="30" id="b7D-vB-30s"/>
@@ -299,7 +306,9 @@
                 <constraint firstItem="if3-Tf-GPB" firstAttribute="leading" secondItem="wOf-XE-99I" secondAttribute="leading" constant="30" id="kvw-F3-OqS"/>
                 <constraint firstItem="w3Z-ak-SdY" firstAttribute="leading" secondItem="wOf-XE-99I" secondAttribute="leading" constant="30" id="lUj-zv-TY4"/>
                 <constraint firstAttribute="trailing" secondItem="w3Z-ak-SdY" secondAttribute="trailing" constant="30" id="lpk-MQ-f32"/>
-                <constraint firstItem="7nq-HZ-t5H" firstAttribute="leading" secondItem="wOf-XE-99I" secondAttribute="leading" constant="20" id="pY7-nQ-0uT"/>
+                <constraint firstItem="7nq-HZ-t5H" firstAttribute="leading" secondItem="wOf-XE-99I" secondAttribute="leading" constant="12" id="pY7-nQ-0uT">
+                    <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="3q3-fM-G63" secondAttribute="trailing" constant="30" id="rRA-LX-Jef"/>
                 <constraint firstItem="3c9-WF-cFh" firstAttribute="top" secondItem="wOf-XE-99I" secondAttribute="top" id="v6R-Dg-m4h"/>
                 <constraint firstItem="3c9-WF-cFh" firstAttribute="leading" secondItem="wOf-XE-99I" secondAttribute="leading" id="z0r-3H-kIV"/>
@@ -376,7 +385,7 @@
         </view>
     </objects>
     <resources>
-        <image name="cancel" width="32" height="32"/>
         <image name="login_background" width="320" height="567"/>
+        <image name="top_navigation_back_normal" width="20" height="20"/>
     </resources>
 </document>

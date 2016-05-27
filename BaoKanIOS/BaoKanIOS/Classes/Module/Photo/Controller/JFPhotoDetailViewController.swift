@@ -297,7 +297,7 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
             commentCommitView.delegate = self
             commentCommitView.show()
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: { })
         }
     }
     
@@ -343,7 +343,8 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
                 }
             }
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            })
         }
     }
     

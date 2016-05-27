@@ -110,7 +110,7 @@ class JFProfileFeedbackViewController: JFBaseTableViewController {
     
     /// 内容文本框
     lazy var contentTextView: UITextView = {
-        let contentTextView = UITextView(frame: CGRect(x: MARGIN, y: 20, width: SCREEN_WIDTH - MARGIN * 2, height: 200))
+        let contentTextView = UITextView(frame: CGRect(x: MARGIN, y: 10, width: SCREEN_WIDTH - MARGIN * 2, height: 200))
         contentTextView.layer.cornerRadius = CORNER_RADIUS
         
         return contentTextView

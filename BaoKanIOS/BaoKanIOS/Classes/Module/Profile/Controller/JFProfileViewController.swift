@@ -170,7 +170,8 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
             avaterAlertC.addAction(cancel)
             presentViewController(avaterAlertC, animated: true, completion: nil)
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            })
         }
     }
     
@@ -181,7 +182,8 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
         if JFAccountModel.shareAccount().isLogin {
             navigationController?.pushViewController(JFCollectionTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            })
         }
     }
     
@@ -192,7 +194,8 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
         if JFAccountModel.shareAccount().isLogin {
             navigationController?.pushViewController(JFCommentListTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            })
         }
     }
     
@@ -203,7 +206,8 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
         if JFAccountModel.shareAccount().isLogin {
             navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Grouped), animated: true)
         } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
+            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            })
         }
     }
 }

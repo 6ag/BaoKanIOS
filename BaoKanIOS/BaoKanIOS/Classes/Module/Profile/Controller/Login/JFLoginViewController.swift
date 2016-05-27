@@ -32,6 +32,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -109,11 +110,12 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     @IBAction func didTappedRegisterButton(sender: UIButton) {
         let registerVc = JFRegisterViewController(nibName: "JFRegisterViewController", bundle: nil)
         registerVc.delegate = self
-        presentViewController(registerVc, animated: true) {}
+        navigationController?.pushViewController(registerVc, animated: true)
     }
     
     @IBAction func didTappedForgotButton(sender: UIButton) {
-        print("忘记密码")
+        let forgotVc = JFForgotViewController(nibName: "JFForgotViewController", bundle: nil)
+        navigationController?.pushViewController(forgotVc, animated: true)
     }
     
     @IBAction func didTappedQQLoginButton(sender: UIButton) {

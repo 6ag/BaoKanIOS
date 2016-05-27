@@ -93,6 +93,8 @@
 		B2E3DFCE1CB228900081745A /* JFVideoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DFB71CB228900081745A /* JFVideoViewController.storyboard */; };
 		B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DFB81CB228900081745A /* JFVideoViewController.swift */; };
 		B2E3DFD41CB228900081745A /* JFVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DFBE1CB228900081745A /* JFVideoCell.swift */; };
+		B2E482551CF891050062D0B9 /* JFForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E482531CF891050062D0B9 /* JFForgotViewController.swift */; };
+		B2E482561CF891050062D0B9 /* JFForgotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2E482541CF891050062D0B9 /* JFForgotViewController.xib */; };
 		B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */; };
 		B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */; };
 		B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */; };
@@ -251,6 +253,8 @@
 		B2E3DFB71CB228900081745A /* JFVideoViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFVideoViewController.storyboard; sourceTree = "<group>"; };
 		B2E3DFB81CB228900081745A /* JFVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFVideoViewController.swift; sourceTree = "<group>"; };
 		B2E3DFBE1CB228900081745A /* JFVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFVideoCell.swift; sourceTree = "<group>"; };
+		B2E482531CF891050062D0B9 /* JFForgotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFForgotViewController.swift; sourceTree = "<group>"; };
+		B2E482541CF891050062D0B9 /* JFForgotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFForgotViewController.xib; sourceTree = "<group>"; };
 		B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailModel.swift; sourceTree = "<group>"; };
 		B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleDetailModel.swift; sourceTree = "<group>"; };
 		B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailCell.swift; sourceTree = "<group>"; };
@@ -509,6 +513,7 @@
 		A5B279A91C36392F003C773D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B2E482521CF890CD0062D0B9 /* Forgot */,
 				B20D58C41CF2DE38000DA6EB /* Comment */,
 				B20D58C11CF2DE10000DA6EB /* Info */,
 				B2BD22761CE5DD5C009E0877 /* Collection */,
@@ -843,6 +848,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B2E482521CF890CD0062D0B9 /* Forgot */ = {
+			isa = PBXGroup;
+			children = (
+				B2E482531CF891050062D0B9 /* JFForgotViewController.swift */,
+				B2E482541CF891050062D0B9 /* JFForgotViewController.xib */,
+			);
+			path = Forgot;
+			sourceTree = "<group>";
+		};
 		B2F174601CB761A1007AA386 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1005,6 +1019,7 @@
 				B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */,
 				B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
+				B2E482561CF891050062D0B9 /* JFForgotViewController.xib in Resources */,
 				B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */,
 				B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */,
 				B29D53E21CF45CB600CD3F0D /* ShareSDKUI.bundle in Resources */,
@@ -1088,6 +1103,7 @@
 				A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */,
 				B20D58C61CF2DEE5000DA6EB /* JFCommentListTableViewController.swift in Sources */,
 				B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */,
+				B2E482551CF891050062D0B9 /* JFForgotViewController.swift in Sources */,
 				B2E3DFC91CB228900081745A /* JFPhotoListCell.swift in Sources */,
 				B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */,
 				A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */,

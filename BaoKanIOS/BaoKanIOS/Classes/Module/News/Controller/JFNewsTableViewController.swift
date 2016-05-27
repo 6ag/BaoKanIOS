@@ -92,19 +92,19 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     private func loadNews(classid: Int, pageIndex: Int, method: Int) {
         
-        let parameters = [
-            "table" : "news",
+        let parameters: [String : AnyObject] = [
             "classid" : classid,
             "pageIndex" : pageIndex
         ]
         
-        JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+        JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters) { (success, result, error) -> () in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             
             if success == true {
                 if let successResult = result {
+                    print(successResult)
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     let minId = self.articleList.last?.id ?? "0"
