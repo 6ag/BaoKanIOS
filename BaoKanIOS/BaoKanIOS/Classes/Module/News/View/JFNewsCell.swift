@@ -13,7 +13,6 @@ class JFNewsCell: UITableViewCell {
     
     var postModel: JFArticleListModel? {
         didSet {
-//            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), options: YYWebImageOptions.ShowNetworkActivity)
             iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholder: UIImage(named: "placeholder_logo"))
             titleLabel.text = postModel!.title
             dateLabel.text = postModel!.newstime
@@ -23,8 +22,6 @@ class JFNewsCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // 准备uI
         prepareUI()
     }
     

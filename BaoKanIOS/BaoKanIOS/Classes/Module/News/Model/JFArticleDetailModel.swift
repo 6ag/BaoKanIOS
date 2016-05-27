@@ -46,6 +46,9 @@ class JFArticleDetailModel: NSObject {
     /// 赞数量
     var isgood: Int = 0
     
+    /// 信息来源
+    var befrom: String?
+    
     /// 是否赞过
     var isStar = false
     

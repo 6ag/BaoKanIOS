@@ -181,7 +181,7 @@ class JFNewsDetailViewController: UIViewController {
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-                    //                    print(successResult)
+                    print(successResult)
                     // 相关连接
                     self.otherLinks.removeAll()
                     let otherLinks = successResult["data"]["otherLink"].array
@@ -212,7 +212,8 @@ class JFNewsDetailViewController: UIViewController {
                         "havefava" : content["havefava"]!.stringValue,    // 是否收藏  favor1
                         "smalltext" : content["smalltext"]!.stringValue,  // 文章简介
                         "titlepic" : content["titlepic"]!.stringValue,    // 标题图片
-                        "isgood" : content["isgood"]!.stringValue         // 赞数量
+                        "isgood" : content["isgood"]!.stringValue,        // 赞数量
+                        "befrom" : content["befrom"]!.stringValue
                     ]
                     self.model = JFArticleDetailModel(dict: dict)
                 }
@@ -334,7 +335,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -346,6 +347,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return 1
         case 2:
+            return 1
+        case 3:
             return otherLinks.count
         default:
             return 0
@@ -358,8 +361,10 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 0:
             return webView.height
         case 1:
-            return 60
+            return 160
         case 2:
+            return 160
+        case 3:
             return 44
         default:
             return 0
@@ -367,7 +372,6 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier(detailContentIdentifier)!
@@ -376,9 +380,14 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return starAndShareCell
         case 2:
+            let cell = UITableViewCell()
+            let adImageView = UIImageView(frame: CGRect(x: 12, y: 0, width: SCREEN_WIDTH - 24, height: 160))
+            adImageView.image = UIImage(named: "temp_ad")
+            cell.contentView.addSubview(adImageView)
+            return cell
+        case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier)!
             cell.textLabel?.text = otherLinks[indexPath.row].title
-            // 自定义分割线
             let separatorView = UIView(frame: CGRect(x: 0, y: 43.5, width: SCREEN_WIDTH, height: 0.5))
             separatorView.backgroundColor = UIColor(white: 0.6, alpha: 0.5)
             cell.contentView.addSubview(separatorView)
@@ -389,7 +398,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 2 {
+        if section == 3 {
             let leftRedView = UIView(frame: CGRect(x: 0, y: 0, width: 3, height: 30))
             leftRedView.backgroundColor = NAVIGATIONBAR_RED_COLOR
             
@@ -410,23 +419,37 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section != 2 {
+        switch section {
+        case 0:
             return 1
-        } else {
+        case 1:
+            return 1
+        case 2:
+            return 10
+        case 3:
             return otherLinks.count == 0 ? 1 : 30
+        default:
+            return 1
         }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section != 2 {
+        switch section {
+        case 0:
             return 1
-        } else {
+        case 1:
+            return 1
+        case 2:
+            return 20
+        case 3:
             return 50
+        default:
+            return 1
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             let otherModel = otherLinks[indexPath.row]
             let detailVc = JFNewsDetailViewController()
             detailVc.articleParam = (otherModel.classid!, otherModel.id!)
