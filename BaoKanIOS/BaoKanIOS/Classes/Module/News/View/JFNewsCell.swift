@@ -13,7 +13,8 @@ class JFNewsCell: UITableViewCell {
     
     var postModel: JFArticleListModel? {
         didSet {
-            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), options: YYWebImageOptions.ShowNetworkActivity)
+//            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), options: YYWebImageOptions.ShowNetworkActivity)
+            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholder: UIImage(named: "placeholder_logo"))
             titleLabel.text = postModel!.title
             dateLabel.text = postModel!.newstime
             readCountLabel.text = "阅读量: \(postModel!.onclick!)"

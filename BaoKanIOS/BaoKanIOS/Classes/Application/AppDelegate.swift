@@ -53,8 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     ShareSDKConnector.connectWeChat(WXApi.classForCoder())
                                 case SSDKPlatformType.TypeQQ:
                                     ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
-                                case SSDKPlatformType.TypeSinaWeibo:
-                                    ShareSDKConnector.connectWeibo(WeiboSDK.classForCoder())
                                 default:
                                     break
                                 }},

@@ -46,26 +46,56 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RC5-NI-Pd0" userLabel="star">
+                        <rect key="frame" x="274" y="21" width="28" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="0" image="comment_support">
+                            <color key="titleColor" red="0.74509803919999995" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <state key="selected" image="comment_support_highlighted"/>
+                        <state key="highlighted" title="0" image="comment_support_highlighted"/>
+                        <connections>
+                            <action selector="didTappedStarButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jV9-Co-4hz"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esp-GF-hwC" userLabel="comment">
+                        <rect key="frame" x="327" y="21" width="28" height="19"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="0" image="comment_comment">
+                            <color key="titleColor" red="0.74509803919999995" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="hpD-w9-pLB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="6YA-kn-d0U"/>
                     <constraint firstItem="pdg-yq-IT3" firstAttribute="leading" secondItem="LYE-iE-0cR" secondAttribute="leading" id="AYs-50-bdX"/>
                     <constraint firstItem="pdg-yq-IT3" firstAttribute="top" secondItem="LYE-iE-0cR" secondAttribute="bottom" constant="5" id="CFZ-a5-7nD"/>
+                    <constraint firstAttribute="trailing" secondItem="esp-GF-hwC" secondAttribute="trailing" constant="20" id="NAx-dU-8yi"/>
                     <constraint firstItem="6DQ-y4-mGp" firstAttribute="top" secondItem="pdg-yq-IT3" secondAttribute="bottom" constant="7" id="XX4-k3-cf1"/>
                     <constraint firstItem="6DQ-y4-mGp" firstAttribute="leading" secondItem="pdg-yq-IT3" secondAttribute="leading" id="Xqv-Xa-saY"/>
+                    <constraint firstItem="esp-GF-hwC" firstAttribute="leading" secondItem="RC5-NI-Pd0" secondAttribute="trailing" constant="25" id="YbS-gZ-8YZ"/>
                     <constraint firstItem="hpD-w9-pLB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="nTH-NJ-eVH"/>
                     <constraint firstItem="LYE-iE-0cR" firstAttribute="centerY" secondItem="hpD-w9-pLB" secondAttribute="centerY" id="ncC-Kw-6jK"/>
+                    <constraint firstItem="RC5-NI-Pd0" firstAttribute="top" secondItem="LYE-iE-0cR" secondAttribute="top" id="ujL-ms-hDs"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6DQ-y4-mGp" secondAttribute="trailing" constant="10" id="vpL-ag-3Ds"/>
                     <constraint firstItem="LYE-iE-0cR" firstAttribute="leading" secondItem="hpD-w9-pLB" secondAttribute="trailing" constant="8" id="y1S-aU-nhl"/>
+                    <constraint firstItem="esp-GF-hwC" firstAttribute="top" secondItem="LYE-iE-0cR" secondAttribute="top" id="zlM-6f-TmC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarImageView" destination="hpD-w9-pLB" id="dqx-aj-Qaz"/>
+                <outlet property="commentButton" destination="esp-GF-hwC" id="XgO-gF-sbv"/>
                 <outlet property="contentLabel" destination="6DQ-y4-mGp" id="H2R-i7-SUV"/>
+                <outlet property="starButton" destination="RC5-NI-Pd0" id="eUM-UK-qtn"/>
                 <outlet property="timeLabel" destination="pdg-yq-IT3" id="Ats-fa-Odr"/>
                 <outlet property="usernameLabel" destination="LYE-iE-0cR" id="8aT-mA-73a"/>
             </connections>
             <point key="canvasLocation" x="442" y="389"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="comment_comment" width="19" height="19"/>
+        <image name="comment_support" width="19" height="16"/>
+        <image name="comment_support_highlighted" width="19" height="16"/>
+    </resources>
 </document>

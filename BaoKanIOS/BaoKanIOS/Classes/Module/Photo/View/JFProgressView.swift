@@ -29,6 +29,15 @@ class JFProgressView: UIView {
     /// 进度条颜色
     var progressColor = UIColor(red:0.122,  green:0.729,  blue:0.949, alpha:0.8)
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor(white: 1, alpha: 0.0)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func drawRect(rect: CGRect) {
         
         // 背景

@@ -25,7 +25,7 @@ class JFCommentModel: NSObject {
     var classid: Int = 0
     
     /// 赞数量
-    var zcnum: Int = 0
+    var zcnum: String?
     
     /// 评论信息
     var saytext: String?

@@ -159,12 +159,38 @@ class JFCommentTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("commentCell") as! JFCommentCell
+        cell.delegate = self
         cell.commentModel = commentList[indexPath.row]
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
     
 }
+
+// MARK: - JFCommentCellDelegate
+extension JFCommentTableViewController: JFCommentCellDelegate {
+    func didTappedStarButton(button: UIButton, commentModel: JFCommentModel) {
+        
+        button.selected = !button.selected
+        let parameters = [
+            "classid" : commentModel.classid,
+            "id" : commentModel.id,
+            "plid" : commentModel.plid,
+            "dopl" : button.selected ? "1" : "0",
+            "action" : "DoForPl"
+            ]
+        
+        JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(result)
+            if success {
+                
+            }
+        }
+    }
+}
+
+

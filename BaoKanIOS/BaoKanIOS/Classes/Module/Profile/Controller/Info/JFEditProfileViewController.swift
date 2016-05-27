@@ -66,13 +66,13 @@ class JFEditProfileViewController: JFBaseTableViewController {
     
     /// 尾部退出视图
     private lazy var footerView: UIView = {
-        let logoutButton = UIButton(frame: CGRect(x: 20, y: 0, width: SCREEN_WIDTH - 40, height: 40))
+        let logoutButton = UIButton(frame: CGRect(x: 20, y: 0, width: SCREEN_WIDTH - 40, height: 44))
         logoutButton.addTarget(self, action: #selector(didTappedLogoutButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         logoutButton.setTitle("退出登录", forState: UIControlState.Normal)
         logoutButton.backgroundColor = NAVIGATIONBAR_RED_COLOR
         logoutButton.layer.cornerRadius = CORNER_RADIUS
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44))
         footerView.addSubview(logoutButton)
         return footerView
     }()

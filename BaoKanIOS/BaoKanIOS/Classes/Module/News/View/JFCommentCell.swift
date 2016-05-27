@@ -9,12 +9,19 @@
 import UIKit
 import YYWebImage
 
+protocol JFCommentCellDelegate {
+    func didTappedStarButton(button: UIButton, commentModel: JFCommentModel)
+}
+
 class JFCommentCell: UITableViewCell {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var starButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    var delegate: JFCommentCellDelegate?
     
     var commentModel: JFCommentModel? {
         didSet {
@@ -22,6 +29,7 @@ class JFCommentCell: UITableViewCell {
             usernameLabel.text = commentModel?.plusername!
             timeLabel.text = commentModel?.saytime!
             contentLabel.text = commentModel?.saytext!
+            starButton.setTitle(commentModel?.zcnum!, forState: UIControlState.Normal)
         }
     }
     
@@ -29,6 +37,13 @@ class JFCommentCell: UITableViewCell {
         self.commentModel = commentModel
         layoutIfNeeded()
         return CGRectGetMaxY(contentLabel.frame) + 10
+    }
+    
+    /**
+     点击了赞
+     */
+    @IBAction func didTappedStarButton(sender: UIButton) {
+        delegate?.didTappedStarButton(sender, commentModel: commentModel!)
     }
     
 }
