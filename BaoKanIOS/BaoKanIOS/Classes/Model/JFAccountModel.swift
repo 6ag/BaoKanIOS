@@ -63,6 +63,9 @@ class JFAccountModel: NSObject {
      注销
      */
     func logout() -> Void {
+        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeQQ)
+        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeWechat)
+        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeSinaWeibo)
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: IS_LOGIN)
     }
     
