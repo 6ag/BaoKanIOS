@@ -44,7 +44,10 @@ class JFArticleDetailModel: NSObject {
     var titlepic: String?
     
     /// 赞数量
-    var isgood: String?
+    var isgood: Int = 0
+    
+    /// 是否赞过
+    var isStar = false
     
     /**
      字典转模型构造方法

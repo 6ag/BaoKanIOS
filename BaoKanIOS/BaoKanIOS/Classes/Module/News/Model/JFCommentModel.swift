@@ -16,6 +16,7 @@ class JFCommentModel: NSObject {
     /// 评论id
     var plid: Int = 0
     
+    /// 评论用户名
     var plusername: String?
     
     /// 文章id
@@ -25,7 +26,7 @@ class JFCommentModel: NSObject {
     var classid: Int = 0
     
     /// 赞数量
-    var zcnum: String?
+    var zcnum: Int = 0
     
     /// 评论信息
     var saytext: String?
@@ -35,6 +36,9 @@ class JFCommentModel: NSObject {
     
     /// 用户头像url 需要拼接
     var userpic: String?
+    
+    /// 是否赞过
+    var isStar = false
     
     /// 缓存行高
     var rowHeight: CGFloat = 0

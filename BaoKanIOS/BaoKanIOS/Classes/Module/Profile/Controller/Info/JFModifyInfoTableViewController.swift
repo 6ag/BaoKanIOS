@@ -58,6 +58,7 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
             cell.contentView.addSubview(avatarImageView)
             return cell
         case 1:
+            usernameField.text = JFAccountModel.shareAccount().username!
             cell.contentView.addSubview(usernameField)
             return cell
         case 2:
@@ -82,11 +83,7 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 20
-        } else {
-            return 0.1
-        }
+        return 20
     }
     
     /**
@@ -111,30 +108,36 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
 
     private lazy var usernameField: UITextField = {
         let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        field.enabled = false
+        field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "用户名"
         return field
     }()
     
     private lazy var realField: UITextField = {
         let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "姓名"
         return field
     }()
     
     private lazy var phoneNumberField: UITextField = {
         let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "联系电话"
         return field
     }()
     
     private lazy var qqField: UITextField = {
         let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "QQ号"
         return field
     }()
     
     private lazy var signField: UITextField = {
         let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "个性签名"
         return field
     }()

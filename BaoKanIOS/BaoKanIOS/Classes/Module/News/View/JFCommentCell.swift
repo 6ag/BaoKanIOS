@@ -26,10 +26,10 @@ class JFCommentCell: UITableViewCell {
     var commentModel: JFCommentModel? {
         didSet {
             avatarImageView.yy_setImageWithURL(NSURL(string: commentModel!.userpic!), options: YYWebImageOptions.IgnorePlaceHolder)
-            usernameLabel.text = commentModel?.plusername!
-            timeLabel.text = commentModel?.saytime!
-            contentLabel.text = commentModel?.saytext!
-            starButton.setTitle(commentModel?.zcnum!, forState: UIControlState.Normal)
+            usernameLabel.text = commentModel!.plusername!
+            timeLabel.text = commentModel!.saytime!
+            contentLabel.text = commentModel!.saytext!
+            starButton.setTitle("\(commentModel!.zcnum)", forState: UIControlState.Normal)
         }
     }
     

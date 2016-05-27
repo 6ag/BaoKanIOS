@@ -13,7 +13,7 @@ class JFCommentTableViewController: UITableViewController {
     
     var param: (classid: String, id: String)? {
         didSet {
-            loadCommentList(param!.classid, id: param!.id, pageIndex: pageIndex, method: 0)
+            updateNewData()
         }
     }
     
@@ -180,14 +180,16 @@ extension JFCommentTableViewController: JFCommentCellDelegate {
             "classid" : commentModel.classid,
             "id" : commentModel.id,
             "plid" : commentModel.plid,
-            "dopl" : button.selected ? "1" : "0",
+            "dopl" : button.selected ? "zcnum" : "fdnum",
             "action" : "DoForPl"
             ]
         
         JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
             print(result)
+            JFProgressHUD.showInfoWithStatus(result!["result"]["info"].stringValue)
             if success {
-                
+                commentModel.zcnum += 1
+                self.tableView.reloadData()
             }
         }
     }

@@ -34,11 +34,10 @@ class JFNewsDetailViewController: UIViewController {
             bottomBarView.collectionButton.selected = model?.havefava == "favorfill"
             
             // 更新赞数量
-            starAndShareCell.starButton.setTitle(model?.isgood, forState: UIControlState.Normal)
-            starAndShareCell.starButton.setTitle(model?.isgood, forState: UIControlState.Selected)
+            starAndShareCell.starButton.setTitle("\(model!.isgood)", forState: UIControlState.Normal)
             
             // 更新赞状态
-//            starAndShareCell.starButton.selected = 
+            starAndShareCell.starButton.selected = model!.isStar
         }
     }
     
@@ -604,17 +603,19 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
      */
     func didTappedStarButton(button: UIButton) {
         button.selected = !button.selected
-        let parameters = [
+        
+        let parameters: [String : AnyObject] = [
             "classid" : articleParam!.classid,
             "id" : articleParam!.id,
-            "dopl" : button.selected ? 1 : 0,
+            "dopl" : button.selected ? "zcnum" : "fdnum",
         ]
         
-        JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+        JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters) { (success, result, error) in
             print(result)
+            JFProgressHUD.showInfoWithStatus(result!["result"]["info"].stringValue)
             if success {
-                // 加载数据
-                self.updateData()
+                self.model!.isgood += 1
+                self.tableView.reloadData()
             }
         }
         
