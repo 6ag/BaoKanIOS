@@ -24,6 +24,7 @@ class JFCommentModel: NSObject {
     /// 栏目id
     var classid: Int = 0
     
+    /// 赞数量
     var zcnum: Int = 0
     
     /// 评论信息

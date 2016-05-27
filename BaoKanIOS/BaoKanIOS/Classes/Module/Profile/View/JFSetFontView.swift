@@ -51,8 +51,15 @@ class JFSetFontView: UIView {
         selectHandle()
     }
     
-    @IBAction func didChangedSliderValue(slider: UISlider) {
-        currentButton = viewWithTag(Int(slider.value)) as! UIButton
+    @IBAction func didTappedSlider(sender: UISlider) {
+        
+        var scale = Int(sender.value)
+        if sender.value - Float(Int(sender.value)) >= 0.5 {
+            scale = Int(sender.value) + 1
+        }
+        
+        sender.setValue(Float(scale), animated: true)
+        currentButton = viewWithTag(scale) as! UIButton
         selectHandle()
     }
     

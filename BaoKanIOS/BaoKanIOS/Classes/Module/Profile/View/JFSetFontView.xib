@@ -94,7 +94,7 @@
                     <color key="minimumTrackTintColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <action selector="didChangedSliderValue:" destination="XWq-bm-JPa" eventType="valueChanged" id="Qjs-GC-kCg"/>
+                        <action selector="didTappedSlider:" destination="XWq-bm-JPa" eventType="touchUpInside" id="tHE-he-WBo"/>
                     </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一段正文的预览文字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRJ-RG-LFP">

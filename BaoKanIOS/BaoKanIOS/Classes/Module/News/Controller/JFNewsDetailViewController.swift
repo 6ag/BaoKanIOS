@@ -32,6 +32,13 @@ class JFNewsDetailViewController: UIViewController {
             
             // 更新收藏状态
             bottomBarView.collectionButton.selected = model?.havefava == "favorfill"
+            
+            // 更新赞数量
+            starAndShareCell.starButton.setTitle(model?.isgood, forState: UIControlState.Normal)
+            starAndShareCell.starButton.setTitle(model?.isgood, forState: UIControlState.Selected)
+            
+            // 更新赞状态
+//            starAndShareCell.starButton.selected = 
         }
     }
     
@@ -42,6 +49,12 @@ class JFNewsDetailViewController: UIViewController {
     let detailStarAndShareIdentifier = "detailStarAndShareIdentifier"
     let detailOtherLinkIdentifier = "detailOtherLinkIdentifier"
     
+    /// 赞分享cell
+    private lazy var starAndShareCell: JFStarAndShareCell = {
+        let starAndShareCell = self.tableView.dequeueReusableCellWithIdentifier(self.detailStarAndShareIdentifier) as! JFStarAndShareCell
+        starAndShareCell.delegate = self
+        return starAndShareCell
+    }()
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -175,8 +188,7 @@ class JFNewsDetailViewController: UIViewController {
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-                    print(successResult)
-                    
+//                    print(successResult)
                     // 相关连接
                     self.otherLinks.removeAll()
                     let otherLinks = successResult["data"]["otherLink"].array
@@ -206,7 +218,8 @@ class JFNewsDetailViewController: UIViewController {
                         "plnum" : content["plnum"]!.stringValue,          // 评论数
                         "havefava" : content["havefava"]!.stringValue,    // 是否收藏  favor1
                         "smalltext" : content["smalltext"]!.stringValue,  // 文章简介
-                        "titlepic" : content["titlepic"]!.stringValue     // 标题图片
+                        "titlepic" : content["titlepic"]!.stringValue,    // 标题图片
+                        "isgood" : content["isgood"]!.stringValue         // 赞数量
                     ]
                     self.model = JFArticleDetailModel(dict: dict)
                 }
@@ -252,150 +265,11 @@ class JFNewsDetailViewController: UIViewController {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         return tableView
     }()
-}
-
-// MARK: - JFNewsBottomBarDelegate、JFCommentCommitViewDelegate
-extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitViewDelegate {
-    
-    /**
-     底部返回按钮点击
-     */
-    func didTappedBackButton(button: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
-    /**
-     底部编辑按钮点击
-     */
-    func didTappedEditButton(button: UIButton) {
-        if JFAccountModel.shareAccount().isLogin {
-            let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
-            commentCommitView.delegate = self
-            commentCommitView.show()
-        } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: {
-                
-            })
-        }
-    }
-    
-    /**
-     底部评论按钮点击
-     */
-    func didTappedCommentButton(button: UIButton) {
-        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
-        commentVc.param = articleParam
-        navigationController?.pushViewController(commentVc, animated: true)
-    }
-    
-    /**
-     底部收藏按钮点击
-     */
-    func didTappedCollectButton(button: UIButton) {
-        
-        if JFAccountModel.shareAccount().isLogin {
-            
-            let parameters = [
-                "username" : JFAccountModel.shareAccount().username!,
-                "userid" : JFAccountModel.shareAccount().id,
-                "token" : JFAccountModel.shareAccount().token!,
-                "classid" : articleParam!.classid,
-                "id" : articleParam!.id
-            ]
-            
-            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
-                if success {
-                    if let successResult = result {
-                        if successResult["result"]["status"].intValue == 1 {
-                            // 增加成功
-                            JFProgressHUD.showSuccessWithStatus("收藏成功")
-                            button.selected = true
-                        } else if successResult["result"]["status"].intValue == 3 {
-                            // 删除成功
-                            JFProgressHUD.showSuccessWithStatus("取消收藏")
-                            button.selected = false
-                        }
-                    }
-                } else {
-                    print(error)
-                }
-            }
-        } else {
-            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
-        }
-        
-    }
-    
-    /**
-     底部分享按钮点击
-     */
-    func didTappedShareButton(button: UIButton) {
-        
-        // 从缓存中获取标题图片
-        guard let currentModel = model else {return}
-        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
-        
-        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
-            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
-        }
-        
-        let shareParames = NSMutableDictionary()
-        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
-                                                images : image,
-                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
-                                                title : model?.title,
-                                                type : SSDKContentType.Auto)
-        
-        let items = [
-            SSDKPlatformType.TypeQQ.rawValue,
-            SSDKPlatformType.TypeWechat.rawValue,
-            SSDKPlatformType.TypeSinaWeibo.rawValue
-        ]
-        
-        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-            switch state {
-                
-            case SSDKResponseState.Success:
-                print("分享成功")
-            case SSDKResponseState.Fail:
-                print("分享失败,错误描述:\(error)")
-            case SSDKResponseState.Cancel:
-                print("取消分享")
-            default:
-                break
-            }
-        }
-        
-    }
-    
-    /**
-     点击了提交评论视图的发送按钮
-     
-     - parameter message: 评论信息
-     */
-    func didTappedSendButtonWithMessage(message: String) {
-        
-        let parameters = [
-            "classid" : articleParam!.classid,
-            "id" : articleParam!.id,
-            "userid" : JFAccountModel.shareAccount().id,
-            "nomember" : "0",
-            "username" : JFAccountModel.shareAccount().username!,
-            "token" : JFAccountModel.shareAccount().token!,
-            "saytext" : message
-        ]
-        
-        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
-            if success {
-                // 加载数据
-                self.updateData()
-            }
-        }
-    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -508,8 +382,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             cell.contentView.addSubview(webView)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier(detailStarAndShareIdentifier) as! JFStarAndShareCell
-            return cell
+            return starAndShareCell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier)!
             cell.textLabel?.text = otherLinks[indexPath.row].title
@@ -570,6 +443,145 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
+// MARK: - JFNewsBottomBarDelegate、JFCommentCommitViewDelegate
+extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitViewDelegate {
+    
+    /**
+     底部返回按钮点击
+     */
+    func didTappedBackButton(button: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    /**
+     底部编辑按钮点击
+     */
+    func didTappedEditButton(button: UIButton) {
+        if JFAccountModel.shareAccount().isLogin {
+            let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
+            commentCommitView.delegate = self
+            commentCommitView.show()
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: {
+                
+            })
+        }
+    }
+    
+    /**
+     底部评论按钮点击
+     */
+    func didTappedCommentButton(button: UIButton) {
+        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
+        commentVc.param = articleParam
+        navigationController?.pushViewController(commentVc, animated: true)
+    }
+    
+    /**
+     底部收藏按钮点击
+     */
+    func didTappedCollectButton(button: UIButton) {
+        
+        if JFAccountModel.shareAccount().isLogin {
+            
+            let parameters = [
+                "username" : JFAccountModel.shareAccount().username!,
+                "userid" : JFAccountModel.shareAccount().id,
+                "token" : JFAccountModel.shareAccount().token!,
+                "classid" : articleParam!.classid,
+                "id" : articleParam!.id
+            ]
+            
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+                if success {
+                    if let successResult = result {
+                        if successResult["result"]["status"].intValue == 1 {
+                            // 增加成功
+                            JFProgressHUD.showSuccessWithStatus("收藏成功")
+                            button.selected = true
+                        } else if successResult["result"]["status"].intValue == 3 {
+                            // 删除成功
+                            JFProgressHUD.showSuccessWithStatus("取消收藏")
+                            button.selected = false
+                        }
+                    }
+                } else {
+                    print(error)
+                }
+            }
+        } else {
+            presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true, completion: { })
+        }
+        
+    }
+    
+    /**
+     底部分享按钮点击
+     */
+    func didTappedShareButton(button: UIButton) {
+        
+        // 从缓存中获取标题图片
+        guard let currentModel = model else {return}
+        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
+        
+        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+                                                images : image,
+                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                title : model?.title,
+                                                type : SSDKContentType.Auto)
+        
+        let items = [
+            SSDKPlatformType.TypeQQ.rawValue,
+            SSDKPlatformType.TypeWechat.rawValue,
+            SSDKPlatformType.TypeSinaWeibo.rawValue
+        ]
+        
+        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+            switch state {
+            case SSDKResponseState.Success:
+                print("分享成功")
+            case SSDKResponseState.Fail:
+                print("分享失败,错误描述:\(error)")
+            case SSDKResponseState.Cancel:
+                print("取消分享")
+            default:
+                break
+            }
+        }
+        
+    }
+    
+    /**
+     点击了提交评论视图的发送按钮
+     
+     - parameter message: 评论信息
+     */
+    func didTappedSendButtonWithMessage(message: String) {
+        
+        let parameters = [
+            "classid" : articleParam!.classid,
+            "id" : articleParam!.id,
+            "userid" : JFAccountModel.shareAccount().id,
+            "nomember" : "0",
+            "username" : JFAccountModel.shareAccount().username!,
+            "token" : JFAccountModel.shareAccount().token!,
+            "saytext" : message
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            if success {
+                // 加载数据
+                self.updateData()
+            }
+        }
+    }
+}
+
 // MARK: - WKNavigationDelegate
 extension JFNewsDetailViewController: WKNavigationDelegate {
     
@@ -580,6 +592,98 @@ extension JFNewsDetailViewController: WKNavigationDelegate {
                 webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height as! NSNumber) + 20)
                 self.tableView.reloadData()
                 self.activityView.stopAnimating()
+            }
+        }
+    }
+}
+
+// MARK: - JFStarAndShareCellDelegate
+extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
+    
+    /**
+     点击了赞
+     */
+    func didTappedStarButton(button: UIButton) {
+        button.selected = !button.selected
+        let parameters = [
+            "classid" : articleParam!.classid,
+            "id" : articleParam!.id,
+            "dopl" : button.selected ? 1 : 0,
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(result)
+            if success {
+                // 加载数据
+                self.updateData()
+            }
+        }
+        
+    }
+    
+    /**
+     点击了微信
+     */
+    func didTappedWeixinButton(button: UIButton) {
+        // 从缓存中获取标题图片
+        guard let currentModel = model else {return}
+        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
+        
+        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+                                                images : image,
+                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                title : model?.title,
+                                                type : SSDKContentType.Auto)
+        
+        ShareSDK.share(SSDKPlatformType.SubTypeWechatSession, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
+            switch state {
+            case SSDKResponseState.Success:
+                print("分享成功")
+            case SSDKResponseState.Fail:
+                print("分享失败,错误描述:\(error)")
+            case SSDKResponseState.Cancel:
+                print("取消分享")
+            default:
+                break
+            }
+        }
+        
+    }
+    
+    /**
+     点击了朋友圈
+     */
+    func didTappedFriendCircleButton(button: UIButton) {
+        // 从缓存中获取标题图片
+        guard let currentModel = model else {return}
+        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
+        
+        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
+            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+                                                images : image,
+                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                title : model?.title,
+                                                type : SSDKContentType.Auto)
+        
+        ShareSDK.share(SSDKPlatformType.SubTypeWechatTimeline, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
+            switch state {
+            case SSDKResponseState.Success:
+                print("分享成功")
+            case SSDKResponseState.Fail:
+                print("分享失败,错误描述:\(error)")
+            case SSDKResponseState.Cancel:
+                print("取消分享")
+            default:
+                break
             }
         }
     }

@@ -76,6 +76,7 @@ class JFCommentTableViewController: UITableViewController {
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             
+            print(result)
             if success {
                 if let successResult = result {
                     
@@ -102,7 +103,8 @@ class JFCommentTableViewController: UITableViewController {
                             "classid" : comment["classid"].intValue,
                             "saytext" : comment["saytext"].stringValue,
                             "saytime" : comment["saytime"].stringValue,
-                            "userpic" : "\(BASE_URL)\(comment["userpic"].stringValue)"
+                            "userpic" : "\(BASE_URL)\(comment["userpic"].stringValue)",
+                            "zcnum" : comment["zcnum"].stringValue
                         ]
                         
                         let commentModel = JFCommentModel(dict: dict as! [String : AnyObject])

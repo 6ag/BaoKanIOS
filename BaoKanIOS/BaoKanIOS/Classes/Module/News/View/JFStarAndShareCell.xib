@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-Kb-Jtn" userLabel="star">
@@ -23,10 +23,10 @@
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                         <state key="normal" title="21" image="article_content_star_normal">
-                            <color key="titleColor" red="0.78614757580000005" green="0.78465323860000002" blue="0.78292295329999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <state key="selected" image="article_content_star_selected">
-                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="didTappedStarButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KR3-Hw-QJ1"/>
@@ -38,7 +38,7 @@
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                         <state key="normal" title="朋友圈" image="article_content_share_pyq">
-                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="didTappedFriendCircleButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oAP-aT-P5H"/>
@@ -50,7 +50,7 @@
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                         <state key="normal" title="微信" image="article_content_share_weixin">
-                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="didTappedWeixinButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0Sk-Au-4zs"/>
@@ -80,9 +80,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="article_content_share_pyq" width="25" height="25"/>
-        <image name="article_content_share_weixin" width="25" height="25"/>
-        <image name="article_content_star_normal" width="25" height="25"/>
-        <image name="article_content_star_selected" width="25" height="25"/>
+        <image name="article_content_share_pyq" width="20" height="20"/>
+        <image name="article_content_share_weixin" width="20" height="20"/>
+        <image name="article_content_star_normal" width="20" height="20"/>
+        <image name="article_content_star_selected" width="20" height="20"/>
     </resources>
 </document>

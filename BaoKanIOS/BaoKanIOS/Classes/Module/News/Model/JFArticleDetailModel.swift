@@ -43,6 +43,9 @@ class JFArticleDetailModel: NSObject {
     /// 标题图片
     var titlepic: String?
     
+    /// 赞数量
+    var isgood: String?
+    
     /**
      字典转模型构造方法
      */

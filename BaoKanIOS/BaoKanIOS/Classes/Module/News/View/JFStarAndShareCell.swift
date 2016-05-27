@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol JFStarAndShareCellDelegate {
+    func didTappedStarButton(button: UIButton)
+    func didTappedWeixinButton(button: UIButton)
+    func didTappedFriendCircleButton(button: UIButton)
+}
+
 class JFStarAndShareCell: UITableViewCell {
 
     @IBOutlet weak var starButton: UIButton!
     @IBOutlet weak var weixinButton: UIButton!
     @IBOutlet weak var friendCircleButton: UIButton!
+    var delegate: JFStarAndShareCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,14 +36,14 @@ class JFStarAndShareCell: UITableViewCell {
     }
     
     @IBAction func didTappedStarButton(sender: UIButton) {
-        
+        delegate?.didTappedStarButton(sender)
     }
     
     @IBAction func didTappedWeixinButton(sender: UIButton) {
-        
+        delegate?.didTappedWeixinButton(sender)
     }
     
     @IBAction func didTappedFriendCircleButton(sender: UIButton) {
-        
+        delegate?.didTappedFriendCircleButton(sender)
     }
 }

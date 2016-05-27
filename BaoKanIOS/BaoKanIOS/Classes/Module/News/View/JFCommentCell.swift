@@ -23,7 +23,6 @@ class JFCommentCell: UITableViewCell {
             timeLabel.text = commentModel?.saytime!
             contentLabel.text = commentModel?.saytext!
         }
-        
     }
     
     func getCellHeight(commentModel: JFCommentModel) -> CGFloat {
