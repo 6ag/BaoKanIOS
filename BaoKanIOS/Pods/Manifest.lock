@@ -12,9 +12,9 @@ PODS:
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - YYCache (1.0.3)
-  - YYImage (1.0.1):
-    - YYImage/Core (= 1.0.1)
-  - YYImage/Core (1.0.1)
+  - YYImage (1.0.2):
+    - YYImage/Core (= 1.0.2)
+  - YYImage/Core (1.0.2)
   - YYWebImage (1.0.3):
     - YYCache
     - YYImage
@@ -41,7 +41,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
-  YYImage: b41b45bc5f32bfcdf67bdfb9c09da9e9832357c0
+  YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 8da75a611fd0d2e0f58a273f9ca0bc731614cb0d
 
 COCOAPODS: 0.39.0

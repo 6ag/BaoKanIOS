@@ -34,6 +34,9 @@ class JFAccountModel: NSObject {
     /// 用户组
     var groupName: String?
     
+    /// 积分
+    var points: String?
+    
     /// 签到时间
     var checkingTime: String?
     

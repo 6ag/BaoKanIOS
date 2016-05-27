@@ -19,12 +19,14 @@ class JFProfileViewController: JFBaseTableViewController {
         // 这个是用来占位的
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 275))
         tableView.tableHeaderView = tableHeaderView
+        prepareData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-        prepareData()
+        updateHeaderData()
+        tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -42,7 +44,7 @@ class JFProfileViewController: JFBaseTableViewController {
         //        }
         //        let group1 = JFProfileCellGroupModel(cells: [group1CellModel1])
         
-        let group2CellModel1 = JFProfileCellLabelModel(title: "清除缓存", icon: "setting_clear_icon", text: "\(String(format: "%.2f", CGFloat(YYImageCache.sharedCache().diskCache.totalCost()) / 1024 / 1024))M")
+        let group2CellModel1 = JFProfileCellLabelModel(title: "清除缓存", icon: "setting_clear_icon", text: "0.0M")
         group2CellModel1.operation = { () -> Void in
             JFProgressHUD.showWithStatus("正在清理")
             YYImageCache.sharedCache().diskCache.removeAllObjectsWithBlock({
@@ -61,8 +63,8 @@ class JFProfileViewController: JFBaseTableViewController {
         let group2CellModel3 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
         let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2, group2CellModel3])
         
-        let group3CellModel1 = JFProfileCellArrowModel(title: "意见反馈", icon: "setting_feedback_icon", destinationVc: JFProfileFeedbackViewController.self)
-        let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.self)
+        let group3CellModel1 = JFProfileCellArrowModel(title: "意见反馈", icon: "setting_feedback_icon", destinationVc: JFProfileFeedbackViewController.classForCoder())
+        let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.classForCoder())
         let group3CellModel3 = JFProfileCellArrowModel(title: "推荐给好友", icon: "setting_share_icon")
         group3CellModel3.operation = { () -> Void in
             var image = UIImage(named: "launchScreen")
@@ -101,16 +103,17 @@ class JFProfileViewController: JFBaseTableViewController {
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         
         groupModels = [group2, group3]
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if JFAccountModel.shareAccount().isLogin {
-            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
-            headerView.nameLabel.text = JFAccountModel.shareAccount().username
-        } else {
-            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
-            headerView.nameLabel.text = "登录账号"
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath) as! JFProfileCell
+        
+        // 更新缓存数据
+        if indexPath.section == 0 && indexPath.row == 0 {
+            cell.settingRightLabel.text = "\(String(format: "%.2f", CGFloat(YYImageCache.sharedCache().diskCache.totalCost()) / 1024 / 1024))M"
         }
-        
-        tableView.reloadData()
+        return cell
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -125,10 +128,15 @@ class JFProfileViewController: JFBaseTableViewController {
      更新头部数据
      */
     private func updateHeaderData() {
-        
+        if JFAccountModel.shareAccount().isLogin {
+            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
+            headerView.nameLabel.text = JFAccountModel.shareAccount().username
+        } else {
+            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
+            headerView.nameLabel.text = "登录账号"
+        }
     }
     
-    // MARK: - 各种点击事件
     lazy var headerView: JFProfileHeaderView = {
         let headerView = NSBundle.mainBundle().loadNibNamed("JFProfileHeaderView", owner: nil, options: nil).last as! JFProfileHeaderView
         headerView.delegate = self
@@ -193,7 +201,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedInfoButton() {
         if JFAccountModel.shareAccount().isLogin {
-            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Plain), animated: true)
+            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Grouped), animated: true)
         } else {
             presentViewController(JFLoginViewController(nibName: "JFLoginViewController", bundle: nil), animated: true) {}
         }

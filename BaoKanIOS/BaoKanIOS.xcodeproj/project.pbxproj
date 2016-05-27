@@ -82,7 +82,6 @@
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
 		B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */; };
 		B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF851CB222560081745A /* JFNewsViewController.swift */; };
-		B2E3DF921CB222560081745A /* JFDetailADCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF871CB222560081745A /* JFDetailADCell.swift */; };
 		B2E3DF931CB222560081745A /* JFDetailOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */; };
 		B2E3DF941CB222560081745A /* JFNewsBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */; };
 		B2E3DF951CB222560081745A /* JFNewsBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */; };
@@ -99,6 +98,7 @@
 		B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */; };
 		B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */; };
 		B2F174671CB764E0007AA386 /* JFPhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */; };
+		B2FA169C1CF7E0B000406953 /* JFOtherLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA169B1CF7E0B000406953 /* JFOtherLinkModel.swift */; };
 		B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */; };
 		B2FE1C331CB9F71F001CCF99 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9A1CB7BDC20092C717 /* CFNetwork.framework */; };
 		B2FE1C341CB9F728001CCF99 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9C1CB7BDCF0092C717 /* CoreFoundation.framework */; };
@@ -112,6 +112,11 @@
 		B2FFCACE1CE48D0000ADC54C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FFCACD1CE48D0000ADC54C /* libstdc++.tbd */; };
 		B2FFCACF1CE48DA800ADC54C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */; };
 		B2FFCAD11CE48ED600ADC54C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FFCAD01CE48ED600ADC54C /* ImageIO.framework */; };
+		B2FFCF8A1CF7290400E07786 /* JFModifyInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF891CF7290400E07786 /* JFModifyInfoTableViewController.swift */; };
+		B2FFCF8C1CF7291900E07786 /* JFModifySafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */; };
+		B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */; };
+		B2FFCF941CF7546500E07786 /* JFStarAndShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */; };
+		B2FFCF951CF7546500E07786 /* JFStarAndShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */; };
 		FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963C1C3A65E900046824 /* Assets.xcassets */; };
 		FBF0963F1C3A65E900046824 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963D1C3A65E900046824 /* Info.plist */; };
 /* End PBXBuildFile section */
@@ -248,7 +253,6 @@
 		B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsTableViewController.swift; sourceTree = "<group>"; };
 		B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFNewsViewController.storyboard; sourceTree = "<group>"; };
 		B2E3DF851CB222560081745A /* JFNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsViewController.swift; sourceTree = "<group>"; };
-		B2E3DF871CB222560081745A /* JFDetailADCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailADCell.swift; sourceTree = "<group>"; };
 		B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherCell.swift; sourceTree = "<group>"; };
 		B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsBottomBar.swift; sourceTree = "<group>"; };
 		B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsBottomBar.xib; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 		B2F174611CB761C3007AA386 /* JFPhotoDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailModel.swift; sourceTree = "<group>"; };
 		B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleDetailModel.swift; sourceTree = "<group>"; };
 		B2F174661CB764E0007AA386 /* JFPhotoDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailCell.swift; sourceTree = "<group>"; };
+		B2FA169B1CF7E0B000406953 /* JFOtherLinkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFOtherLinkModel.swift; sourceTree = "<group>"; };
 		B2FC6DFB1CDB880100DAC654 /* JFBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFBaseTableViewController.swift; sourceTree = "<group>"; };
 		B2FD9A011CB95F6C0005B8AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B2FD9A031CB95F760005B8AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -276,6 +281,11 @@
 		B2FFCACB1CE48CDA00ADC54C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		B2FFCACD1CE48D0000ADC54C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		B2FFCAD01CE48ED600ADC54C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B2FFCF891CF7290400E07786 /* JFModifyInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFModifyInfoTableViewController.swift; sourceTree = "<group>"; };
+		B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFModifySafeTableViewController.swift; sourceTree = "<group>"; };
+		B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFInfoHeaderView.swift; sourceTree = "<group>"; };
+		B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFStarAndShareCell.swift; sourceTree = "<group>"; };
+		B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFStarAndShareCell.xib; sourceTree = "<group>"; };
 		CD8416C2AE2F58BAC0DC55D5 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF0963C1C3A65E900046824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = BaoKanIOS/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		FBF0963D1C3A65E900046824 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -611,6 +621,8 @@
 			isa = PBXGroup;
 			children = (
 				B20D58C21CF2DE10000DA6EB /* JFEditProfileViewController.swift */,
+				B2FFCF891CF7290400E07786 /* JFModifyInfoTableViewController.swift */,
+				B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -640,6 +652,7 @@
 		B238BBB61CEEE3A10050FC3F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B2FFCF8D1CF731D800E07786 /* Info */,
 				B238BBB71CEEE3A10050FC3F /* JFLoginButton.swift */,
 				B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */,
 				B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */,
@@ -792,7 +805,6 @@
 		B2E3DF861CB222560081745A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B2E3DF871CB222560081745A /* JFDetailADCell.swift */,
 				B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */,
 				B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */,
 				B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */,
@@ -802,6 +814,8 @@
 				B2FFCA6F1CE47B6A00ADC54C /* JFCommentCommitView.xib */,
 				B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */,
 				B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */,
+				B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */,
+				B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -879,6 +893,7 @@
 			children = (
 				B2F174641CB761F8007AA386 /* JFArticleDetailModel.swift */,
 				B24952841CEC4A41006229C2 /* JFCommentModel.swift */,
+				B2FA169B1CF7E0B000406953 /* JFOtherLinkModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -890,6 +905,14 @@
 				B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */,
 			);
 			path = JPush;
+			sourceTree = "<group>";
+		};
+		B2FFCF8D1CF731D800E07786 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1009,6 +1032,7 @@
 				B29D53E51CF45CB600CD3F0D /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				B2FFCA701CE47B6A00ADC54C /* JFCommentCommitView.xib in Resources */,
 				B28716C01CEC540800E1E3E5 /* JFCommentCell.xib in Resources */,
+				B2FFCF951CF7546500E07786 /* JFStarAndShareCell.xib in Resources */,
 				B2E3DF951CB222560081745A /* JFNewsBottomBar.xib in Resources */,
 				A5B279CB1C36392F003C773D /* JFReadViewController.storyboard in Resources */,
 				B29D53E71CF45CB600CD3F0D /* WeiboSDK.bundle in Resources */,
@@ -1105,6 +1129,7 @@
 				B2E3DFC91CB228900081745A /* JFPhotoListCell.swift in Sources */,
 				B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */,
 				A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */,
+				B2FFCF941CF7546500E07786 /* JFStarAndShareCell.swift in Sources */,
 				B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */,
 				B2E3DF961CB222560081745A /* JFNewsCell.swift in Sources */,
 				B238BBBE1CEEE3A10050FC3F /* JFLoginButton.swift in Sources */,
@@ -1121,13 +1146,14 @@
 				B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
 				B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */,
+				B2FFCF8C1CF7291900E07786 /* JFModifySafeTableViewController.swift in Sources */,
 				B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */,
 				B238BBBD1CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift in Sources */,
 				A55CD9021C76E47E0087CA0A /* api.swift in Sources */,
+				B2FA169C1CF7E0B000406953 /* JFOtherLinkModel.swift in Sources */,
 				B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */,
 				B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */,
 				B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */,
-				B2E3DF921CB222560081745A /* JFDetailADCell.swift in Sources */,
 				B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */,
 				B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
@@ -1147,6 +1173,7 @@
 				B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
 				B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */,
+				B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */,
 				B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */,
 				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
 				B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */,
@@ -1154,6 +1181,7 @@
 				B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */,
 				B2E3DF931CB222560081745A /* JFDetailOtherCell.swift in Sources */,
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
+				B2FFCF8A1CF7290400E07786 /* JFModifyInfoTableViewController.swift in Sources */,
 				B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */,
 				B242D00C1CF2985900E974F1 /* JFProfileTopButton.swift in Sources */,
 				B2E3DFC41CB228900081745A /* JFPhotoViewController.swift in Sources */,

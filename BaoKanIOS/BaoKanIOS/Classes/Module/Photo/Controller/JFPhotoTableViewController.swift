@@ -80,8 +80,6 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
             if success == true {
                 if let successResult = result {
                     
-//                    print(successResult)
-                    
                     let minId = self.photoList.last?.id ?? "0"
                     let maxId = self.photoList.first?.id ?? "0"
                     

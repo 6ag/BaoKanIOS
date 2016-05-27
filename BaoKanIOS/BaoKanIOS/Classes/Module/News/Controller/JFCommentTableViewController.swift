@@ -84,8 +84,6 @@ class JFCommentTableViewController: UITableViewController {
                     
                     let data = successResult["data"].arrayValue
                     
-                    print(data)
-                    
                     if data.count == 0 && self.commentList.count == 0 {
                         return
                     }

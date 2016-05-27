@@ -9,8 +9,7 @@
 import UIKit
 import YYWebImage
 
-class JFDetailOtherCell: UITableViewCell
-{
+class JFDetailOtherCell: UITableViewCell {
     
     var data: [String : String]? {
         didSet {
@@ -19,24 +18,21 @@ class JFDetailOtherCell: UITableViewCell
         }
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
-    {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // 准备uI
         prepareUI()
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     /**
      准备UI
      */
-    private func prepareUI()
-    {
+    private func prepareUI() {
         contentView.addSubview(myImageView)
         contentView.addSubview(myTitleLabel)
         

@@ -67,6 +67,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (success, result, error) in
                 if success {
+                    print(result)
                     if let successResult = result {
                         JFAccountModel.shareAccount().setValuesForKeysWithDictionary(successResult["data"]["user"].dictionaryObject!)
                         JFAccountModel.shareAccount().login()

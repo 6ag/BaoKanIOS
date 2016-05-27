@@ -68,7 +68,7 @@ class JFCollectionTableViewController: UITableViewController {
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
-            
+            print(result)
             if success == true {
                 if let successResult = result {
                     let data = successResult["data"].arrayValue.reverse()
@@ -91,11 +91,11 @@ class JFCollectionTableViewController: UITableViewController {
                         let postModel = JFCollectionModel(dict: dict)
                         
                         if method == 0 {
-                            if Int(maxId) < Int(postModel.id!) {
+                            if Int(maxId) < Int(postModel.favaid!) {
                                 self.articleList.insert(postModel, atIndex: 0)
                             }
                         } else {
-                            if Int(minId) > Int(postModel.id!) {
+                            if Int(minId) > Int(postModel.favaid!) {
                                 self.articleList.append(postModel)
                             }
                         }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="109" id="KGk-i7-Jjw" customClass="JFStarAndShareCell" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-Kb-Jtn" userLabel="star">
+                        <rect key="frame" x="20" y="13" width="105" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="Cgd-RA-gpV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                        <state key="normal" title="21" image="article_content_star_normal">
+                            <color key="titleColor" red="0.78614757580000005" green="0.78465323860000002" blue="0.78292295329999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <state key="selected" image="article_content_star_selected">
+                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didTappedStarButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KR3-Hw-QJ1"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUT-1f-dAN" userLabel="pyq">
+                        <rect key="frame" x="250" y="13" width="105" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                        <state key="normal" title="朋友圈" image="article_content_share_pyq">
+                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didTappedFriendCircleButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oAP-aT-P5H"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QS-hV-3JI" userLabel="weixin">
+                        <rect key="frame" x="135" y="13" width="105" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                        <state key="normal" title="微信" image="article_content_share_weixin">
+                            <color key="titleColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didTappedWeixinButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0Sk-Au-4zs"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="lUT-1f-dAN" firstAttribute="leading" secondItem="2QS-hV-3JI" secondAttribute="trailing" constant="10" id="5nO-Gk-daK"/>
+                    <constraint firstItem="2QS-hV-3JI" firstAttribute="height" secondItem="7fm-Kb-Jtn" secondAttribute="height" id="8BJ-3C-FFG"/>
+                    <constraint firstItem="lUT-1f-dAN" firstAttribute="width" secondItem="7fm-Kb-Jtn" secondAttribute="width" id="APu-HS-sYp"/>
+                    <constraint firstItem="2QS-hV-3JI" firstAttribute="centerY" secondItem="7fm-Kb-Jtn" secondAttribute="centerY" id="As4-gg-V4l"/>
+                    <constraint firstItem="lUT-1f-dAN" firstAttribute="centerY" secondItem="2QS-hV-3JI" secondAttribute="centerY" id="NWc-gC-hc4"/>
+                    <constraint firstItem="7fm-Kb-Jtn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Q9v-NT-NfP"/>
+                    <constraint firstAttribute="trailing" secondItem="lUT-1f-dAN" secondAttribute="trailing" constant="20" id="QQS-xU-l9F"/>
+                    <constraint firstItem="2QS-hV-3JI" firstAttribute="leading" secondItem="7fm-Kb-Jtn" secondAttribute="trailing" constant="10" id="iph-Qj-Mlo"/>
+                    <constraint firstItem="2QS-hV-3JI" firstAttribute="width" secondItem="7fm-Kb-Jtn" secondAttribute="width" id="o5e-mA-oiD"/>
+                    <constraint firstItem="lUT-1f-dAN" firstAttribute="height" secondItem="7fm-Kb-Jtn" secondAttribute="height" id="sge-JV-uV6"/>
+                    <constraint firstItem="7fm-Kb-Jtn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zoH-Sr-aFM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="friendCircleButton" destination="lUT-1f-dAN" id="rDj-b2-Lje"/>
+                <outlet property="starButton" destination="7fm-Kb-Jtn" id="l0c-rN-hXZ"/>
+                <outlet property="weixinButton" destination="2QS-hV-3JI" id="Yaz-Jg-2iJ"/>
+            </connections>
+            <point key="canvasLocation" x="141.5" y="360.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="article_content_share_pyq" width="25" height="25"/>
+        <image name="article_content_share_weixin" width="25" height="25"/>
+        <image name="article_content_star_normal" width="25" height="25"/>
+        <image name="article_content_star_selected" width="25" height="25"/>
+    </resources>
+</document>

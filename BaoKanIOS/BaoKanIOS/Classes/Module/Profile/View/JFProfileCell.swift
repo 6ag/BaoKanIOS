@@ -86,7 +86,7 @@ class JFProfileCell: UITableViewCell {
     
     // MARK: - 懒加载
     lazy var settingRightLabel: UILabel = {
-        let settingRightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        let settingRightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
         settingRightLabel.textColor = UIColor.grayColor()
         settingRightLabel.textAlignment = .Right
         settingRightLabel.font = UIFont.systemFontOfSize(14)

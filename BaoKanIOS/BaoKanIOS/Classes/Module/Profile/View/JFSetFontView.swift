@@ -17,6 +17,7 @@ class JFSetFontView: UIView {
     let minSize = 12 // 14   16   18   20  22   24
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         let fontSize = NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE)
         let scale = (fontSize - minSize) / 2
         currentButton = viewWithTag(scale) as! UIButton

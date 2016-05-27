@@ -16,7 +16,7 @@ class JFBaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.sectionHeaderHeight = 0
+        tableView.sectionHeaderHeight = 0.01
         tableView.separatorStyle = .None
         tableView.registerClass(JFProfileCell.self, forCellReuseIdentifier: "profileCell")
     }

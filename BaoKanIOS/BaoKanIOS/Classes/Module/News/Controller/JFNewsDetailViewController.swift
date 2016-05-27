@@ -35,9 +35,21 @@ class JFNewsDetailViewController: UIViewController {
         }
     }
     
+    /// 相关连接模型
+    var otherLinks = [JFOtherLinkModel]()
+    
+    let detailContentIdentifier = "detailContentIdentifier"
+    let detailStarAndShareIdentifier = "detailStarAndShareIdentifier"
+    let detailOtherLinkIdentifier = "detailOtherLinkIdentifier"
+    
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: detailContentIdentifier)
+        tableView.registerNib(UINib(nibName: "JFStarAndShareCell", bundle: nil), forCellReuseIdentifier: detailStarAndShareIdentifier)
+        tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: detailOtherLinkIdentifier)
         
         prepareUI()
     }
@@ -164,6 +176,24 @@ class JFNewsDetailViewController: UIViewController {
             if success == true {
                 if let successResult = result {
                     print(successResult)
+                    
+                    // 相关连接
+                    self.otherLinks.removeAll()
+                    let otherLinks = successResult["data"]["otherLink"].array
+                    if let others = otherLinks {
+                        for other in others {
+                            let dict = [
+                                "id" : other["id"].stringValue,
+                                "classid" : other["classid"].stringValue,
+                                "title" : other["title"].stringValue
+                            ]
+                            
+                            let otherModel = JFOtherLinkModel(dict: dict)
+                            self.otherLinks.append(otherModel)
+                        }
+                    }
+                    
+                    // 正文数据
                     let content = successResult["data"]["content"].dictionaryValue
                     let dict = [
                         "title" : content["title"]!.stringValue,          // 文章标题
@@ -178,7 +208,6 @@ class JFNewsDetailViewController: UIViewController {
                         "smalltext" : content["smalltext"]!.stringValue,  // 文章简介
                         "titlepic" : content["titlepic"]!.stringValue     // 标题图片
                     ]
-                    
                     self.model = JFArticleDetailModel(dict: dict)
                 }
             } else {
@@ -220,7 +249,7 @@ class JFNewsDetailViewController: UIViewController {
     
     /// tableView
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.whiteColor()
@@ -438,22 +467,106 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         webView.loadHTMLString(html, baseURL: nil)
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        // 正文 / 赞 - 分享 / 相关新闻
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return otherLinks.count
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return webView.height
+        
+        switch indexPath.section {
+        case 0:
+            return webView.height
+        case 1:
+            return 60
+        case 2:
+            return 44
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("detailContent")
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "detailContent")
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier(detailContentIdentifier)!
+            cell.contentView.addSubview(webView)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier(detailStarAndShareIdentifier) as! JFStarAndShareCell
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier)!
+            cell.textLabel?.text = otherLinks[indexPath.row].title
+            // 自定义分割线
+            let separatorView = UIView(frame: CGRect(x: 0, y: 43.5, width: SCREEN_WIDTH, height: 0.5))
+            separatorView.backgroundColor = UIColor(white: 0.6, alpha: 0.5)
+            cell.contentView.addSubview(separatorView)
+            return cell
+        default:
+            return UITableViewCell()
         }
-        cell?.contentView.addSubview(webView)
-        return cell!
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 2 {
+            let leftRedView = UIView(frame: CGRect(x: 0, y: 0, width: 3, height: 30))
+            leftRedView.backgroundColor = NAVIGATIONBAR_RED_COLOR
+            
+            let bgView = UIView(frame: CGRect(x: 3, y: 0, width: SCREEN_WIDTH - 3, height: 30))
+            bgView.backgroundColor = UIColor(red:0.914,  green:0.890,  blue:0.847, alpha:0.3)
+            
+            let titleLabel = UILabel(frame: CGRect(x: 20, y: 0, width: 100, height: 30))
+            titleLabel.text = "相关新闻"
+            
+            let headerView = UIView()
+            headerView.addSubview(leftRedView)
+            headerView.addSubview(bgView)
+            headerView.addSubview(titleLabel)
+            return otherLinks.count == 0 ? nil : headerView
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section != 2 {
+            return 1
+        } else {
+            return otherLinks.count == 0 ? 1 : 30
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section != 2 {
+            return 1
+        } else {
+            return 50
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 {
+            let otherModel = otherLinks[indexPath.row]
+            let detailVc = JFNewsDetailViewController()
+            detailVc.articleParam = (otherModel.classid!, otherModel.id!)
+            self.navigationController?.pushViewController(detailVc, animated: true)
+        }
     }
 }
 
@@ -464,7 +577,7 @@ extension JFNewsDetailViewController: WKNavigationDelegate {
         webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
             if let height = result {
                 let frame = webView.frame
-                webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height as! NSNumber) + 60)
+                webView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.width, CGFloat(height as! NSNumber) + 20)
                 self.tableView.reloadData()
                 self.activityView.stopAnimating()
             }

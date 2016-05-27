@@ -96,11 +96,11 @@ class JFCommentListTableViewController: UITableViewController {
                         let postModel = JFUserCommentModel(dict: dict)
                         
                         if method == 0 {
-                            if Int(maxId) < Int(postModel.id!) {
+                            if Int(maxId) < Int(postModel.plid!) {
                                 self.articleList.insert(postModel, atIndex: 0)
                             }
                         } else {
-                            if Int(minId) > Int(postModel.id!) {
+                            if Int(minId) > Int(postModel.plid!) {
                                 self.articleList.append(postModel)
                             }
                         }

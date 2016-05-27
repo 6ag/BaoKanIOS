@@ -105,7 +105,6 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             
             if success == true {
                 if let successResult = result {
-//                    print(successResult)
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     let minId = self.articleList.last?.id ?? "0"

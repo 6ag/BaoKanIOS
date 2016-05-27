@@ -30,6 +30,5 @@ class JFTopLabel: UILabel {
         textAlignment = NSTextAlignment.Center
         font = UIFont.systemFontOfSize(20.0)
     }
-
     
 }

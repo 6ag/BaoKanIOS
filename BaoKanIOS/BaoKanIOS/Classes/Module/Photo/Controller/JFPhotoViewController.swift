@@ -30,10 +30,12 @@ class JFPhotoViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
     }
     
     // MARK: - 各种自定义方法

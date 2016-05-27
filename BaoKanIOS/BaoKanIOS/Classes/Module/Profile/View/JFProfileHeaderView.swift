@@ -17,10 +17,6 @@ protocol JFProfileHeaderViewDelegate {
 }
 
 class JFProfileHeaderView: UIView {
-    
-    override func awakeFromNib() {
-        
-    }
 
     @IBOutlet weak var avatarButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
