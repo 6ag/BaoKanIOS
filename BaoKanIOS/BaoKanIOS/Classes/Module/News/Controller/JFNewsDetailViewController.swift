@@ -181,7 +181,7 @@ class JFNewsDetailViewController: UIViewController {
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-                    print(successResult)
+//                    print(successResult)
                     // 相关连接
                     self.otherLinks.removeAll()
                     let otherLinks = successResult["data"]["otherLink"].array

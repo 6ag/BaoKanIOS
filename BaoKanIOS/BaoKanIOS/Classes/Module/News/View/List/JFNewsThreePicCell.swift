@@ -24,6 +24,8 @@ class JFNewsThreePicCell: UITableViewCell {
                 iconView3.yy_setImageWithURL(NSURL(string: postModel!.morepic![2]), placeholder: UIImage(named: "placeholder_logo"))
             }
             
+            print(postModel?.morepic)
+            
             articleTitleLabel.text = postModel?.title!
             timeLabel.text = postModel?.newstime!
             commentLabel.text = postModel?.plnum!

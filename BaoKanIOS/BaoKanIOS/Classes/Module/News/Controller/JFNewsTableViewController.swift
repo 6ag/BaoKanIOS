@@ -42,6 +42,8 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.registerNib(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: newsOnePicCell)
         tableView.registerNib(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: newsThreePicCell)
         
+        tableView.separatorColor = UIColor(red:0.949,  green:0.949,  blue:0.949, alpha:1)
+        
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         headerRefresh.lastUpdatedTimeLabel.hidden = true
         tableView.mj_header = headerRefresh
@@ -141,7 +143,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                             
                             var titlepicUrl = article["titlepic"].stringValue
                             // 判断url是否包含前缀
-                            titlepicUrl = titlepicUrl.hasPrefix("http") ? titlepicUrl : "(\(BASE_URL)\(titlepicUrl))"
+                            titlepicUrl = titlepicUrl.hasPrefix("http") ? titlepicUrl : "\(BASE_URL)\(titlepicUrl)"
                             dict["titlepic"] = titlepicUrl
                             
                             // 标题多图
@@ -151,7 +153,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                                 for picdict in morepic {
                                     var bigpicUrl = picdict["bigpic"].stringValue
                                     // 判断url是否包含前缀
-                                    bigpicUrl = bigpicUrl.hasPrefix("http") ? bigpicUrl : "(\(BASE_URL)\(bigpicUrl))"
+                                    bigpicUrl = bigpicUrl.hasPrefix("http") ? bigpicUrl : "\(BASE_URL)\(bigpicUrl)"
                                     morepicArray.append(bigpicUrl)
                                 }
                                 dict["morepic"] = morepicArray
