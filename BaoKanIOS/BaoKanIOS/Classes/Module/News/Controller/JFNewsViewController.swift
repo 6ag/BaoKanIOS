@@ -78,6 +78,10 @@ class JFNewsViewController: UIViewController {
             // 如果本地没有数据则初始化并保存到本地
             let topTitles = [
                 [
+                    "classid" : "10000",
+                    "classname" : "今日头条"
+                ],
+                [
                     "classid" : "2",
                     "classname": "网文快讯"
                 ],

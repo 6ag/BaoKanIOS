@@ -47,12 +47,26 @@
 		B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */; };
 		B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */; };
 		B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */; };
+		B23AFF9F1CF9848C00C73C3B /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF901CF9848C00C73C3B /* JFCommentCell.swift */; };
+		B23AFFA01CF9848C00C73C3B /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFF911CF9848C00C73C3B /* JFCommentCell.xib */; };
+		B23AFFA11CF9848C00C73C3B /* JFCommentCommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF921CF9848C00C73C3B /* JFCommentCommitView.swift */; };
+		B23AFFA21CF9848C00C73C3B /* JFCommentCommitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFF931CF9848C00C73C3B /* JFCommentCommitView.xib */; };
+		B23AFFA31CF9848C00C73C3B /* JFDetailOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF951CF9848C00C73C3B /* JFDetailOtherCell.swift */; };
+		B23AFFA41CF9848C00C73C3B /* JFNewsBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF961CF9848C00C73C3B /* JFNewsBottomBar.swift */; };
+		B23AFFA51CF9848C00C73C3B /* JFNewsBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFF971CF9848C00C73C3B /* JFNewsBottomBar.xib */; };
+		B23AFFA61CF9848C00C73C3B /* JFStarAndShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF981CF9848C00C73C3B /* JFStarAndShareCell.swift */; };
+		B23AFFA71CF9848C00C73C3B /* JFStarAndShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFF991CF9848C00C73C3B /* JFStarAndShareCell.xib */; };
+		B23AFFA81CF9848C00C73C3B /* JFNewsNoPicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF9B1CF9848C00C73C3B /* JFNewsNoPicCell.swift */; };
+		B23AFFA91CF9848C00C73C3B /* JFNewsOnePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF9C1CF9848C00C73C3B /* JFNewsOnePicCell.swift */; };
+		B23AFFAA1CF9848C00C73C3B /* JFNewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF9D1CF9848C00C73C3B /* JFNewsThreePicCell.swift */; };
+		B23AFFAB1CF9848C00C73C3B /* JFTopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23AFF9E1CF9848C00C73C3B /* JFTopLabel.swift */; };
+		B23AFFAD1CF98F4300C73C3B /* JFNewsNoPicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFFAC1CF98F4300C73C3B /* JFNewsNoPicCell.xib */; };
+		B23AFFAF1CF98F5A00C73C3B /* JFNewsOnePicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFFAE1CF98F5A00C73C3B /* JFNewsOnePicCell.xib */; };
+		B23AFFB11CF98F6400C73C3B /* JFNewsThreePicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B23AFFB01CF98F6400C73C3B /* JFNewsThreePicCell.xib */; };
 		B242D00C1CF2985900E974F1 /* JFProfileTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B242D00B1CF2985900E974F1 /* JFProfileTopButton.swift */; };
 		B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */; };
 		B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */; };
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
-		B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */; };
-		B28716C01CEC540800E1E3E5 /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */; };
 		B292E74D1CEEBE79005AA23A /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */; };
 		B29D53E01CF45CB600CD3F0D /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53BE1CF45CB500CD3F0D /* ShareSDK.framework */; };
 		B29D53E11CF45CB600CD3F0D /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53C11CF45CB500CD3F0D /* ShareSDKExtension.framework */; };
@@ -80,11 +94,6 @@
 		B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */; };
 		B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */; };
 		B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF851CB222560081745A /* JFNewsViewController.swift */; };
-		B2E3DF931CB222560081745A /* JFDetailOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */; };
-		B2E3DF941CB222560081745A /* JFNewsBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */; };
-		B2E3DF951CB222560081745A /* JFNewsBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */; };
-		B2E3DF961CB222560081745A /* JFNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF8B1CB222560081745A /* JFNewsCell.swift */; };
-		B2E3DF971CB222560081745A /* JFTopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DF8C1CB222560081745A /* JFTopLabel.swift */; };
 		B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DFA81CB228900081745A /* JFPhotoTableViewController.swift */; };
 		B2E3DFC31CB228900081745A /* JFPhotoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E3DFA91CB228900081745A /* JFPhotoViewController.storyboard */; };
 		B2E3DFC41CB228900081745A /* JFPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E3DFAA1CB228900081745A /* JFPhotoViewController.swift */; };
@@ -105,8 +114,6 @@
 		B2FE1C351CB9F733001CCF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3F9E1CB7BDDB0092C717 /* CoreTelephony.framework */; };
 		B2FE1C361CB9F73B001CCF99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA01CB7BDE50092C717 /* SystemConfiguration.framework */; };
 		B2FE1C371CB9F746001CCF99 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3FA41CB7BE050092C717 /* Security.framework */; };
-		B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCA6D1CE47B5F00ADC54C /* JFCommentCommitView.swift */; };
-		B2FFCA701CE47B6A00ADC54C /* JFCommentCommitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2FFCA6F1CE47B6A00ADC54C /* JFCommentCommitView.xib */; };
 		B2FFCACA1CE48CBF00ADC54C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FFCAC91CE48CBF00ADC54C /* libsqlite3.tbd */; };
 		B2FFCACC1CE48CDA00ADC54C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FFCACB1CE48CDA00ADC54C /* libiconv.tbd */; };
 		B2FFCACE1CE48D0000ADC54C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FFCACD1CE48D0000ADC54C /* libstdc++.tbd */; };
@@ -115,8 +122,6 @@
 		B2FFCF8A1CF7290400E07786 /* JFModifyInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF891CF7290400E07786 /* JFModifyInfoTableViewController.swift */; };
 		B2FFCF8C1CF7291900E07786 /* JFModifySafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */; };
 		B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */; };
-		B2FFCF941CF7546500E07786 /* JFStarAndShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */; };
-		B2FFCF951CF7546500E07786 /* JFStarAndShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */; };
 		FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963C1C3A65E900046824 /* Assets.xcassets */; };
 		FBF0963F1C3A65E900046824 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963D1C3A65E900046824 /* Info.plist */; };
 /* End PBXBuildFile section */
@@ -197,12 +202,26 @@
 		B238BBB81CEEE3A10050FC3F /* JFProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileCell.swift; sourceTree = "<group>"; };
 		B238BBC01CEEE3ED0050FC3F /* JFProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileHeaderView.swift; sourceTree = "<group>"; };
 		B238BBC21CEEE3F50050FC3F /* JFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFProfileHeaderView.xib; sourceTree = "<group>"; };
+		B23AFF901CF9848C00C73C3B /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
+		B23AFF911CF9848C00C73C3B /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
+		B23AFF921CF9848C00C73C3B /* JFCommentCommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCommitView.swift; sourceTree = "<group>"; };
+		B23AFF931CF9848C00C73C3B /* JFCommentCommitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCommitView.xib; sourceTree = "<group>"; };
+		B23AFF951CF9848C00C73C3B /* JFDetailOtherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherCell.swift; sourceTree = "<group>"; };
+		B23AFF961CF9848C00C73C3B /* JFNewsBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsBottomBar.swift; sourceTree = "<group>"; };
+		B23AFF971CF9848C00C73C3B /* JFNewsBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsBottomBar.xib; sourceTree = "<group>"; };
+		B23AFF981CF9848C00C73C3B /* JFStarAndShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFStarAndShareCell.swift; sourceTree = "<group>"; };
+		B23AFF991CF9848C00C73C3B /* JFStarAndShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFStarAndShareCell.xib; sourceTree = "<group>"; };
+		B23AFF9B1CF9848C00C73C3B /* JFNewsNoPicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsNoPicCell.swift; sourceTree = "<group>"; };
+		B23AFF9C1CF9848C00C73C3B /* JFNewsOnePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsOnePicCell.swift; sourceTree = "<group>"; };
+		B23AFF9D1CF9848C00C73C3B /* JFNewsThreePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsThreePicCell.swift; sourceTree = "<group>"; };
+		B23AFF9E1CF9848C00C73C3B /* JFTopLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFTopLabel.swift; sourceTree = "<group>"; };
+		B23AFFAC1CF98F4300C73C3B /* JFNewsNoPicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsNoPicCell.xib; sourceTree = "<group>"; };
+		B23AFFAE1CF98F5A00C73C3B /* JFNewsOnePicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsOnePicCell.xib; sourceTree = "<group>"; };
+		B23AFFB01CF98F6400C73C3B /* JFNewsThreePicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsThreePicCell.xib; sourceTree = "<group>"; };
 		B242D00B1CF2985900E974F1 /* JFProfileTopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileTopButton.swift; sourceTree = "<group>"; };
 		B242D00E1CF2D35900E974F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = BaoKanIOS/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentTableViewController.swift; sourceTree = "<group>"; };
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
-		B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
-		B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
 		B292E74B1CEEBE79005AA23A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		B29D53BE1CF45CB500CD3F0D /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
@@ -240,11 +259,6 @@
 		B2E3DF831CB222560081745A /* JFNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsTableViewController.swift; sourceTree = "<group>"; };
 		B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFNewsViewController.storyboard; sourceTree = "<group>"; };
 		B2E3DF851CB222560081745A /* JFNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsViewController.swift; sourceTree = "<group>"; };
-		B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherCell.swift; sourceTree = "<group>"; };
-		B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsBottomBar.swift; sourceTree = "<group>"; };
-		B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFNewsBottomBar.xib; sourceTree = "<group>"; };
-		B2E3DF8B1CB222560081745A /* JFNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsCell.swift; sourceTree = "<group>"; };
-		B2E3DF8C1CB222560081745A /* JFTopLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFTopLabel.swift; sourceTree = "<group>"; };
 		B2E3DFA81CB228900081745A /* JFPhotoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoTableViewController.swift; sourceTree = "<group>"; };
 		B2E3DFA91CB228900081745A /* JFPhotoViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFPhotoViewController.storyboard; sourceTree = "<group>"; };
 		B2E3DFAA1CB228900081745A /* JFPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoViewController.swift; sourceTree = "<group>"; };
@@ -264,8 +278,6 @@
 		B2FD9A031CB95F760005B8AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2FD9A051CB95F7F0005B8AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B2FD9A081CB95F900005B8AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		B2FFCA6D1CE47B5F00ADC54C /* JFCommentCommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCommitView.swift; sourceTree = "<group>"; };
-		B2FFCA6F1CE47B6A00ADC54C /* JFCommentCommitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCommitView.xib; sourceTree = "<group>"; };
 		B2FFCAC91CE48CBF00ADC54C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B2FFCACB1CE48CDA00ADC54C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		B2FFCACD1CE48D0000ADC54C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -273,8 +285,6 @@
 		B2FFCF891CF7290400E07786 /* JFModifyInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFModifyInfoTableViewController.swift; sourceTree = "<group>"; };
 		B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFModifySafeTableViewController.swift; sourceTree = "<group>"; };
 		B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFInfoHeaderView.swift; sourceTree = "<group>"; };
-		B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFStarAndShareCell.swift; sourceTree = "<group>"; };
-		B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFStarAndShareCell.xib; sourceTree = "<group>"; };
 		CD8416C2AE2F58BAC0DC55D5 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF0963C1C3A65E900046824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = BaoKanIOS/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		FBF0963D1C3A65E900046824 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -653,6 +663,43 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B23AFF8F1CF9848C00C73C3B /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				B23AFF901CF9848C00C73C3B /* JFCommentCell.swift */,
+				B23AFF911CF9848C00C73C3B /* JFCommentCell.xib */,
+				B23AFF921CF9848C00C73C3B /* JFCommentCommitView.swift */,
+				B23AFF931CF9848C00C73C3B /* JFCommentCommitView.xib */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		B23AFF941CF9848C00C73C3B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B23AFF951CF9848C00C73C3B /* JFDetailOtherCell.swift */,
+				B23AFF961CF9848C00C73C3B /* JFNewsBottomBar.swift */,
+				B23AFF971CF9848C00C73C3B /* JFNewsBottomBar.xib */,
+				B23AFF981CF9848C00C73C3B /* JFStarAndShareCell.swift */,
+				B23AFF991CF9848C00C73C3B /* JFStarAndShareCell.xib */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		B23AFF9A1CF9848C00C73C3B /* List */ = {
+			isa = PBXGroup;
+			children = (
+				B23AFF9B1CF9848C00C73C3B /* JFNewsNoPicCell.swift */,
+				B23AFFAC1CF98F4300C73C3B /* JFNewsNoPicCell.xib */,
+				B23AFF9C1CF9848C00C73C3B /* JFNewsOnePicCell.swift */,
+				B23AFFAE1CF98F5A00C73C3B /* JFNewsOnePicCell.xib */,
+				B23AFF9D1CF9848C00C73C3B /* JFNewsThreePicCell.swift */,
+				B23AFFB01CF98F6400C73C3B /* JFNewsThreePicCell.xib */,
+				B23AFF9E1CF9848C00C73C3B /* JFTopLabel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		B29D53BD1CF45CB500CD3F0D /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,17 +820,9 @@
 		B2E3DF861CB222560081745A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B2E3DF881CB222560081745A /* JFDetailOtherCell.swift */,
-				B2E3DF891CB222560081745A /* JFNewsBottomBar.swift */,
-				B2E3DF8A1CB222560081745A /* JFNewsBottomBar.xib */,
-				B2E3DF8B1CB222560081745A /* JFNewsCell.swift */,
-				B2E3DF8C1CB222560081745A /* JFTopLabel.swift */,
-				B2FFCA6D1CE47B5F00ADC54C /* JFCommentCommitView.swift */,
-				B2FFCA6F1CE47B6A00ADC54C /* JFCommentCommitView.xib */,
-				B28716BD1CEC540800E1E3E5 /* JFCommentCell.swift */,
-				B28716BE1CEC540800E1E3E5 /* JFCommentCell.xib */,
-				B2FFCF921CF7546500E07786 /* JFStarAndShareCell.swift */,
-				B2FFCF931CF7546500E07786 /* JFStarAndShareCell.xib */,
+				B23AFF8F1CF9848C00C73C3B /* Comment */,
+				B23AFF941CF9848C00C73C3B /* Detail */,
+				B23AFF9A1CF9848C00C73C3B /* List */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1006,20 +1045,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23AFFAF1CF98F5A00C73C3B /* JFNewsOnePicCell.xib in Resources */,
 				B29D53E51CF45CB600CD3F0D /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				B2FFCA701CE47B6A00ADC54C /* JFCommentCommitView.xib in Resources */,
-				B28716C01CEC540800E1E3E5 /* JFCommentCell.xib in Resources */,
-				B2FFCF951CF7546500E07786 /* JFStarAndShareCell.xib in Resources */,
-				B2E3DF951CB222560081745A /* JFNewsBottomBar.xib in Resources */,
 				A5B279CB1C36392F003C773D /* JFReadViewController.storyboard in Resources */,
 				FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */,
+				B23AFFA71CF9848C00C73C3B /* JFStarAndShareCell.xib in Resources */,
 				B20578B01CF6E4A8004CE501 /* JFSetFontView.xib in Resources */,
 				FBF0963F1C3A65E900046824 /* Info.plist in Resources */,
 				B2E3DFCE1CB228900081745A /* JFVideoViewController.storyboard in Resources */,
+				B23AFFA51CF9848C00C73C3B /* JFNewsBottomBar.xib in Resources */,
 				B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */,
+				B23AFFA21CF9848C00C73C3B /* JFCommentCommitView.xib in Resources */,
 				B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */,
 				A5B279C91C36392F003C773D /* JFProfileViewController.storyboard in Resources */,
 				B2E482561CF891050062D0B9 /* JFForgotViewController.xib in Resources */,
+				B23AFFB11CF98F6400C73C3B /* JFNewsThreePicCell.xib in Resources */,
 				B2BD22841CE5DDF3009E0877 /* JFRegisterViewController.xib in Resources */,
 				B238BBC31CEEE3F50050FC3F /* JFProfileHeaderView.xib in Resources */,
 				B29D53E21CF45CB600CD3F0D /* ShareSDKUI.bundle in Resources */,
@@ -1027,7 +1067,9 @@
 				B29D53EB1CF45CB600CD3F0D /* ShareSDK.bundle in Resources */,
 				B29D53E91CF45CB600CD3F0D /* README.txt in Resources */,
 				B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */,
+				B23AFFAD1CF98F4300C73C3B /* JFNewsNoPicCell.xib in Resources */,
 				B2E3DFC31CB228900081745A /* JFPhotoViewController.storyboard in Resources */,
+				B23AFFA01CF9848C00C73C3B /* JFCommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,46 +1142,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23AFFAA1CF9848C00C73C3B /* JFNewsThreePicCell.swift in Sources */,
 				A5B279C21C36392F003C773D /* AppDelegate.swift in Sources */,
+				B23AFF9F1CF9848C00C73C3B /* JFCommentCell.swift in Sources */,
 				B20D58C61CF2DEE5000DA6EB /* JFCommentListTableViewController.swift in Sources */,
+				B23AFFA41CF9848C00C73C3B /* JFNewsBottomBar.swift in Sources */,
 				B2E3DF8F1CB222560081745A /* JFNewsTableViewController.swift in Sources */,
 				B2E482551CF891050062D0B9 /* JFForgotViewController.swift in Sources */,
 				B2E3DFC91CB228900081745A /* JFPhotoListCell.swift in Sources */,
 				B238BBBC1CEEE3A10050FC3F /* JFProfileCellModel.swift in Sources */,
 				A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */,
-				B2FFCF941CF7546500E07786 /* JFStarAndShareCell.swift in Sources */,
 				B238BBC11CEEE3ED0050FC3F /* JFProfileHeaderView.swift in Sources */,
-				B2E3DF961CB222560081745A /* JFNewsCell.swift in Sources */,
 				B238BBBE1CEEE3A10050FC3F /* JFLoginButton.swift in Sources */,
 				B2E3DF911CB222560081745A /* JFNewsViewController.swift in Sources */,
 				B20578A91CF6BFB8004CE501 /* JFCollectionModel.swift in Sources */,
 				B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */,
+				B23AFFA91CF9848C00C73C3B /* JFNewsOnePicCell.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
 				B20578AE1CF6E4A0004CE501 /* JFSetFontView.swift in Sources */,
 				B2E3DFCD1CB228900081745A /* JFVideoTableViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
 				B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */,
 				B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */,
-				B2E3DF971CB222560081745A /* JFTopLabel.swift in Sources */,
 				B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */,
 				A5B279C51C36392F003C773D /* JFNavigationController.swift in Sources */,
-				B2FFCA6E1CE47B5F00ADC54C /* JFCommentCommitView.swift in Sources */,
 				B2FFCF8C1CF7291900E07786 /* JFModifySafeTableViewController.swift in Sources */,
 				B2F174651CB761F8007AA386 /* JFArticleDetailModel.swift in Sources */,
 				B238BBBD1CEEE3A10050FC3F /* JFProfileCellSwitchModel.swift in Sources */,
+				B23AFFA11CF9848C00C73C3B /* JFCommentCommitView.swift in Sources */,
 				A55CD9021C76E47E0087CA0A /* api.swift in Sources */,
 				B2FA169C1CF7E0B000406953 /* JFOtherLinkModel.swift in Sources */,
 				B2BD22711CE5829A009E0877 /* JFDutyViewController.swift in Sources */,
-				B28716BF1CEC540800E1E3E5 /* JFCommentCell.swift in Sources */,
 				B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */,
 				B238BBB91CEEE3A10050FC3F /* JFProfileCellArrowModel.swift in Sources */,
 				B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */,
 				A56BF6FF1C365919001E9F5A /* JFCommon.swift in Sources */,
 				A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */,
+				B23AFFA31CF9848C00C73C3B /* JFDetailOtherCell.swift in Sources */,
+				B23AFFA61CF9848C00C73C3B /* JFStarAndShareCell.swift in Sources */,
 				A55CD9061C76EDF80087CA0A /* Color+Extension.swift in Sources */,
 				B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */,
 				B2BD22831CE5DDF3009E0877 /* JFRegisterViewController.swift in Sources */,
 				B20D58C31CF2DE10000DA6EB /* JFEditProfileViewController.swift in Sources */,
+				B23AFFAB1CF9848C00C73C3B /* JFTopLabel.swift in Sources */,
 				A5309C271C47719900455EB8 /* JFArticleListModel.swift in Sources */,
 				A56ED56E1C7AB02F009B862D /* UIView+Extension.swift in Sources */,
 				B220AAEE1CE1C424007FBBD2 /* UIImage+Extension.swift in Sources */,
@@ -1149,15 +1194,14 @@
 				B20578AC1CF6D429004CE501 /* JFUserCommentModel.swift in Sources */,
 				B238BBBA1CEEE3A10050FC3F /* JFProfileCellGroupModel.swift in Sources */,
 				B2E3DFC21CB228900081745A /* JFPhotoTableViewController.swift in Sources */,
+				B23AFFA81CF9848C00C73C3B /* JFNewsNoPicCell.swift in Sources */,
 				A5B279C61C36392F003C773D /* JFTabBarController.swift in Sources */,
 				B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */,
 				B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */,
 				B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */,
 				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
 				B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */,
-				B2E3DF941CB222560081745A /* JFNewsBottomBar.swift in Sources */,
 				B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */,
-				B2E3DF931CB222560081745A /* JFDetailOtherCell.swift in Sources */,
 				A5B279CC1C36392F003C773D /* JFReadViewController.swift in Sources */,
 				B2FFCF8A1CF7290400E07786 /* JFModifyInfoTableViewController.swift in Sources */,
 				B2BD227B1CE5DD5C009E0877 /* JFCollectionTableViewController.swift in Sources */,

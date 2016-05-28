@@ -339,8 +339,6 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        // 正文 / 赞 - 分享 / 相关新闻
         switch section {
         case 0:
             return 1
@@ -356,7 +354,6 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         switch indexPath.section {
         case 0:
             return webView.height

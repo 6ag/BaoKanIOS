@@ -28,7 +28,9 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     var articleList = [JFArticleListModel]()
     
     /// 新闻cell重用标识符
-    let newsReuseIdentifier = "newsReuseIdentifier"
+    let newsNoPicCell = "newsNoPicCell"
+    let newsOnePicCell = "newsOnePicCell"
+    let newsThreePicCell = "newsThreePicCell"
     
     /// 顶部轮播
     var topScrollView: SDCycleScrollView!
@@ -36,8 +38,9 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerClass(JFNewsCell.self, forCellReuseIdentifier: newsReuseIdentifier)
-        tableView.rowHeight = 100
+        tableView.registerNib(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: newsNoPicCell)
+        tableView.registerNib(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: newsOnePicCell)
+        tableView.registerNib(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: newsThreePicCell)
         
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         headerRefresh.lastUpdatedTimeLabel.hidden = true
@@ -92,10 +95,17 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     private func loadNews(classid: Int, pageIndex: Int, method: Int) {
         
-        let parameters: [String : AnyObject] = [
+        var parameters: [String : AnyObject]
+        if classid == 10000 {
+            parameters = [
+            "pageIndex" : pageIndex
+            ]
+        } else {
+            parameters = [
             "classid" : classid,
             "pageIndex" : pageIndex
-        ]
+            ]
+        }
         
         JFNetworkTool.shareNetworkTool.get(ARTICLE_LIST, parameters: parameters) { (success, result, error) -> () in
             
@@ -111,8 +121,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                     let maxId = self.articleList.first?.id ?? "0"
                     
                     for article in data {
-                        
-                        var dict = [
+                        var dict: [String : AnyObject] = [
                             "title" : article["title"].stringValue,          // 文章标题
                             "bclassid" : article["bclassid"].stringValue,    // 终极栏目id
                             "classid" : article["classid"].stringValue,      // 当前子分类id
@@ -124,29 +133,48 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                             "id" : article["id"].stringValue,                // 文章id
                             "classname" : article["classname"].stringValue,  // 分类名称
                             "table" : article["table"].stringValue,          // 数据表名
-                            "titleurl" : "\(BASE_URL)\(article["titleurl"].stringValue)", // 文章url
+                            "plnum" : article["plnum"].stringValue,          // 评论数量
                         ]
                         
-                        // 标题图片可能无值
+                        // 判断是否有标题图片
                         if article["titlepic"].string != "" {
                             
-                            dict["titlepic"] = article["titlepic"].string!
+                            var titlepicUrl = article["titlepic"].stringValue
+                            // 判断url是否包含前缀
+                            titlepicUrl = titlepicUrl.hasPrefix("http") ? titlepicUrl : "(\(BASE_URL)\(titlepicUrl))"
+                            dict["titlepic"] = titlepicUrl
                             
-                            let postModel = JFArticleListModel(dict: dict)
-                            
-                            if method == 0 {
-                                if Int(maxId) < Int(postModel.id!) {
-                                    self.articleList.insert(postModel, atIndex: 0)
+                            // 标题多图
+                            let morepics = article["morepic"].array
+                            if let morepic = morepics {
+                                var morepicArray = [String]()
+                                for picdict in morepic {
+                                    var bigpicUrl = picdict["bigpic"].stringValue
+                                    // 判断url是否包含前缀
+                                    bigpicUrl = bigpicUrl.hasPrefix("http") ? bigpicUrl : "(\(BASE_URL)\(bigpicUrl))"
+                                    morepicArray.append(bigpicUrl)
                                 }
+                                dict["morepic"] = morepicArray
+                                dict["piccount"] = 3
                             } else {
-                                if Int(minId) > Int(postModel.id!) {
-                                    self.articleList.append(postModel)
-                                }
+                                dict["piccount"] = 1
                             }
-                            
                         } else {
-                            // 如果无图，就跳过
-                            continue
+                            dict["piccount"] = 0
+                        }
+                        
+                        // 字典转模型
+                        let postModel = JFArticleListModel(dict: dict)
+                        
+                        // 根据加载方式拼接数据
+                        if method == 0 {
+                            if Int(maxId) < Int(postModel.id!) {
+                                self.articleList.insert(postModel, atIndex: 0)
+                            }
+                        } else {
+                            if Int(minId) > Int(postModel.id!) {
+                                self.articleList.append(postModel)
+                            }
                         }
                         
                     }
@@ -179,12 +207,55 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFNewsCell
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if articleList.count >= 3 {
-            cell.postModel = articleList[indexPath.row + 3]
+            let postModel = articleList[indexPath.row + 3]
+            if postModel.piccount == 0 {
+                if postModel.rowHeight == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+                    let height = cell.getRowHeight(postModel)
+                    postModel.rowHeight = height
+                }
+                return postModel.rowHeight
+            } else if postModel.piccount == 1 {
+                // 单图的高度固定
+                return 96
+            } else if postModel.piccount == 3 {
+                if postModel.rowHeight == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+                    let height = cell.getRowHeight(postModel)
+                    postModel.rowHeight = height
+                }
+                return postModel.rowHeight
+            }
         }
-        return cell
+        return 0
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if articleList.count >= 3 {
+            let postModel = articleList[indexPath.row + 3]
+            if postModel.piccount == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+                cell.postModel = postModel
+                return cell
+            } else if postModel.piccount == 1 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(newsOnePicCell) as! JFNewsOnePicCell
+                cell.postModel = postModel
+                return cell
+            } else if postModel.piccount == 3 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+                cell.postModel = postModel
+                return cell
+            }
+            
+        }
+        return UITableViewCell()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
