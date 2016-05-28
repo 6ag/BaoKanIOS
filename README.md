@@ -17,8 +17,8 @@
 
 ### 个人中心
 
-![image](https://github.com/6ag/BaoKanIOS/blob/master/3.jpg)
+![image](https://github.com/6ag/BaoKanIOS/blob/master/3.gif)
 
-### 还没写完呢。。
+### 目前项目还在继续开发中，不过也快了。写完iOS版，就开始着手Android版的开发。
 
 
