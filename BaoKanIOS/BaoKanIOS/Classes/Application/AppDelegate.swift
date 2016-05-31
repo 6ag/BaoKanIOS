@@ -35,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 字体 14小   16中   18大   20  22   24  共6个等级，可以用枚举列举使用
             NSUserDefaults.standardUserDefaults().setInteger(16, forKey: CONTENT_FONT_SIZE)
         }
+        
+        // 验证缓存的账号是否有效
+        JFAccountModel.checkUserInfo()
     }
     
     /**

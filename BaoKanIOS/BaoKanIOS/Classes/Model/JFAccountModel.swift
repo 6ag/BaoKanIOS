@@ -64,6 +64,31 @@ class JFAccountModel: NSObject, NSCoding {
     }
     
     /**
+     每次打开app就检查一次用户是否有效
+     */
+    class func checkUserInfo() {
+        if isLogin() {
+            // 已经登录并保存过信息，验证信息是否有效
+            let parameters: [String : AnyObject] = [
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!
+            ]
+            
+            JFNetworkTool.shareNetworkTool.post(GET_USERINFO, parameters: parameters, finished: { (success, result, error) in
+                if success {
+                    print("登录信息有效")
+                    if let successResult = result {
+                        let account = JFAccountModel(dict: successResult["data"]["user"].dictionaryObject!)
+                        // 更新用户信息
+                        account.updateUserInfo()
+                    }
+                }
+            })
+        }
+    }
+    
+    /**
      防止kvc崩溃
      */
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
