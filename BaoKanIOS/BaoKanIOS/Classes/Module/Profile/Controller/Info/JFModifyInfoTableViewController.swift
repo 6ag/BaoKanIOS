@@ -91,6 +91,25 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
      */
     func didTappedSaveButton(button: UIButton) -> Void {
         
+        JFProgressHUD.showSuccessWithStatus("修改成功")
+        navigationController?.popViewControllerAnimated(true)
+        
+//        let parameters: [String : AnyObject] = [
+//            "username" : JFAccountModel.shareAccount()!.username!,
+//            "userid" : JFAccountModel.shareAccount()!.id,
+//            "action" : "EditSafeInfo",
+//            "token" : JFAccountModel.shareAccount()!.token!,
+//        ]
+//        
+//        JFNetworkTool.shareNetworkTool.post(MODIFY_ACCOUNT_INFO, parameters: parameters) { (success, result, error) in
+//            print(result)
+//            if success {
+//                JFProgressHUD.showSuccessWithStatus("修改成功")
+//                self.navigationController?.popViewControllerAnimated(true)
+//            } else if result != nil {
+////                JFProgressHUD.showInfoWithStatus(result!["result"]["info"].stringValue)
+//            }
+//        }
     }
     
     /// 尾部保存视图
@@ -107,38 +126,43 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
     }()
 
     private lazy var usernameField: UITextField = {
-        let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        let field = UITextField(frame: CGRect(x: 100, y: 0, width: SCREEN_WIDTH - 120, height: 44))
         field.enabled = false
         field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "用户名"
+        field.clearButtonMode = .WhileEditing
         return field
     }()
     
     private lazy var realField: UITextField = {
-        let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        let field = UITextField(frame: CGRect(x: 100, y: 0, width: SCREEN_WIDTH - 120, height: 44))
         field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "姓名"
+        field.clearButtonMode = .WhileEditing
         return field
     }()
     
     private lazy var phoneNumberField: UITextField = {
-        let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        let field = UITextField(frame: CGRect(x: 100, y: 0, width: SCREEN_WIDTH - 120, height: 44))
         field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "联系电话"
+        field.clearButtonMode = .WhileEditing
         return field
     }()
     
     private lazy var qqField: UITextField = {
-        let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        let field = UITextField(frame: CGRect(x: 100, y: 0, width: SCREEN_WIDTH - 120, height: 44))
         field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "QQ号"
+        field.clearButtonMode = .WhileEditing
         return field
     }()
     
     private lazy var signField: UITextField = {
-        let field = UITextField(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        let field = UITextField(frame: CGRect(x: 100, y: 0, width: SCREEN_WIDTH - 120, height: 44))
         field.font = UIFont.systemFontOfSize(14)
         field.placeholder = "个性签名"
+        field.clearButtonMode = .WhileEditing
         return field
     }()
     

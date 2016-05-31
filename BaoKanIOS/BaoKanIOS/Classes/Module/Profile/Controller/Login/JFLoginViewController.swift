@@ -26,6 +26,10 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
         effectView.frame = SCREEN_BOUNDS
         bgImageView.addSubview(effectView)
         
+        // 设置保存的账号
+        usernameField.text = NSUserDefaults.standardUserDefaults().objectForKey("username") as? String
+        passwordField.text = NSUserDefaults.standardUserDefaults().objectForKey("password") as? String
+        
         didChangeTextField(usernameField)
     }
     
@@ -51,6 +55,10 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     
     // 测试账号密码都是：bbsbaokan
     @IBAction func didTappedLoginButton(button: JFLoginButton) {
+        
+        // 保存账号和密码
+        NSUserDefaults.standardUserDefaults().setObject(self.usernameField.text, forKey: "username")
+        NSUserDefaults.standardUserDefaults().setObject(self.passwordField.text, forKey: "password")
         
         view.userInteractionEnabled = false
         view.endEditing(true)

@@ -16,8 +16,12 @@ class JFNewsViewController: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
     /// 标签按钮旁的加号按钮
     @IBOutlet weak var addButton: UIButton!
-    // 顶部标签数组
-    private var topTitles: [[String : String]]?
+    
+    // 栏目数组
+    private var selectedArray: [[String : String]]?
+    private var optionalArray: [[String : String]]?
+    
+    let editColumnVc = JFEditColumnViewController()
     
     // MARK: - 视图生命周期
     override func viewDidLoad() {
@@ -68,11 +72,42 @@ class JFNewsViewController: UIViewController {
     }
     
     /**
+     编辑分类按钮点击
+     */
+    @IBAction func didTappedEditColumnButton(sender: UIButton) {
+        sender.selected = !sender.selected
+        
+        if sender.selected {
+            editColumnVc.selectedArray = selectedArray
+            editColumnVc.optionalArray = optionalArray
+            editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: 0)
+            addChildViewController(editColumnVc)
+            view.addSubview(editColumnVc.view)
+            tabBarController?.tabBar.hidden = true
+            
+            // 切换控制器动画
+            UIView.animateWithDuration(0.25, animations: {
+                self.editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 60)
+                self.addButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+            })
+        } else {
+            UIView.animateWithDuration(0.25, animations: {
+                self.editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: 0)
+                self.addButton.imageView!.transform = CGAffineTransformIdentity
+                }, completion: { (_) in
+                    self.editColumnVc.view.removeFromSuperview()
+                    self.tabBarController?.tabBar.hidden = false
+            })
+        }
+        
+    }
+    
+    /**
      添加顶部标题栏和控制器
      */
     private func addContent() {
         
-        self.topTitles = [
+        selectedArray = [
             [
                 "classid" : "10000",
                 "classname" : "今日头条"
@@ -112,7 +147,10 @@ class JFNewsViewController: UIViewController {
             [
                 "classid" : "396",
                 "classname": "独家报道"
-            ],
+            ]
+        ]
+        
+        optionalArray = [
             [
                 "classid" : "32",
                 "classname": "高端访谈"
@@ -182,10 +220,10 @@ class JFNewsViewController: UIViewController {
         // 布局用的左边距
         var leftMargin: CGFloat = 0
         
-        for i in 0..<topTitles!.count {
+        for i in 0..<selectedArray!.count {
             
             let label = JFTopLabel()
-            label.text = topTitles![i]["classname"]
+            label.text = selectedArray![i]["classname"]
             label.tag = i
             label.scale = i == 0 ? 1.0 : 0.0
             label.userInteractionEnabled = true
@@ -210,7 +248,7 @@ class JFNewsViewController: UIViewController {
             
             // 默认控制器
             if i == 0 {
-                newsVc.classid = Int(topTitles![0]["classid"]!)
+                newsVc.classid = Int(selectedArray![0]["classid"]!)
                 newsVc.view.frame = contentScrollView.bounds
                 contentScrollView.addSubview(newsVc.view)
             }
@@ -258,7 +296,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
         topScrollView.setContentOffset(CGPoint(x: offsetX, y: topScrollView.contentOffset.y), animated: true)
         
         // 恢复其他label缩放
-        for i in 0..<topTitles!.count {
+        for i in 0..<selectedArray!.count {
             if i != index {
                 let topLabel = topScrollView.subviews[i] as! JFTopLabel
                 topLabel.scale = 0.0
@@ -311,7 +349,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
         newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
         
         // 传递分类数据
-        newsVc.classid = Int(topTitles![index]["classid"]!)
+        newsVc.classid = Int(selectedArray![index]["classid"]!)
     }
     
 }

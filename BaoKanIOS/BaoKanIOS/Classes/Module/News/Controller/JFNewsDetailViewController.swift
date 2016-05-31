@@ -10,6 +10,7 @@ import UIKit
 import YYWebImage
 import MJRefresh
 import WebKit
+import Mustache
 
 class JFNewsDetailViewController: UIViewController {
     
@@ -237,6 +238,7 @@ class JFNewsDetailViewController: UIViewController {
         let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         webView.navigationDelegate = self
         webView.scrollView.scrollEnabled = false
+        webView.scrollView.delegate = self
         return webView
     }()
     
@@ -277,7 +279,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         
         // 内容页html
         var html = ""
-        html.appendContentsOf("<html>")
+        html.appendContentsOf("<!doctype html>")
         html.appendContentsOf("<head>")
         html.appendContentsOf("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>")
         
@@ -300,8 +302,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             "}" +
             ".img-responsive {" +
             "text-align: center;" +
-            "margin-bottom: 10px;" +
-            "width: 98%;" +
+            "max-width: 98% !important;" +
+            "height: auto;" +
             "}" +
             ".container {" +
             "background: #FFFFFF;" +
@@ -331,7 +333,16 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         html.appendContentsOf("</body>")
         html.appendContentsOf("</html>")
         
-        webView.loadHTMLString(html, baseURL: nil)
+        
+//        let arr = html.componentsSeparatedByString("<p")
+//        for str in arr {
+//            print("<p" + str)
+//        }
+        
+        let template = try! Template(string: html)
+        let rendering = try! template.render()
+        webView.loadHTMLString(rendering, baseURL: nil)
+//        print(rendering)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -605,6 +616,7 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
 extension JFNewsDetailViewController: WKNavigationDelegate {
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        print("didFinishNavigation")
         webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
             if let height = result {
                 let frame = webView.frame
@@ -613,6 +625,10 @@ extension JFNewsDetailViewController: WKNavigationDelegate {
                 self.activityView.stopAnimating()
             }
         }
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return nil
     }
 }
 

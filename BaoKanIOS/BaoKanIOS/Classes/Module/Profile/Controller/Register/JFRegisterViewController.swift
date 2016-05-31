@@ -90,6 +90,7 @@ class JFRegisterViewController: UIViewController {
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
                 if success {
+                    JFProgressHUD.showInfoWithStatus("注册成功，自动登录")
                     self.didTappedBackButton()
                     // 注册成功后回调成功
                     self.delegate?.registerSuccess(self.usernameField.text!, password: self.passwordField1.text!)

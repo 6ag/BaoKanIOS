@@ -30,7 +30,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="DCM-dw-Ohm"/>
                     </constraints>
-                    <state key="normal" title="找回密码">
+                    <state key="normal" title="发送">
                         <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -238,23 +238,23 @@
                     <exclude reference="w3Z-ak-SdY"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="DMg-7a-6hS"/>
-                    <exclude reference="MYS-cP-Yit"/>
-                    <exclude reference="v6R-Dg-m4h"/>
-                    <exclude reference="z0r-3H-kIV"/>
                     <exclude reference="Svw-yb-Noo"/>
                     <exclude reference="pY7-nQ-0uT"/>
-                    <exclude reference="gd8-Hu-4ZR"/>
-                    <exclude reference="lUj-zv-TY4"/>
-                    <exclude reference="lpk-MQ-f32"/>
-                    <exclude reference="xzl-od-deU"/>
-                    <exclude reference="0UH-sP-RJH"/>
-                    <exclude reference="b7D-vB-30s"/>
-                    <exclude reference="wgm-tb-Hzs"/>
                     <exclude reference="0jw-dI-VgI"/>
                     <exclude reference="YiI-4P-vTE"/>
                     <exclude reference="abt-5G-dx9"/>
                     <exclude reference="joQ-lb-qLt"/>
+                    <exclude reference="0UH-sP-RJH"/>
+                    <exclude reference="b7D-vB-30s"/>
+                    <exclude reference="wgm-tb-Hzs"/>
+                    <exclude reference="DMg-7a-6hS"/>
+                    <exclude reference="MYS-cP-Yit"/>
+                    <exclude reference="v6R-Dg-m4h"/>
+                    <exclude reference="z0r-3H-kIV"/>
+                    <exclude reference="gd8-Hu-4ZR"/>
+                    <exclude reference="lUj-zv-TY4"/>
+                    <exclude reference="lpk-MQ-f32"/>
+                    <exclude reference="xzl-od-deU"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -266,29 +266,29 @@
                     <include reference="w3Z-ak-SdY"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="DMg-7a-6hS"/>
-                    <include reference="MYS-cP-Yit"/>
-                    <include reference="v6R-Dg-m4h"/>
-                    <include reference="z0r-3H-kIV"/>
                     <include reference="Svw-yb-Noo"/>
                     <include reference="pY7-nQ-0uT"/>
-                    <include reference="lUj-zv-TY4"/>
-                    <include reference="lpk-MQ-f32"/>
-                    <include reference="0UH-sP-RJH"/>
-                    <include reference="b7D-vB-30s"/>
                     <include reference="0jw-dI-VgI"/>
                     <include reference="YiI-4P-vTE"/>
                     <include reference="abt-5G-dx9"/>
                     <include reference="joQ-lb-qLt"/>
+                    <include reference="0UH-sP-RJH"/>
+                    <include reference="b7D-vB-30s"/>
+                    <include reference="DMg-7a-6hS"/>
+                    <include reference="MYS-cP-Yit"/>
+                    <include reference="v6R-Dg-m4h"/>
+                    <include reference="z0r-3H-kIV"/>
+                    <include reference="lUj-zv-TY4"/>
+                    <include reference="lpk-MQ-f32"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="wgm-tb-Hzs"/>
                     <include reference="gd8-Hu-4ZR"/>
                     <exclude reference="lUj-zv-TY4"/>
                     <exclude reference="lpk-MQ-f32"/>
                     <include reference="xzl-od-deU"/>
-                    <include reference="wgm-tb-Hzs"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="421" y="439"/>

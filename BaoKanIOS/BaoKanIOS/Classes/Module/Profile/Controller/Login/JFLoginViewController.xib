@@ -153,34 +153,6 @@
                         </mask>
                     </variation>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZA-9n-u09" userLabel="xinlang">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Rim-RE-Plv"/>
-                        <constraint firstAttribute="width" constant="40" id="z7L-tW-zhH"/>
-                    </constraints>
-                    <state key="normal" backgroundImage="account_snslogin_icon_3"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Rim-RE-Plv"/>
-                            <exclude reference="z7L-tW-zhH"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="Rim-RE-Plv"/>
-                            <include reference="z7L-tW-zhH"/>
-                        </mask>
-                    </variation>
-                    <connections>
-                        <action selector="didTappedSinaLoginButton:" destination="-1" eventType="touchUpInside" id="Ve2-zQ-cgX"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0J-ra-iPo">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -246,6 +218,34 @@
                     </variation>
                     <connections>
                         <action selector="didTappedBackButton" destination="-1" eventType="touchUpInside" id="EJ4-Va-lPH"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZA-9n-u09" userLabel="xinlang">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Rim-RE-Plv"/>
+                        <constraint firstAttribute="width" constant="40" id="z7L-tW-zhH"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="account_snslogin_icon_3"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Rim-RE-Plv"/>
+                            <exclude reference="z7L-tW-zhH"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="Rim-RE-Plv"/>
+                            <include reference="z7L-tW-zhH"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="didTappedSinaLoginButton:" destination="-1" eventType="touchUpInside" id="Ve2-zQ-cgX"/>
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvn-TP-HMe" userLabel="QQ">
@@ -319,11 +319,11 @@
                     <exclude reference="n9Y-EZ-Crd"/>
                     <exclude reference="HVF-gx-bLC"/>
                     <exclude reference="7WQ-Hc-7ZT"/>
-                    <exclude reference="ZZA-9n-u09"/>
                     <exclude reference="Z0J-ra-iPo"/>
                     <exclude reference="W6E-gI-7ba"/>
                     <exclude reference="Ju7-aV-c86"/>
                     <exclude reference="orm-Gv-W4X"/>
+                    <exclude reference="ZZA-9n-u09"/>
                     <exclude reference="Jvn-TP-HMe"/>
                 </mask>
                 <mask key="constraints">
@@ -360,11 +360,11 @@
                     <include reference="n9Y-EZ-Crd"/>
                     <include reference="HVF-gx-bLC"/>
                     <include reference="7WQ-Hc-7ZT"/>
-                    <include reference="ZZA-9n-u09"/>
                     <include reference="Z0J-ra-iPo"/>
                     <include reference="W6E-gI-7ba"/>
                     <include reference="Ju7-aV-c86"/>
                     <include reference="orm-Gv-W4X"/>
+                    <include reference="ZZA-9n-u09"/>
                     <include reference="Jvn-TP-HMe"/>
                 </mask>
                 <mask key="constraints">

@@ -69,11 +69,13 @@ class JFForgotViewController: UIViewController {
             
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(MODIFY_ACCOUNT_INFO, parameters: parameters) { (success, result, error) in
-                if success {
-                    JFProgressHUD.showInfoWithStatus("邮件已经发送")
-                    self.dismissViewControllerAnimated(true, completion: {})
-                } else if result != nil {
-                    JFProgressHUD.showInfoWithStatus(result!["info"].stringValue)
+                if result != nil {
+                    if result!["data"]["info"].stringValue == "邮件已发送，请登录邮箱认证并取回密码" {
+                        self.dismissViewControllerAnimated(true, completion: {})
+                    }
+                    JFProgressHUD.showInfoWithStatus(result!["data"]["info"].stringValue)
+                } else {
+                    JFProgressHUD.showInfoWithStatus("找回失败，请联系管理员！")
                 }
                 // 结束动画
                 sender.endLoginAnimation()

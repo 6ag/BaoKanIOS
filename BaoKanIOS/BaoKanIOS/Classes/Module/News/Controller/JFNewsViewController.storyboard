@@ -31,6 +31,9 @@
                                     <constraint firstAttribute="width" constant="40" id="kmt-ii-9xV"/>
                                 </constraints>
                                 <state key="normal" image="channel_nav_plus"/>
+                                <connections>
+                                    <action selector="didTappedEditColumnButton:" destination="mqn-Xd-dLs" eventType="touchUpInside" id="gQJ-UQ-RLV"/>
+                                </connections>
                             </button>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-EV-o5G" userLabel="contentScrollView">
                                 <rect key="frame" x="0.0" y="104" width="600" height="496"/>

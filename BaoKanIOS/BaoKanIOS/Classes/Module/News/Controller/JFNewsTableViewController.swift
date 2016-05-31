@@ -41,8 +41,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         tableView.registerNib(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: newsNoPicCell)
         tableView.registerNib(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: newsOnePicCell)
         tableView.registerNib(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: newsThreePicCell)
-        
-        tableView.separatorColor = UIColor(red:0.949,  green:0.949,  blue:0.949, alpha:1)
+        tableView.separatorColor = UIColor(red:0.9,  green:0.9,  blue:0.9, alpha:1)
         
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         headerRefresh.lastUpdatedTimeLabel.hidden = true

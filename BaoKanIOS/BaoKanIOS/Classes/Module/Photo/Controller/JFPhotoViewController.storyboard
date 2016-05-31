@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hz5-hD-UIz">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -47,15 +49,6 @@
                                     <constraint firstAttribute="height" constant="40" id="cvn-BJ-qt9"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-2X-T8b">
-                                <rect key="frame" x="560" y="64" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Myr-FY-0Ym"/>
-                                    <constraint firstAttribute="width" constant="40" id="kmt-ii-9xV"/>
-                                </constraints>
-                                <state key="normal" image="channel_nav_plus"/>
-                            </button>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-EV-o5G" userLabel="contentScrollView">
                                 <rect key="frame" x="0.0" y="104" width="600" height="496"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -66,32 +59,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FHU-EV-o5G" firstAttribute="top" secondItem="fNF-2X-T8b" secondAttribute="bottom" id="04j-Wk-wpa"/>
                             <constraint firstItem="V3q-ZM-xaJ" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="2Oa-Ga-56e"/>
+                            <constraint firstItem="FHU-EV-o5G" firstAttribute="top" secondItem="V3q-ZM-xaJ" secondAttribute="bottom" id="37a-Uy-bya"/>
                             <constraint firstItem="HvU-g6-pnF" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="6cV-2M-Lrb"/>
-                            <constraint firstItem="nVh-rT-fTe" firstAttribute="top" secondItem="fNF-2X-T8b" secondAttribute="bottom" id="8fQ-Rl-ZQY"/>
+                            <constraint firstAttribute="trailing" secondItem="V3q-ZM-xaJ" secondAttribute="trailing" id="BI9-nZ-1vr"/>
                             <constraint firstAttribute="trailing" secondItem="HvU-g6-pnF" secondAttribute="trailing" id="ECk-5a-11D"/>
                             <constraint firstItem="nVh-rT-fTe" firstAttribute="top" secondItem="rwb-V9-5e0" secondAttribute="topMargin" id="JF6-JJ-tac"/>
                             <constraint firstItem="nVh-rT-fTe" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="LZx-TS-hFa"/>
                             <constraint firstItem="HvU-g6-pnF" firstAttribute="centerY" secondItem="rwb-V9-5e0" secondAttribute="centerY" id="Nbg-WK-PcO"/>
                             <constraint firstAttribute="trailing" secondItem="nVh-rT-fTe" secondAttribute="trailing" id="OYt-ev-Qdw"/>
-                            <constraint firstAttribute="trailing" secondItem="fNF-2X-T8b" secondAttribute="trailing" id="VLx-QO-igl"/>
                             <constraint firstItem="fuU-RQ-tUC" firstAttribute="top" secondItem="FHU-EV-o5G" secondAttribute="bottom" id="ZBW-cO-yTr"/>
                             <constraint firstAttribute="trailing" secondItem="FHU-EV-o5G" secondAttribute="trailing" id="n0h-zf-Th1"/>
-                            <constraint firstItem="fNF-2X-T8b" firstAttribute="top" secondItem="tUK-om-XoJ" secondAttribute="bottom" id="t0u-uf-s0z"/>
                             <constraint firstItem="FHU-EV-o5G" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="tsN-zH-cM8"/>
                             <constraint firstItem="V3q-ZM-xaJ" firstAttribute="top" secondItem="tUK-om-XoJ" secondAttribute="bottom" id="uv1-rx-JBN"/>
-                            <constraint firstItem="fNF-2X-T8b" firstAttribute="leading" secondItem="V3q-ZM-xaJ" secondAttribute="trailing" id="wWM-gn-utu"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="nVh-rT-fTe"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8fQ-Rl-ZQY"/>
                                 <exclude reference="JF6-JJ-tac"/>
                                 <exclude reference="LZx-TS-hFa"/>
                                 <exclude reference="OYt-ev-Qdw"/>
+                                <exclude reference="BI9-nZ-1vr"/>
+                                <exclude reference="37a-Uy-bya"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -99,16 +90,16 @@
                                 <include reference="nVh-rT-fTe"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8fQ-Rl-ZQY"/>
                                 <include reference="JF6-JJ-tac"/>
                                 <include reference="LZx-TS-hFa"/>
                                 <include reference="OYt-ev-Qdw"/>
+                                <include reference="BI9-nZ-1vr"/>
+                                <include reference="37a-Uy-bya"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="图秀" id="UN2-ep-CMR"/>
                     <connections>
-                        <outlet property="addButton" destination="fNF-2X-T8b" id="gbC-s0-6WO"/>
                         <outlet property="contentScrollView" destination="FHU-EV-o5G" id="CSU-ks-opV"/>
                         <outlet property="topScrollView" destination="V3q-ZM-xaJ" id="fCP-cN-6FT"/>
                     </connections>
@@ -137,7 +128,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="channel_nav_plus" width="18" height="18"/>
         <image name="photoview_image_default_white" width="320" height="70"/>
     </resources>
 </document>

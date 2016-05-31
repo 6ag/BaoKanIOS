@@ -52,9 +52,19 @@ class JFEditProfileViewController: JFBaseTableViewController {
      退出登录点击
      */
     func didTappedLogoutButton(button: UIButton) -> Void {
-        JFAccountModel.shareAccount()!.logout()
-        JFProgressHUD.showSuccessWithStatus("退出成功")
-        navigationController?.popViewControllerAnimated(true)
+        
+        let alertC = UIAlertController(title: "确定注销登录状态？", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let action1 = UIAlertAction(title: "确定", style: UIAlertActionStyle.Default) { (action) in
+            JFAccountModel.logout()
+            JFProgressHUD.showSuccessWithStatus("退出成功")
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        let action2 = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel) { (action) in
+            
+        }
+        alertC.addAction(action1)
+        alertC.addAction(action2)
+        presentViewController(alertC, animated: true) {}
     }
     
     // MARK: - 懒加载

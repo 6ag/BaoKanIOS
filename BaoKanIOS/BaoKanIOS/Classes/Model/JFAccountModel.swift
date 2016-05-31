@@ -83,6 +83,9 @@ class JFAccountModel: NSObject, NSCoding {
                         // 更新用户信息
                         account.updateUserInfo()
                     }
+                } else {
+                    print("登录信息无效")
+                    JFAccountModel.logout()
                 }
             })
         }
@@ -96,7 +99,7 @@ class JFAccountModel: NSObject, NSCoding {
     /**
      注销
      */
-    func logout() -> Void {
+    class func logout() -> Void {
         // 清除内存中的账号对象和归档
         JFAccountModel.userAccount = nil
         do {

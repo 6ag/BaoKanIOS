@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BaoKanIOS/Alamofire.framework"
+  install_framework "Pods-BaoKanIOS/Mustache.framework"
   install_framework "Pods-BaoKanIOS/IQKeyboardManagerSwift.framework"
   install_framework "Pods-BaoKanIOS/MJRefresh.framework"
   install_framework "Pods-BaoKanIOS/SDCycleScrollView.framework"
@@ -99,6 +100,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BaoKanIOS/Alamofire.framework"
+  install_framework "Pods-BaoKanIOS/Mustache.framework"
   install_framework "Pods-BaoKanIOS/IQKeyboardManagerSwift.framework"
   install_framework "Pods-BaoKanIOS/MJRefresh.framework"
   install_framework "Pods-BaoKanIOS/SDCycleScrollView.framework"

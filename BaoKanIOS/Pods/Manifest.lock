@@ -1,9 +1,10 @@
 PODS:
   - Alamofire (3.4.0)
+  - GRMustache.swift (1.0.1)
   - IQKeyboardManagerSwift (4.0.3)
   - MJRefresh (3.1.0)
   - pop (1.0.9)
-  - SDCycleScrollView (1.64):
+  - SDCycleScrollView (1.65):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
@@ -21,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.4.0)
+  - GRMustache.swift (~> 1.0)
   - IQKeyboardManagerSwift
   - MJRefresh (~> 3.1.0)
   - pop (~> 1.0.9)
@@ -32,10 +34,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  GRMustache.swift: 36a9a277311f6492b7b2c50b0458812df06899a4
   IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
+  SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4

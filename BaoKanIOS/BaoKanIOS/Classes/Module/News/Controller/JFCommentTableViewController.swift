@@ -166,7 +166,7 @@ class JFCommentTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        // 回复指定评论，下一版实现
     }
     
 }

@@ -68,6 +68,9 @@
 		B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */; };
 		B24952831CEC47EC006229C2 /* JFCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */; };
 		B24952851CEC4A41006229C2 /* JFCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24952841CEC4A41006229C2 /* JFCommentModel.swift */; };
+		B27E56DF1CFDDA0300762470 /* JFEditColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27E56DE1CFDDA0300762470 /* JFEditColumnViewController.swift */; };
+		B27E56E21CFDDBD200762470 /* JFEditColumnViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27E56E11CFDDBD200762470 /* JFEditColumnViewCell.swift */; };
+		B27E56E41CFDDBF700762470 /* JFColumnReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27E56E31CFDDBF700762470 /* JFColumnReusableView.swift */; };
 		B292E74D1CEEBE79005AA23A /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */; };
 		B29D53E01CF45CB600CD3F0D /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53BE1CF45CB500CD3F0D /* ShareSDK.framework */; };
 		B29D53E11CF45CB600CD3F0D /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53C11CF45CB500CD3F0D /* ShareSDKExtension.framework */; };
@@ -223,6 +226,9 @@
 		B242D00E1CF2D35900E974F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = BaoKanIOS/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentTableViewController.swift; sourceTree = "<group>"; };
 		B24952841CEC4A41006229C2 /* JFCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentModel.swift; sourceTree = "<group>"; };
+		B27E56DE1CFDDA0300762470 /* JFEditColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditColumnViewController.swift; sourceTree = "<group>"; };
+		B27E56E11CFDDBD200762470 /* JFEditColumnViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditColumnViewCell.swift; sourceTree = "<group>"; };
+		B27E56E31CFDDBF700762470 /* JFColumnReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFColumnReusableView.swift; sourceTree = "<group>"; };
 		B292E74B1CEEBE79005AA23A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		B292E74C1CEEBE79005AA23A /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		B29D53BE1CF45CB500CD3F0D /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
@@ -700,6 +706,15 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		B27E56E01CFDDBB500762470 /* Column */ = {
+			isa = PBXGroup;
+			children = (
+				B27E56E11CFDDBD200762470 /* JFEditColumnViewCell.swift */,
+				B27E56E31CFDDBF700762470 /* JFColumnReusableView.swift */,
+			);
+			path = Column;
+			sourceTree = "<group>";
+		};
 		B29D53BD1CF45CB500CD3F0D /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,6 +828,7 @@
 				B2E3DF841CB222560081745A /* JFNewsViewController.storyboard */,
 				B2E3DF851CB222560081745A /* JFNewsViewController.swift */,
 				B24952821CEC47EC006229C2 /* JFCommentTableViewController.swift */,
+				B27E56DE1CFDDA0300762470 /* JFEditColumnViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -820,6 +836,7 @@
 		B2E3DF861CB222560081745A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B27E56E01CFDDBB500762470 /* Column */,
 				B23AFF8F1CF9848C00C73C3B /* Comment */,
 				B23AFF941CF9848C00C73C3B /* Detail */,
 				B23AFF9A1CF9848C00C73C3B /* List */,
@@ -1159,9 +1176,11 @@
 				B2F174621CB761C3007AA386 /* JFPhotoDetailModel.swift in Sources */,
 				B23AFFA91CF9848C00C73C3B /* JFNewsOnePicCell.swift in Sources */,
 				A5B279CA1C36392F003C773D /* JFProfileViewController.swift in Sources */,
+				B27E56E41CFDDBF700762470 /* JFColumnReusableView.swift in Sources */,
 				B20578AE1CF6E4A0004CE501 /* JFSetFontView.swift in Sources */,
 				B2E3DFCD1CB228900081745A /* JFVideoTableViewController.swift in Sources */,
 				A5B279CF1C36392F003C773D /* JFNetworkTool.swift in Sources */,
+				B27E56DF1CFDDA0300762470 /* JFEditColumnViewController.swift in Sources */,
 				B20D58C01CF2D6EC000DA6EB /* JFFeatureViewController.swift in Sources */,
 				B2BD22731CE584DF009E0877 /* JFProgressView.swift in Sources */,
 				B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */,
@@ -1199,6 +1218,7 @@
 				B238BBBF1CEEE3A10050FC3F /* JFProfileCell.swift in Sources */,
 				B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */,
 				B2E3DFCF1CB228900081745A /* JFVideoViewController.swift in Sources */,
+				B27E56E21CFDDBD200762470 /* JFEditColumnViewCell.swift in Sources */,
 				A56ED5721C7ABAB0009B862D /* String+Extension.swift in Sources */,
 				B2CBAA6A1CEAEAD6007DA5B7 /* JFAccountModel.swift in Sources */,
 				B2FC6DFC1CDB880100DAC654 /* JFBaseTableViewController.swift in Sources */,
