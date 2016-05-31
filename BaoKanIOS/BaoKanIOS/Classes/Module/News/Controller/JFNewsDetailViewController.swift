@@ -160,14 +160,14 @@ class JFNewsDetailViewController: UIViewController {
         
         var parameters = [String : AnyObject]()
         
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             parameters = [
                 "table" : "news",
                 "classid" : classid,
                 "id" : id,
-                "username" : JFAccountModel.shareAccount().username!,
-                "userid" : JFAccountModel.shareAccount().id,
-                "token" : JFAccountModel.shareAccount().token!,
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!,
             ]
         } else {
             parameters = [
@@ -288,7 +288,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             "font-size: 20px;" +
             "color: #3c3c3c;" +
             "font-weight: bold;" +
-            "margin-left: 10px;" +
+            "margin-left: 5px;" +
             "}" +
             ".time {" +
             "text-align: left;" +
@@ -296,7 +296,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             "color: gray;" +
             "margin-top: 7px;" +
             "margin-bottom: 7px;" +
-            "margin-left: 10px;" +
+            "margin-left: 5px;" +
             "}" +
             ".img-responsive {" +
             "text-align: center;" +
@@ -488,17 +488,19 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      */
     func didTappedCollectButton(button: UIButton) {
         
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             
-            let parameters = [
-                "username" : JFAccountModel.shareAccount().username!,
-                "userid" : JFAccountModel.shareAccount().id,
-                "token" : JFAccountModel.shareAccount().token!,
+            let parameters: [String : AnyObject] = [
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!,
                 "classid" : articleParam!.classid,
                 "id" : articleParam!.id
             ]
             
-            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(parameters)
+            
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (success, result, error) in
                 if success {
                     if let successResult = result {
                         if successResult["result"]["status"].intValue == 1 {
@@ -571,14 +573,14 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         
         var parameters = [String : AnyObject]()
         
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             parameters = [
                 "classid" : articleParam!.classid,
                 "id" : articleParam!.id,
-                "userid" : JFAccountModel.shareAccount().id,
+                "userid" : JFAccountModel.shareAccount()!.id,
                 "nomember" : "0",
-                "username" : JFAccountModel.shareAccount().username!,
-                "token" : JFAccountModel.shareAccount().token!,
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "token" : JFAccountModel.shareAccount()!.token!,
                 "saytext" : message
             ]
         } else {

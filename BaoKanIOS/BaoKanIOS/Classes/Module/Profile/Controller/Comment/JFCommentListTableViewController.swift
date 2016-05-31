@@ -57,14 +57,14 @@ class JFCommentListTableViewController: UITableViewController {
      */
     private func loadNews(pageIndex: Int, method: Int) {
         
-        let parameters = [
-            "username" : JFAccountModel.shareAccount().username!,
-            "userid" : JFAccountModel.shareAccount().id,
-            "token" : JFAccountModel.shareAccount().token!,
+        let parameters: [String : AnyObject] = [
+            "username" : JFAccountModel.shareAccount()!.username!,
+            "userid" : JFAccountModel.shareAccount()!.id,
+            "token" : JFAccountModel.shareAccount()!.token!,
             "pageIndex" : pageIndex
         ]
         
-        JFNetworkTool.shareNetworkTool.get(GET_USER_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+        JFNetworkTool.shareNetworkTool.get(GET_USER_COMMENT, parameters: parameters) { (success, result, error) -> () in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()

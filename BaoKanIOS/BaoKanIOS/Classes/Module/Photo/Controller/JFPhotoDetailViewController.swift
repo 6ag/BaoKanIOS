@@ -76,14 +76,14 @@ class JFPhotoDetailViewController: UIViewController {
         photoModels.removeAll()
         var parameters = [String : AnyObject]()
         
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             parameters = [
                 "table" : "news",
                 "classid" : classid,
                 "id" : id,
-                "username" : JFAccountModel.shareAccount().username!,
-                "userid" : JFAccountModel.shareAccount().id,
-                "token" : JFAccountModel.shareAccount().token!,
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!,
             ]
         } else {
             parameters = [
@@ -292,7 +292,7 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      发布评论
      */
     func didTappedEditButton(button: UIButton) {
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
             commentCommitView.delegate = self
             commentCommitView.show()
@@ -315,17 +315,17 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      */
     func didTappedCollectButton(button: UIButton) {
         
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             
-            let parameters = [
-                "username" : JFAccountModel.shareAccount().username!,
-                "userid" : JFAccountModel.shareAccount().id,
-                "token" : JFAccountModel.shareAccount().token!,
+            let parameters: [String : AnyObject] = [
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!,
                 "classid" : photoParam!.classid,
                 "id" : photoParam!.id
             ]
             
-            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (success, result, error) in
                 if success {
                     if let successResult = result {
                         if successResult["result"]["status"].intValue == 1 {
@@ -398,15 +398,15 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      */
     func didTappedSendButtonWithMessage(message: String) {
         
-        let parameters = [
+        let parameters: [String : AnyObject] = [
             "classid" : photoParam!.classid,
             "id" : photoParam!.id,
-            "userid" : JFAccountModel.shareAccount().id,
-            "username" : JFAccountModel.shareAccount().username!,
+            "userid" : JFAccountModel.shareAccount()!.id,
+            "username" : JFAccountModel.shareAccount()!.username!,
             "saytext" : message
         ]
         
-        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters) { (success, result, error) in
             if success {
                 self.loadPhotoDetail(self.photoParam!.classid, id: self.photoParam!.id)
             }

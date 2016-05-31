@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JFAccountModel: NSObject {
+class JFAccountModel: NSObject, NSCoding {
     
     /// 令牌
     var token: String?
@@ -49,9 +49,18 @@ class JFAccountModel: NSObject {
     /// 签到天数
     var CheckingToday: String?
     
-    /// 是否登录 只读计算型属性可以省略get和大括号
-    var isLogin: Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGIN) && username != nil
+    // KVC 字典转模型
+    init(dict: [String: AnyObject]) {
+        super.init()
+        // 将字典里面的每一个key的值赋值给对应的模型属性
+        setValuesForKeysWithDictionary(dict)
+    }
+    
+    /**
+     是否已经登录
+     */
+    class func isLogin() -> Bool {
+        return JFAccountModel.shareAccount() != nil
     }
     
     /**
@@ -63,33 +72,79 @@ class JFAccountModel: NSObject {
      注销
      */
     func logout() -> Void {
-        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeQQ)
-        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeWechat)
-        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeSinaWeibo)
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: IS_LOGIN)
+        // 清除内存中的账号对象和归档
+        JFAccountModel.userAccount = nil
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(JFAccountModel.accountPath)
+        } catch {
+            print("退出异常")
+        }
     }
     
     /**
      登录
      */
-    func login() -> Void {
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: IS_LOGIN)
+    func updateUserInfo() -> Void {
+        // 保存到内存中
+        JFAccountModel.userAccount = self
+        // 归档用户信息
+        saveAccount()
     }
     
-    /**
-     单例
-     */
-    static func shareAccount() -> JFAccountModel {
-        struct Singleton {
-            static var onceToken : dispatch_once_t = 0
-            static var single: JFAccountModel?
+    /// 归档账号的路径
+    static let accountPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last! + "/Account.plist"
+    
+    // MARK: - 保存对象
+    func saveAccount() {
+        NSKeyedArchiver.archiveRootObject(self, toFile: JFAccountModel.accountPath)
+    }
+    
+    // 保存到内存中
+    private static var userAccount: JFAccountModel?
+    
+    static func shareAccount() -> JFAccountModel? {
+        if userAccount == nil {
+            userAccount = NSKeyedUnarchiver.unarchiveObjectWithFile(accountPath) as? JFAccountModel
         }
-        dispatch_once(&Singleton.onceToken, {
-            Singleton.single = JFAccountModel()
-            }
-        )
-        return Singleton.single!
+        if userAccount == nil {
+            // 说明没有登录
+            return nil
+        } else {
+            // 这里还需要验证账号是否有效
+            return userAccount
+        }
     }
     
-    private override init() {}
+    // MARK: - 归档和解档
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(token, forKey: "token")
+        aCoder.encodeInt(Int32(id), forKey: "id")
+        aCoder.encodeObject(username, forKey: "username")
+        aCoder.encodeObject(registerTime, forKey: "registerTime")
+        aCoder.encodeObject(email, forKey: "email")
+        aCoder.encodeObject(avatarUrl, forKey: "avatarUrl")
+        aCoder.encodeObject(groupId, forKey: "groupId")
+        aCoder.encodeObject(groupName, forKey: "groupName")
+        aCoder.encodeObject(points, forKey: "points")
+        aCoder.encodeObject(checkingTime, forKey: "checkingTime")
+        aCoder.encodeObject(checkingDate, forKey: "checkingDate")
+        aCoder.encodeObject(checkingMoth, forKey: "checkingMoth")
+        aCoder.encodeObject(CheckingToday, forKey: "CheckingToday")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        token = aDecoder.decodeObjectForKey("token") as? String
+        id = Int(aDecoder.decodeIntForKey("id"))
+        username = aDecoder.decodeObjectForKey("username") as? String
+        registerTime = aDecoder.decodeObjectForKey("registerTime") as? String
+        email = aDecoder.decodeObjectForKey("email") as? String
+        avatarUrl = aDecoder.decodeObjectForKey("avatarUrl") as? String
+        groupId = aDecoder.decodeObjectForKey("groupId") as? String
+        groupName = aDecoder.decodeObjectForKey("groupName") as? String
+        points = aDecoder.decodeObjectForKey("points") as? String
+        checkingTime = aDecoder.decodeObjectForKey("checkingTime") as? String
+        checkingDate = aDecoder.decodeObjectForKey("checkingDate") as? String
+        checkingMoth = aDecoder.decodeObjectForKey("checkingMoth") as? String
+        CheckingToday = aDecoder.decodeObjectForKey("CheckingToday") as? String
+    }
 }

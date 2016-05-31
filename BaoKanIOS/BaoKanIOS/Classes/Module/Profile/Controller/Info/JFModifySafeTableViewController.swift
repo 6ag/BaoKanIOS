@@ -52,7 +52,7 @@ class JFModifySafeTableViewController: JFBaseTableViewController {
             cell.contentView.addSubview(reNewPasswordField)
             return cell
         case 3:
-            emailField.text = JFAccountModel.shareAccount().email!
+            emailField.text = JFAccountModel.shareAccount()!.email!
             cell.contentView.addSubview(emailField)
             return cell
         default:

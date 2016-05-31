@@ -53,10 +53,10 @@ class JFInfoHeaderView: UIView {
             make.right.equalTo(-MARGIN)
         }
         
-        avatarImageView.yy_setImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), options: YYWebImageOptions.AllowBackgroundTask)
-        usernameLabel.text = JFAccountModel.shareAccount().username!
-        levelLabel.text = "等级：\(JFAccountModel.shareAccount().groupName!)"
-        pointsLabel.text = "\(JFAccountModel.shareAccount().points!)积分"
+        avatarImageView.yy_setImageWithURL(NSURL(string: JFAccountModel.shareAccount()!.avatarUrl!), options: YYWebImageOptions.AllowBackgroundTask)
+        usernameLabel.text = JFAccountModel.shareAccount()!.username!
+        levelLabel.text = "等级：\(JFAccountModel.shareAccount()!.groupName!)"
+        pointsLabel.text = "\(JFAccountModel.shareAccount()!.points!)积分"
     }
     
     // MARK: - 懒加载

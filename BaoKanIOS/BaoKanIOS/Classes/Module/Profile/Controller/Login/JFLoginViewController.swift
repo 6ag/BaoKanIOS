@@ -70,14 +70,9 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
                 if success {
                     print(result)
                     if let successResult = result {
-                        JFAccountModel.shareAccount().setValuesForKeysWithDictionary(successResult["data"]["user"].dictionaryObject!)
-                        JFAccountModel.shareAccount().login()
-                        
-                        // 如果有值说明是通过第三方登录的
-                        if let avatar = self.avatarString {
-                            JFAccountModel.shareAccount().avatarUrl = avatar
-                        }
-                        
+                       let account = JFAccountModel(dict: successResult["data"]["user"].dictionaryObject!)
+                        // 更新用户信息
+                        account.updateUserInfo()
                         self.didTappedBackButton()
                     }
                 } else if result != nil {

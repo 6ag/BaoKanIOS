@@ -19,9 +19,9 @@ class JFEditProfileViewController: JFBaseTableViewController {
         let group1CellModel2 = JFProfileCellArrowModel(title: "修改安全信息", destinationVc: JFModifySafeTableViewController.classForCoder())
         let group1 = JFProfileCellGroupModel(cells: [group1CellModel1, group1CellModel2])
         
-        let group2CellModel1 = JFProfileCellLabelModel(title: "注册时间", text: JFAccountModel.shareAccount().registerTime!)
-        let group2CellModel2 = JFProfileCellLabelModel(title: "我的积分", text: JFAccountModel.shareAccount().points!)
-        let group2CellModel3 = JFProfileCellLabelModel(title: "我的等级", text: JFAccountModel.shareAccount().groupName!)
+        let group2CellModel1 = JFProfileCellLabelModel(title: "注册时间", text: JFAccountModel.shareAccount()!.registerTime!)
+        let group2CellModel2 = JFProfileCellLabelModel(title: "我的积分", text: JFAccountModel.shareAccount()!.points!)
+        let group2CellModel3 = JFProfileCellLabelModel(title: "我的等级", text: JFAccountModel.shareAccount()!.groupName!)
         let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2, group2CellModel3])
         
         groupModels = [group1, group2]
@@ -52,7 +52,7 @@ class JFEditProfileViewController: JFBaseTableViewController {
      退出登录点击
      */
     func didTappedLogoutButton(button: UIButton) -> Void {
-        JFAccountModel.shareAccount().logout()
+        JFAccountModel.shareAccount()!.logout()
         JFProgressHUD.showSuccessWithStatus("退出成功")
         navigationController?.popViewControllerAnimated(true)
     }

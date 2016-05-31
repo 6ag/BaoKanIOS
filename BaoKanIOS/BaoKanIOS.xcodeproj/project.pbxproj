@@ -27,6 +27,7 @@
 		A5B279D01C36392F003C773D /* JFProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B279BC1C36392F003C773D /* JFProgressHUD.swift */; };
 		A5B279D11C36392F003C773D /* BaoKanIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */; };
 		B2003BCD1CB64531006D1C08 /* JFPhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */; };
+		B2040ADB1CFBFB3E0094367B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2040ADA1CFBFB3E0094367B /* Info.plist */; };
 		B204229B1CED4FEF009227C8 /* JFPhotoBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */; };
 		B204229D1CED4FFD009227C8 /* JFPhotoBottomBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */; };
 		B20578A61CF68B6B004CE501 /* JFProfileFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20578A51CF68B6B004CE501 /* JFProfileFeedbackViewController.swift */; };
@@ -123,7 +124,6 @@
 		B2FFCF8C1CF7291900E07786 /* JFModifySafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8B1CF7291900E07786 /* JFModifySafeTableViewController.swift */; };
 		B2FFCF8F1CF731EC00E07786 /* JFInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */; };
 		FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963C1C3A65E900046824 /* Assets.xcassets */; };
-		FBF0963F1C3A65E900046824 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBF0963D1C3A65E900046824 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +182,7 @@
 		A5B279BC1C36392F003C773D /* JFProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressHUD.swift; sourceTree = "<group>"; };
 		A5B279C11C36392F003C773D /* BaoKanIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaoKanIOS.xcdatamodel; sourceTree = "<group>"; };
 		B2003BCC1CB64531006D1C08 /* JFPhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoDetailViewController.swift; sourceTree = "<group>"; };
+		B2040ADA1CFBFB3E0094367B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
 		B204229A1CED4FEF009227C8 /* JFPhotoBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPhotoBottomBar.swift; sourceTree = "<group>"; };
 		B204229C1CED4FFD009227C8 /* JFPhotoBottomBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFPhotoBottomBar.xib; sourceTree = "<group>"; };
 		B20578A51CF68B6B004CE501 /* JFProfileFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +288,6 @@
 		B2FFCF8E1CF731EC00E07786 /* JFInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFInfoHeaderView.swift; sourceTree = "<group>"; };
 		CD8416C2AE2F58BAC0DC55D5 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF0963C1C3A65E900046824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = BaoKanIOS/Assets.xcassets; sourceTree = SOURCE_ROOT; };
-		FBF0963D1C3A65E900046824 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BaoKanIOS/Info.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -592,9 +592,9 @@
 		A5B279BF1C36392F003C773D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B2040ADA1CFBFB3E0094367B /* Info.plist */,
 				B242D00D1CF2D35900E974F1 /* LaunchScreen.storyboard */,
 				FBF0963C1C3A65E900046824 /* Assets.xcassets */,
-				FBF0963D1C3A65E900046824 /* Info.plist */,
 				A5B279C01C36392F003C773D /* BaoKanIOS.xcdatamodeld */,
 			);
 			path = Resource;
@@ -1051,7 +1051,6 @@
 				FBF0963E1C3A65E900046824 /* Assets.xcassets in Resources */,
 				B23AFFA71CF9848C00C73C3B /* JFStarAndShareCell.xib in Resources */,
 				B20578B01CF6E4A8004CE501 /* JFSetFontView.xib in Resources */,
-				FBF0963F1C3A65E900046824 /* Info.plist in Resources */,
 				B2E3DFCE1CB228900081745A /* JFVideoViewController.storyboard in Resources */,
 				B23AFFA51CF9848C00C73C3B /* JFNewsBottomBar.xib in Resources */,
 				B242D00F1CF2D35900E974F1 /* LaunchScreen.storyboard in Resources */,
@@ -1069,6 +1068,7 @@
 				B2E3DF901CB222560081745A /* JFNewsViewController.storyboard in Resources */,
 				B23AFFAD1CF98F4300C73C3B /* JFNewsNoPicCell.xib in Resources */,
 				B2E3DFC31CB228900081745A /* JFPhotoViewController.storyboard in Resources */,
+				B2040ADB1CFBFB3E0094367B /* Info.plist in Resources */,
 				B23AFFA01CF9848C00C73C3B /* JFCommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

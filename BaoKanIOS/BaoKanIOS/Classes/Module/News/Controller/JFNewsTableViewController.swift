@@ -59,8 +59,26 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         topScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
         topScrollView.pageDotColor = NAVIGATIONBAR_WHITE_COLOR
         topScrollView.currentPageDotColor = NAVIGATIONBAR_RED_COLOR
-        topScrollView.imageURLStringsGroup = [articleList[0].titlepic!, articleList[1].titlepic!, articleList[2].titlepic!]
-        topScrollView.titlesGroup = [articleList[0].title!, articleList[1].title!, articleList[2].title!]
+        
+        // 过滤无图崩溃
+        var images = [String]()
+        var titles = [String]()
+        
+        if articleList.count < 3 {
+            return
+        }
+        for index in 0...2 {
+            if articleList[index].titlepic != nil {
+                images.append(articleList[index].titlepic!)
+                titles.append(articleList[index].title!)
+            }
+        }
+        if images.count == 0 {
+            return
+        }
+        
+        topScrollView.imageURLStringsGroup = images
+        topScrollView.titlesGroup = titles
         topScrollView.autoScrollTimeInterval = 5
         tableView.tableHeaderView = topScrollView
     }
@@ -116,7 +134,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             
             if success == true {
                 if let successResult = result {
-//                    print(successResult)
+                    print(successResult)
                     let data = successResult["data"][0].arrayValue.reverse()
                     
                     let minId = self.articleList.last?.id ?? "0"
@@ -171,22 +189,22 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                         // 根据加载方式拼接数据
                         if method == 0 {
                             if Int(maxId) < Int(postModel.id!) {
-                                self.articleList.insert(postModel, atIndex: 0)
+                                if self.articleList.count >= 3 || postModel.piccount != 0 {
+                                    self.articleList.insert(postModel, atIndex: 0)
+                                }
                             }
                         } else {
                             if Int(minId) > Int(postModel.id!) {
-                                self.articleList.append(postModel)
+                                if self.articleList.count >= 3 || postModel.piccount != 0 {
+                                    self.articleList.append(postModel)
+                                }
                             }
                         }
                         
                     }
                     
-                    // 刷新数据
                     self.tableView.reloadData()
-                    if self.articleList.count >= 3 {
-                        self.prepareScrollView()
-                    }
-                    
+                    self.prepareScrollView()
                 } else {
                     print("error:\(error)")
                 }

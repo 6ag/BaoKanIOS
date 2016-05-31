@@ -128,9 +128,9 @@ class JFProfileViewController: JFBaseTableViewController {
      更新头部数据
      */
     private func updateHeaderData() {
-        if JFAccountModel.shareAccount().isLogin {
-            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
-            headerView.nameLabel.text = JFAccountModel.shareAccount().username
+        if JFAccountModel.isLogin() {
+            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount()!.avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
+            headerView.nameLabel.text = JFAccountModel.shareAccount()!.username
         } else {
             headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
             headerView.nameLabel.text = "登录账号"
@@ -153,7 +153,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      头像按钮点击
      */
     func didTappedAvatarButton() {
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             // 更换头像
             let avaterAlertC = UIAlertController(title: "修改头像", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             let selectPhoto = UIAlertAction(title: "相册选择", style: .Default, handler: { (action) in
@@ -179,7 +179,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      收藏列表
      */
     func didTappedCollectionButton() {
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             navigationController?.pushViewController(JFCollectionTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
             presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
@@ -191,7 +191,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      评论列表
      */
     func didTappedCommentButton() {
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             navigationController?.pushViewController(JFCommentListTableViewController(style: UITableViewStyle.Plain), animated: true)
         } else {
             presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
@@ -203,7 +203,7 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      修改个人信息
      */
     func didTappedInfoButton() {
-        if JFAccountModel.shareAccount().isLogin {
+        if JFAccountModel.isLogin() {
             navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Grouped), animated: true)
         } else {
             presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {

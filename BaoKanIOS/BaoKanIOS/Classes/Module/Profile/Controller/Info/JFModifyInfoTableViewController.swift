@@ -54,11 +54,11 @@ class JFModifyInfoTableViewController: JFBaseTableViewController {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         switch indexPath.row {
         case 0:
-            avatarImageView.yy_setImageWithURL(NSURL(string: JFAccountModel.shareAccount().avatarUrl!), options: YYWebImageOptions.AllowBackgroundTask)
+            avatarImageView.yy_setImageWithURL(NSURL(string: JFAccountModel.shareAccount()!.avatarUrl!), options: YYWebImageOptions.AllowBackgroundTask)
             cell.contentView.addSubview(avatarImageView)
             return cell
         case 1:
-            usernameField.text = JFAccountModel.shareAccount().username!
+            usernameField.text = JFAccountModel.shareAccount()!.username!
             cell.contentView.addSubview(usernameField)
             return cell
         case 2:

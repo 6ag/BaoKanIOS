@@ -52,52 +52,41 @@ class JFPhotoViewController: UIViewController {
      添加顶部标题栏和控制器
      */
     private func addContent() {
-        // 初始化标签数组
-        if let topTitles = NSUserDefaults.standardUserDefaults().objectForKey("photoTopTitles") as? [[String : String]] {
-            self.topTitles = topTitles;
-        } else {
-            // 如果本地没有数据则初始化并保存到本地
-            let topTitles = [
-                [
-                    "classid" : "322",
-                    "classname": "图话网文"
-                ],
-                [
-                    "classid" : "338",
-                    "classname": "娱乐八卦"
-                ],
-                [
-                    "classid" : "345",
-                    "classname": "封面素材"
-                ],
-                [
-                    "classid" : "350",
-                    "classname": "美女模特"
-                ],
-                [
-                    "classid" : "354",
-                    "classname": "社会百态"
-                ],
-                [
-                    "classid" : "357",
-                    "classname": "旅游视野"
-                ],
-                [
-                    "classid" : "366",
-                    "classname": "游戏图库"
-                ],
-                [
-                    "classid" : "433",
-                    "classname": "军事图秀"
-                ],
-                [
-                    "classid" : "434",
-                    "classname": "封面展示"
-                ]
+        
+        self.topTitles = [
+            [
+                "classid" : "322",
+                "classname" : "图话网文"
+            ],
+            [
+                "classid" : "434",
+                "classname": "精品封面"
+            ],
+            [
+                "classid" : "350",
+                "classname": "美女模特"
+            ],
+            [
+                "classid" : "366",
+                "classname": "游戏图库"
+            ],
+            [
+                "classid" : "338",
+                "classname": "娱乐八卦"
+            ],
+            [
+                "classid" : "354",
+                "classname": "社会百态"
+            ],
+            [
+                "classid" : "357",
+                "classname": "旅游视野"
+            ],
+            [
+                "classid" : "433",
+                "classname": "军事图秀"
             ]
-            NSUserDefaults.standardUserDefaults().setObject(topTitles, forKey: "photoTopTitles")
-            self.topTitles = topTitles
-        }
+        ]
         
         // 布局用的左边距
         var leftMargin: CGFloat = 0
