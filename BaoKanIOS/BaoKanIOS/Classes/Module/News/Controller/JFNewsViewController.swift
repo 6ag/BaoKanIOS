@@ -289,7 +289,7 @@ class JFNewsViewController: UIViewController {
             // 默认控制器
             if i == 0 {
                 newsVc.classid = Int(selectedArray![0]["classid"]!)
-                newsVc.view.frame = contentScrollView.bounds
+                newsVc.view.frame = CGRect(x: 0, y: 0, width: contentScrollView.bounds.width, height: contentScrollView.bounds.height)
                 contentScrollView.addSubview(newsVc.view)
             }
         }
@@ -302,6 +302,8 @@ class JFNewsViewController: UIViewController {
         // 设置顶部标签区域滚动范围
         topScrollView.contentSize = CGSize(width: leftMargin + lastLabel.frame.width, height: 0)
         
+        // 视图滚动到第一个位置
+        contentScrollView.setContentOffset(CGPoint(x: 0, y: contentScrollView.contentOffset.y), animated: true)
     }
     
     /**
@@ -352,7 +354,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
     
     // 正在滚动
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let value = abs(scrollView.contentOffset.x / scrollView.frame.width)
+        let value = (scrollView.contentOffset.x / scrollView.frame.width)
         
         let leftIndex = Int(value)
         let rightIndex = leftIndex + 1
