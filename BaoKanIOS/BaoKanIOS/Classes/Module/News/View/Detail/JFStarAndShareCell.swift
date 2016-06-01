@@ -27,6 +27,7 @@ class JFStarAndShareCell: UITableViewCell {
         prepareButton(qqButton)
         prepareButton(weixinButton)
         prepareButton(friendCircleButton)
+        
     }
     
     private func prepareButton(button: UIButton) {

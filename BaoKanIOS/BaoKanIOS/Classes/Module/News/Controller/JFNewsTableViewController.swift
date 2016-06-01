@@ -283,6 +283,14 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         if articleList.count >= 3 {
             let currentListModel = articleList[indexPath.row + 3]
             let detailVc = JFNewsDetailViewController()
+            
+            // 传递分享需要的图片连接
+            if currentListModel.piccount == 3 {
+                detailVc.sharePicUrl = currentListModel.morepic![0]
+            } else if currentListModel.piccount == 1 {
+                detailVc.sharePicUrl = currentListModel.titlepic!
+            }
+            
             detailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
             self.navigationController?.pushViewController(detailVc, animated: true)
         }

@@ -31,6 +31,9 @@ class JFNewsDetailViewController: UIViewController {
         }
     }
     
+    /// 分享的图片url
+    var sharePicUrl: String = ""
+    
     /// 相关连接模型
     var otherLinks = [JFOtherLinkModel]()
     
@@ -192,7 +195,7 @@ class JFNewsDetailViewController: UIViewController {
         JFNetworkTool.shareNetworkTool.get(ARTICLE_DETAIL, parameters: parameters) { (success, result, error) -> () in
             if success == true {
                 if let successResult = result {
-//                    print(successResult)
+                    
                     // 相关连接
                     self.otherLinks.removeAll()
                     let otherLinks = successResult["data"]["otherLink"].array
@@ -216,7 +219,7 @@ class JFNewsDetailViewController: UIViewController {
                         "username" : content["username"]!.stringValue,    // 用户名
                         "lastdotime" : content["lastdotime"]!.stringValue,// 最后编辑时间戳
                         "newstext" : content["newstext"]!.stringValue,    // 文章内容
-                        "titleurl" : "\(BASE_URL)\(content["titleurl"]!.stringValue)", // 文章url
+                        "titleurl" : content["titleurl"]!.stringValue, // 文章url
                         "id" : content["id"]!.stringValue,                // 文章id
                         "classid" : content["classid"]!.stringValue,      // 当前子分类id
                         "plnum" : content["plnum"]!.stringValue,          // 评论数
@@ -403,16 +406,9 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         html.appendContentsOf("</body>")
         html.appendContentsOf("</html>")
         
-        
-//        let arr = html.componentsSeparatedByString("<p")
-//        for str in arr {
-//            print("<p" + str)
-//        }
-        
         let template = try! Template(string: html)
         let rendering = try! template.render()
         webView.loadHTMLString(rendering, baseURL: nil)
-//        print(rendering)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -627,8 +623,6 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
                             button.selected = false
                         }
                     }
-                } else {
-                    print(error)
                 }
             }
         } else {
@@ -644,17 +638,20 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         
         // 从缓存中获取标题图片
         guard let currentModel = model else {return}
-        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
         
+        var image = YYImageCache.sharedCache().getImageForKey(sharePicUrl)
         if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
             image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
         }
         
+        // 标题url
+        let titleurl = currentModel.titleurl!.hasPrefix("http") ? currentModel.titleurl! : "\(BASE_URL)\(currentModel.titleurl!)"
+        
         let shareParames = NSMutableDictionary()
-        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+        shareParames.SSDKSetupShareParamsByText(currentModel.smalltext,
                                                 images : image,
-                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
-                                                title : model?.title,
+                                                url : NSURL(string: titleurl),
+                                                title : currentModel.title,
                                                 type : SSDKContentType.Auto)
         
         let items = [
@@ -714,6 +711,9 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         }
     }
     
+    /**
+     修改了正文字体大小，需要重新显示
+     */
     func didChangeFontSize() {
         loadWebViewContent(model!)
     }
@@ -746,19 +746,22 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
      根据类型分享
      */
     private func shareWithType(type: SSDKPlatformType) {
-        // 从缓存中获取标题图片
-        guard let currentModel = model else {return}
-        var image = YYImageCache.sharedCache().getImageForKey(currentModel.titlepic!)
         
+        guard let currentModel = model else {return}
+        
+        var image = YYImageCache.sharedCache().getImageForKey(sharePicUrl)
         if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
             image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
         }
         
+        // 标题url
+        let titleurl = currentModel.titleurl!.hasPrefix("http") ? currentModel.titleurl! : "\(BASE_URL)\(currentModel.titleurl!)"
+        
         let shareParames = NSMutableDictionary()
-        shareParames.SSDKSetupShareParamsByText(model?.smalltext,
+        shareParames.SSDKSetupShareParamsByText(currentModel.smalltext,
                                                 images : image,
-                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
-                                                title : model?.title,
+                                                url : NSURL(string: titleurl),
+                                                title : currentModel.title,
                                                 type : SSDKContentType.Auto)
         
         ShareSDK.share(type, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in

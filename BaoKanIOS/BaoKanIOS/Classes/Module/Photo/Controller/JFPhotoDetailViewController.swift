@@ -34,6 +34,9 @@ class JFPhotoDetailViewController: UIViewController {
     private let photoIdentifier = "photoDetail"
     private var photoModels = [JFPhotoDetailModel]()
     
+    /// 用来做分享的标题连接
+    var titleurl: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,6 +101,10 @@ class JFPhotoDetailViewController: UIViewController {
             
             if success == true {
                 if let successResult = result {
+                    print(successResult)
+                    
+                    // 标题url
+                    self.titleurl = successResult["data"]["content"]["titleurl"].stringValue
                     
                     // 更新评论数量
                     if successResult["data"]["content"]["plnum"].stringValue != "0" {
@@ -366,7 +373,7 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
         let shareParames = NSMutableDictionary()
         shareParames.SSDKSetupShareParamsByText(currentModel.text,
                                                 images : image,
-                                                url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                url : NSURL(string: self.titleurl!.hasPrefix("http") ? self.titleurl! : "\(BASE_URL)\(self.titleurl!)"),
                                                 title : currentModel.title,
                                                 type : SSDKContentType.Auto)
         
