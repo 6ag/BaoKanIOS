@@ -67,6 +67,19 @@ class JFNewsViewController: UIViewController {
     */
     private func prepareUI() {
         
+        // 移除原有数据
+        for subView in topScrollView.subviews {
+            if subView.isKindOfClass(JFTopLabel.classForCoder()) {
+                subView.removeFromSuperview()
+            }
+        }
+        for subView in contentScrollView.subviews {
+            subView.removeFromSuperview()
+        }
+        for vc in childViewControllers {
+            vc.removeFromParentViewController()
+        }
+        
         // 添加内容
         addContent()
     }
@@ -95,9 +108,143 @@ class JFNewsViewController: UIViewController {
                 self.editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: 0)
                 self.addButton.imageView!.transform = CGAffineTransformIdentity
                 }, completion: { (_) in
+                    self.selectedArray = self.editColumnVc.selectedArray
+                    self.optionalArray = self.editColumnVc.optionalArray
+                    NSUserDefaults.standardUserDefaults().setObject(self.selectedArray, forKey: "selectedArray")
+                    NSUserDefaults.standardUserDefaults().setObject(self.optionalArray, forKey: "optionalArray")
                     self.editColumnVc.view.removeFromSuperview()
                     self.tabBarController?.tabBar.hidden = false
+                    
+                    self.prepareUI()
             })
+        }
+        
+    }
+    
+    /**
+     配置栏目
+     */
+    private func setupColumn() {
+        let tempSelectedArray = NSUserDefaults.standardUserDefaults().objectForKey("selectedArray") as? [[String : String]]
+        let tempOptionalArray = NSUserDefaults.standardUserDefaults().objectForKey("optionalArray") as? [[String : String]]
+        
+        if tempSelectedArray != nil || tempOptionalArray != nil {
+            selectedArray = tempSelectedArray != nil ? tempSelectedArray : [[String : String]]()
+            optionalArray = tempOptionalArray != nil ? tempOptionalArray : [[String : String]]()
+        } else {
+            selectedArray = [
+                [
+                    "classid" : "10000",
+                    "classname" : "今日头条"
+                ],
+                [
+                    "classid" : "2",
+                    "classname": "网文快讯"
+                ],
+                [
+                    "classid" : "21",
+                    "classname": "媒体视角"
+                ],
+                [
+                    "classid" : "12",
+                    "classname": "网文IP"
+                ],
+                [
+                    "classid" : "264",
+                    "classname": "企业资讯"
+                ],
+                [
+                    "classid" : "33",
+                    "classname": "作家风采"
+                ],
+                [
+                    "classid" : "34",
+                    "classname": "维权在线"
+                ],
+                [
+                    "classid" : "212",
+                    "classname": "业者动态"
+                ],
+                [
+                    "classid" : "132",
+                    "classname": "风花雪月"
+                ],
+                [
+                    "classid" : "396",
+                    "classname": "独家报道"
+                ]
+            ]
+            
+            optionalArray = [
+                [
+                    "classid" : "32",
+                    "classname": "高端访谈"
+                ],
+                [
+                    "classid" : "102",
+                    "classname": "政策解读"
+                ],
+                [
+                    "classid" : "111",
+                    "classname": "写作指导"
+                ],
+                [
+                    "classid" : "119",
+                    "classname": "求职招聘"
+                ],
+                [
+                    "classid" : "115",
+                    "classname": "征稿信息"
+                ],
+                [
+                    "classid" : "51",
+                    "classname": "精彩活动"
+                ],
+                [
+                    "classid" : "440",
+                    "classname": "写作常识"
+                ],
+                [
+                    "classid" : "209",
+                    "classname": "数据分析"
+                ],
+                [
+                    "classid" : "208",
+                    "classname": "统计图表"
+                ],
+                [
+                    "classid" : "405",
+                    "classname": "名家专栏"
+                ],
+                [
+                    "classid" : "394",
+                    "classname": "传统文学"
+                ],
+                [
+                    "classid" : "414",
+                    "classname": "写作素材"
+                ],
+                [
+                    "classid" : "281",
+                    "classname": "游戏世界"
+                ],
+                [
+                    "classid" : "57",
+                    "classname": "娱乐八卦"
+                ],
+                [
+                    "classid" : "58",
+                    "classname": "社会杂谈"
+                ],
+                [
+                    "classid" : "56",
+                    "classname": "影视动画"
+                ]
+            ]
+            
+            // 默认栏目保存
+            NSUserDefaults.standardUserDefaults().setObject(selectedArray, forKey: "selectedArray")
+            NSUserDefaults.standardUserDefaults().setObject(optionalArray, forKey: "optionalArray")
         }
         
     }
@@ -107,115 +254,8 @@ class JFNewsViewController: UIViewController {
      */
     private func addContent() {
         
-        selectedArray = [
-            [
-                "classid" : "10000",
-                "classname" : "今日头条"
-            ],
-            [
-                "classid" : "2",
-                "classname": "网文快讯"
-            ],
-            [
-                "classid" : "21",
-                "classname": "媒体视角"
-            ],
-            [
-                "classid" : "12",
-                "classname": "网文IP"
-            ],
-            [
-                "classid" : "264",
-                "classname": "企业资讯"
-            ],
-            [
-                "classid" : "33",
-                "classname": "作家风采"
-            ],
-            [
-                "classid" : "34",
-                "classname": "维权在线"
-            ],
-            [
-                "classid" : "212",
-                "classname": "业者动态"
-            ],
-            [
-                "classid" : "132",
-                "classname": "风花雪月"
-            ],
-            [
-                "classid" : "396",
-                "classname": "独家报道"
-            ]
-        ]
-        
-        optionalArray = [
-            [
-                "classid" : "32",
-                "classname": "高端访谈"
-            ],
-            [
-                "classid" : "102",
-                "classname": "政策解读"
-            ],
-            [
-                "classid" : "111",
-                "classname": "写作指导"
-            ],
-            [
-                "classid" : "119",
-                "classname": "求职招聘"
-            ],
-            [
-                "classid" : "115",
-                "classname": "征稿信息"
-            ],
-            [
-                "classid" : "51",
-                "classname": "精彩活动"
-            ],
-            [
-                "classid" : "440",
-                "classname": "写作常识"
-            ],
-            [
-                "classid" : "209",
-                "classname": "数据分析"
-            ],
-            [
-                "classid" : "208",
-                "classname": "统计图表"
-            ],
-            [
-                "classid" : "405",
-                "classname": "名家专栏"
-            ],
-            [
-                "classid" : "394",
-                "classname": "传统文学"
-            ],
-            [
-                "classid" : "414",
-                "classname": "写作素材"
-            ],
-            [
-                "classid" : "281",
-                "classname": "游戏世界"
-            ],
-            [
-                "classid" : "57",
-                "classname": "娱乐八卦"
-            ],
-            [
-                "classid" : "58",
-                "classname": "社会杂谈"
-            ],
-            [
-                "classid" : "56",
-                "classname": "影视动画"
-            ]
-        ]
+        // 初始化栏目
+        setupColumn()
         
         // 布局用的左边距
         var leftMargin: CGFloat = 0
