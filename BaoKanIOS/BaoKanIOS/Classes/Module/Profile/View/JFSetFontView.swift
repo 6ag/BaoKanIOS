@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol JFSetFontViewDelegate: NSObjectProtocol {
+    func didChangeFontSize() -> Void
+}
+
 class JFSetFontView: UIView {
     
     @IBOutlet weak var slider: UISlider!
@@ -15,6 +19,7 @@ class JFSetFontView: UIView {
     var currentButton: UIButton!
     let bgView = UIView(frame: SCREEN_BOUNDS)
     let minSize = 12 // 14   16   18   20  22   24
+    var delegate: JFSetFontViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +48,7 @@ class JFSetFontView: UIView {
         let fontSize = minSize + scale * 2
         previewLabel.font = UIFont.systemFontOfSize(CGFloat(fontSize))
         NSUserDefaults.standardUserDefaults().setInteger(fontSize, forKey: CONTENT_FONT_SIZE)
+        delegate?.didChangeFontSize()
     }
     
     @IBAction func didTappedFontButton(button: UIButton) {

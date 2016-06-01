@@ -26,11 +26,6 @@ class JFNewsDetailViewController: UIViewController {
             // 更新页面数据
             loadWebViewContent(model!)
             
-            // 更新评论数量
-            if model!.plnum! != "0" {
-                bottomBarView.commentButton.setTitle(model!.plnum!, forState: UIControlState.Normal)
-            }
-            
             // 更新收藏状态
             bottomBarView.collectionButton.selected = model?.havefava == "favorfill"
         }
@@ -39,9 +34,13 @@ class JFNewsDetailViewController: UIViewController {
     /// 相关连接模型
     var otherLinks = [JFOtherLinkModel]()
     
+    /// 评论模型
+    var commentList = [JFCommentModel]()
+    
     let detailContentIdentifier = "detailContentIdentifier"
     let detailStarAndShareIdentifier = "detailStarAndShareIdentifier"
     let detailOtherLinkIdentifier = "detailOtherLinkIdentifier"
+    let detailCommentIdentifier = "detailCommentIdentifier"
     
     /// 赞分享cell
     private lazy var starAndShareCell: JFStarAndShareCell = {
@@ -57,6 +56,7 @@ class JFNewsDetailViewController: UIViewController {
         tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: detailContentIdentifier)
         tableView.registerNib(UINib(nibName: "JFStarAndShareCell", bundle: nil), forCellReuseIdentifier: detailStarAndShareIdentifier)
         tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: detailOtherLinkIdentifier)
+        tableView.registerNib(UINib(nibName: "JFCommentCell", bundle: nil), forCellReuseIdentifier: detailCommentIdentifier)
         
         prepareUI()
     }
@@ -99,6 +99,7 @@ class JFNewsDetailViewController: UIViewController {
     @objc private func updateData() {
         // 请求页面数据
         loadNewsDetail(articleParam!.classid, id: articleParam!.id)
+        loadCommentList(articleParam!.classid, id: articleParam!.id)
     }
     
     // MARK: - 底部条操作
@@ -150,9 +151,18 @@ class JFNewsDetailViewController: UIViewController {
         }
     }
     
+    /**
+     点击更多评论
+     */
+    func didTappedmoreCommentButton(button: UIButton) -> Void {
+        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
+        commentVc.param = articleParam
+        navigationController?.pushViewController(commentVc, animated: true)
+    }
+    
     // MARK: - 网络请求
     /**
-     加载
+     加载详情
      
      - parameter classid: 当前子分类id
      - parameter id:      文章id
@@ -224,6 +234,53 @@ class JFNewsDetailViewController: UIViewController {
         }
     }
     
+    
+    /**
+     加载评论
+     */
+    func loadCommentList(classid: String, id: String) {
+        let parameters = [
+            "classid" : classid,
+            "id" : id,
+            "pageIndex" : 1
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(GET_COMMENT, parameters: parameters as? [String : AnyObject]) { (success, result, error) -> () in
+            
+            if success {
+                if let successResult = result {
+                    let data = successResult["data"].arrayValue
+                    if data.count == 0 && self.commentList.count == 0 {
+                        return
+                    }
+                    
+                    self.commentList.removeAll()
+                    
+                    for comment in data.reverse() {
+                        let dict = [
+                            "plstep" : comment["plstep"].intValue,
+                            "plid" : comment["plid"].intValue,
+                            "plusername" : comment["plusername"].stringValue,
+                            "id" : comment["id"].intValue,
+                            "classid" : comment["classid"].intValue,
+                            "saytext" : comment["saytext"].stringValue,
+                            "saytime" : comment["saytime"].stringValue,
+                            "userpic" : "\(BASE_URL)\(comment["userpic"].stringValue)",
+                            "zcnum" : comment["zcnum"].stringValue
+                        ]
+                        
+                        let commentModel = JFCommentModel(dict: dict as! [String : AnyObject])
+                        self.commentList.append(commentModel)
+                    }
+                    
+                    self.tableView.reloadData()
+                }
+            } else {
+                JFProgressHUD.showErrorWithStatus("网络不给力")
+            }
+        }
+    }
+    
     // MARK: - 懒加载
     
     /// 活动指示器
@@ -264,6 +321,19 @@ class JFNewsDetailViewController: UIViewController {
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         return tableView
+    }()
+    
+    /// 尾部退出视图
+    private lazy var footerView: UIView = {
+        let moreCommentButton = UIButton(frame: CGRect(x: 20, y: 0, width: SCREEN_WIDTH - 40, height: 44))
+        moreCommentButton.addTarget(self, action: #selector(didTappedmoreCommentButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        moreCommentButton.setTitle("更多评论", forState: UIControlState.Normal)
+        moreCommentButton.backgroundColor = NAVIGATIONBAR_RED_COLOR
+        moreCommentButton.layer.cornerRadius = CORNER_RADIUS
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44))
+        footerView.addSubview(moreCommentButton)
+        return footerView
     }()
 }
 
@@ -346,7 +416,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -359,6 +429,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             return 1
         case 3:
             return otherLinks.count
+        case 4:
+            return commentList.count
         default:
             return 0
         }
@@ -374,6 +446,14 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             return 160
         case 3:
             return 44
+        case 4:
+            var rowHeight = commentList[indexPath.row].rowHeight
+            if rowHeight < 1 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(detailCommentIdentifier) as! JFCommentCell
+                commentList[indexPath.row].rowHeight = cell.getCellHeight(commentList[indexPath.row])
+                rowHeight = commentList[indexPath.row].rowHeight
+            }
+            return rowHeight
         default:
             return 0
         }
@@ -400,13 +480,20 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             separatorView.backgroundColor = UIColor(white: 0.6, alpha: 0.5)
             cell.contentView.addSubview(separatorView)
             return cell
+        case 4:
+            // 评论
+            let cell = tableView.dequeueReusableCellWithIdentifier(detailCommentIdentifier) as! JFCommentCell
+            cell.delegate = self
+            cell.commentModel = commentList[indexPath.row]
+            return cell
         default:
             return UITableViewCell()
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 3 {
+        
+        if section == 3 || section == 4 {
             let leftRedView = UIView(frame: CGRect(x: 0, y: 0, width: 3, height: 30))
             leftRedView.backgroundColor = NAVIGATIONBAR_RED_COLOR
             
@@ -414,13 +501,28 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             bgView.backgroundColor = UIColor(red:0.914,  green:0.890,  blue:0.847, alpha:0.3)
             
             let titleLabel = UILabel(frame: CGRect(x: 20, y: 0, width: 100, height: 30))
-            titleLabel.text = "相关新闻"
             
             let headerView = UIView()
             headerView.addSubview(leftRedView)
             headerView.addSubview(bgView)
             headerView.addSubview(titleLabel)
-            return otherLinks.count == 0 ? nil : headerView
+            
+            if section == 3 {
+                titleLabel.text = "相关新闻"
+                return otherLinks.count == 0 ? nil : headerView
+            } else {
+                titleLabel.text = "最新评论"
+                return commentList.count == 0 ? nil : headerView
+            }
+            
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 4 {
+            return commentList.count == 0 ? nil : footerView
         } else {
             return nil
         }
@@ -436,6 +538,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             return 10
         case 3:
             return otherLinks.count == 0 ? 1 : 30
+        case 4:
+            return commentList.count == 0 ? 1 : 30
         default:
             return 1
         }
@@ -450,7 +554,9 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 2:
             return 20
         case 3:
-            return 50
+            return commentList.count == 0 ? 1 : 20
+        case 4:
+            return commentList.count == 0 ? 50 : 100
         default:
             return 1
         }
@@ -467,7 +573,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 // MARK: - JFNewsBottomBarDelegate、JFCommentCommitViewDelegate
-extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitViewDelegate {
+extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitViewDelegate, JFSetFontViewDelegate {
     
     /**
      底部返回按钮点击
@@ -486,12 +592,12 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
     }
     
     /**
-     底部评论按钮点击
+     底部字体按钮点击 - 原来是评论
      */
     func didTappedCommentButton(button: UIButton) {
-        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
-        commentVc.param = articleParam
-        navigationController?.pushViewController(commentVc, animated: true)
+        let setFontSizeView = NSBundle.mainBundle().loadNibNamed("JFSetFontView", owner: nil, options: nil).last as! JFSetFontView
+        setFontSizeView.delegate = self
+        setFontSizeView.show()
     }
     
     /**
@@ -500,7 +606,6 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
     func didTappedCollectButton(button: UIButton) {
         
         if JFAccountModel.isLogin() {
-            
             let parameters: [String : AnyObject] = [
                 "username" : JFAccountModel.shareAccount()!.username!,
                 "userid" : JFAccountModel.shareAccount()!.id,
@@ -508,8 +613,6 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
                 "classid" : articleParam!.classid,
                 "id" : articleParam!.id
             ]
-            
-            print(parameters)
             
             JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (success, result, error) in
                 if success {
@@ -610,6 +713,10 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
             }
         }
     }
+    
+    func didChangeFontSize() {
+        loadWebViewContent(model!)
+    }
 }
 
 // MARK: - WKNavigationDelegate
@@ -687,5 +794,29 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
      */
     func didTappedFriendCircleButton(button: UIButton) {
         shareWithType(SSDKPlatformType.SubTypeWechatTimeline)
+    }
+}
+
+// MARK: - JFCommentCellDelegate
+extension JFNewsDetailViewController: JFCommentCellDelegate {
+    func didTappedStarButton(button: UIButton, commentModel: JFCommentModel) {
+        button.selected = true
+        
+        let parameters = [
+            "classid" : commentModel.classid,
+            "id" : commentModel.id,
+            "plid" : commentModel.plid,
+            "dopl" : "1",
+            "action" : "DoForPl"
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(TOP_DOWN, parameters: parameters as? [String : AnyObject]) { (success, result, error) in
+            print(result)
+            JFProgressHUD.showInfoWithStatus(result!["result"]["info"].stringValue)
+            if success {
+                commentModel.zcnum += 1
+                self.tableView.reloadData()
+            }
+        }
     }
 }

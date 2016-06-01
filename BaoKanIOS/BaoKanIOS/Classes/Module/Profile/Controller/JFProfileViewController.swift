@@ -58,6 +58,7 @@ class JFProfileViewController: JFBaseTableViewController {
         let group2CellModel2 = JFProfileCellArrowModel(title: "正文字体", icon: "setting_star_icon")
         group2CellModel2.operation = { () -> Void in
             let setFontSizeView = NSBundle.mainBundle().loadNibNamed("JFSetFontView", owner: nil, options: nil).last as! JFSetFontView
+            setFontSizeView.delegate = self
             setFontSizeView.show()
         }
         let group2CellModel3 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
@@ -209,5 +210,11 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
             presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
+    }
+}
+
+extension JFProfileViewController: JFSetFontViewDelegate {
+    func didChangeFontSize() {
+        print("改变了字体大小")
     }
 }

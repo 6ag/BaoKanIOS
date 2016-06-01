@@ -65,7 +65,7 @@ class JFCommentTableViewController: UITableViewController {
      */
     func loadCommentList(classid: String, id: String, pageIndex: Int, method: Int) {
         let parameters = [
-            "table" : "news",
+//            "table" : "news",
             "classid" : classid,
             "id" : id,
             "pageIndex" : pageIndex
@@ -132,15 +132,12 @@ class JFCommentTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         var rowHeight = commentList[indexPath.row].rowHeight
-        
         if rowHeight < 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("commentCell") as! JFCommentCell
             commentList[indexPath.row].rowHeight = cell.getCellHeight(commentList[indexPath.row])
             rowHeight = commentList[indexPath.row].rowHeight
         }
-        
         return rowHeight
     }
     
