@@ -28,6 +28,21 @@ class JFStarAndShareCell: UITableViewCell {
         prepareButton(weixinButton)
         prepareButton(friendCircleButton)
         
+        // WX
+        if WXApi.isWXAppInstalled() && WXApi.isWXAppSupportApi() {
+            weixinButton.hidden = false
+            friendCircleButton.hidden = false
+        } else {
+            weixinButton.hidden = true
+            friendCircleButton.hidden = true
+        }
+        
+        // QQ
+        if QQApiInterface.isQQInstalled() && QQApiInterface.isQQSupportApi() {
+            qqButton.hidden = false
+        } else {
+            qqButton.hidden = true
+        }
     }
     
     private func prepareButton(button: UIButton) {

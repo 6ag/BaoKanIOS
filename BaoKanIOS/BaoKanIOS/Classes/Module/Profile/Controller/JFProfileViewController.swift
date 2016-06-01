@@ -155,21 +155,23 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedAvatarButton() {
         if JFAccountModel.isLogin() {
-            // 更换头像
-            let avaterAlertC = UIAlertController(title: "修改头像", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            let selectPhoto = UIAlertAction(title: "相册选择", style: .Default, handler: { (action) in
-                
-            })
-            let takePhoto = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
-                
-            })
-            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (action) in
-                
-            })
-            avaterAlertC.addAction(selectPhoto)
-            avaterAlertC.addAction(takePhoto)
-            avaterAlertC.addAction(cancel)
-            presentViewController(avaterAlertC, animated: true, completion: nil)
+//            // 更换头像
+//            let avaterAlertC = UIAlertController(title: "修改头像", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+//            let selectPhoto = UIAlertAction(title: "相册选择", style: .Default, handler: { (action) in
+//                
+//            })
+//            let takePhoto = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
+//                
+//            })
+//            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (action) in
+//                
+//            })
+//            avaterAlertC.addAction(selectPhoto)
+//            avaterAlertC.addAction(takePhoto)
+//            avaterAlertC.addAction(cancel)
+//            presentViewController(avaterAlertC, animated: true, completion: nil)
+            // 还没有修改头像的接口，这里进个人资料里
+            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Grouped), animated: true)
         } else {
             presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })

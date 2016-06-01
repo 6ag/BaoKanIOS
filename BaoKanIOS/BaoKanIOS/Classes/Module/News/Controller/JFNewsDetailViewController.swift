@@ -439,7 +439,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return 160
         case 2:
-            return 160
+//            return 160
+            return 1
         case 3:
             return 44
         case 4:
@@ -464,11 +465,12 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return starAndShareCell
         case 2:
-            let cell = UITableViewCell()
-            let adImageView = UIImageView(frame: CGRect(x: 12, y: 0, width: SCREEN_WIDTH - 24, height: 160))
-            adImageView.image = UIImage(named: "temp_ad")
-            cell.contentView.addSubview(adImageView)
-            return cell
+//            let cell = UITableViewCell()
+//            let adImageView = UIImageView(frame: CGRect(x: 12, y: 0, width: SCREEN_WIDTH - 24, height: 160))
+//            adImageView.image = UIImage(named: "temp_ad")
+//            cell.contentView.addSubview(adImageView)
+//            return cell
+            return UITableViewCell()
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier)!
             cell.textLabel?.text = otherLinks[indexPath.row].title
@@ -548,7 +550,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return 1
         case 2:
-            return 20
+//            return 20
+            return 1
         case 3:
             return commentList.count == 0 ? 1 : 20
         case 4:
@@ -559,6 +562,8 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         if indexPath.section == 3 {
             let otherModel = otherLinks[indexPath.row]
             let detailVc = JFNewsDetailViewController()
