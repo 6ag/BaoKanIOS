@@ -10,12 +10,15 @@ import UIKit
 import SnapKit
 
 class JFNewsViewController: UIViewController {
+    
     /// 顶部标签按钮区域
     @IBOutlet weak var topScrollView: UIScrollView!
     /// 内容区域
     @IBOutlet weak var contentScrollView: UIScrollView!
     /// 标签按钮旁的加号按钮
     @IBOutlet weak var addButton: UIButton!
+    
+    var contentOffsetX: CGFloat = 0.0
     
     // 栏目数组
     private var selectedArray: [[String : String]]?
@@ -352,6 +355,11 @@ extension JFNewsViewController: UIScrollViewDelegate {
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
+    // 开始拖拽视图
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        contentOffsetX = scrollView.contentOffset.x
+    }
+    
     // 正在滚动
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let value = (scrollView.contentOffset.x / scrollView.frame.width)
@@ -369,8 +377,14 @@ extension JFNewsViewController: UIScrollViewDelegate {
             labelRight.scale = Float(scaleRight)
         }
         
-        // 计算子控制器数组角标
-        var index = (value - CGFloat(Int(value))) > 0 ? Int(value) + 1 : Int(value)
+        var index = Int(value)
+        
+        // 根据滑动方向计算下标
+        if scrollView.contentOffset.x - contentOffsetX > 2.0 {
+            index = (value - CGFloat(Int(value))) > 0 ? Int(value) + 1 : Int(value)
+        } else if contentOffsetX - scrollView.contentOffset.x > 2.0 {
+            index = (value - CGFloat(Int(value))) < 0 ? Int(value) - 1 : Int(value)
+        }
         
         // 控制器角标范围
         if index > childViewControllers.count - 1 {
