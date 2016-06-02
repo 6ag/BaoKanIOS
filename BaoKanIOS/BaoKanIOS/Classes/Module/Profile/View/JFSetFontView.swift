@@ -15,7 +15,7 @@ protocol JFSetFontViewDelegate: NSObjectProtocol {
 class JFSetFontView: UIView {
     
     @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var previewLabel: UILabel!
+    
     var currentButton: UIButton!
     let bgView = UIView(frame: SCREEN_BOUNDS)
     let minSize = 12 // 14   16   18   20  22   24
@@ -28,7 +28,6 @@ class JFSetFontView: UIView {
         currentButton = viewWithTag(scale) as! UIButton
         currentButton.selected = true
         slider.setValue(Float(scale), animated: true)
-        previewLabel.font = UIFont.systemFontOfSize(CGFloat(fontSize))
     }
     
     /**
@@ -46,7 +45,6 @@ class JFSetFontView: UIView {
         // 字体大小系数 1 - 6
         let scale = currentButton.tag
         let fontSize = minSize + scale * 2
-        previewLabel.font = UIFont.systemFontOfSize(CGFloat(fontSize))
         NSUserDefaults.standardUserDefaults().setInteger(fontSize, forKey: CONTENT_FONT_SIZE)
         delegate?.didChangeFontSize()
     }
@@ -58,7 +56,6 @@ class JFSetFontView: UIView {
     }
     
     @IBAction func didTappedSlider(sender: UISlider) {
-        
         var scale = Int(sender.value)
         if sender.value - Float(Int(sender.value)) >= 0.5 {
             scale = Int(sender.value) + 1
@@ -81,11 +78,11 @@ class JFSetFontView: UIView {
         bgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedBgView(_:))))
         UIApplication.sharedApplication().keyWindow?.addSubview(bgView)
         
-        frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 180)
+        frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 120)
         UIApplication.sharedApplication().keyWindow?.addSubview(self)
         
         UIView.animateWithDuration(0.25, animations: {
-            self.transform = CGAffineTransformMakeTranslation(0, -180)
+            self.transform = CGAffineTransformMakeTranslation(0, -120)
             self.bgView.backgroundColor = UIColor(white: 0, alpha: GLOBAL_SHADOW_ALPHA)
         }) { (_) in
             

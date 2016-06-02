@@ -80,8 +80,9 @@ class JFProfileCell: UITableViewCell {
         contentView.addSubview(settingLineView)
     }
     
-    @objc private func didChangedSwitch() {
-        
+    @objc private func didChangedSwitch(settingSwitch: UISwitch) {
+        // 修改本地存储的状态
+        NSUserDefaults.standardUserDefaults().setBool(settingSwitch.on, forKey: NIGHT_KEY)
     }
     
     // MARK: - 懒加载
@@ -100,7 +101,7 @@ class JFProfileCell: UITableViewCell {
     
     lazy var settingSwitchView: UISwitch = {
         let settingSwitchView = UISwitch()
-        settingSwitchView.addTarget(self, action: #selector(didChangedSwitch), forControlEvents: .ValueChanged)
+        settingSwitchView.addTarget(self, action: #selector(didChangedSwitch(_:)), forControlEvents: .ValueChanged)
         return settingSwitchView
     }()
     

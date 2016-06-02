@@ -9,12 +9,12 @@
 import UIKit
 
 class JFProfileCellSwitchModel: JFProfileCellModel {
-
-    typealias ProfileCellSwitchOn = (on: Bool) -> Void
     
     /// 开关状态
-    var on: Bool = false
+    var on: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey(NIGHT_KEY)
+        }
+    }
     
-    /// 状态闭包
-    var onClosure: ProfileCellSwitchOn?
 }

@@ -110,7 +110,6 @@ class JFNewFeatureCell: UICollectionViewCell {
         startButton.hidden = false
         // 把按钮的 transform 缩放设置为0
         startButton.transform = CGAffineTransformMakeScale(0, 0)
-        
         UIView.animateWithDuration(1, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
             self.startButton.transform = CGAffineTransformIdentity
         }) { (_) -> Void in
@@ -135,6 +134,7 @@ class JFNewFeatureCell: UICollectionViewCell {
         startButton.snp_makeConstraints { (make) in
             make.centerX.equalTo(contentView)
             make.bottom.equalTo(-100)
+            make.size.equalTo(CGSize(width: 140, height: 40))
         }
     }
     
@@ -152,6 +152,8 @@ class JFNewFeatureCell: UICollectionViewCell {
     /// 开始体验按钮
     private lazy var startButton: UIButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 20
+        button.layer.masksToBounds = true
         button.setBackgroundImage(UIImage(named: "new_feature_finish_button"), forState: UIControlState.Normal)
         button.setBackgroundImage(UIImage(named: "new_feature_finish_button_highlighted"), forState: UIControlState.Highlighted)
         button.setTitle("开始体验", forState: UIControlState.Normal)

@@ -8,6 +8,18 @@
 
 import UIKit
 
+/**
+ 是否是夜间模式
+ 
+ - returns: true 是夜间模式
+ */
+func isNight() -> Bool {
+    return NSUserDefaults.standardUserDefaults().boolForKey(NIGHT_KEY)
+}
+
+/// 保存夜间模式的状态的key
+let NIGHT_KEY = "night"
+
 /// appStore中的应用id
 let APPLE_ID = "1115587250"
 

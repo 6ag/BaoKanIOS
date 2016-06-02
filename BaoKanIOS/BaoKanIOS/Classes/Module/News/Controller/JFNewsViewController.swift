@@ -66,8 +66,8 @@ class JFNewsViewController: UIViewController {
     
     // MARK: - 各种自定义方法
     /**
-    准备视图
-    */
+     准备视图
+     */
     private func prepareUI() {
         
         // 移除原有数据
@@ -175,7 +175,11 @@ class JFNewsViewController: UIViewController {
                 [
                     "classid" : "396",
                     "classname": "独家报道"
-                ]
+                ],
+                [
+                    "classid" : "119",
+                    "classname": "求职招聘"
+                ],
             ]
             
             optionalArray = [
@@ -190,10 +194,6 @@ class JFNewsViewController: UIViewController {
                 [
                     "classid" : "111",
                     "classname": "写作指导"
-                ],
-                [
-                    "classid" : "119",
-                    "classname": "求职招聘"
                 ],
                 [
                     "classid" : "115",

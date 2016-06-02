@@ -61,8 +61,8 @@ class JFProfileViewController: JFBaseTableViewController {
             setFontSizeView.delegate = self
             setFontSizeView.show()
         }
-        let group2CellModel3 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
-        let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2, group2CellModel3])
+//        let group2CellModel3 = JFProfileCellSwitchModel(title: "夜间模式", icon: "setting_duty_icon")
+        let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2])
         
         let group3CellModel1 = JFProfileCellArrowModel(title: "意见反馈", icon: "setting_feedback_icon", destinationVc: JFProfileFeedbackViewController.classForCoder())
         let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.classForCoder())

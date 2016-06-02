@@ -21,7 +21,6 @@ class JFEditColumnViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         prepareUI()
-        contentView.backgroundColor = UIColor.clearColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,6 +31,7 @@ class JFEditColumnViewCell: UICollectionViewCell {
      准备UI
      */
     private func prepareUI() {
+        contentView.backgroundColor = UIColor.clearColor()
         contentView.addSubview(contentLabel)
         contentView.addSubview(deleteButton)
     }
