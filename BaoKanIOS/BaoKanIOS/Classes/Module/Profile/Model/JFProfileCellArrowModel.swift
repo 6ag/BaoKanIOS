@@ -14,8 +14,8 @@ class JFProfileCellArrowModel: JFProfileCellModel {
     var destinationVc: AnyClass?
     
     init(title: String, destinationVc: AnyClass) {
-        super.init(title: title)
         self.destinationVc = destinationVc
+        super.init(title: title)
     }
     
     override init(title: String) {
@@ -27,7 +27,7 @@ class JFProfileCellArrowModel: JFProfileCellModel {
     }
     
     init(title: String, icon: String, destinationVc: AnyClass) {
-        super.init(title: title, icon: icon)
         self.destinationVc = destinationVc
+        super.init(title: title, icon: icon)
     }
 }

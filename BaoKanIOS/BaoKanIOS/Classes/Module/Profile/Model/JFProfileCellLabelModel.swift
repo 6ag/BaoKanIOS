@@ -14,12 +14,12 @@ class JFProfileCellLabelModel: JFProfileCellModel {
     var text: String?
     
     init(title: String, text: String) {
-        super.init(title: title)
         self.text = text
+        super.init(title: title)
     }
     
     init(title: String, icon: String, text: String) {
-        super.init(title: title, icon: icon)
         self.text = text
+        super.init(title: title, icon: icon)
     }
 }

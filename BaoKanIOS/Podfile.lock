@@ -2,13 +2,13 @@ PODS:
   - Alamofire (3.4.0)
   - GRMustache.swift (1.0.1)
   - IQKeyboardManagerSwift (4.0.3)
-  - MJRefresh (3.1.0)
+  - MJRefresh (3.1.1)
   - pop (1.0.9)
   - SDCycleScrollView (1.65):
     - SDWebImage (~> 3.7)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
   - SnapKit (0.21.0)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
@@ -36,10 +36,10 @@ SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   GRMustache.swift: 36a9a277311f6492b7b2c50b0458812df06899a4
   IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
-  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  MJRefresh: 70a47c5543b567cdaf70ead5a6e99ce820652eb9
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
@@ -47,4 +47,6 @@ SPEC CHECKSUMS:
   YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
   YYWebImage: 8da75a611fd0d2e0f58a273f9ca0bc731614cb0d
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 95c73c363536d289dea386ff8005e34eb4598521
+
+COCOAPODS: 1.0.1

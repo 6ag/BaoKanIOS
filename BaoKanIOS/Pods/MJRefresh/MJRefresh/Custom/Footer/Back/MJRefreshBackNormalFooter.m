@@ -45,7 +45,7 @@
     self.loadingView = nil;
     [self setNeedsLayout];
 }
-#pragma makr - 重写父类的方法
+#pragma mark - 重写父类的方法
 - (void)prepare
 {
     [super prepare];
@@ -60,7 +60,7 @@
     // 箭头的中心点
     CGFloat arrowCenterX = self.mj_w * 0.5;
     if (!self.stateLabel.hidden) {
-        arrowCenterX -= 100;
+        arrowCenterX -= 20 + self.stateLabel.mj_textWith * 0.5;
     }
     CGFloat arrowCenterY = self.mj_h * 0.5;
     CGPoint arrowCenter = CGPointMake(arrowCenterX, arrowCenterY);

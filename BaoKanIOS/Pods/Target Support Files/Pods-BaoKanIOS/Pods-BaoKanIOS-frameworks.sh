@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -59,8 +59,8 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements \"$1\""
-    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$1"
+    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements \"$1\""
+    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1"
   fi
 }
 
@@ -84,32 +84,32 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-BaoKanIOS/Alamofire.framework"
-  install_framework "Pods-BaoKanIOS/Mustache.framework"
-  install_framework "Pods-BaoKanIOS/IQKeyboardManagerSwift.framework"
-  install_framework "Pods-BaoKanIOS/MJRefresh.framework"
-  install_framework "Pods-BaoKanIOS/SDCycleScrollView.framework"
-  install_framework "Pods-BaoKanIOS/SDWebImage.framework"
-  install_framework "Pods-BaoKanIOS/SVProgressHUD.framework"
-  install_framework "Pods-BaoKanIOS/SnapKit.framework"
-  install_framework "Pods-BaoKanIOS/SwiftyJSON.framework"
-  install_framework "Pods-BaoKanIOS/YYCache.framework"
-  install_framework "Pods-BaoKanIOS/YYImage.framework"
-  install_framework "Pods-BaoKanIOS/YYWebImage.framework"
-  install_framework "Pods-BaoKanIOS/pop.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GRMustache.swift/Mustache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDCycleScrollView/SDCycleScrollView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-BaoKanIOS/Alamofire.framework"
-  install_framework "Pods-BaoKanIOS/Mustache.framework"
-  install_framework "Pods-BaoKanIOS/IQKeyboardManagerSwift.framework"
-  install_framework "Pods-BaoKanIOS/MJRefresh.framework"
-  install_framework "Pods-BaoKanIOS/SDCycleScrollView.framework"
-  install_framework "Pods-BaoKanIOS/SDWebImage.framework"
-  install_framework "Pods-BaoKanIOS/SVProgressHUD.framework"
-  install_framework "Pods-BaoKanIOS/SnapKit.framework"
-  install_framework "Pods-BaoKanIOS/SwiftyJSON.framework"
-  install_framework "Pods-BaoKanIOS/YYCache.framework"
-  install_framework "Pods-BaoKanIOS/YYImage.framework"
-  install_framework "Pods-BaoKanIOS/YYWebImage.framework"
-  install_framework "Pods-BaoKanIOS/pop.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GRMustache.swift/Mustache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDCycleScrollView/SDCycleScrollView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCache/YYCache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYImage/YYImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYWebImage/YYWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
 fi

@@ -11,6 +11,12 @@
 
 *XCode7.3* + *swift2.2* ，如果下载项目后，编译失败，请检查XCode版本是否满足。
 
+### AppStore
+
+<a target='_blank' href='https://itunes.apple.com/app/id1115587250'>
+<img src='http://ww2.sinaimg.cn/large/0060lm7Tgw1f1hgrs1ebwj308102q0sp.jpg' width='144' height='49' />
+</a>
+
 ### 网文资讯
 
 ![image](https://github.com/6ag/BaoKanIOS/blob/master/1.gif)

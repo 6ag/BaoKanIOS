@@ -133,6 +133,45 @@
     self.refreshingAction = action;
 }
 
+- (NSString *)localizedStringForKey:(NSString *)key{
+    return [self localizedStringForKey:key withDefault:nil];
+}
+
+- (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString
+{
+    static NSBundle *bundle = nil;
+    if (bundle == nil)
+    {
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"MJRefresh" ofType:@"bundle"];
+        
+        bundle = [NSBundle bundleWithPath:bundlePath];
+        NSString *language = [[NSLocale preferredLanguages] count]? [NSLocale preferredLanguages][0]: @"en";
+        if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
+            NSRange range = [language rangeOfString:@"-" options:NSBackwardsSearch];
+            language = [language substringToIndex:range.location];
+        }
+        if (![[bundle localizations] containsObject:language])
+        {
+            language = [language componentsSeparatedByString:@"-"][0];
+        }
+        if ([[bundle localizations] containsObject:language])
+        {
+            bundlePath = [bundle pathForResource:language ofType:@"lproj"];
+        }
+
+        bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
+    }
+    defaultString = [bundle localizedStringForKey:key value:defaultString table:nil];
+    return [[NSBundle mainBundle] localizedStringForKey:key value:defaultString table:nil];
+}
+
+- (void)setState:(MJRefreshState)state
+{
+    _state = state;
+    
+    [self setNeedsLayout];
+}
+
 #pragma mark 进入刷新状态
 - (void)beginRefreshing
 {
@@ -144,9 +183,12 @@
     if (self.window) {
         self.state = MJRefreshStateRefreshing;
     } else {
-        self.state = MJRefreshStateWillRefresh;
-        // 刷新(预防从另一个控制器回到这个控制器的情况，回来要重新刷新一下)
-        [self setNeedsDisplay];
+        // 预发当前正在刷新中时调用本方法使得header insert回置失败
+        if (self.state != MJRefreshStateRefreshing) {
+            self.state = MJRefreshStateWillRefresh;
+            // 刷新(预防从另一个控制器回到这个控制器的情况，回来要重新刷新一下)
+            [self setNeedsDisplay];
+        }
     }
 }
 
@@ -213,7 +255,7 @@
 @end
 
 @implementation UILabel(MJRefresh)
-+ (instancetype)label
++ (instancetype)mj_label
 {
     UILabel *label = [[self alloc] init];
     label.font = MJRefreshLabelFont;
@@ -222,5 +264,25 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     return label;
+}
+
+- (CGFloat)mj_textWith {
+    CGFloat stringWidth = 0;
+    CGSize size = CGSizeMake(MAXFLOAT, MAXFLOAT);
+    if (self.text.length > 0) {
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        stringWidth =[self.text
+                      boundingRectWithSize:size
+                      options:NSStringDrawingUsesLineFragmentOrigin
+                      attributes:@{NSFontAttributeName:self.font}
+                      context:nil].size.width;
+#else
+        
+        stringWidth = [self.text sizeWithFont:self.font
+                             constrainedToSize:size
+                                 lineBreakMode:NSLineBreakByCharWrapping].width;
+#endif
+    }
+    return stringWidth;
 }
 @end

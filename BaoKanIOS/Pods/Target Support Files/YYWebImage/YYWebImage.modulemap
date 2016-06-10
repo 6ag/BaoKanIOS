@@ -3,6 +3,4 @@ framework module YYWebImage {
 
   export *
   module * { export * }
-
-  private header "_YYWebImageSetter.h"
 }

@@ -471,4 +471,13 @@ extension JFPhotoDetailViewController: JFPhotoDetailCellDelegate {
             scrollView.setZoomScale(1.0, animated: true)
         }
     }
+    
+    /**
+     持续滑动中判断偏移量
+     */
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.x <= -30 {
+            navigationController?.popViewControllerAnimated(true)
+        }
+    }
 }

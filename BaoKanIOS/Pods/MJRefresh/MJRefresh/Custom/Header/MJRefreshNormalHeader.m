@@ -21,7 +21,8 @@
 {
     if (!_arrowView) {
         UIImage *image = [UIImage imageNamed:MJRefreshSrcName(@"arrow.png")] ?: [UIImage imageNamed:MJRefreshFrameworkSrcName(@"arrow.png")];
-        UIImageView *arrowView = [[UIImageView alloc] initWithImage:image];
+        UIImageView *arrowView = [[UIImageView alloc] initWithImage:[image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)]];
+        arrowView.tintColor = self.stateLabel.textColor;
         [self addSubview:_arrowView = arrowView];
     }
     return _arrowView;
@@ -46,7 +47,7 @@
     [self setNeedsLayout];
 }
 
-#pragma makr - 重写父类的方法
+#pragma mark - 重写父类的方法
 - (void)prepare
 {
     [super prepare];
@@ -61,7 +62,14 @@
     // 箭头的中心点
     CGFloat arrowCenterX = self.mj_w * 0.5;
     if (!self.stateLabel.hidden) {
-        arrowCenterX -= 100;
+        CGFloat offset = 20;
+        CGFloat stateWidth = self.stateLabel.mj_textWith;
+        CGFloat timeWidth = 0.0;
+        if (!self.lastUpdatedTimeLabel.hidden) {
+            timeWidth = self.lastUpdatedTimeLabel.mj_textWith;
+        }
+        CGFloat textWidth = MAX(stateWidth, timeWidth);
+        arrowCenterX -= textWidth / 2 + offset;
     }
     CGFloat arrowCenterY = self.mj_h * 0.5;
     CGPoint arrowCenter = CGPointMake(arrowCenterX, arrowCenterY);

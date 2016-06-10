@@ -412,7 +412,7 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5
+        return model == nil ? 0 : 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
