@@ -240,11 +240,11 @@ extension JFVideoViewController: UIScrollViewDelegate {
         let scaleLeft = 1 - scaleRight
         
         let labelLeft = topScrollView.subviews[leftIndex] as! JFTopLabel
-        labelLeft.scale = Float(scaleLeft)
+        labelLeft.scale = CGFloat(scaleLeft)
         
         if rightIndex < topScrollView.subviews.count {
             let labelRight = topScrollView.subviews[rightIndex] as! JFTopLabel
-            labelRight.scale = Float(scaleRight)
+            labelRight.scale = CGFloat(scaleRight)
         }
         
     }

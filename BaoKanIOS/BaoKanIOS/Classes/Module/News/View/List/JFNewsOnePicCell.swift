@@ -22,6 +22,12 @@ class JFNewsOnePicCell: UITableViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // 图片宽度固定
+        articleTitleLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 133
+    }
+    
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

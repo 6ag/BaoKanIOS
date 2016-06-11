@@ -78,11 +78,8 @@ class JFProfileFeedbackViewController: JFBaseTableViewController {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
                 
                 self.tableView.userInteractionEnabled = true
-                if success == true {
-                    JFProgressHUD.showSuccessWithStatus("谢谢支持")
-                } else {
-                    JFProgressHUD.showErrorWithStatus("您的网络不给力哦")
-                }
+                
+                JFProgressHUD.showSuccessWithStatus("谢谢支持")
                 
                 // 返回上一级控制器
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {

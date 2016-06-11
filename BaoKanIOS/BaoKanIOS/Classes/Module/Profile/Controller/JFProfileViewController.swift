@@ -65,7 +65,7 @@ class JFProfileViewController: JFBaseTableViewController {
         let group2 = JFProfileCellGroupModel(cells: [group2CellModel1, group2CellModel2])
         
         let group3CellModel1 = JFProfileCellArrowModel(title: "意见反馈", icon: "setting_feedback_icon", destinationVc: JFProfileFeedbackViewController.classForCoder())
-        let group3CellModel2 = JFProfileCellArrowModel(title: "版权声明", icon: "setting_help_icon", destinationVc: JFDutyViewController.classForCoder())
+        let group3CellModel2 = JFProfileCellArrowModel(title: "关于我们", icon: "setting_help_icon", destinationVc: JFAboutMeViewController.classForCoder())
         let group3CellModel3 = JFProfileCellArrowModel(title: "推荐给好友", icon: "setting_share_icon")
         group3CellModel3.operation = { () -> Void in
             var image = UIImage(named: "launchScreen")
@@ -100,6 +100,7 @@ class JFProfileViewController: JFBaseTableViewController {
                 }
             }
         }
+
         let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String))
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         

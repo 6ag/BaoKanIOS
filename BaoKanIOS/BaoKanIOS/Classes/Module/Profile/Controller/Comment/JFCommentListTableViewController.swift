@@ -18,7 +18,7 @@ class JFCommentListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "足迹"
+        title = "评论"
         tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: identifier)
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
         headerRefresh.lastUpdatedTimeLabel.hidden = true
