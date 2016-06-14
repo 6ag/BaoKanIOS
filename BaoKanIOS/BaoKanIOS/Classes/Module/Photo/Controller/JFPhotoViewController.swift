@@ -63,10 +63,6 @@ class JFPhotoViewController: UIViewController {
                 "classname": "精品封面"
             ],
             [
-                "classid" : "350",
-                "classname": "美女模特"
-            ],
-            [
                 "classid" : "366",
                 "classname": "游戏图库"
             ],
