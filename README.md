@@ -9,7 +9,10 @@
 
 ### 重大改版
 
-此项目开发分支为 `coding` 分支， `master` 分支已经不更新。
+此项目开发分支为 `coding` 分支， `master` 分支已经不更新。  
+此项目开发分支为 `coding` 分支， `master` 分支已经不更新。  
+此项目开发分支为 `coding` 分支， `master` 分支已经不更新。  
+重要的事情说三遍！  
 项目最新测试代码在 [六阿哥客户端](https://github.com/6ag/LiuAGeIOS) ，两个项目基础代码大部分相同，学习建议参考 [六阿哥客户端](https://github.com/6ag/LiuAGeIOS) 。
 
 ### 开发环境
