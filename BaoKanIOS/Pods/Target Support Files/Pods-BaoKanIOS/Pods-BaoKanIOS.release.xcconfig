@@ -1,8 +1,0 @@
-EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Alamofire.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/IQKeyboardManagerSwift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MJRefresh.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Mustache.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SDCycleScrollView.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SDWebImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SVProgressHUD.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SnapKit.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SwiftyJSON.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/YYCache.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/YYImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/YYWebImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/pop.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "IQKeyboardManagerSwift" -framework "MJRefresh" -framework "Mustache" -framework "SDCycleScrollView" -framework "SDWebImage" -framework "SVProgressHUD" -framework "SnapKit" -framework "SwiftyJSON" -framework "YYCache" -framework "YYImage" -framework "YYWebImage" -framework "pop"
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
-PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-BaoKanIOS
-PODS_ROOT = ${SRCROOT}/Pods

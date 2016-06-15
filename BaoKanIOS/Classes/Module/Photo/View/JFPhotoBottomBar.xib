@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="jOX-oJ-3J4" customClass="JFPhotoBottomBar" customModule="LiuAGeIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPs-R8-5wW" userLabel="lineView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.24705882352941178" green="0.23529411764705882" blue="0.22352941176470587" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05y-f5-bKE" userLabel="Back">
+                    <rect key="frame" x="0.0" y="1" width="64" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="fgq-KS-usk"/>
+                    </constraints>
+                    <state key="normal" image="bottom_bar_back_normal"/>
+                    <connections>
+                        <action selector="didTappedBackButton:" destination="jOX-oJ-3J4" eventType="touchUpInside" id="29q-Zh-UIA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THS-Aq-VcB" userLabel="Edit">
+                    <rect key="frame" x="64" y="1" width="64" height="44"/>
+                    <state key="normal" image="bottom_bar_edit_normal"/>
+                    <connections>
+                        <action selector="didTappedEditButton:" destination="jOX-oJ-3J4" eventType="touchUpInside" id="xYr-wi-aJs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvs-3u-gev" userLabel="Collection" customClass="JFNoHighlightedButton">
+                    <rect key="frame" x="192" y="1" width="64" height="44"/>
+                    <state key="normal" image="bottom_bar_collection_normal1"/>
+                    <state key="selected" image="bottom_bar_collection_selected"/>
+                    <state key="highlighted" image="bottom_bar_collection_selected"/>
+                    <connections>
+                        <action selector="didTappedCollectButton:" destination="jOX-oJ-3J4" eventType="touchUpInside" id="65k-am-iKJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-pv-gYh" userLabel="Share">
+                    <rect key="frame" x="256" y="1" width="64" height="44"/>
+                    <state key="normal" image="bottom_bar_share_normal"/>
+                    <connections>
+                        <action selector="didTappedShareButton:" destination="jOX-oJ-3J4" eventType="touchUpInside" id="l4A-pA-1Dr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nV7-gR-ybP" userLabel="Comment">
+                    <rect key="frame" x="128" y="1" width="64" height="44"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="bottom_bar_comment_normal">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didTappedCommentButton:" destination="jOX-oJ-3J4" eventType="touchUpInside" id="cRt-cb-avh"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.11764705882352941" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="wvs-3u-gev" firstAttribute="width" secondItem="05y-f5-bKE" secondAttribute="width" id="8Rd-oa-zlO"/>
+                <constraint firstItem="THS-Aq-VcB" firstAttribute="height" secondItem="05y-f5-bKE" secondAttribute="height" id="8Zv-YQ-46S"/>
+                <constraint firstItem="THS-Aq-VcB" firstAttribute="width" secondItem="05y-f5-bKE" secondAttribute="width" id="Ai0-3S-RRK"/>
+                <constraint firstItem="vPs-R8-5wW" firstAttribute="leading" secondItem="jOX-oJ-3J4" secondAttribute="leading" id="BJL-cH-dXz"/>
+                <constraint firstItem="dtQ-pv-gYh" firstAttribute="leading" secondItem="wvs-3u-gev" secondAttribute="trailing" id="Dgz-st-0b7"/>
+                <constraint firstItem="05y-f5-bKE" firstAttribute="leading" secondItem="jOX-oJ-3J4" secondAttribute="leading" id="Eg2-fC-0Ek"/>
+                <constraint firstItem="nV7-gR-ybP" firstAttribute="width" secondItem="05y-f5-bKE" secondAttribute="width" id="IbB-Eo-fAp"/>
+                <constraint firstAttribute="bottom" secondItem="dtQ-pv-gYh" secondAttribute="bottom" id="Igw-JN-yje"/>
+                <constraint firstItem="vPs-R8-5wW" firstAttribute="top" secondItem="jOX-oJ-3J4" secondAttribute="top" id="LR5-BO-kDy"/>
+                <constraint firstItem="dtQ-pv-gYh" firstAttribute="width" secondItem="05y-f5-bKE" secondAttribute="width" id="NF3-FK-wXG"/>
+                <constraint firstItem="wvs-3u-gev" firstAttribute="height" secondItem="05y-f5-bKE" secondAttribute="height" id="Pz7-PY-ToL"/>
+                <constraint firstItem="nV7-gR-ybP" firstAttribute="leading" secondItem="THS-Aq-VcB" secondAttribute="trailing" id="Yd2-3I-8Ip"/>
+                <constraint firstItem="05y-f5-bKE" firstAttribute="top" secondItem="vPs-R8-5wW" secondAttribute="bottom" id="a2u-OM-4jF"/>
+                <constraint firstItem="dtQ-pv-gYh" firstAttribute="height" secondItem="05y-f5-bKE" secondAttribute="height" id="cr4-3F-yXV"/>
+                <constraint firstAttribute="trailing" secondItem="vPs-R8-5wW" secondAttribute="trailing" id="dMS-0X-AXL"/>
+                <constraint firstItem="THS-Aq-VcB" firstAttribute="leading" secondItem="05y-f5-bKE" secondAttribute="trailing" id="daG-Jb-r0d"/>
+                <constraint firstAttribute="trailing" secondItem="dtQ-pv-gYh" secondAttribute="trailing" id="fGT-Jc-Mew"/>
+                <constraint firstAttribute="bottom" secondItem="wvs-3u-gev" secondAttribute="bottom" id="fLT-fu-hQD"/>
+                <constraint firstAttribute="bottom" secondItem="THS-Aq-VcB" secondAttribute="bottom" id="kyR-YP-Xty"/>
+                <constraint firstItem="wvs-3u-gev" firstAttribute="leading" secondItem="nV7-gR-ybP" secondAttribute="trailing" id="nCC-U4-rEZ"/>
+                <constraint firstAttribute="bottom" secondItem="nV7-gR-ybP" secondAttribute="bottom" id="o75-Ap-XEG"/>
+                <constraint firstAttribute="bottom" secondItem="05y-f5-bKE" secondAttribute="bottom" id="rmM-i2-ays"/>
+                <constraint firstItem="nV7-gR-ybP" firstAttribute="height" secondItem="05y-f5-bKE" secondAttribute="height" id="zVJ-br-9Uj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionButton" destination="wvs-3u-gev" id="Koz-ge-5qF"/>
+                <outlet property="commentButton" destination="nV7-gR-ybP" id="U4g-rr-dX2"/>
+            </connections>
+            <point key="canvasLocation" x="532" y="322.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bottom_bar_back_normal" width="20" height="20"/>
+        <image name="bottom_bar_collection_normal1" width="22" height="22"/>
+        <image name="bottom_bar_collection_selected" width="24" height="24"/>
+        <image name="bottom_bar_comment_normal" width="22" height="22"/>
+        <image name="bottom_bar_edit_normal" width="20" height="20"/>
+        <image name="bottom_bar_share_normal" width="22" height="22"/>
+    </resources>
+</document>

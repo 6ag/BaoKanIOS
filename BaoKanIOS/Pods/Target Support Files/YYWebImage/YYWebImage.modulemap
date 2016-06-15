@@ -1,8 +1,0 @@
-framework module YYWebImage {
-  umbrella header "YYWebImage-umbrella.h"
-
-  export *
-  module * { export * }
-
-  private header "_YYWebImageSetter.h"
-}
