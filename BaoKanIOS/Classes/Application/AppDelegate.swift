@@ -96,11 +96,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        // 这段代码是为了清除本地用户缓存，因为修改了字段，不清除会崩
+        
         if isNewVersion() {
+            window?.rootViewController =  JFNewFeatureViewController()
             JFAccountModel.logout()
+        } else {
+            window?.rootViewController = JFTabBarController()
         }
-        window?.rootViewController =  isNewVersion() ? JFNewFeatureViewController() : JFTabBarController()
         window?.makeKeyAndVisible()
     }
     
