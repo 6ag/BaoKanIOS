@@ -377,19 +377,12 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         if (scrollView.dragging) {
             if scrollView.contentOffset.y - contentOffsetY > 5.0 {
                 // 向上拖拽 隐藏
-                bottomBarView.snp_updateConstraints(closure: { (make) in
-                    make.bottom.equalTo(44)
-                })
                 UIView.animateWithDuration(0.25, animations: {
-                    self.view.layoutIfNeeded()
+                    self.bottomBarView.transform = CGAffineTransformMakeTranslation(0, 44)
                 })
             } else if contentOffsetY - scrollView.contentOffset.y > 5.0 {
-                // 向下拖拽 显示
-                bottomBarView.snp_updateConstraints(closure: { (make) in
-                    make.bottom.equalTo(0)
-                })
                 UIView.animateWithDuration(0.25, animations: {
-                    self.view.layoutIfNeeded()
+                    self.bottomBarView.transform = CGAffineTransformIdentity
                 })
             }
             
@@ -403,11 +396,8 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         
         // 滚动到底部后 显示
         if case let space = scrollView.contentOffset.y + SCREEN_HEIGHT - scrollView.contentSize.height where space > -5 && space < 5 {
-            bottomBarView.snp_updateConstraints(closure: { (make) in
-                make.bottom.equalTo(0)
-            })
             UIView.animateWithDuration(0.25, animations: {
-                self.view.layoutIfNeeded()
+                self.bottomBarView.transform = CGAffineTransformIdentity
             })
         }
     }
