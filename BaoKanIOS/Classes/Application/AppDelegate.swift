@@ -30,8 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      配置全局数据
      */
     private func setupGlobalData() {
+        
         // 设置初始正文字体大小
-        if NSUserDefaults.standardUserDefaults().stringForKey(CONTENT_FONT_TYPE_KEY) == "" || NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE_KEY) == 0 {
+        if NSUserDefaults.standardUserDefaults().stringForKey(CONTENT_FONT_TYPE_KEY) == nil || NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE_KEY) == 0 {
             // 字体  16小   18中   20大   22超大  24巨大   26极大  共6个等级，可以用枚举列举使用
             NSUserDefaults.standardUserDefaults().setInteger(18, forKey: CONTENT_FONT_SIZE_KEY)
             NSUserDefaults.standardUserDefaults().setObject("", forKey: CONTENT_FONT_TYPE_KEY)
@@ -96,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
         if isNewVersion() {
             window?.rootViewController =  JFNewFeatureViewController()
             JFAccountModel.logout()
