@@ -77,8 +77,8 @@ func jf_setupButtonSpringAnimation(view: UIView) {
 func setupFooterRefresh(target: AnyObject, action: Selector) -> MJRefreshAutoNormalFooter {
     let footerRefresh = MJRefreshAutoNormalFooter(refreshingTarget: target, refreshingAction: action)
     footerRefresh.automaticallyHidden = true
-    footerRefresh.setTitle("正在为您加载更多资讯...", forState: MJRefreshState.Refreshing)
-    footerRefresh.setTitle("上拉即可加载更多资讯...", forState: MJRefreshState.Idle)
+    footerRefresh.setTitle("正在为您加载更多...", forState: MJRefreshState.Refreshing)
+    footerRefresh.setTitle("上拉即可加载更多...", forState: MJRefreshState.Idle)
     footerRefresh.setTitle("没有更多数据啦...", forState: MJRefreshState.NoMoreData)
     return footerRefresh
 }
