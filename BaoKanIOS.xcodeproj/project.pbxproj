@@ -1243,6 +1243,7 @@
 			baseConfigurationReference = 6C1F152F1EFFE76F85543E40 /* Pods-BaoKanIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK",
@@ -1271,6 +1272,7 @@
 			baseConfigurationReference = B655FA07C4754B777E3DFA2D /* Pods-BaoKanIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK",

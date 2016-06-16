@@ -95,7 +95,7 @@ class JFVideoTableViewController: UITableViewController, SDCycleScrollViewDelega
             if success == true {
                 if let successResult = result {
                     
-                    print(result)
+//                    print(result)
                     
                     let data = successResult["data"][0].arrayValue.reverse()
                     

@@ -68,7 +68,7 @@ class JFCollectionTableViewController: UITableViewController {
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
-            print(result)
+//            print(result)
             if success == true {
                 if let successResult = result {
                     let data = successResult["data"].arrayValue.reverse()

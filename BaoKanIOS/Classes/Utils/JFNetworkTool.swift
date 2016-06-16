@@ -118,7 +118,7 @@ extension JFNetworkTool {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
-                        debugPrint(response)
+//                        debugPrint(response)
                         finished(success: true, result: nil, error: nil)
                     }
                 case .Failure(let encodingError):
