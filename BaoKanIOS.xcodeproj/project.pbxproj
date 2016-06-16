@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83987AECAC2C664ECBEECAAF /* Pods_BaoKanIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FB5DB9B7B0A503BF954FA5 /* Pods_BaoKanIOS.framework */; };
+		B204F35B1D12A25E00B8A87C /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */; };
 		B29B5C451D11265B00C5AC8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29B5C441D11265B00C5AC8F /* Assets.xcassets */; };
 		B29B5CFC1D1126F500C5AC8F /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C511D1126F500C5AC8F /* api.swift */; };
 		B29B5CFD1D1126F500C5AC8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C521D1126F500C5AC8F /* AppDelegate.swift */; };
@@ -31,7 +32,6 @@
 		B29B5D111D1126F500C5AC8F /* JFColumnReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C711D1126F500C5AC8F /* JFColumnReusableView.swift */; };
 		B29B5D121D1126F500C5AC8F /* JFEditColumnViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C721D1126F500C5AC8F /* JFEditColumnViewCell.swift */; };
 		B29B5D131D1126F500C5AC8F /* JFCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C741D1126F500C5AC8F /* JFCommentCell.swift */; };
-		B29B5D141D1126F500C5AC8F /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29B5C751D1126F500C5AC8F /* JFCommentCell.xib */; };
 		B29B5D151D1126F500C5AC8F /* JFCommentCommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C761D1126F500C5AC8F /* JFCommentCommitView.swift */; };
 		B29B5D161D1126F500C5AC8F /* JFCommentCommitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29B5C771D1126F500C5AC8F /* JFCommentCommitView.xib */; };
 		B29B5D1C1D1126F500C5AC8F /* JFNewsNoPicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5C7F1D1126F500C5AC8F /* JFNewsNoPicCell.swift */; };
@@ -139,6 +139,7 @@
 /* Begin PBXFileReference section */
 		41FB5DB9B7B0A503BF954FA5 /* Pods_BaoKanIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaoKanIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1F152F1EFFE76F85543E40 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
 		B29B5C3A1D11265B00C5AC8F /* BaoKanIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoKanIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29B5C441D11265B00C5AC8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B29B5C491D11265B00C5AC8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,7 +166,6 @@
 		B29B5C711D1126F500C5AC8F /* JFColumnReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFColumnReusableView.swift; sourceTree = "<group>"; };
 		B29B5C721D1126F500C5AC8F /* JFEditColumnViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFEditColumnViewCell.swift; sourceTree = "<group>"; };
 		B29B5C741D1126F500C5AC8F /* JFCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCell.swift; sourceTree = "<group>"; };
-		B29B5C751D1126F500C5AC8F /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
 		B29B5C761D1126F500C5AC8F /* JFCommentCommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCommentCommitView.swift; sourceTree = "<group>"; };
 		B29B5C771D1126F500C5AC8F /* JFCommentCommitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCommitView.xib; sourceTree = "<group>"; };
 		B29B5C7F1D1126F500C5AC8F /* JFNewsNoPicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsNoPicCell.swift; sourceTree = "<group>"; };
@@ -507,7 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				B29B5C741D1126F500C5AC8F /* JFCommentCell.swift */,
-				B29B5C751D1126F500C5AC8F /* JFCommentCell.xib */,
+				B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */,
 				B29B5C761D1126F500C5AC8F /* JFCommentCommitView.swift */,
 				B29B5C771D1126F500C5AC8F /* JFCommentCommitView.xib */,
 			);
@@ -978,6 +978,7 @@
 				B29B5D1F1D1126F500C5AC8F /* JFNewsOnePicCell.xib in Resources */,
 				B29B5D3D1D1126F500C5AC8F /* JFRegisterViewController.xib in Resources */,
 				B29B5D9D1D1136AA00C5AC8F /* JFStarAndShareCell.xib in Resources */,
+				B204F35B1D12A25E00B8A87C /* JFCommentCell.xib in Resources */,
 				B29B5D611D1126F500C5AC8F /* ShareSDK.bundle in Resources */,
 				B29B5D251D1126F500C5AC8F /* JFPhotoViewController.storyboard in Resources */,
 				B29B5D291D1126F500C5AC8F /* JFPhotoBottomBar.xib in Resources */,
@@ -989,7 +990,6 @@
 				B29B5C451D11265B00C5AC8F /* Assets.xcassets in Resources */,
 				B29B5D211D1126F500C5AC8F /* JFNewsThreePicCell.xib in Resources */,
 				B29B5D581D1126F500C5AC8F /* ShareSDKUI.bundle in Resources */,
-				B29B5D141D1126F500C5AC8F /* JFCommentCell.xib in Resources */,
 				B29B5D161D1126F500C5AC8F /* JFCommentCommitView.xib in Resources */,
 				B29B5D841D112C4300C5AC8F /* www in Resources */,
 				B29B5D4D1D1126F500C5AC8F /* JFReadViewController.storyboard in Resources */,

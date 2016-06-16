@@ -38,6 +38,9 @@ class JFNewsDetailViewController: UIViewController {
         }
     }
     
+    // 临时广告图片
+    let adImageView = UIImageView(frame: CGRect(x: 12, y: 0, width: SCREEN_WIDTH - 24, height: 160))
+    
     /// 是否已经加载过webView
     var isLoaded = false
     
@@ -56,6 +59,10 @@ class JFNewsDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        adImageView.userInteractionEnabled = true
+        adImageView.image = UIImage(named: "temp_ad")
+        adImageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(saveAdImage(_:))))
+        
         setupWebViewJavascriptBridge()
         prepareUI()
         updateData()
@@ -66,6 +73,33 @@ class JFNewsDetailViewController: UIViewController {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    /**
+     长按保存广告图
+     */
+    func saveAdImage(longPress: UILongPressGestureRecognizer) {
+        if longPress.state == .Began {
+            let alertC = UIAlertController(title: "保存图片到相册", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            let save = UIAlertAction(title: "保存", style: UIAlertActionStyle.Default) { (action) in
+                UIImageWriteToSavedPhotosAlbum(self.adImageView.image!, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+            let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel) { (action) in }
+            alertC.addAction(save)
+            alertC.addAction(cancel)
+            presentViewController(alertC, animated: true) {}
+        }
+    }
+    
+    /**
+     保存图片到相册
+     */
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        if let _ = error {
+            JFProgressHUD.showInfoWithStatus("保存失败")
+        } else {
+            JFProgressHUD.showInfoWithStatus("保存成功")
+        }
     }
     
     /**
@@ -151,6 +185,7 @@ class JFNewsDetailViewController: UIViewController {
     /// webView - 显示正文的
     private lazy var webView: UIWebView = {
         let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        webView.dataDetectorTypes = .None
         webView.delegate = self
         webView.scrollView.scrollEnabled = false
         return webView
@@ -225,8 +260,6 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1: // 广告
             let cell = UITableViewCell()
             cell.selectionStyle = .None
-            let adImageView = UIImageView(frame: CGRect(x: 12, y: 0, width: SCREEN_WIDTH - 24, height: 160))
-            adImageView.image = UIImage(named: "temp_ad")
             cell.contentView.addSubview(adImageView)
             return cell
         case 2: // 相关阅读
@@ -596,6 +629,19 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
     }
     
     /**
+     过滤html，有需要过滤的直接写到这个方法
+     
+     - parameter string: 过滤前的html
+     
+     - returns: 过滤后的html
+     */
+    func filterHTML(string: String) -> String {
+        var tempHtml = (string as NSString).stringByReplacingOccurrencesOfString("<p>&nbsp;</p>", withString: "")
+        tempHtml = (tempHtml as NSString).stringByReplacingOccurrencesOfString(" style=\"text-indent: 2em;\"", withString: "")
+        return tempHtml
+    }
+    
+    /**
      加载webView内容
      
      - parameter model: 新闻模型
@@ -659,7 +705,7 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
         let template = (try! String(contentsOfFile: templatePath, encoding: NSUTF8StringEncoding)) as NSString
         html = template.stringByReplacingOccurrencesOfString("<p>mainnews</p>", withString: html, options: NSStringCompareOptions.CaseInsensitiveSearch, range: template.rangeOfString("<p>mainnews</p>"))
         let baseURL = NSURL(fileURLWithPath: templatePath)
-        webView.loadHTMLString(html, baseURL: baseURL)
+        webView.loadHTMLString(filterHTML(html), baseURL: baseURL)
         
         // 已经加载过就修改标记
         isLoaded = true

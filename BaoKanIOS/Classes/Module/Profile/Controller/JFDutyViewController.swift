@@ -41,7 +41,9 @@ class JFDutyViewController: UIViewController {
         "</body>" +
         "</html>"
         
-        (view as! UIWebView).loadHTMLString(html, baseURL: nil)
+        let webView = (view as! UIWebView)
+        webView.dataDetectorTypes = .None
+        webView.loadHTMLString(html, baseURL: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
