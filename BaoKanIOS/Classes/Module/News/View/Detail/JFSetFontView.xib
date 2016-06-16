@@ -18,7 +18,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="fe4-QP-XAY"/>
@@ -31,7 +31,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="R7d-7k-8ZG"/>
@@ -44,7 +44,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="NDd-hs-bQd"/>
@@ -57,7 +57,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected" title="超大">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="YR4-nv-Bxs"/>
@@ -70,7 +70,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="9f1-Xb-vk5"/>
@@ -83,7 +83,7 @@
                         <color key="titleColor" red="0.1176470588" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected" title="极大">
-                        <color key="titleColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="didTappedFontButton:" destination="XWq-bm-JPa" eventType="touchUpInside" id="o3Z-op-gOe"/>
@@ -91,8 +91,8 @@
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-jF-TjF">
                     <rect key="frame" x="18" y="107" width="339" height="31"/>
-                    <color key="minimumTrackTintColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="thumbTintColor" red="0.12549019610000001" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="didTappedSlider:" destination="XWq-bm-JPa" eventType="touchUpInside" id="tHE-he-WBo"/>
                     </connections>
@@ -100,7 +100,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正文字体" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wu-FD-GRv">
                     <rect key="frame" x="20" y="25" width="60" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GeZ-6v-FK9">
