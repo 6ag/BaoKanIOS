@@ -147,7 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let options = launchOptions {
             let userInfo = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject]
             if let info = userInfo {
-                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: info)
+                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: nil, userInfo: info)
             }
         }
     }
@@ -176,14 +176,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if application.applicationState == .Background || application.applicationState == .Inactive {
             application.applicationIconBadgeNumber = 0
-            NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: userInfo)
+            NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: nil, userInfo: userInfo)
         } else if application.applicationState == .Active {
             application.applicationIconBadgeNumber = 0
             
             let message = userInfo["aps"]!["alert"] as! String
             let alertC = UIAlertController(title: "收到新的消息", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             let confrimAction = UIAlertAction(title: "查看", style: UIAlertActionStyle.Destructive, handler: { (action) in
-                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: userInfo)
+                NSNotificationCenter.defaultCenter().postNotificationName("didReceiveRemoteNotificationOfJPush", object: nil, userInfo: userInfo)
             })
             let cancelAction = UIAlertAction(title: "忽略", style: UIAlertActionStyle.Default, handler: { (action) in
                 

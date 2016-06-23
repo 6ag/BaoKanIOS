@@ -55,11 +55,19 @@ class JFNewsViewController: UIViewController {
      */
     func didReceiveRemoteNotificationOfJPush(notification: NSNotification) -> Void {
         
-        if let userInfo = notification.object as? NSDictionary {
-            guard let classid = userInfo["classid"], let id = userInfo["id"] else {return}
-            let detailVc = JFNewsDetailViewController()
-            detailVc.articleParam = (classid as! String,id as! String)
-            navigationController?.pushViewController(detailVc, animated: true)
+        if let userInfo = notification.userInfo {
+            guard let classid = userInfo["classid"] as? String, let id = userInfo["id"] as? String, let type = userInfo["type"] as? String else {return}
+            
+            if type == "photo" {
+                let detailVc = JFPhotoDetailViewController()
+                detailVc.photoParam = (classid, id)
+                navigationController?.pushViewController(detailVc, animated: true)
+            } else {
+                let detailVc = JFNewsDetailViewController()
+                detailVc.articleParam = (classid, id)
+                navigationController?.pushViewController(detailVc, animated: true)
+            }
+            
         }
         
     }
