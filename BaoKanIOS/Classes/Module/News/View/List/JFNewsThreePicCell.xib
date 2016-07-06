@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题标题标题标题标题标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swU-jX-mpa">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="标题标题标题标题标题标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swU-jX-mpa">
                         <rect key="frame" x="15" y="15" width="345" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,7 +77,6 @@
                 <constraints>
                     <constraint firstItem="3jk-bI-6ra" firstAttribute="centerY" secondItem="g8O-6a-yp1" secondAttribute="centerY" id="10h-3A-udd"/>
                     <constraint firstItem="MfJ-Ft-v2C" firstAttribute="top" secondItem="swU-jX-mpa" secondAttribute="bottom" constant="15" id="2N8-NP-lsQ"/>
-                    <constraint firstAttribute="trailing" secondItem="swU-jX-mpa" secondAttribute="trailing" constant="15" id="2dL-Ia-ZBr"/>
                     <constraint firstItem="g8O-6a-yp1" firstAttribute="leading" secondItem="gJ2-8x-pcN" secondAttribute="trailing" constant="8" id="43q-tX-S6D"/>
                     <constraint firstItem="xSg-Yp-hNB" firstAttribute="width" secondItem="MfJ-Ft-v2C" secondAttribute="width" id="7q9-cm-fbp"/>
                     <constraint firstItem="swU-jX-mpa" firstAttribute="leading" secondItem="BbC-Je-Lyz" secondAttribute="leading" constant="15" id="A6V-HD-CCT"/>

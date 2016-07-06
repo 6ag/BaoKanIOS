@@ -45,6 +45,11 @@ class JFNewsThreePicCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var showNumLabel: UILabel!
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        articleTitleLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 30
+    }
+    
     /**
      计算行高
      */
