@@ -61,7 +61,7 @@ class JFColumnReusableView: UICollectionReusableView {
     }()
     
     lazy var clickButton: UIButton = {
-        let clickButton = UIButton(frame: CGRect(x: SCREEN_WIDTH - 80, y: 10, width: 60, height: 20))
+        let clickButton = UIButton(frame: CGRect(x: SCREEN_WIDTH - 100, y: 10, width: 60, height: 20))
         clickButton.backgroundColor = UIColor.whiteColor()
         clickButton.layer.masksToBounds = true
         clickButton.layer.cornerRadius = 10

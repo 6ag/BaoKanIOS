@@ -63,7 +63,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      */
     private func prepareScrollView() {
         
-        topScrollView = SDCycleScrollView(frame: CGRect(x:0, y:0, width: SCREEN_WIDTH, height:150), delegate:self, placeholderImage:UIImage(named: "photoview_image_default_white"))
+        topScrollView = SDCycleScrollView(frame: CGRect(x:0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 0.3), delegate:self, placeholderImage:UIImage(named: "photoview_image_default_white"))
         topScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
         topScrollView.pageDotColor = NAVIGATIONBAR_RED_COLOR
         topScrollView.currentPageDotColor = UIColor.blackColor()

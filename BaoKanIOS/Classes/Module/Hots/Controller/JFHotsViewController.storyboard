@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5Yo-T2-3rG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Hots View Controller-->
+        <scene sceneID="4ip-ls-GbK">
+            <objects>
+                <viewController id="d3d-7m-hTe" customClass="JFHotsViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Q16-Dq-3gF">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KL4-uF-ngE">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="近期热门">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="RV4-Cy-UIZ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rBd-As-ED2">
+                                <rect key="frame" x="560" y="11" width="20" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="search_icon"/>
+                                <connections>
+                                    <action selector="didTappedSearchButton:" destination="d3d-7m-hTe" eventType="touchUpInside" id="SUF-e2-0Om"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kjd-3w-zMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1556.25" y="185.91549295774647"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BrS-ni-MEG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Yo-T2-3rG" customClass="JFNavigationController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A9U-rS-dyg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="d3d-7m-hTe" kind="relationship" relationship="rootViewController" id="irx-dx-xxA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fjL-lh-5bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="541.875" y="238.73239436619716"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="search_icon" width="20" height="20"/>
+    </resources>
+</document>

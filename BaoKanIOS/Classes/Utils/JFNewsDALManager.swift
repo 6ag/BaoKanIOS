@@ -46,6 +46,94 @@ class JFNewsDALManager: NSObject {
     }
 }
 
+// MARK: - 搜索关键词数据管理
+extension JFNewsDALManager {
+    
+    /**
+     从本地查询搜索关键词列表数据
+     
+     - parameter keyboard: 关键词
+     - parameter finished: 数据回调
+     */
+    func loadSearchKeyListFromLocation(keyboard: String, finished: (success: Bool, result: [[String : AnyObject]]?, error: NSError?) -> ()) {
+        
+        // 字符不能少于1个
+        if keyboard.characters.count == 0 {
+            finished(success: true, result: [[String : AnyObject]](), error: nil)
+            return
+        }
+        
+        let sql = "select * from \(SEARCH_KEYBOARD) where keyboard like '%\(keyboard)%' or pinyin like '%\(keyboard)%' order by num DESC limit 10";
+        
+        JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) in
+            
+            var array = [[String : AnyObject]]()
+            
+            let result = try! db.executeQuery(sql, values: nil)
+            while result.next() {
+                let keyboard = result.stringForColumn("keyboard")
+                let pinyin = result.stringForColumn("pinyin")
+                let num = result.intForColumn("num")
+                
+                let dict: [String : AnyObject] = [
+                    "keyboard" : keyboard,
+                    "pinyin" : pinyin,
+                    "num" : Int(num)
+                ]
+                
+                array.append(dict)
+            }
+            
+            finished(success: true, result: array, error: nil)
+        }
+        
+    }
+    
+    /**
+     更新本地搜索关键词列表数据到本地 - 这个方法是定期更新的哈
+     */
+    func updateSearchKeyListData() {
+        
+        JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) in
+            
+            if db.executeStatements("DELETE FROM \(SEARCH_KEYBOARD);") {
+                // print("清空表成功")
+                
+                JFNetworkTool.shareNetworkTool.loadSearchKeyListFromNetwork { (success, result, error) in
+                    
+                    guard let successResult = result where error == nil && success == true else {
+                        return
+                    }
+                    
+                    let array = successResult.arrayObject as! [[String : AnyObject]]
+                    let sql = "INSERT INTO \(SEARCH_KEYBOARD) (keyboard, pinyin, num) VALUES (?, ?, ?)"
+                    
+                    JFSQLiteManager.shareManager.dbQueue.inTransaction { (db, rollback) in
+                        
+                        for dict in array {
+                            
+                            // 拼音有可能转换失败
+                            guard let pinyin = dict["pinyin"] as? String else {continue}
+                            let keyboard = dict["keyboard"] as! String
+                            let num = Int(dict["num"] as! String)!
+                            
+                            if db.executeUpdate(sql, withArgumentsInArray: [keyboard, pinyin, num]) {
+                                // print("缓存数据成功 - \(keyboard)")
+                            } else {
+                                // print("缓存数据失败 - \(keyboard)")
+                                rollback.memory = true
+                                break
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("清空表失败")
+            }
+        }
+    }
+}
+
 // MARK: - 资讯列表数据管理
 extension JFNewsDALManager {
     

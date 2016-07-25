@@ -75,6 +75,11 @@ class JFNewsDetailViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.barTintColor = NAVIGATIONBAR_WHITE_COLOR
+    }
+    
     /**
      长按保存广告图
      */
@@ -110,10 +115,39 @@ class JFNewsDetailViewController: UIViewController {
         bridge = WebViewJavascriptBridge(forWebView: webView, webViewDelegate: self, handler: { (data, responseCallback) in
             responseCallback("Response for message from ObjC")
             
-            // 接收js发送过来的图片点击事件
+            guard let dict = data as! [String : AnyObject]! else {return}
+            
+            let index = Int(dict["index"] as! NSNumber)
+            let x = CGFloat(dict["x"] as! NSNumber)
+            let y = CGFloat(dict["y"] as! NSNumber) - self.tableView.contentOffset.y
+            let width = CGFloat(dict["width"] as! NSNumber)
+            let height = CGFloat(dict["height"] as! NSNumber)
+            let url = dict["url"] as! String
+            
+            let bgView = UIView(frame: SCREEN_BOUNDS)
+            bgView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
+            self.view.addSubview(bgView)
+            
+            let tempImageView = UIImageView(frame: CGRect(x: x, y: y, width: width, height: height))
+            tempImageView.yy_setImageWithURL(NSURL(string: url), placeholder: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("www/images/loading.jpg", ofType: nil)!))
+            self.view.addSubview(tempImageView)
+            
+            // 显示出图片浏览器
             let newsPhotoBrowserVc = JFNewsPhotoBrowserViewController()
-            newsPhotoBrowserVc.photoParam = (self.model!.allphoto!, Int(data as! NSNumber))
+            newsPhotoBrowserVc.transitioningDelegate = self
+            newsPhotoBrowserVc.modalPresentationStyle = .Custom
+            newsPhotoBrowserVc.photoParam = (self.model!.allphoto!, index)
             self.presentViewController(newsPhotoBrowserVc, animated: true, completion: {})
+            
+            UIView.animateWithDuration(0.3, animations: {
+                tempImageView.frame = CGRect(x: 0, y: (SCREEN_HEIGHT - height * (SCREEN_WIDTH / width)) * 0.5, width: SCREEN_WIDTH, height: height * (SCREEN_WIDTH / width))
+                }, completion: { (_) in
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                        bgView.removeFromSuperview()
+                        tempImageView.removeFromSuperview()
+                    }
+            })
+            
         })
     }
     
@@ -127,6 +161,7 @@ class JFNewsDetailViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "JFDetailOtherCell", bundle: nil), forCellReuseIdentifier: detailOtherLinkIdentifier)
         tableView.registerNib(UINib(nibName: "JFCommentCell", bundle: nil), forCellReuseIdentifier: detailCommentIdentifier)
         tableView.tableHeaderView = webView
+        tableView.tableFooterView = closeDetailView
         
         view.backgroundColor = UIColor.whiteColor()
         view.addSubview(tableView)
@@ -172,6 +207,20 @@ class JFNewsDetailViewController: UIViewController {
     }
     
     // MARK: - 懒加载
+    /// 尾部关闭视图
+    private lazy var closeDetailView: JFCloseDetailView = {
+        let closeDetailView = JFCloseDetailView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 26))
+        closeDetailView.titleLabel?.font = UIFont.systemFontOfSize(15)
+        closeDetailView.setTitleColor(UIColor(white: 0.2, alpha: 1), forState: UIControlState.Normal)
+        closeDetailView.setTitleColor(UIColor(white: 0.2, alpha: 1), forState: UIControlState.Selected)
+        closeDetailView.selected = false
+        closeDetailView.setTitle("上拉关闭当前页", forState: UIControlState.Normal)
+        closeDetailView.setImage(UIImage(named: "newscontent_drag_arrow"), forState: UIControlState.Normal)
+        closeDetailView.setTitle("释放关闭当前页", forState: UIControlState.Selected)
+        closeDetailView.setImage(UIImage(named: "newscontent_drag_return"), forState: UIControlState.Selected)
+        return closeDetailView
+    }()
+    
     /// tableView - 整个容器
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: UITableViewStyle.Grouped)
@@ -374,9 +423,9 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1:
             return 20
         case 2:
-            return otherLinks.count == 0 ? 1 : 20
+            return otherLinks.count == 0 ? 1 : 15
         case 3:
-            return commentList.count == 10 ? 120 : 50
+            return commentList.count == 10 ? 100 : 20
         default:
             return 1
         }
@@ -402,6 +451,29 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
         contentOffsetY = scrollView.contentOffset.y
     }
     
+    // 松手后触发
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if (scrollView.contentOffset.y + SCREEN_HEIGHT) > scrollView.contentSize.height {
+            if (scrollView.contentOffset.y + SCREEN_HEIGHT) - scrollView.contentSize.height >= 50 {
+                
+                UIGraphicsBeginImageContext(SCREEN_BOUNDS.size)
+                UIApplication.sharedApplication().keyWindow?.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+                let tempImageView = UIImageView(image: UIGraphicsGetImageFromCurrentImageContext())
+                UIApplication.sharedApplication().keyWindow?.addSubview(tempImageView)
+                
+                navigationController?.popViewControllerAnimated(false)
+                UIView.animateWithDuration(0.3, animations: {
+                    tempImageView.alpha = 0
+                    tempImageView.frame = CGRect(x: 0, y: SCREEN_HEIGHT * 0.5, width: SCREEN_WIDTH, height: 0)
+                    }, completion: { (_) in
+                        tempImageView.removeFromSuperview()
+                })
+                
+            }
+        }
+    }
+    
     /**
      手指滑动屏幕开始滚动
      */
@@ -419,6 +491,14 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
                 })
             }
             
+        }
+        
+        if (scrollView.contentOffset.y + SCREEN_HEIGHT) > scrollView.contentSize.height {
+            if (scrollView.contentOffset.y + SCREEN_HEIGHT) - scrollView.contentSize.height >= 50 {
+                closeDetailView.selected = true
+            } else {
+                closeDetailView.selected = false
+            }
         }
     }
     
@@ -684,8 +764,11 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
                 // 加载中的占位图
                 let loading = NSBundle.mainBundle().pathForResource("www/images/loading.jpg", ofType: nil)!
                 
+                // 图片URL
+                let imgUrl = dict["url"] as! String
+                
                 // img标签
-                let imgTag = "<img onclick='didTappedImage(\(index));' src='\(loading)' id='\(dict["url"] as! String)' width='\(width)' height='\(height)' />"
+                let imgTag = "<img onclick='didTappedImage(\(index), \"\(imgUrl)\");' src='\(loading)' id='\(imgUrl)' width='\(width)' height='\(height)' />"
                 tempNewstext = (tempNewstext as NSString).stringByReplacingOccurrencesOfString(dict["ref"] as! String, withString: imgTag, options: NSStringCompareOptions.CaseInsensitiveSearch, range: range)
             }
             
@@ -885,4 +968,30 @@ extension JFNewsDetailViewController: JFCommentCellDelegate {
         commentVc.param = articleParam
         navigationController?.pushViewController(commentVc, animated: true)
     }
+}
+
+// MARK: - 栏目管理自定义转场动画事件
+extension JFNewsDetailViewController: UIViewControllerTransitioningDelegate {
+    
+    /**
+     返回一个控制modal视图大小的对象
+     */
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return JFNewsPhotoPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    }
+    
+    /**
+     返回一个控制器modal动画效果的对象
+     */
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return JFNewsPhotoModalAnimation()
+    }
+    
+    /**
+     返回一个控制dismiss动画效果的对象
+     */
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return JFNewsPhotoDismissAnimation()
+    }
+    
 }

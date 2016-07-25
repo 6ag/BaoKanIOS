@@ -56,3 +56,12 @@ let MODIFY_ACCOUNT_INFO = "publicActions.php"
 /// 获取用户评论列表
 let GET_USER_COMMENT = "getUserComment.php"
 
+/// 搜索
+let SEARCH = "search.php"
+
+/// 搜索关键词列表
+let SEARCH_KEY_LIST = "searchKeyboard.php"
+
+/// 更新搜索关键词列表的开关
+let UPDATE_SEARCH_KEY_LIST = "updateKeyboard.php"
+

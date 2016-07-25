@@ -18,6 +18,7 @@ class JFDetailOtherCell: UITableViewCell {
     
     var model: JFOtherLinkModel? {
         didSet {
+            model!.titlepic = model!.titlepic!.hasPrefix("http") ? model!.titlepic! : "http://www.baokan.name\(model!.titlepic!)"
             iconImageView.yy_setImageWithURL(NSURL(string: model!.titlepic!), placeholder: UIImage(named: "list_placeholder"))
             articleTitleLabel.text = model!.title!
             befromLabel.text = model!.classname!

@@ -24,7 +24,13 @@ class JFNewsViewController: UIViewController {
     private var selectedArray: [[String : String]]?
     private var optionalArray: [[String : String]]?
     
-    let editColumnVc = JFEditColumnViewController()
+    /// 栏目管理控制器
+    private lazy var editColumnVc: JFEditColumnViewController = {
+        let editColumnVc = JFEditColumnViewController()
+        editColumnVc.transitioningDelegate = self
+        editColumnVc.modalPresentationStyle = .Custom
+        return editColumnVc
+    }()
     
     // MARK: - 视图生命周期
     override func viewDidLoad() {
@@ -34,6 +40,7 @@ class JFNewsViewController: UIViewController {
         prepareUI()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveRemoteNotificationOfJPush(_:)), name: "didReceiveRemoteNotificationOfJPush", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(columnViewWillDismiss(_:)), name: "columnViewWillDismiss", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,6 +79,25 @@ class JFNewsViewController: UIViewController {
         
     }
     
+    /**
+     栏目管理控制器即将消失
+     */
+    func columnViewWillDismiss(notification: NSNotification) {
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.addButton.imageView!.transform = CGAffineTransformIdentity
+            }, completion: { (_) in
+                // 赋值重新排序后的栏目数据
+                self.selectedArray = self.editColumnVc.selectedArray
+                self.optionalArray = self.editColumnVc.optionalArray
+                NSUserDefaults.standardUserDefaults().setObject(self.selectedArray, forKey: "selectedArray")
+                NSUserDefaults.standardUserDefaults().setObject(self.optionalArray, forKey: "optionalArray")
+                
+                // 咋判断啥时候需要刷新？咋刷新呢
+                self.prepareUI()
+        })
+    }
+    
     // MARK: - 各种自定义方法
     /**
      准备视图
@@ -99,37 +125,16 @@ class JFNewsViewController: UIViewController {
      编辑分类按钮点击
      */
     @IBAction func didTappedEditColumnButton(sender: UIButton) {
-        sender.selected = !sender.selected
         
-        if sender.selected {
-            editColumnVc.selectedArray = selectedArray
-            editColumnVc.optionalArray = optionalArray
-            editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: 0)
-            addChildViewController(editColumnVc)
-            view.addSubview(editColumnVc.view)
-            tabBarController?.tabBar.hidden = true
+        editColumnVc.selectedArray = selectedArray
+        editColumnVc.optionalArray = optionalArray
+        presentViewController(editColumnVc, animated: true, completion: {
             
-            // 切换控制器动画
-            UIView.animateWithDuration(0.25, animations: {
-                self.editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 60)
-                self.addButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            })
-        } else {
-            UIView.animateWithDuration(0.25, animations: {
-                self.editColumnVc.view.frame = CGRect(x: 0, y: 60, width: SCREEN_WIDTH, height: 0)
-                self.addButton.imageView!.transform = CGAffineTransformIdentity
-                }, completion: { (_) in
-                    self.selectedArray = self.editColumnVc.selectedArray
-                    self.optionalArray = self.editColumnVc.optionalArray
-                    NSUserDefaults.standardUserDefaults().setObject(self.selectedArray, forKey: "selectedArray")
-                    NSUserDefaults.standardUserDefaults().setObject(self.optionalArray, forKey: "optionalArray")
-                    self.editColumnVc.view.removeFromSuperview()
-                    self.tabBarController?.tabBar.hidden = false
-                    
-                    self.prepareUI()
-            })
-        }
+        })
         
+        UIView.animateWithDuration(0.5, animations: {
+            self.addButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) - 0.01)
+        })
     }
     
     /**
@@ -299,10 +304,8 @@ class JFNewsViewController: UIViewController {
             addChildViewController(newsVc)
             
             // 默认控制器
-            if i == 0 {
-                newsVc.classid = Int(selectedArray![0]["classid"]!)
-                newsVc.view.frame = CGRect(x: 0, y: 0, width: contentScrollView.bounds.width, height: contentScrollView.bounds.height)
-                contentScrollView.addSubview(newsVc.view)
+            if i <= 1 {
+                addContentViewController(i)
             }
         }
         
@@ -316,6 +319,26 @@ class JFNewsViewController: UIViewController {
         
         // 视图滚动到第一个位置
         contentScrollView.setContentOffset(CGPoint(x: 0, y: contentScrollView.contentOffset.y), animated: true)
+    }
+    
+    /**
+     添加内容控制器
+     
+     - parameter index: 控制器角标
+     */
+    private func addContentViewController(index: Int) {
+        
+        // 获取需要展示的控制器
+        let newsVc = childViewControllers[index] as! JFNewsTableViewController
+        
+        // 如果已经展示则直接返回
+        if newsVc.view.superview != nil {
+            return
+        }
+        
+        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: contentScrollView.bounds.width, height: contentScrollView.bounds.height)
+        contentScrollView.addSubview(newsVc.view)
+        newsVc.classid = Int(selectedArray![index]["classid"]!)
     }
     
     /**
@@ -357,6 +380,35 @@ extension JFNewsViewController: UIScrollViewDelegate {
             }
         }
         
+        // 添加控制器 - 并预加载控制器  左滑预加载下下个 右滑预加载上上个 保证滑动流畅
+        let value = (scrollView.contentOffset.x / scrollView.frame.width)
+        
+        var index1 = Int(value)
+        var index2 = Int(value)
+        
+        // 根据滑动方向计算下标
+        if scrollView.contentOffset.x - contentOffsetX > 2.0 {
+            index1 = (value - CGFloat(Int(value))) > 0 ? Int(value) + 1 : Int(value)
+            index2 = index1 + 1
+        } else if contentOffsetX - scrollView.contentOffset.x > 2.0 {
+            index1 = (value - CGFloat(Int(value))) < 0 ? Int(value) - 1 : Int(value)
+            index2 = index1 - 1
+        }
+        
+        // 控制器角标范围
+        if index1 > childViewControllers.count - 1 {
+            index1 = childViewControllers.count - 1
+        } else if index1 < 0 {
+            index1 = 0
+        }
+        if index2 > childViewControllers.count - 1 {
+            index2 = childViewControllers.count - 1
+        } else if index2 < 0 {
+            index2 = 0
+        }
+        
+        addContentViewController(index1)
+        addContentViewController(index2)
     }
     
     // 滚动结束 手势导致
@@ -371,6 +423,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
     
     // 正在滚动
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        
         let value = (scrollView.contentOffset.x / scrollView.frame.width)
         
         let leftIndex = Int(value)
@@ -379,42 +432,38 @@ extension JFNewsViewController: UIScrollViewDelegate {
         let scaleLeft = 1 - scaleRight
         
         let labelLeft = topScrollView.subviews[leftIndex] as! JFTopLabel
-        labelLeft.scale = CGFloat(scaleLeft)
+        labelLeft.scale = scaleLeft
         
         if rightIndex < topScrollView.subviews.count {
             let labelRight = topScrollView.subviews[rightIndex] as! JFTopLabel
-            labelRight.scale = CGFloat(scaleRight)
+            labelRight.scale = scaleRight
         }
-        
-        var index = Int(value)
-        
-        // 根据滑动方向计算下标
-        if scrollView.contentOffset.x - contentOffsetX > 2.0 {
-            index = (value - CGFloat(Int(value))) > 0 ? Int(value) + 1 : Int(value)
-        } else if contentOffsetX - scrollView.contentOffset.x > 2.0 {
-            index = (value - CGFloat(Int(value))) < 0 ? Int(value) - 1 : Int(value)
-        }
-        
-        // 控制器角标范围
-        if index > childViewControllers.count - 1 {
-            index = childViewControllers.count - 1
-        } else if index < 0 {
-            index = 0
-        }
-        
-        // 获取需要展示的控制器
-        let newsVc = childViewControllers[index] as! JFNewsTableViewController
-        
-        // 如果已经展示则直接返回
-        if newsVc.view.superview != nil {
-            return
-        }
-        
-        contentScrollView.addSubview(newsVc.view)
-        newsVc.view.frame = CGRect(x: CGFloat(index) * SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: contentScrollView.frame.height)
-        
-        // 传递分类数据
-        newsVc.classid = Int(selectedArray![index]["classid"]!)
+    }
+
+}
+
+// MARK: - 栏目管理自定义转场动画事件
+extension JFNewsViewController: UIViewControllerTransitioningDelegate {
+    
+    /**
+     返回一个控制modal视图大小的对象
+     */
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return JFPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    }
+    
+    /**
+     返回一个控制器modal动画效果的对象
+     */
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return JFPopoverModalAnimation()
+    }
+    
+    /**
+     返回一个控制dismiss动画效果的对象
+     */
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return JFPopoverDismissAnimation()
     }
     
 }

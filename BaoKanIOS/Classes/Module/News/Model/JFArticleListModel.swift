@@ -106,4 +106,42 @@ class JFArticleListModel: NSObject {
         
     }
     
+    /**
+     加载搜索结果
+     
+     - parameter keyboard:  搜索关键词
+     - parameter pageIndex: 加载分页
+     - parameter finished:  数据回调
+     */
+    class func loadSearchResult(keyboard: String, pageIndex: Int, finished: (searchResultModels: [JFArticleListModel]?, error: NSError?) -> ()) {
+        
+        // 搜索不需要缓存，所以直接从网络加载
+        JFNetworkTool.shareNetworkTool.loadSearchResultFromNetwork(keyboard, pageIndex: pageIndex) { (success, result, error) in
+            
+            // 请求失败
+            if error != nil || result == nil {
+                finished(searchResultModels: nil, error: error)
+                return
+            }
+            
+            // 没有数据了
+            if result?.count == 0 {
+                finished(searchResultModels: [JFArticleListModel](), error: nil)
+                return
+            }
+            
+            let data = result!.arrayValue
+            var searchResultModels = [JFArticleListModel]()
+            
+            // 遍历转模型添加数据
+            for article in data {
+                let postModel = JFArticleListModel(dict: article.dictionaryObject!)
+                searchResultModels.append(postModel)
+            }
+            
+            finished(searchResultModels: searchResultModels, error: nil)
+        }
+    }
+
+    
 }

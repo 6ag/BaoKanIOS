@@ -52,11 +52,12 @@ class JFNewsPhotoBrowserViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.sharedApplication().statusBarHidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().statusBarHidden = false
     }
     
     /**

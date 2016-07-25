@@ -42,6 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 验证缓存的账号是否有效
         JFAccountModel.checkUserInfo({})
+        
+        // 是否需要更新本地搜索关键词列表
+        JFNetworkTool.shareNetworkTool.shouldUpdateKeyboardList({ (update) in
+            if update {
+                JFNewsDALManager.shareManager.updateSearchKeyListData()
+            }
+        })
     }
     
     /**

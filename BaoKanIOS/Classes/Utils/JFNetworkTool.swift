@@ -131,6 +131,73 @@ extension JFNetworkTool {
     }
     
     /**
+     获取更新搜索关键词列表的开关
+     
+     - parameter finished: 数据回调
+     */
+    func shouldUpdateKeyboardList(finished: (update: Bool) -> ()) {
+        
+        JFNetworkTool.shareNetworkTool.get(UPDATE_SEARCH_KEY_LIST, parameters: nil) { (success, result, error) in
+            guard let successResult = result where success == true else {
+                finished(update: false)
+                return
+            }
+            
+            let updateNum = successResult["data"].intValue
+            if NSUserDefaults.standardUserDefaults().integerForKey(UPDATE_SEARCH_KEYBOARD) == updateNum {
+                finished(update: false)
+            } else {
+                NSUserDefaults.standardUserDefaults().setInteger(updateNum, forKey: UPDATE_SEARCH_KEYBOARD)
+                finished(update: true)
+            }
+            
+        }
+    }
+    
+    /**
+     从网络加载（搜索关键词列表）数据
+     
+     - parameter finished: 数据回调
+     */
+    func loadSearchKeyListFromNetwork(finished: NetworkFinished) {
+        
+        JFNetworkTool.shareNetworkTool.get(SEARCH_KEY_LIST, parameters: nil) { (success, result, error) in
+            guard let successResult = result where success == true else {
+                finished(success: false, result: nil, error: error)
+                return
+            }
+            
+//            print(successResult)
+            finished(success: true, result: successResult["data"], error: nil)
+        }
+    }
+    
+    /**
+     从网络加载（搜索结果）列表
+     
+     - parameter keyboard:  搜索关键词
+     - parameter pageIndex: 加载分页
+     - parameter finished:  数据回调
+     */
+    func loadSearchResultFromNetwork(keyboard: String, pageIndex: Int, finished: NetworkFinished) {
+        
+        let parameters: [String : AnyObject] = [
+            "keyboard" : keyboard,   // 搜索关键字
+            "pageIndex" : pageIndex, // 页码
+            "pageSize" : 20          // 单页数量
+        ]
+        
+        JFNetworkTool.shareNetworkTool.get(SEARCH, parameters: parameters) { (success, result, error) -> () in
+            
+            guard let successResult = result where success == true else {
+                finished(success: false, result: nil, error: error)
+                return
+            }
+            finished(success: true, result: successResult["data"], error: nil)
+        }
+    }
+    
+    /**
      从网络加载（资讯列表）数据
      
      - parameter classid:   资讯分类id
@@ -164,7 +231,7 @@ extension JFNetworkTool {
                 finished(success: false, result: nil, error: error)
                 return
             }
-            print(successResult)
+//            print(successResult)
             finished(success: true, result: successResult["data"], error: nil)
         }
     }
@@ -200,7 +267,7 @@ extension JFNetworkTool {
                 finished(success: false, result: nil, error: error)
                 return
             }
-            print(successResult)
+//            print(successResult)
             finished(success: true, result: successResult["data"], error: nil)
         }
     }
@@ -229,7 +296,7 @@ extension JFNetworkTool {
                 finished(success: false, result: nil, error: error)
                 return
             }
-            print(successResult)
+//            print(successResult)
             finished(success: true, result: successResult["data"], error: nil)
         }
     }

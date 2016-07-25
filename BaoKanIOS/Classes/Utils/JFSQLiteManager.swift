@@ -14,6 +14,7 @@ let NEWS_LIST_HOME_LIST = "jf_newslist_homelist"   // 首页 列表页 的 列�
 let NEWS_LIST_OTHER_TOP = "jf_newslist_othertop"   // 其他分类 列表页 的 幻灯片 数据表
 let NEWS_LIST_OTHER_LIST = "jf_newslist_otherlist" // 其他分类 列表页 的 列表 数据表
 let NEWS_CONTENT = "jf_news_content"               // 资讯/图库 正文 数据表
+let SEARCH_KEYBOARD = "jf_search_keyboard"         // 搜索关键词数据表
 
 class JFSQLiteManager: NSObject {
     
@@ -40,6 +41,7 @@ class JFSQLiteManager: NSObject {
         createNewsListTable(NEWS_LIST_OTHER_TOP)
         createNewsListTable(NEWS_LIST_OTHER_LIST)
         createNewsContentTable()
+        createSearchKeyboardTable()
     }
     
     /**
@@ -82,6 +84,28 @@ class JFSQLiteManager: NSObject {
                 print("创建 \(NEWS_CONTENT) 表成功")
             } else {
                 print("创建 \(NEWS_CONTENT) 表失败")
+            }
+        }
+    }
+    
+    /**
+     创建搜索关键词数据表
+     */
+    private func createSearchKeyboardTable() {
+        
+        let sql = "CREATE TABLE IF NOT EXISTS \(SEARCH_KEYBOARD) ( \n" +
+            "id INTEGER, \n" +
+            "keyboard VARCHAR(30), \n" +
+            "pinyin VARCHAR(30), \n" +
+            "num INTEGER, \n" +
+            "createTime VARCHAR(30) DEFAULT (datetime('now', 'localtime')) \n" +
+        ");"
+        
+        dbQueue.inDatabase { (db) in
+            if db.executeStatements(sql) {
+                print("创建 \(SEARCH_KEYBOARD) 表成功")
+            } else {
+                print("创建 \(SEARCH_KEYBOARD) 表失败")
             }
         }
     }

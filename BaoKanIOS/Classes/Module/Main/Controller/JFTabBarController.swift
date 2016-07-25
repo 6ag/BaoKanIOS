@@ -32,13 +32,13 @@ class JFTabBarController: UITabBarController {
         let recVc = UIStoryboard.init(name: "JFPhotoViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(recVc, title: "图秀", imageName: "tabbar_icon_media")
         
+        // 热门
+        let readVc = UIStoryboard.init(name: "JFHotsViewController", bundle: nil).instantiateInitialViewController()!
+        addChildViewController(readVc, title: "热门", imageName: "tabbar_icon_reader")
+        
         // 视频
 //        let bzoneVc = UIStoryboard.init(name: "JFVideoViewController", bundle: nil).instantiateInitialViewController()!
 //        addChildViewController(bzoneVc, title: "视频", imageName: "tabbar_icon_bar")
-        
-        // 阅读
-//        let readVc = UIStoryboard.init(name: "JFReadViewController", bundle: nil).instantiateInitialViewController()!
-//        addChildViewController(readVc, title: "阅读", imageName: "tabbar_icon_reader")
         
         // 我
         let profileVc = UIStoryboard.init(name: "JFProfileViewController", bundle: nil).instantiateInitialViewController()!
