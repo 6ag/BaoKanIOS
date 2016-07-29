@@ -17,11 +17,13 @@ class JFPresentationController: UIPresentationController {
         
         // 关闭按钮
         let closeButton = UIButton(frame: CGRect(x: SCREEN_WIDTH - 40, y: 20, width: 40, height: 40))
-        closeButton.setImage(UIImage(named: "channel_nav_plus"), forState: UIControlState.Normal)
+        closeButton.setImage(UIImage(named: "channel_nav_plus_colse"), forState: UIControlState.Normal)
         closeButton.addTarget(self, action: #selector(didTappedCloseButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        closeButton.alpha = 0
         containerView?.addSubview(closeButton)
         
         UIView.animateWithDuration(0.5, animations: {
+            closeButton.alpha = 1
             closeButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) - 0.01)
         })
         
@@ -33,7 +35,8 @@ class JFPresentationController: UIPresentationController {
     @objc private func didTappedCloseButton(button: UIButton) {
         // 发出栏目管理视图即将消失的通知
         NSNotificationCenter.defaultCenter().postNotificationName("columnViewWillDismiss", object: nil)
-        UIView.animateWithDuration(0.5, animations: { 
+        UIView.animateWithDuration(0.5, animations: {
+            button.alpha = 0
             button.imageView!.transform = CGAffineTransformIdentity
             }) { (_) in
                 button.removeFromSuperview()

@@ -53,6 +53,7 @@ class JFNewsDetailViewController: UIViewController {
     let detailContentIdentifier = "detailContentIdentifier"
     let detailStarAndShareIdentifier = "detailStarAndShareIdentifier"
     let detailOtherLinkIdentifier = "detailOtherLinkIdentifier"
+    let detailOtherLinkNoneIdentifier = "detailOtherLinkNoneIdentifier"
     let detailCommentIdentifier = "detailCommentIdentifier"
     
     // MARK: - 生命周期
@@ -159,6 +160,7 @@ class JFNewsDetailViewController: UIViewController {
         // 注册cell
         tableView.registerNib(UINib(nibName: "JFStarAndShareCell", bundle: nil), forCellReuseIdentifier: detailStarAndShareIdentifier)
         tableView.registerNib(UINib(nibName: "JFDetailOtherCell", bundle: nil), forCellReuseIdentifier: detailOtherLinkIdentifier)
+        tableView.registerNib(UINib(nibName: "JFDetailOtherNoneCell", bundle: nil), forCellReuseIdentifier: detailOtherLinkNoneIdentifier)
         tableView.registerNib(UINib(nibName: "JFCommentCell", bundle: nil), forCellReuseIdentifier: detailCommentIdentifier)
         tableView.tableHeaderView = webView
         tableView.tableFooterView = closeDetailView
@@ -312,9 +314,19 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
             cell.contentView.addSubview(adImageView)
             return cell
         case 2: // 相关阅读
-            let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier) as! JFDetailOtherCell
-            cell.model = otherLinks[indexPath.row]
-            return cell
+            
+            let model = otherLinks[indexPath.row]
+            
+            if model.titlepic == nil {
+                let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkNoneIdentifier) as! JFDetailOtherNoneCell
+                cell.model = model
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkIdentifier) as! JFDetailOtherCell
+                cell.model = model
+                return cell
+            }
+            
         case 3: // 评论
             let cell = tableView.dequeueReusableCellWithIdentifier(detailCommentIdentifier) as! JFCommentCell
             cell.delegate = self
@@ -379,7 +391,17 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         case 1: // 广告
             return 160
         case 2: // 相关阅读
-            return 100
+            var rowHeight = otherLinks[indexPath.row].rowHeight
+            let model = otherLinks[indexPath.row]
+            if model.titlepic == nil {
+                let cell = tableView.dequeueReusableCellWithIdentifier(detailOtherLinkNoneIdentifier) as! JFDetailOtherNoneCell
+                // 缓存评论cell高度
+                otherLinks[indexPath.row].rowHeight = cell.getRowHeight(model)
+                rowHeight = otherLinks[indexPath.row].rowHeight
+                return rowHeight
+            } else {
+                return 100
+            }
         case 3: // 评论
             var rowHeight = commentList[indexPath.row].rowHeight
             if rowHeight < 1 {

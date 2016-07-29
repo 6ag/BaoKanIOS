@@ -9,26 +9,33 @@
 import UIKit
 import YYWebImage
 
-class JFDetailOtherCell: UITableViewCell {
+class JFDetailOtherNoneCell: UITableViewCell {
     
-    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var befromLabel: UILabel!
     @IBOutlet weak var showNumLabel: UILabel!
     
     var model: JFOtherLinkModel? {
         didSet {
-            if let titlepic = model?.titlepic {
-                iconImageView.hidden = false
-                model!.titlepic = model!.titlepic!.hasPrefix("http") ? model!.titlepic! : "http://www.baokan.name\(model!.titlepic!)"
-                iconImageView.yy_setImageWithURL(NSURL(string: model!.titlepic!), placeholder: UIImage(named: "list_placeholder"))
-            } else {
-                iconImageView.hidden = true
-            }
-            
             articleTitleLabel.text = model!.title!
             befromLabel.text = model!.classname!
             showNumLabel.text = model!.onclick!
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        articleTitleLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 30
+    }
+    
+    /**
+     计算行高
+     */
+    func getRowHeight(model: JFOtherLinkModel) -> CGFloat {
+        self.model = model
+        layoutIfNeeded()
+        return CGRectGetMaxY(showNumLabel.frame) + 15
+    }
+    
+    
 }

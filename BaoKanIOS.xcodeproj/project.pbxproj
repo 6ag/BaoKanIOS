@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		83987AECAC2C664ECBEECAAF /* Pods_BaoKanIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FB5DB9B7B0A503BF954FA5 /* Pods_BaoKanIOS.framework */; };
 		B204F35B1D12A25E00B8A87C /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */; };
+		B214FA981D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B214FA961D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift */; };
+		B214FA991D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B214FA971D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib */; };
 		B24B96F61D460ADC004B8BBE /* JFSearchKeyboardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B96F51D460ADC004B8BBE /* JFSearchKeyboardTableView.swift */; };
 		B24B96F81D460B10004B8BBE /* JFPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B96F71D460B10004B8BBE /* JFPlaceholderView.swift */; };
 		B28A0ECF1D34CEDC00C387C7 /* JFHotsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */; };
@@ -152,6 +154,8 @@
 		41FB5DB9B7B0A503BF954FA5 /* Pods_BaoKanIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaoKanIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1F152F1EFFE76F85543E40 /* Pods-BaoKanIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoKanIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoKanIOS/Pods-BaoKanIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
+		B214FA961D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherNoneCell.swift; sourceTree = "<group>"; };
+		B214FA971D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFDetailOtherNoneCell.xib; sourceTree = "<group>"; };
 		B24B96F51D460ADC004B8BBE /* JFSearchKeyboardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFSearchKeyboardTableView.swift; sourceTree = "<group>"; };
 		B24B96F71D460B10004B8BBE /* JFPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPlaceholderView.swift; sourceTree = "<group>"; };
 		B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFHotsViewController.storyboard; sourceTree = "<group>"; };
@@ -593,6 +597,8 @@
 			isa = PBXGroup;
 			children = (
 				B28A0EE01D34E74C00C387C7 /* JFCloseDetailView.swift */,
+				B214FA961D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift */,
+				B214FA971D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib */,
 				B29B5D8B1D1136AA00C5AC8F /* JFDetailOtherCell.swift */,
 				B29B5D8C1D1136AA00C5AC8F /* JFDetailOtherCell.xib */,
 				B29B5D8D1D1136AA00C5AC8F /* JFNewsBottomBar.swift */,
@@ -1046,6 +1052,7 @@
 				B29B5D5F1D1126F500C5AC8F /* README.txt in Resources */,
 				B29B5D3B1D1126F500C5AC8F /* JFLoginViewController.xib in Resources */,
 				B29B5D0C1D1126F500C5AC8F /* JFNewsViewController.storyboard in Resources */,
+				B214FA991D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib in Resources */,
 				B29B5D381D1126F500C5AC8F /* JFProfileViewController.storyboard in Resources */,
 				B29B5D501D1126F500C5AC8F /* JFVideoViewController.storyboard in Resources */,
 				B29B5C451D11265B00C5AC8F /* Assets.xcassets in Resources */,
@@ -1147,6 +1154,7 @@
 				B24B96F61D460ADC004B8BBE /* JFSearchKeyboardTableView.swift in Sources */,
 				B29B5D2C1D1126F500C5AC8F /* JFProgressView.swift in Sources */,
 				B29B5D8A1D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift in Sources */,
+				B214FA981D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift in Sources */,
 				B29B5D4F1D1126F500C5AC8F /* JFVideoTableViewController.swift in Sources */,
 				B29B5D241D1126F500C5AC8F /* JFPhotoTableViewController.swift in Sources */,
 				B29B5CFD1D1126F500C5AC8F /* AppDelegate.swift in Sources */,

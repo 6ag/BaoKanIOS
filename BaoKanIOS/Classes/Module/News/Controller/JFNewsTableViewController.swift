@@ -10,7 +10,7 @@ import UIKit
 import SDCycleScrollView
 import MJRefresh
 
-class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegate {
+class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     
     /// 分类数据
     var classid: Int? {
@@ -44,6 +44,10 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
      准备tableView
      */
     private func prepareTableView() {
+        
+        view.addSubview(tableView)
+        view.addSubview(placeholderView)
+        placeholderView.startAnimation()
         
         // 注册cell
         tableView.registerNib(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: newsNoPicCell)
@@ -170,6 +174,10 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
             
             if list.count == 0 {
                 self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                
+                if self.articleList.count == 0 {
+                    self.placeholderView.noAnyData("还没有任何资讯")
+                }
                 return
             }
             
@@ -191,21 +199,43 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
                 }
             }
             
+            self.placeholderView.removeAnimation()
             self.tableView.reloadData()
         }
         
     }
     
-    // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    /// 内容区域
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 104), style: UITableViewStyle.Plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.separatorColor = UIColor(red:0.9,  green:0.9,  blue:0.9, alpha:1)
+        return tableView
+    }()
+    
+    /// 没有内容的时候的占位图
+    private lazy var placeholderView: JFPlaceholderView = {
+        let placeholderView = JFPlaceholderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 104))
+        placeholderView.backgroundColor = UIColor.whiteColor()
+        return placeholderView
+    }()
+    
+}
+
+// MARK: - UITableViewDelegate UITableViewDatasource
+extension JFNewsTableViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let postModel = articleList[indexPath.row]
         if postModel.titlepic == "" { // 无图
@@ -227,11 +257,11 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 100
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let postModel = articleList[indexPath.row]
         
@@ -250,7 +280,7 @@ class JFNewsTableViewController: UITableViewController, SDCycleScrollViewDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // 取消cell选中状态

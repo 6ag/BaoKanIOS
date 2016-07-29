@@ -97,9 +97,7 @@ class JFPhotoDetailViewController: UIViewController {
      */
     func loadPhotoDetail(classid: Int, id: Int) {
         
-        activityView.startAnimating()
         JFArticleDetailModel.loadNewsDetail(classid, id: id) { (articleDetailModel, error) in
-            self.activityView.stopAnimating()
             
             guard let model = articleDetailModel where error == nil else {return}
             self.model = model
@@ -130,7 +128,6 @@ class JFPhotoDetailViewController: UIViewController {
         view.addSubview(bottomScrollView)
         bottomScrollView.addSubview(captionLabel)
         navigationBarView.addSubview(topTitleLabel)
-        view.addSubview(activityView)
         
         topTitleLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(navigationBarView)
@@ -231,13 +228,6 @@ class JFPhotoDetailViewController: UIViewController {
         return navigationBarView
     }()
     
-    /// 活动指示器
-    private lazy var activityView: UIActivityIndicatorView = {
-        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        activityView.center = self.view.center
-        return activityView
-    }()
-    
     /// 底部文字透明滚动视图
     private lazy var bottomScrollView: UIScrollView = {
         let bottomScrollView = UIScrollView()
@@ -291,7 +281,7 @@ extension JFPhotoDetailViewController: UICollectionViewDelegate, UICollectionVie
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier, forIndexPath: indexPath) as! JFPhotoDetailCell
         cell.delegate = self
-        cell.model = photoModels[indexPath.item]
+        cell.urlString = photoModels[indexPath.item].bigpic
         return cell
     }
 }

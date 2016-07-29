@@ -20,9 +20,10 @@ class JFPhotoDetailCell: UICollectionViewCell {
     
     var delegate: JFPhotoDetailCellDelegate?
     
-    var articleModel: JFArticleImageModel? {
+    /// 图片URL字符串
+    var urlString: String? {
         didSet {
-            guard let imageURL = articleModel?.url else {
+            guard let imageURL = urlString else {
                 print("imageURL 为空")
                 return
             }
@@ -30,17 +31,18 @@ class JFPhotoDetailCell: UICollectionViewCell {
             // 将imageView图片设置为nil,防止cell重用
             picImageView.image = nil
             resetProperties()
+            indicator.startAnimating()
             
             // 判断本地磁盘是否已经缓存
             if JFArticleStorage.getArticleImageCache().containsImageForKey(imageURL, withType: YYImageCacheType.Disk) {
-
+                
                 let image = UIImage(contentsOfFile: JFArticleStorage.getFilePathForKey(imageURL))!
-                picImageView.image = image
+                self.picImageView.yy_imageURL = NSURL(string: imageURL)
                 self.layoutImageView(image)
+                self.indicator.stopAnimating()
                 
             } else {
                 
-                indicator.startAnimating()
                 YYWebImageManager(cache: JFArticleStorage.getArticleImageCache(), queue: NSOperationQueue()).requestImageWithURL(NSURL(string: imageURL)!, options: YYWebImageOptions.UseNSURLCache, progress: { (_, _) in
                     }, transform: { (image, url) -> UIImage? in
                         return image
@@ -50,45 +52,16 @@ class JFPhotoDetailCell: UICollectionViewCell {
                             
                             guard let _ = image where error == nil else {return}
                             
-                            let image = UIImage(contentsOfFile: JFArticleStorage.getFilePathForKey(imageURL))!
-                            self.picImageView.image = image
-                            self.layoutImageView(image)
+                            // 刚缓存的图片会有一点处理时间保存到本地
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                                let image = UIImage(contentsOfFile: JFArticleStorage.getFilePathForKey(imageURL))!
+                                self.layoutImageView(image)
+                                self.picImageView.yy_imageURL = NSURL(string: imageURL)
+                            }
+                            
                         })
                 })
             }
-            
-        }
-    }
-    
-    var model: JFPhotoDetailModel? {
-        didSet {
-            guard let imageURL = model?.bigpic else {
-                print("imageURL 为空")
-                return
-            }
-            
-            // 将imageView图片设置为nil,防止cell重用
-            picImageView.image = nil
-            resetProperties()
-            
-            // 显示下载指示器
-            indicator.startAnimating()
-            
-            picImageView.yy_setImageWithURL(NSURL(string: imageURL), placeholder: nil, options: YYWebImageOptions.ShowNetworkActivity) { (image, url, type, stage, error) in
-                self.indicator.stopAnimating()
-                
-                if error != nil {
-                    print("下载大图片出错:error: \(error), url:\(imageURL)")
-                    return
-                }
-                
-                // 设置图片的大小
-                if let img = image {
-                    self.layoutImageView(img)
-                }
-                
-            }
-            
         }
     }
     

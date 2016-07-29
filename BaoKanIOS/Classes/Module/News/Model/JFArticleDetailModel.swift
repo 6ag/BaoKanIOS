@@ -143,6 +143,9 @@ class JFOtherLinkModel: NSObject {
     
     var classname: String?
     
+    /// 缓存行高
+    var rowHeight: CGFloat = 0
+    
     init(dict: [String : AnyObject]) {
         super.init()
         setValuesForKeysWithDictionary(dict)

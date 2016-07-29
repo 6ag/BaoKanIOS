@@ -189,7 +189,7 @@ extension JFNewsPhotoBrowserViewController: UICollectionViewDelegate, UICollecti
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier, forIndexPath: indexPath) as! JFPhotoDetailCell
         cell.delegate = self
-        cell.articleModel = photoModels[indexPath.item]
+        cell.urlString = photoModels[indexPath.item].url
         return cell
     }
 }

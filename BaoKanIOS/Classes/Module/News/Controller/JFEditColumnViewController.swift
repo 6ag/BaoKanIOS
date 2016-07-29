@@ -122,7 +122,11 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            // 点击已经选择的，就进行跳转
+            dismissViewControllerAnimated(true, completion: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("columnViewWillDismiss", object: nil, userInfo: ["index" : indexPath.item])
+        } else if indexPath.section == 1 {
             lastIsHidden = true
             
             let endCell = collectionView.cellForItemAtIndexPath(indexPath) as! JFEditColumnViewCell
