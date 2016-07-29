@@ -74,7 +74,6 @@ class JFNewsViewController: UIViewController {
                 detailVc.articleParam = (classid, id)
                 navigationController?.pushViewController(detailVc, animated: true)
             }
-            
         }
         
     }
