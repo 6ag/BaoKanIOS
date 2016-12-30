@@ -168,7 +168,8 @@ static void _YYDiskCacheSetGlobal(YYDiskCache *cache) {
 }
 
 - (instancetype)initWithPath:(NSString *)path {
-    return [self initWithPath:path inlineThreshold:1024 * 20]; // 20KB
+//    return [self initWithPath:path inlineThreshold:1024 * 20]; // 20KB
+    return [self initWithPath:path inlineThreshold:0]; // 0KB就去缓存
 }
 
 - (instancetype)initWithPath:(NSString *)path

@@ -484,7 +484,7 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
                 let tempImageView = UIImageView(image: UIGraphicsGetImageFromCurrentImageContext())
                 UIApplication.shared.keyWindow?.addSubview(tempImageView)
                 
-                navigationController?.popViewController(animated: false)
+                _ = navigationController?.popViewController(animated: false)
                 UIView.animate(withDuration: 0.3, animations: {
                     tempImageView.alpha = 0
                     tempImageView.frame = CGRect(x: 0, y: SCREEN_HEIGHT * 0.5, width: SCREEN_WIDTH, height: 0)
@@ -541,7 +541,7 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      底部返回按钮点击
      */
     func didTappedBackButton(_ button: UIButton) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     /**
@@ -731,7 +731,14 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
      */
     func webViewDidFinishLoad(_ webView: UIWebView) {
         
-        autolayoutWebView()
+        if !webView.isLoading {
+            if let allphoto = model?.allphoto {
+                // 加载图片 - 从缓存中获取图片的本地绝对路径，发送给webView显示
+                getImageFromDownloaderOrDiskByImageUrlArray(allphoto)
+            }
+            
+            autolayoutWebView()
+        }
     }
     
     /**
@@ -766,22 +773,13 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
         if model.allphoto!.count > 0 {
             
             // 拼接图片标签
-            for (index, dict) in model.allphoto!.enumerated() {
+            for (index, insetPhoto) in model.allphoto!.enumerated() {
                 // 图片占位符范围
-                let range = (tempNewstext as NSString).range(of: dict["ref"] as! String)
+                let range = (tempNewstext as NSString).range(of: insetPhoto.ref!)
                 
                 // 默认宽、高为0
-                var width: CGFloat = 0
-                var height: CGFloat = 0
-                
-                
-                
-                if let w = (dict as! [String : [String : AnyObject]])["pixel"]!["width"] as? NSNumber {
-                    width = CGFloat(w.floatValue)
-                }
-                if let h = (dict as! [String : [String : AnyObject]])["pixel"]!["height"] as? NSNumber  {
-                    height = CGFloat(h.floatValue)
-                }
+                var width = insetPhoto.widthPixel
+                var height = insetPhoto.heightPixel
                 
                 // 如果图片超过了最大宽度，才等比压缩 这个最大宽度是根据css里的container容器宽度来自适应的
                 if width >= SCREEN_WIDTH - 40 {
@@ -794,15 +792,14 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
                 let loading = Bundle.main.path(forResource: "www/images/loading.jpg", ofType: nil)!
                 
                 // 图片URL
-                let imgUrl = dict["url"] as! String
+                let imgUrl = insetPhoto.url!
+                print("imgUrl = \(imgUrl)")
                 
                 // img标签
                 let imgTag = "<img onclick='didTappedImage(\(index), \"\(imgUrl)\");' src='\(loading)' id='\(imgUrl)' width='\(width)' height='\(height)' />"
-                tempNewstext = (tempNewstext as NSString).replacingOccurrences(of: dict["ref"] as! String, with: imgTag, options: NSString.CompareOptions.caseInsensitive, range: range)
+                tempNewstext = (tempNewstext as NSString).replacingOccurrences(of: insetPhoto.ref!, with: imgTag, options: NSString.CompareOptions.caseInsensitive, range: range)
             }
             
-            // 加载图片 - 从缓存中获取图片的本地绝对路径，发送给webView显示
-            getImageFromDownloaderOrDiskByImageUrlArray(model.allphoto!)
         }
         
         tempNewstext = (tempNewstext as NSString).replacingOccurrences(of: " style=\"text-indent: 2em;\"", with: "")
@@ -826,13 +823,13 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
     /**
      下载或从缓存中获取图片，发送给webView
      */
-    func getImageFromDownloaderOrDiskByImageUrlArray(_ imageArray: [AnyObject]) {
+    func getImageFromDownloaderOrDiskByImageUrlArray(_ imageArray: [JFInsetPhotoModel]) {
         
         // 循环加载图片
-        for dict in imageArray {
+        for insetPhoto in imageArray {
             
             // 图片url
-            let imageString = dict["url"] as! String
+            let imageString = insetPhoto.url!
             
             // 判断本地磁盘是否已经缓存
             if JFArticleStorage.getArticleImageCache().containsImage(forKey: imageString, with: YYImageCacheType.disk) {
@@ -840,7 +837,7 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
                 let imagePath = JFArticleStorage.getFilePathForKey(imageString)
                 // 发送图片占位标识和本地绝对路径给webView
                 bridge?.send("replaceimage\(imageString)~\(imagePath)")
-                // print("图片已有缓存，发送给js \(imagePath)")
+                print("图片已有缓存，发送给js \(imagePath)")
             } else {
                 YYWebImageManager(cache: JFArticleStorage.getArticleImageCache(), queue: OperationQueue()).requestImage(with: URL(string: imageString)!, options: YYWebImageOptions.useNSURLCache, progress: { (_, _) in
                     }, transform: { (image, url) -> UIImage? in
@@ -853,7 +850,7 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
                             let imagePath = JFArticleStorage.getFilePathForKey(imageString)
                             // 发送图片占位标识和本地绝对路径给webView
                             self.bridge?.send("replaceimage\(imageString)~\(imagePath)")
-                            // print("图片缓存完成，发送给js \(imagePath)")
+                            print("图片缓存完成，发送给js \(imagePath)")
                         }
                 })
             }

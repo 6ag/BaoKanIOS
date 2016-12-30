@@ -13,13 +13,10 @@ class JFNewsPhotoBrowserViewController: UIViewController {
     
     // MARK: - 属性
     /// 文章详情请求参数
-    var photoParam : (allphoto: [AnyObject], index: Int)? {
+    var photoParam : (allphoto: [JFInsetPhotoModel], index: Int)? {
         didSet {
-            // 处理文章图片数据
-            for dict in photoParam!.allphoto {
-                let photoModel = JFArticleImageModel(dict: dict as! [String : AnyObject])
-                photoModels.append(photoModel)
-            }
+            // 文章配图模型数组
+            photoModels = photoParam!.allphoto
             
             self.scrollViewDidEndDecelerating(self.collectionView)
             self.collectionView.reloadData()
@@ -33,7 +30,8 @@ class JFNewsPhotoBrowserViewController: UIViewController {
         }
     }
     
-    fileprivate var photoModels = [JFArticleImageModel]()
+    // 文章配图模型数组
+    fileprivate var photoModels = [JFInsetPhotoModel]()
     
     /// 当前图片脚标
     var currentIndex = 0

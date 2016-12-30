@@ -128,7 +128,6 @@
 		B29B5D7E1D11294400C5AC8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D7D1D11294400C5AC8F /* libz.tbd */; };
 		B29B5D821D11299D00C5AC8F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D811D11299D00C5AC8F /* libstdc++.tbd */; };
 		B29B5D841D112C4300C5AC8F /* www in Resources */ = {isa = PBXBuildFile; fileRef = B29B5D831D112C4300C5AC8F /* www */; };
-		B29B5D871D11337800C5AC8F /* JFArticleImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5D851D11337800C5AC8F /* JFArticleImageModel.swift */; };
 		B29B5D881D11337800C5AC8F /* JFArticleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5D861D11337800C5AC8F /* JFArticleListModel.swift */; };
 		B29B5D8A1D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5D891D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift */; };
 		B29B5D951D1136AA00C5AC8F /* JFDetailOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5D8B1D1136AA00C5AC8F /* JFDetailOtherCell.swift */; };
@@ -289,7 +288,6 @@
 		B29B5D7F1D11298E00C5AC8F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B29B5D811D11299D00C5AC8F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		B29B5D831D112C4300C5AC8F /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
-		B29B5D851D11337800C5AC8F /* JFArticleImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleImageModel.swift; sourceTree = "<group>"; };
 		B29B5D861D11337800C5AC8F /* JFArticleListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFArticleListModel.swift; sourceTree = "<group>"; };
 		B29B5D891D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoBrowserViewController.swift; sourceTree = "<group>"; };
 		B29B5D8B1D1136AA00C5AC8F /* JFDetailOtherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherCell.swift; sourceTree = "<group>"; };
@@ -544,7 +542,6 @@
 		B29B5C6B1D1126F500C5AC8F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B29B5D851D11337800C5AC8F /* JFArticleImageModel.swift */,
 				B29B5D861D11337800C5AC8F /* JFArticleListModel.swift */,
 				B29B5C6C1D1126F500C5AC8F /* JFArticleDetailModel.swift */,
 				B29B5C6D1D1126F500C5AC8F /* JFCommentModel.swift */,
@@ -1093,7 +1090,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B29B5D871D11337800C5AC8F /* JFArticleImageModel.swift in Sources */,
 				B29B5D641D1126F500C5AC8F /* WebViewJavascriptBridge.m in Sources */,
 				B29B5D451D1126F500C5AC8F /* JFInfoHeaderView.swift in Sources */,
 				B29B5CFE1D1126F500C5AC8F /* JFCommon.swift in Sources */,

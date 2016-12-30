@@ -9,30 +9,6 @@
 import UIKit
 import YYWebImage
 import pop
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFPhotoDetailViewController: UIViewController {
     
@@ -387,10 +363,10 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
         
         // 从缓存中获取标题图片
         let currentModel = photoModels[page - 1]
-        var image = YYImageCache.shared().getImageForKey(currentModel.bigpic!)
+        var image = YYImageCache.shared().getImageForKey(currentModel.bigpic!)!
         
-        if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
-            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        if image.size.width > 300.0 || image.size.height > 300.0 {
+            image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
         }
         
         let shareParames = NSMutableDictionary()

@@ -47,18 +47,20 @@ class JFArticleDetailModel: NSObject {
     /// 标题图片
     var titlepic: String?
     
-    /// 所有图片
-    var allphoto: [AnyObject]?
-    
     /// 信息来源 - 如果没有则返回空字符串，所以可以直接强拆
     var befrom: String?
     
     /// 是否赞过
     var isStar = false
     
+    // 图片详情
     var morepics: [JFPhotoDetailModel]?
     
+    /// 相关链接
     var otherLinks: [JFOtherLinkModel]?
+    
+    /// 所有正文配图
+    var allphoto: [JFInsetPhotoModel]?
     
     /**
      字典转模型构造方法
@@ -98,6 +100,20 @@ class JFArticleDetailModel: NSObject {
                 otherLinks = otherModels
             }
             return
+        } else if key == "allphoto" {
+            if let array = value as? [[String: AnyObject]] {
+                var allphotoModels = [JFInsetPhotoModel]()
+                for dict in array {
+                    let insetPhotoModel = JFInsetPhotoModel(dict: dict)
+                    if let pixel = dict["pixel"] as? [String : CGFloat] {
+                        insetPhotoModel.widthPixel = pixel["width"] ?? 0
+                        insetPhotoModel.heightPixel = pixel["height"] ?? 0
+                    }
+                    allphotoModels.append(insetPhotoModel)
+                }
+                allphoto = allphotoModels
+            }
+            return
         }
         return super.setValue(value, forKey: key)
     }
@@ -125,6 +141,33 @@ class JFArticleDetailModel: NSObject {
             finished(JFArticleDetailModel(dict: dict! as [String : AnyObject]), nil)
         }
     }
+    
+}
+
+/// 正文插图模型
+class JFInsetPhotoModel: NSObject {
+    
+    // 图片占位字符
+    var ref: String?
+    
+    // 图片描述
+    var caption: String?
+    
+    // 图片url
+    var url: String?
+    
+    // 宽度
+    var widthPixel: CGFloat = 0
+    
+    // 高度
+    var heightPixel: CGFloat = 0
+    
+    init(dict: [String : AnyObject]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
 }
 
