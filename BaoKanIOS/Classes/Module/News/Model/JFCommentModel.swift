@@ -48,10 +48,10 @@ class JFCommentModel: NSObject {
     
     init (dict: [String : AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     /**
      加载（评论列表）数据
@@ -62,19 +62,19 @@ class JFCommentModel: NSObject {
      - parameter pageSize:  每页条数
      - parameter finished:  数据回调
      */
-    class func loadCommentList(classid: Int, id: Int, pageIndex: Int, pageSize: Int, finished: (commentModels: [JFCommentModel]?, error: NSError?) -> ()) {
+    class func loadCommentList(_ classid: Int, id: Int, pageIndex: Int, pageSize: Int, finished: @escaping (_ commentModels: [JFCommentModel]?, _ error: NSError?) -> ()) {
         
         JFNewsDALManager.shareManager.loadCommentList(classid, id: id, pageIndex: pageIndex, pageSize: pageSize) { (result, error) in
             
             // 请求失败
             if error != nil || result == nil {
-                finished(commentModels: nil, error: error)
+                finished(nil, error)
                 return
             }
             
             // 没有数据了
             if result?.count == 0 {
-                finished(commentModels: [JFCommentModel](), error: nil)
+                finished([JFCommentModel](), nil)
                 return
             }
             
@@ -83,11 +83,11 @@ class JFCommentModel: NSObject {
             
             // 遍历转模型添加数据
             for article in data {
-                let postModel = JFCommentModel(dict: article.dictionaryObject!)
+                let postModel = JFCommentModel(dict: article.dictionaryObject! as [String : AnyObject])
                 commentModels.append(postModel)
             }
             
-            finished(commentModels: commentModels, error: nil)
+            finished(commentModels, nil)
         }
     }
 }

@@ -25,8 +25,8 @@ class JFInfoHeaderView: UIView {
     /**
      准备UI
      */
-    private func prepareUI() {
-        backgroundColor = UIColor.whiteColor()
+    fileprivate func prepareUI() {
+        backgroundColor = UIColor.white
         addSubview(avatarImageView)
         addSubview(usernameLabel)
         addSubview(levelLabel)
@@ -53,36 +53,36 @@ class JFInfoHeaderView: UIView {
             make.right.equalTo(-MARGIN)
         }
         
-        avatarImageView.yy_setImageWithURL(NSURL(string: JFAccountModel.shareAccount()!.avatarUrl!), options: YYWebImageOptions.AllowBackgroundTask)
+        avatarImageView.yy_setImage(with: URL(string: JFAccountModel.shareAccount()!.avatarUrl!), options: YYWebImageOptions.allowBackgroundTask)
         usernameLabel.text = JFAccountModel.shareAccount()!.username!
         levelLabel.text = "等级：\(JFAccountModel.shareAccount()!.groupName!)"
         pointsLabel.text = "\(JFAccountModel.shareAccount()!.points!)积分"
     }
     
     // MARK: - 懒加载
-    private lazy var avatarImageView: UIImageView = {
+    fileprivate lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.layer.cornerRadius = 25
         avatarImageView.layer.masksToBounds = true
         return avatarImageView
     }()
     
-    private lazy var usernameLabel: UILabel = {
+    fileprivate lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         return usernameLabel
     }()
     
-    private lazy var levelLabel: UILabel = {
+    fileprivate lazy var levelLabel: UILabel = {
         let levelLabel = UILabel()
-        levelLabel.font = UIFont.systemFontOfSize(13)
-        levelLabel.textColor = UIColor.grayColor()
+        levelLabel.font = UIFont.systemFont(ofSize: 13)
+        levelLabel.textColor = UIColor.gray
         return levelLabel
     }()
     
-    private lazy var pointsLabel: UILabel = {
+    fileprivate lazy var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
-        pointsLabel.font = UIFont.systemFontOfSize(13)
-        pointsLabel.textColor = UIColor.grayColor()
+        pointsLabel.font = UIFont.systemFont(ofSize: 13)
+        pointsLabel.textColor = UIColor.gray
         return pointsLabel
     }()
     

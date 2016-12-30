@@ -11,9 +11,9 @@ import YYWebImage
 import SnapKit
 
 protocol JFPhotoDetailCellDelegate {
-    func didOneTappedPhotoDetailView(scrollView: UIScrollView)
-    func didDoubleTappedPhotoDetailView(scrollView: UIScrollView, touchPoint: CGPoint)
-    func didLongPressPhotoDetailView(scrollView: UIScrollView, currentImage: UIImage?)
+    func didOneTappedPhotoDetailView(_ scrollView: UIScrollView)
+    func didDoubleTappedPhotoDetailView(_ scrollView: UIScrollView, touchPoint: CGPoint)
+    func didLongPressPhotoDetailView(_ scrollView: UIScrollView, currentImage: UIImage?)
 }
 
 class JFPhotoDetailCell: UICollectionViewCell {
@@ -34,29 +34,29 @@ class JFPhotoDetailCell: UICollectionViewCell {
             indicator.startAnimating()
             
             // 判断本地磁盘是否已经缓存
-            if JFArticleStorage.getArticleImageCache().containsImageForKey(imageURL, withType: YYImageCacheType.Disk) {
+            if JFArticleStorage.getArticleImageCache().containsImage(forKey: imageURL, with: YYImageCacheType.disk) {
                 
                 let image = UIImage(contentsOfFile: JFArticleStorage.getFilePathForKey(imageURL))!
-                self.picImageView.yy_imageURL = NSURL(string: imageURL)
+                self.picImageView.yy_imageURL = URL(string: imageURL)
                 self.layoutImageView(image)
                 self.indicator.stopAnimating()
                 
             } else {
                 
-                YYWebImageManager(cache: JFArticleStorage.getArticleImageCache(), queue: NSOperationQueue()).requestImageWithURL(NSURL(string: imageURL)!, options: YYWebImageOptions.UseNSURLCache, progress: { (_, _) in
+                YYWebImageManager(cache: JFArticleStorage.getArticleImageCache(), queue: OperationQueue()).requestImage(with: URL(string: imageURL)!, options: YYWebImageOptions.useNSURLCache, progress: { (_, _) in
                     }, transform: { (image, url) -> UIImage? in
                         return image
                     }, completion: { (image, url, type, stage, error) in
-                        dispatch_sync(dispatch_get_main_queue(), {
+                        DispatchQueue.main.sync(execute: {
                             self.indicator.stopAnimating()
                             
-                            guard let _ = image where error == nil else {return}
+                            guard let _ = image, error == nil else {return}
                             
                             // 刚缓存的图片会有一点处理时间保存到本地
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
                                 let image = UIImage(contentsOfFile: JFArticleStorage.getFilePathForKey(imageURL))!
                                 self.layoutImageView(image)
-                                self.picImageView.yy_imageURL = NSURL(string: imageURL)
+                                self.picImageView.yy_imageURL = URL(string: imageURL)
                             }
                             
                         })
@@ -68,17 +68,17 @@ class JFPhotoDetailCell: UICollectionViewCell {
     /**
      清除属性,防止cell复用
      */
-    private func resetProperties() {
-        picImageView.transform = CGAffineTransformIdentity
-        scrollView.contentInset = UIEdgeInsetsZero
-        scrollView.contentOffset = CGPointZero
-        scrollView.contentSize = CGSizeZero
+    fileprivate func resetProperties() {
+        picImageView.transform = CGAffineTransform.identity
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.contentOffset = CGPoint.zero
+        scrollView.contentSize = CGSize.zero
     }
     
     /**
      根据长短图,重新布局图片位置
      */
-    private func layoutImageView(image: UIImage) {
+    fileprivate func layoutImageView(_ image: UIImage) {
         // 获取等比例缩放后的图片大小
         let size = image.displaySize()
         
@@ -113,7 +113,7 @@ class JFPhotoDetailCell: UICollectionViewCell {
     /**
      准备UI
      */
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         
         // 添加单击双击事件
         let oneTap = UITapGestureRecognizer(target: self, action: #selector(didOneTappedPhotoDetailView(_:)))
@@ -127,7 +127,7 @@ class JFPhotoDetailCell: UICollectionViewCell {
         addGestureRecognizer(longPress)
         
         // 如果监听到双击事件，单击事件则不触发
-        oneTap.requireGestureRecognizerToFail(doubleTap)
+        oneTap.require(toFail: doubleTap)
         
         // 添加控件
         scrollView.addSubview(picImageView)
@@ -147,48 +147,48 @@ class JFPhotoDetailCell: UICollectionViewCell {
     /**
      图秀详情界面单击事件，隐藏除去图片外的所有UI
      */
-    func didOneTappedPhotoDetailView(tap: UITapGestureRecognizer) {
+    func didOneTappedPhotoDetailView(_ tap: UITapGestureRecognizer) {
         delegate?.didOneTappedPhotoDetailView(scrollView)
     }
     
     /**
      图秀详情界面双击事件，缩放
      */
-    func didDoubleTappedPhotoDetailView(tap: UITapGestureRecognizer) {
-        let touchPoint = tap.locationInView(self)
+    func didDoubleTappedPhotoDetailView(_ tap: UITapGestureRecognizer) {
+        let touchPoint = tap.location(in: self)
         delegate?.didDoubleTappedPhotoDetailView(scrollView, touchPoint: touchPoint)
     }
     
     /**
      图秀详情长按事件
      */
-    func didLongPressPhotoDetailView(longPress: UILongPressGestureRecognizer) {
-        if longPress.state == .Began {
+    func didLongPressPhotoDetailView(_ longPress: UILongPressGestureRecognizer) {
+        if longPress.state == .began {
             // 长按手势会触发2次 所以，你懂得
             delegate?.didLongPressPhotoDetailView(scrollView, currentImage: picImageView.image)
         }
     }
     
     // MARK: - 懒加载
-    private lazy var scrollView: UIScrollView = {
+    fileprivate lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.maximumZoomScale = 2
         scrollView.minimumZoomScale = 1
         scrollView.delegate = self
         return scrollView
     }()
-    private lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-    private lazy var picImageView = UIImageView()
+    fileprivate lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    fileprivate lazy var picImageView = UIImageView()
 }
 
 // MARK: - UIScrollViewDelegate
 extension JFPhotoDetailCell: UIScrollViewDelegate {
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return picImageView
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         // 往中间移动
         // Y偏移
         var offestY = (scrollView.bounds.height - picImageView.frame.height) * 0.5
@@ -205,10 +205,10 @@ extension JFPhotoDetailCell: UIScrollViewDelegate {
             offestX = 0
         }
         
-        UIView.animateWithDuration(0.25) { () -> Void in
+        UIView.animate(withDuration: 0.25, animations: { () -> Void in
             // 设置scrollView的contentInset来居中图片
             scrollView.contentInset = UIEdgeInsets(top: offestY, left: offestX, bottom: offestY, right: offestX)
-        }
+        }) 
     }
     
 }

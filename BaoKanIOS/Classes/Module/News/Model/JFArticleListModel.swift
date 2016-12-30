@@ -53,17 +53,17 @@ class JFArticleListModel: NSObject {
      */
     init(dict: [String : AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     /**
      清除缓存
      
      - parameter classid: 要清除的分类id
      */
-    class func cleanCache(classid: Int) {
+    class func cleanCache(_ classid: Int) {
         JFNewsDALManager.shareManager.cleanCache(classid)
     }
     
@@ -75,20 +75,20 @@ class JFArticleListModel: NSObject {
      - parameter type:      1为资讯列表 2为资讯幻灯片
      - parameter finished:  数据回调
      */
-    class func loadNewsList(table: String, classid: Int, pageIndex: Int, type: Int, finished: (articleListModels: [JFArticleListModel]?, error: NSError?) -> ()) {
+    class func loadNewsList(_ table: String, classid: Int, pageIndex: Int, type: Int, finished: @escaping (_ articleListModels: [JFArticleListModel]?, _ error: NSError?) -> ()) {
         
         // 模型找数据访问层请求数据 - 然后处理数据回调给调用者直接使用
         JFNewsDALManager.shareManager.loadNewsList(table, classid: classid, pageIndex: pageIndex, type: type) { (result, error) in
             
             // 请求失败
             if error != nil || result == nil {
-                finished(articleListModels: nil, error: error)
+                finished(nil, error)
                 return
             }
             
             // 没有数据了
             if result?.count == 0 {
-                finished(articleListModels: [JFArticleListModel](), error: nil)
+                finished([JFArticleListModel](), nil)
                 return
             }
             
@@ -97,11 +97,11 @@ class JFArticleListModel: NSObject {
             
             // 遍历转模型添加数据
             for article in data {
-                let postModel = JFArticleListModel(dict: article.dictionaryObject!)
+                let postModel = JFArticleListModel(dict: article.dictionaryObject! as [String : AnyObject])
                 articleListModels.append(postModel)
             }
             
-            finished(articleListModels: articleListModels, error: nil)
+            finished(articleListModels, nil)
         }
         
     }
@@ -113,33 +113,34 @@ class JFArticleListModel: NSObject {
      - parameter pageIndex: 加载分页
      - parameter finished:  数据回调
      */
-    class func loadSearchResult(keyboard: String, pageIndex: Int, finished: (searchResultModels: [JFArticleListModel]?, error: NSError?) -> ()) {
+    class func loadSearchResult(_ keyboard: String, pageIndex: Int, finished: @escaping (_ searchResultModels: [JFArticleListModel]?, _ error: NSError?) -> ()) {
         
         // 搜索不需要缓存，所以直接从网络加载
-        JFNetworkTool.shareNetworkTool.loadSearchResultFromNetwork(keyboard, pageIndex: pageIndex) { (success, result, error) in
+        JFNetworkTool.shareNetworkTool.loadSearchResultFromNetwork(keyboard, pageIndex: pageIndex) { (status, result, tipString) in
             
-            // 请求失败
-            if error != nil || result == nil {
-                finished(searchResultModels: nil, error: error)
-                return
+            switch status {
+            case .success:
+                if result!["data"].count == 0 {
+                    finished([JFArticleListModel](), nil)
+                    return
+                }
+                
+                let data = result!["data"].arrayValue
+                var searchResultModels = [JFArticleListModel]()
+                
+                // 遍历转模型添加数据
+                for article in data {
+                    let postModel = JFArticleListModel(dict: article.dictionaryObject! as [String : AnyObject])
+                    searchResultModels.append(postModel)
+                }
+                
+                finished(searchResultModels, nil)
+            case .unusual:
+                finished(nil, nil)
+            case .failure:
+                finished(nil, nil)
             }
             
-            // 没有数据了
-            if result?.count == 0 {
-                finished(searchResultModels: [JFArticleListModel](), error: nil)
-                return
-            }
-            
-            let data = result!.arrayValue
-            var searchResultModels = [JFArticleListModel]()
-            
-            // 遍历转模型添加数据
-            for article in data {
-                let postModel = JFArticleListModel(dict: article.dictionaryObject!)
-                searchResultModels.append(postModel)
-            }
-            
-            finished(searchResultModels: searchResultModels, error: nil)
         }
     }
 

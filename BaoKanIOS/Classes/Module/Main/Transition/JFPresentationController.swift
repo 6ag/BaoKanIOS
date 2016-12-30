@@ -13,18 +13,18 @@ class JFPresentationController: UIPresentationController {
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
         
-        presentedView()?.frame = CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)
+        presentedView?.frame = CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 20)
         
         // 关闭按钮
         let closeButton = UIButton(frame: CGRect(x: SCREEN_WIDTH - 40, y: 20, width: 40, height: 40))
-        closeButton.setImage(UIImage(named: "channel_nav_plus_colse"), forState: UIControlState.Normal)
-        closeButton.addTarget(self, action: #selector(didTappedCloseButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        closeButton.setImage(UIImage(named: "channel_nav_plus_colse"), for: UIControlState())
+        closeButton.addTarget(self, action: #selector(didTappedCloseButton(_:)), for: UIControlEvents.touchUpInside)
         closeButton.alpha = 0
         containerView?.addSubview(closeButton)
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             closeButton.alpha = 1
-            closeButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) - 0.01)
+            closeButton.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI) - 0.01)
         })
         
     }
@@ -32,17 +32,17 @@ class JFPresentationController: UIPresentationController {
     /**
      容器视图区域的点击手势
      */
-    @objc private func didTappedCloseButton(button: UIButton) {
+    @objc fileprivate func didTappedCloseButton(_ button: UIButton) {
         // 发出栏目管理视图即将消失的通知
-        NSNotificationCenter.defaultCenter().postNotificationName("columnViewWillDismiss", object: nil)
-        UIView.animateWithDuration(0.5, animations: {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "columnViewWillDismiss"), object: nil)
+        UIView.animate(withDuration: 0.5, animations: {
             button.alpha = 0
-            button.imageView!.transform = CGAffineTransformIdentity
-            }) { (_) in
+            button.imageView!.transform = CGAffineTransform.identity
+            }, completion: { (_) in
                 button.removeFromSuperview()
-        }
+        }) 
         
         // 会触发自定义dismiss动画
-        presentedViewController.dismissViewControllerAnimated(true, completion: nil)
+        presentedViewController.dismiss(animated: true, completion: nil)
     }
 }

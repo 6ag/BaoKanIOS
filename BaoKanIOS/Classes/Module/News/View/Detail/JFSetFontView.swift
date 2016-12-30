@@ -9,9 +9,9 @@
 import UIKit
 
 protocol JFSetFontViewDelegate: NSObjectProtocol {
-    func didChangeFontSize(fontSize: Int)
-    func didChangedFontName(fontName: String)
-    func didChangedNightMode(on: Bool)
+    func didChangeFontSize(_ fontSize: Int)
+    func didChangedFontName(_ fontName: String)
+    func didChangedNightMode(_ on: Bool)
 }
 
 class JFSetFontView: UIView {
@@ -28,38 +28,38 @@ class JFSetFontView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if NSUserDefaults.standardUserDefaults().stringForKey(CONTENT_FONT_TYPE_KEY) == "" {
+        if UserDefaults.standard.string(forKey: CONTENT_FONT_TYPE_KEY) == "" {
             fontSegment.selectedSegmentIndex = 0
         } else {
             fontSegment.selectedSegmentIndex = 1
         }
         
         // 字体大小
-        let fontSize = NSUserDefaults.standardUserDefaults().integerForKey(CONTENT_FONT_SIZE_KEY)
+        let fontSize = UserDefaults.standard.integer(forKey: CONTENT_FONT_SIZE_KEY)
         let scale = (fontSize - minSize) / 2
         currentButton = viewWithTag(scale) as! UIButton
-        currentButton.selected = true
+        currentButton.isSelected = true
         slider.setValue(Float(scale), animated: true)
     }
     
     /**
      修改了字体
      */
-    @IBAction func didChangedFontSegment(sender: UISegmentedControl) {
+    @IBAction func didChangedFontSegment(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
             delegate?.didChangedFontName("")
-            NSUserDefaults.standardUserDefaults().setObject("", forKey: CONTENT_FONT_TYPE_KEY)
+            UserDefaults.standard.set("", forKey: CONTENT_FONT_TYPE_KEY)
         } else {
             delegate?.didChangedFontName("汉仪旗黑")
-            NSUserDefaults.standardUserDefaults().setObject("汉仪旗黑", forKey: CONTENT_FONT_TYPE_KEY)
+            UserDefaults.standard.set("汉仪旗黑", forKey: CONTENT_FONT_TYPE_KEY)
         }
     }
     
     /**
      修改字体按钮点击
      */
-    @IBAction func didTappedFontButton(button: UIButton) {
+    @IBAction func didTappedFontButton(_ button: UIButton) {
         currentButton = button
         slider.setValue(Float(button.tag), animated: true)
         selectHandle()
@@ -68,7 +68,7 @@ class JFSetFontView: UIView {
     /**
      修改字体滑条滑动
      */
-    @IBAction func didTappedSlider(sender: UISlider) {
+    @IBAction func didTappedSlider(_ sender: UISlider) {
         var scale = Int(sender.value)
         if sender.value - Float(Int(sender.value)) >= 0.5 {
             scale = Int(sender.value) + 1
@@ -82,26 +82,26 @@ class JFSetFontView: UIView {
     /**
      修改字体按钮选中处理
      */
-    private func selectHandle() {
+    fileprivate func selectHandle() {
         for subView in subviews {
-            if subView.isKindOfClass(UIButton.classForCoder()) {
+            if subView.isKind(of: UIButton.classForCoder()) {
                 let button = subView as! UIButton
-                button.selected = false
+                button.isSelected = false
             }
         }
-        currentButton.selected = true
+        currentButton.isSelected = true
         
         // 字体大小系数 1 - 6
         let scale = currentButton.tag
         let fontSize = minSize + scale * 2
         delegate?.didChangeFontSize(fontSize)
-        NSUserDefaults.standardUserDefaults().setInteger(fontSize, forKey: CONTENT_FONT_SIZE_KEY)
+        UserDefaults.standard.set(fontSize, forKey: CONTENT_FONT_SIZE_KEY)
     }
     
     /**
      透明背景遮罩触摸事件
      */
-    @objc private func didTappedBgView(tap: UITapGestureRecognizer) {
+    @objc fileprivate func didTappedBgView(_ tap: UITapGestureRecognizer) {
         dismiss()
     }
     
@@ -111,17 +111,17 @@ class JFSetFontView: UIView {
     func show() -> Void {
         bgView.backgroundColor = UIColor(white: 0, alpha: 0)
         bgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedBgView(_:))))
-        UIApplication.sharedApplication().keyWindow?.addSubview(bgView)
+        UIApplication.shared.keyWindow?.addSubview(bgView)
         
         frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 157)
-        UIApplication.sharedApplication().keyWindow?.addSubview(self)
+        UIApplication.shared.keyWindow?.addSubview(self)
         
-        UIView.animateWithDuration(0.25, animations: {
-            self.transform = CGAffineTransformMakeTranslation(0, -157)
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: -157)
             self.bgView.backgroundColor = UIColor(white: 0, alpha: GLOBAL_SHADOW_ALPHA)
-        }) { (_) in
+        }, completion: { (_) in
             
-        }
+        }) 
         
     }
     
@@ -129,13 +129,13 @@ class JFSetFontView: UIView {
      隐藏视图
      */
     func dismiss() -> Void {
-        UIView.animateWithDuration(0.25, animations: {
-            self.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform.identity
             self.bgView.backgroundColor = UIColor(white: 0, alpha: 0)
-        }) { (_) in
+        }, completion: { (_) in
             self.bgView.removeFromSuperview()
             self.removeFromSuperview()
-        }
+        }) 
     }
     
 }

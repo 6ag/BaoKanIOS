@@ -822,7 +822,7 @@ static BOOL YYCGImageDecodeToBitmapBufferWith32BitFormat(CGImageRef srcImage, vI
     } else {
         contextBitmapInfo |= alphaFirst ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaPremultipliedLast;
     }
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 32, YYCGColorSpaceGetDeviceRGB(), contextBitmapInfo);
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, YYCGColorSpaceGetDeviceRGB(), contextBitmapInfo);
     if (!context) goto fail;
     
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), srcImage); // decode and convert
@@ -1406,7 +1406,7 @@ CGImageRef YYCGImageCreateWithWebPData(CFDataRef webpData,
         void *tmp = calloc(1, destLength);
         if (tmp) {
             vImage_Buffer src = {destBytes, canvasHeight, canvasWidth, bytesPerRow};
-            vImage_Buffer dest = {destBytes, canvasHeight, canvasWidth, bytesPerRow};
+            vImage_Buffer dest = {tmp, canvasHeight, canvasWidth, bytesPerRow};
             vImage_CGAffineTransform transform = {1, 0, 0, 1, iter.x_offset, -iter.y_offset};
             uint8_t backColor[4] = {0};
             vImageAffineWarpCG_ARGB8888(&src, &dest, NULL, &transform, backColor, kvImageBackgroundColorFill);
@@ -2457,13 +2457,13 @@ CGImageRef YYCGImageCreateWithWebPData(CFDataRef webpData,
             } else if ([imageSrc isKindOfClass:[NSURL class]]) {
                 CGImageSourceRef source = CGImageSourceCreateWithURL((CFURLRef)imageSrc, NULL);
                 if (source) {
-                    CGImageDestinationAddImageFromSource(destination, source, i, (CFDictionaryRef)frameProperty);
+                    CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef)frameProperty);
                     CFRelease(source);
                 }
             } else if ([imageSrc isKindOfClass:[NSData class]]) {
                 CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)imageSrc, NULL);
                 if (source) {
-                    CGImageDestinationAddImageFromSource(destination, source, i, (CFDictionaryRef)frameProperty);
+                    CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef)frameProperty);
                     CFRelease(source);
                 }
             }
@@ -2630,7 +2630,7 @@ CGImageRef YYCGImageCreateWithWebPData(CFDataRef webpData,
                 chunk_fcTL.sequence_number = apngSequenceIndex;
                 chunk_fcTL.width = frame->header.width;
                 chunk_fcTL.height = frame->header.height;
-                yy_png_delay_to_fraction([(NSNumber *)_durations[0] doubleValue], &chunk_fcTL.delay_num, &chunk_fcTL.delay_den);
+                yy_png_delay_to_fraction([(NSNumber *)_durations[i] doubleValue], &chunk_fcTL.delay_num, &chunk_fcTL.delay_den);
                 chunk_fcTL.delay_num = chunk_fcTL.delay_num;
                 chunk_fcTL.delay_den = chunk_fcTL.delay_den;
                 chunk_fcTL.dispose_op = YY_PNG_DISPOSE_OP_BACKGROUND;
@@ -2783,7 +2783,7 @@ CGImageRef YYCGImageCreateWithWebPData(CFDataRef webpData,
 }
 
 - (BOOL)yy_isDecodedForDisplay {
-    if (self.images.count > 1) return YES;
+    if (self.images.count > 1 || [self isKindOfClass:[YYSpriteSheetImage class]]) return YES;
     NSNumber *num = objc_getAssociatedObject(self, @selector(yy_isDecodedForDisplay));
     return [num boolValue];
 }

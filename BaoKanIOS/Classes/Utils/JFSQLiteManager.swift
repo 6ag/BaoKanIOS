@@ -22,12 +22,12 @@ class JFSQLiteManager: NSObject {
     static let shareManager = JFSQLiteManager()
     
     /// sqlite数据库名
-    private let newsDBName = "news.db"
+    fileprivate let newsDBName = "news.db"
     
     let dbQueue: FMDatabaseQueue
     
     override init() {
-        let documentPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last!
         let dbPath = "\(documentPath)/\(newsDBName)"
         print(dbPath)
         
@@ -49,7 +49,7 @@ class JFSQLiteManager: NSObject {
      
      - parameter tbname: 表名
      */
-    private func createNewsListTable(tbname: String) {
+    fileprivate func createNewsListTable(_ tbname: String) {
         
         let sql = "CREATE TABLE IF NOT EXISTS \(tbname) ( \n" +
             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \n" +
@@ -59,7 +59,7 @@ class JFSQLiteManager: NSObject {
         ");"
         
         dbQueue.inDatabase { (db) in
-            if db.executeStatements(sql) {
+            if (db?.executeStatements(sql))! {
                 print("创建 \(tbname) 表成功")
             } else {
                 print("创建 \(tbname) 表失败")
@@ -70,7 +70,7 @@ class JFSQLiteManager: NSObject {
     /**
      创建资讯内容数据表
      */
-    private func createNewsContentTable() {
+    fileprivate func createNewsContentTable() {
         
         let sql = "CREATE TABLE IF NOT EXISTS \(NEWS_CONTENT) ( \n" +
             "id INTEGER, \n" +
@@ -80,7 +80,7 @@ class JFSQLiteManager: NSObject {
         ");"
         
         dbQueue.inDatabase { (db) in
-            if db.executeStatements(sql) {
+            if (db?.executeStatements(sql))! {
                 print("创建 \(NEWS_CONTENT) 表成功")
             } else {
                 print("创建 \(NEWS_CONTENT) 表失败")
@@ -91,7 +91,7 @@ class JFSQLiteManager: NSObject {
     /**
      创建搜索关键词数据表
      */
-    private func createSearchKeyboardTable() {
+    fileprivate func createSearchKeyboardTable() {
         
         let sql = "CREATE TABLE IF NOT EXISTS \(SEARCH_KEYBOARD) ( \n" +
             "id INTEGER, \n" +
@@ -102,7 +102,7 @@ class JFSQLiteManager: NSObject {
         ");"
         
         dbQueue.inDatabase { (db) in
-            if db.executeStatements(sql) {
+            if (db?.executeStatements(sql))! {
                 print("创建 \(SEARCH_KEYBOARD) 表成功")
             } else {
                 print("创建 \(SEARCH_KEYBOARD) 表失败")

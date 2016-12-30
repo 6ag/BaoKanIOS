@@ -9,7 +9,7 @@
 import UIKit
 
 protocol JFCommentCommitViewDelegate {
-    func didTappedSendButtonWithMessage(message: String) -> Void
+    func didTappedSendButtonWithMessage(_ message: String) -> Void
 }
 
 class JFCommentCommitView: UIView, UITextViewDelegate {
@@ -22,19 +22,19 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
     /**
      取消按钮点击
      */
-    @IBAction func didTappedCancelButton(sender: UIButton) {
+    @IBAction func didTappedCancelButton(_ sender: UIButton) {
         dismiss()
     }
     
     /**
      发送按钮点击
      */
-    @IBAction func didTappedSendButton(sender: UIButton) {
+    @IBAction func didTappedSendButton(_ sender: UIButton) {
         delegate?.didTappedSendButtonWithMessage(textView.text)
         dismiss()
     }
     
-    @objc private func didTappedBgView(tap: UITapGestureRecognizer) {
+    @objc fileprivate func didTappedBgView(_ tap: UITapGestureRecognizer) {
         dismiss()
     }
     
@@ -45,19 +45,19 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
         
         bgView.backgroundColor = UIColor(white: 0, alpha: 0)
         bgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedBgView(_:))))
-        UIApplication.sharedApplication().keyWindow?.addSubview(bgView)
+        UIApplication.shared.keyWindow?.addSubview(bgView)
         
         frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-        UIApplication.sharedApplication().keyWindow?.addSubview(self)
+        UIApplication.shared.keyWindow?.addSubview(self)
         
         textView.becomeFirstResponder()
         
-        UIView.animateWithDuration(0.25, animations: {
-            self.transform = CGAffineTransformMakeTranslation(0, -480)
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: -480)
             self.bgView.backgroundColor = UIColor(white: 0, alpha: GLOBAL_SHADOW_ALPHA)
-        }) { (_) in
+        }, completion: { (_) in
             self.textView.delegate = self
-        }
+        }) 
     }
     
     /**
@@ -67,22 +67,22 @@ class JFCommentCommitView: UIView, UITextViewDelegate {
         
         textView.resignFirstResponder()
         
-        UIView.animateWithDuration(0.25, animations: {
-            self.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform.identity
             self.bgView.backgroundColor = UIColor(white: 0, alpha: 0)
-            }) { (_) in
+            }, completion: { (_) in
                 self.bgView.removeFromSuperview()
                 self.removeFromSuperview()
-        }
+        }) 
     }
     
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         if textView.text.characters.count >= 3 {
-            sendButton.enabled = true
-            sendButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            sendButton.isEnabled = true
+            sendButton.setTitleColor(UIColor.black, for: UIControlState())
         } else {
-            sendButton.enabled = false
-            sendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+            sendButton.isEnabled = false
+            sendButton.setTitleColor(UIColor.gray, for: UIControlState())
         }
     }
 

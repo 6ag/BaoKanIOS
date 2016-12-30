@@ -11,22 +11,22 @@ import UIKit
 class JFNewsPhotoDismissAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     // 动画时间
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.25
     }
     
     // dismiss动画
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         // 获取到modal出来的控制器的view
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
+        let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
         
         // 动画收起modal出来的控制器的view
-        UIView.animateWithDuration(transitionDuration(nil), animations: {
+        UIView.animate(withDuration: transitionDuration(using: nil), animations: {
             fromView.alpha = 0
-        }) { (_) in
+        }, completion: { (_) in
             transitionContext.completeTransition(true)
-        }
+        }) 
         
     }
 }

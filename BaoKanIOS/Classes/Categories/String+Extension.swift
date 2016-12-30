@@ -19,11 +19,11 @@ extension String
     func timeStampToString() -> String
     {
         let string = NSString(string: self)
-        let timeSta: NSTimeInterval = string.doubleValue
-        let dfmatter = NSDateFormatter()
+        let timeSta: TimeInterval = string.doubleValue
+        let dfmatter = DateFormatter()
         dfmatter.dateFormat = "yyyy年MM月dd日"
-        let date = NSDate(timeIntervalSince1970: timeSta)
-        return dfmatter.stringFromDate(date)
+        let date = Date(timeIntervalSince1970: timeSta)
+        return dfmatter.string(from: date)
     }
     
     /**
@@ -33,10 +33,10 @@ extension String
      */
     func stringToTimeStamp()->String
     {
-        let dfmatter = NSDateFormatter()
+        let dfmatter = DateFormatter()
         dfmatter.dateFormat = "yyyy年MM月dd日"
-        let date = dfmatter.dateFromString(self)
-        let dateStamp: NSTimeInterval = date!.timeIntervalSince1970
+        let date = dfmatter.date(from: self)
+        let dateStamp: TimeInterval = date!.timeIntervalSince1970
         let dateSt:Int = Int(dateStamp)
         return String(dateSt)
     }

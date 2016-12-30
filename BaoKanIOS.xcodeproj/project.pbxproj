@@ -96,10 +96,6 @@
 		B29B5D481D1126F500C5AC8F /* JFProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CBC1D1126F500C5AC8F /* JFProfileHeaderView.swift */; };
 		B29B5D491D1126F500C5AC8F /* JFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29B5CBD1D1126F500C5AC8F /* JFProfileHeaderView.xib */; };
 		B29B5D4A1D1126F500C5AC8F /* JFProfileTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CBE1D1126F500C5AC8F /* JFProfileTopButton.swift */; };
-		B29B5D4F1D1126F500C5AC8F /* JFVideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CC71D1126F500C5AC8F /* JFVideoTableViewController.swift */; };
-		B29B5D501D1126F500C5AC8F /* JFVideoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29B5CC81D1126F500C5AC8F /* JFVideoViewController.storyboard */; };
-		B29B5D511D1126F500C5AC8F /* JFVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CC91D1126F500C5AC8F /* JFVideoViewController.swift */; };
-		B29B5D521D1126F500C5AC8F /* JFVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CCB1D1126F500C5AC8F /* JFVideoCell.swift */; };
 		B29B5D531D1126F500C5AC8F /* JFNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CCD1D1126F500C5AC8F /* JFNetworkTool.swift */; };
 		B29B5D541D1126F500C5AC8F /* JFProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B5CCE1D1126F500C5AC8F /* JFProgressHUD.swift */; };
 		B29B5D551D1126F500C5AC8F /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5CD11D1126F500C5AC8F /* jpush-ios-2.1.6.a */; };
@@ -244,10 +240,6 @@
 		B29B5CBC1D1126F500C5AC8F /* JFProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileHeaderView.swift; sourceTree = "<group>"; };
 		B29B5CBD1D1126F500C5AC8F /* JFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFProfileHeaderView.xib; sourceTree = "<group>"; };
 		B29B5CBE1D1126F500C5AC8F /* JFProfileTopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProfileTopButton.swift; sourceTree = "<group>"; };
-		B29B5CC71D1126F500C5AC8F /* JFVideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFVideoTableViewController.swift; sourceTree = "<group>"; };
-		B29B5CC81D1126F500C5AC8F /* JFVideoViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFVideoViewController.storyboard; sourceTree = "<group>"; };
-		B29B5CC91D1126F500C5AC8F /* JFVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFVideoViewController.swift; sourceTree = "<group>"; };
-		B29B5CCB1D1126F500C5AC8F /* JFVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFVideoCell.swift; sourceTree = "<group>"; };
 		B29B5CCD1D1126F500C5AC8F /* JFNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNetworkTool.swift; sourceTree = "<group>"; };
 		B29B5CCE1D1126F500C5AC8F /* JFProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFProgressHUD.swift; sourceTree = "<group>"; };
 		B29B5CD11D1126F500C5AC8F /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
@@ -502,7 +494,6 @@
 				B29B5C861D1126F500C5AC8F /* Photo */,
 				B28A0ECB1D34CEDC00C387C7 /* Hots */,
 				B29B5C941D1126F500C5AC8F /* Profile */,
-				B29B5CC51D1126F500C5AC8F /* Video */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -800,33 +791,6 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
-		B29B5CC51D1126F500C5AC8F /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				B29B5CC61D1126F500C5AC8F /* Controller */,
-				B29B5CCA1D1126F500C5AC8F /* View */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
-		B29B5CC61D1126F500C5AC8F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B29B5CC71D1126F500C5AC8F /* JFVideoTableViewController.swift */,
-				B29B5CC81D1126F500C5AC8F /* JFVideoViewController.storyboard */,
-				B29B5CC91D1126F500C5AC8F /* JFVideoViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B29B5CCA1D1126F500C5AC8F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B29B5CCB1D1126F500C5AC8F /* JFVideoCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		B29B5CCC1D1126F500C5AC8F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1013,6 +977,9 @@
 				TargetAttributes = {
 					B29B5C391D11265B00C5AC8F = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 35PE24U644;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1054,7 +1021,6 @@
 				B29B5D0C1D1126F500C5AC8F /* JFNewsViewController.storyboard in Resources */,
 				B214FA991D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib in Resources */,
 				B29B5D381D1126F500C5AC8F /* JFProfileViewController.storyboard in Resources */,
-				B29B5D501D1126F500C5AC8F /* JFVideoViewController.storyboard in Resources */,
 				B29B5C451D11265B00C5AC8F /* Assets.xcassets in Resources */,
 				B29B5D211D1126F500C5AC8F /* JFNewsThreePicCell.xib in Resources */,
 				B29B5D581D1126F500C5AC8F /* ShareSDKUI.bundle in Resources */,
@@ -1102,7 +1068,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EC6BAAB79040AD40DCBAFEB6 /* [CP] Embed Pods Frameworks */ = {
@@ -1142,7 +1108,6 @@
 				B29B5D441D1126F500C5AC8F /* JFProfileCellSwitchModel.swift in Sources */,
 				B29B5D151D1126F500C5AC8F /* JFCommentCommitView.swift in Sources */,
 				B29B5D991D1136AA00C5AC8F /* JFNoHighlightedButton.m in Sources */,
-				B29B5D521D1126F500C5AC8F /* JFVideoCell.swift in Sources */,
 				B29B5D3E1D1126F500C5AC8F /* JFCollectionModel.swift in Sources */,
 				B29B5D481D1126F500C5AC8F /* JFProfileHeaderView.swift in Sources */,
 				B29B5D531D1126F500C5AC8F /* JFNetworkTool.swift in Sources */,
@@ -1155,7 +1120,6 @@
 				B29B5D2C1D1126F500C5AC8F /* JFProgressView.swift in Sources */,
 				B29B5D8A1D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift in Sources */,
 				B214FA981D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift in Sources */,
-				B29B5D4F1D1126F500C5AC8F /* JFVideoTableViewController.swift in Sources */,
 				B29B5D241D1126F500C5AC8F /* JFPhotoTableViewController.swift in Sources */,
 				B29B5CFD1D1126F500C5AC8F /* AppDelegate.swift in Sources */,
 				B29B5DA61D1137C700C5AC8F /* JFSQLiteManager.swift in Sources */,
@@ -1186,7 +1150,6 @@
 				B28A0EE61D34FA3B00C387C7 /* JFSearchKeyboardModel.swift in Sources */,
 				B29B5D1E1D1126F500C5AC8F /* JFNewsOnePicCell.swift in Sources */,
 				B29B5D0E1D1126F500C5AC8F /* JFArticleDetailModel.swift in Sources */,
-				B29B5D511D1126F500C5AC8F /* JFVideoViewController.swift in Sources */,
 				B29B5D2A1D1126F500C5AC8F /* JFPhotoDetailCell.swift in Sources */,
 				B29B5D2E1D1126F500C5AC8F /* JFCommentListTableViewController.swift in Sources */,
 				B28A0EDA1D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift in Sources */,
@@ -1324,6 +1287,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 35PE24U644;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1333,7 +1298,7 @@
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/Required",
 				);
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1343,8 +1308,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9e367b40-a20a-4e1f-ade8-9a2624f6fbc7";
+				PROVISIONING_PROFILE_SPECIFIER = "XC: cn.6ag.*";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1355,6 +1322,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 35PE24U644;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1364,7 +1333,7 @@
 					"$(PROJECT_DIR)/BaoKanIOS/Classes/Vendor/ShareSDK/Support/Required",
 				);
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1374,8 +1343,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9e367b40-a20a-4e1f-ade8-9a2624f6fbc7";
+				PROVISIONING_PROFILE_SPECIFIER = "XC: cn.6ag.*";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

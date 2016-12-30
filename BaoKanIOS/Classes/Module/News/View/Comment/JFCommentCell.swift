@@ -10,7 +10,7 @@ import UIKit
 import YYWebImage
 
 protocol JFCommentCellDelegate {
-    func didTappedStarButton(button: UIButton, commentModel: JFCommentModel)
+    func didTappedStarButton(_ button: UIButton, commentModel: JFCommentModel)
 }
 
 class JFCommentCell: UITableViewCell {
@@ -25,24 +25,24 @@ class JFCommentCell: UITableViewCell {
     
     var commentModel: JFCommentModel? {
         didSet {
-            avatarImageView.yy_setImageWithURL(NSURL(string: commentModel!.userpic!), options: YYWebImageOptions.IgnorePlaceHolder)
+            avatarImageView.yy_setImage(with: URL(string: commentModel!.userpic!), options: YYWebImageOptions.ignorePlaceHolder)
             usernameLabel.text = commentModel!.plnickname!
             timeLabel.text = commentModel!.saytime!
             contentLabel.text = commentModel!.saytext!
-            starButton.setTitle("\(commentModel!.zcnum)", forState: UIControlState.Normal)
+            starButton.setTitle("\(commentModel!.zcnum)", for: UIControlState())
         }
     }
     
-    func getCellHeight(commentModel: JFCommentModel) -> CGFloat {
+    func getCellHeight(_ commentModel: JFCommentModel) -> CGFloat {
         self.commentModel = commentModel
         layoutIfNeeded()
-        return CGRectGetMaxY(contentLabel.frame) + 10
+        return contentLabel.frame.maxY + 10
     }
     
     /**
      点击了赞
      */
-    @IBAction func didTappedStarButton(sender: UIButton) {
+    @IBAction func didTappedStarButton(_ sender: UIButton) {
         delegate?.didTappedStarButton(sender, commentModel: commentModel!)
     }
     

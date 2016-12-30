@@ -21,10 +21,10 @@ class JFSearchKeyboardModel: NSObject {
     
     init(dict: [String : AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     /**
      加载搜索关键词数据
@@ -32,12 +32,12 @@ class JFSearchKeyboardModel: NSObject {
      - parameter keyboard: 关键词
      - parameter finished: 数据回调
      */
-    class func loadSearchKeyList(keyboard: String, finished: (searchKeyboardModels: [JFSearchKeyboardModel]?, error: NSError?) -> ()) {
+    class func loadSearchKeyList(_ keyboard: String, finished: @escaping (_ searchKeyboardModels: [JFSearchKeyboardModel]?, _ error: NSError?) -> ()) {
         
         JFNewsDALManager.shareManager.loadSearchKeyListFromLocation(keyboard) { (success, result, error) in
             
-            guard let successResult = result where error == nil && success == true else {
-                finished(searchKeyboardModels: nil, error: error)
+            guard let successResult = result, error == nil && success == true else {
+                finished(nil, error)
                 return
             }
             
@@ -48,7 +48,7 @@ class JFSearchKeyboardModel: NSObject {
                 searchKeyboardModels.append(model)
             }
             
-            finished(searchKeyboardModels: searchKeyboardModels, error: error)
+            finished(searchKeyboardModels, error)
         }
     }
 }

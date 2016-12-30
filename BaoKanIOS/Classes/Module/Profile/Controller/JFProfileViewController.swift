@@ -8,6 +8,30 @@
 
 import UIKit
 import YYWebImage
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class JFProfileViewController: JFBaseTableViewController {
     
@@ -24,16 +48,16 @@ class JFProfileViewController: JFBaseTableViewController {
         prepareData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         updateHeaderData()
         tableView.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
     /**
@@ -41,18 +65,18 @@ class JFProfileViewController: JFBaseTableViewController {
      
      - parameter sourceType:  资源类型
      */
-    func setupImagePicker(sourceType: UIImagePickerControllerSourceType) {
+    func setupImagePicker(_ sourceType: UIImagePickerControllerSourceType) {
         imagePickerC.view.backgroundColor = BACKGROUND_COLOR
         imagePickerC.delegate = self
         imagePickerC.sourceType = sourceType
         imagePickerC.allowsEditing = true
-        imagePickerC.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        imagePickerC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
     }
     
     /**
      准备数据
      */
-    private func prepareData() {
+    fileprivate func prepareData() {
         //        let group1CellModel1 = JFProfileCellArrowModel(title: "离线阅读", icon: "setting_star_icon")
         //        group1CellModel1.operation = { () -> Void in
         //            print("离线阅读")
@@ -62,17 +86,17 @@ class JFProfileViewController: JFBaseTableViewController {
         let group2CellModel1 = JFProfileCellLabelModel(title: "清除缓存", icon: "setting_clear_icon", text: "0.0M")
         group2CellModel1.operation = { () -> Void in
             JFProgressHUD.showWithStatus("正在清理")
-            YYImageCache.sharedCache().diskCache.removeAllObjectsWithBlock({
+            YYImageCache.shared().diskCache.removeAllObjects({
                 JFProgressHUD.showSuccessWithStatus("清理成功")
                 group2CellModel1.text = "0.00M"
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 })
             })
         }
         let group2CellModel2 = JFProfileCellArrowModel(title: "正文字体", icon: "setting_star_icon")
         group2CellModel2.operation = { () -> Void in
-            let setFontSizeView = NSBundle.mainBundle().loadNibNamed("JFSetFontView", owner: nil, options: nil).last as! JFSetFontView
+            let setFontSizeView = Bundle.main.loadNibNamed("JFSetFontView", owner: nil, options: nil)?.last as! JFSetFontView
             setFontSizeView.delegate = self
             setFontSizeView.show()
         }
@@ -89,73 +113,73 @@ class JFProfileViewController: JFBaseTableViewController {
             }
             
             let shareParames = NSMutableDictionary()
-            shareParames.SSDKSetupShareParamsByText("爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
+            shareParames.ssdkSetupShareParams(byText: "爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
                                                     images : image,
-                                                    url : NSURL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                                    url : URL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
                                                     title : "爆侃网文",
-                                                    type : SSDKContentType.Auto)
+                                                    type : SSDKContentType.auto)
             
             let items = [
-                SSDKPlatformType.TypeQQ.rawValue,
-                SSDKPlatformType.TypeWechat.rawValue,
-                SSDKPlatformType.TypeSinaWeibo.rawValue
+                SSDKPlatformType.typeQQ.rawValue,
+                SSDKPlatformType.typeWechat.rawValue,
+                SSDKPlatformType.typeSinaWeibo.rawValue
             ]
             
-            ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-                switch state {
-                    
-                case SSDKResponseState.Success:
-                    print("分享成功")
-                case SSDKResponseState.Fail:
-                    print("分享失败,错误描述:\(error)")
-                case SSDKResponseState.Cancel:
-                    print("取消分享")
-                default:
-                    break
-                }
-            }
+//            ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+//                switch state {
+//                    
+//                case SSDKResponseState.success:
+//                    print("分享成功")
+//                case SSDKResponseState.fail:
+//                    print("分享失败,错误描述:\(error)")
+//                case SSDKResponseState.cancel:
+//                    print("取消分享")
+//                default:
+//                    break
+//                }
+//            }
         }
 
-        let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String))
+        let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String))
         let group3 = JFProfileCellGroupModel(cells: [group3CellModel1, group3CellModel2, group3CellModel3, group3CellModel4])
         
         groupModels = [group2, group3]
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath) as! JFProfileCell
+        let cell = super.tableView(tableView, cellForRowAt: indexPath) as! JFProfileCell
         
         // 更新缓存数据
         if indexPath.section == 0 && indexPath.row == 0 {
-            cell.settingRightLabel.text = "\(String(format: "%.2f", CGFloat(YYImageCache.sharedCache().diskCache.totalCost()) / 1024 / 1024))M"
+            cell.settingRightLabel.text = "\(String(format: "%.2f", CGFloat(YYImageCache.shared().diskCache.totalCost()) / 1024 / 1024))M"
         }
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10
     }
     
     /**
      更新头部数据
      */
-    private func updateHeaderData() {
+    fileprivate func updateHeaderData() {
         if JFAccountModel.isLogin() {
-            headerView.avatarButton.yy_setBackgroundImageWithURL(NSURL(string: JFAccountModel.shareAccount()!.avatarUrl!), forState: UIControlState.Normal, options: YYWebImageOptions.AllowBackgroundTask)
+            headerView.avatarButton.yy_setBackgroundImage(with: URL(string: JFAccountModel.shareAccount()!.avatarUrl!), for: UIControlState(), options: YYWebImageOptions.allowBackgroundTask)
             headerView.nameLabel.text = JFAccountModel.shareAccount()!.nickname
         } else {
-            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), forState: UIControlState.Normal)
+            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), for: UIControlState())
             headerView.nameLabel.text = "登录账号"
         }
     }
     
     lazy var headerView: JFProfileHeaderView = {
-        let headerView = NSBundle.mainBundle().loadNibNamed("JFProfileHeaderView", owner: nil, options: nil).last as! JFProfileHeaderView
+        let headerView = Bundle.main.loadNibNamed("JFProfileHeaderView", owner: nil, options: nil)?.last as! JFProfileHeaderView
         headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: -(SCREEN_HEIGHT * 2 - 265), width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 2)
         return headerView
@@ -173,28 +197,28 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
         
         if JFAccountModel.isLogin() {
             let alertC = UIAlertController()
-            let takeAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.Default, handler: { (action) in
-                self.setupImagePicker(.Camera)
-                self.presentViewController(self.imagePickerC, animated: true, completion: {})
+            let takeAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.default, handler: { (action) in
+                self.setupImagePicker(.camera)
+                self.present(self.imagePickerC, animated: true, completion: {})
             })
-            let photoLibraryAction = UIAlertAction(title: "图库选择", style: UIAlertActionStyle.Default, handler: { (action) in
-                self.setupImagePicker(.PhotoLibrary)
-                self.presentViewController(self.imagePickerC, animated: true, completion: {})
+            let photoLibraryAction = UIAlertAction(title: "图库选择", style: UIAlertActionStyle.default, handler: { (action) in
+                self.setupImagePicker(.photoLibrary)
+                self.present(self.imagePickerC, animated: true, completion: {})
             })
-            let albumAction = UIAlertAction(title: "相册选择", style: UIAlertActionStyle.Default, handler: { (action) in
-                self.setupImagePicker(.SavedPhotosAlbum)
-                self.presentViewController(self.imagePickerC, animated: true, completion: {})
+            let albumAction = UIAlertAction(title: "相册选择", style: UIAlertActionStyle.default, handler: { (action) in
+                self.setupImagePicker(.savedPhotosAlbum)
+                self.present(self.imagePickerC, animated: true, completion: {})
             })
-            let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (action) in
+            let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: { (action) in
                 
             })
             alertC.addAction(takeAction)
             alertC.addAction(photoLibraryAction)
             alertC.addAction(albumAction)
             alertC.addAction(cancelAction)
-            self.presentViewController(alertC, animated: true, completion: {})
+            self.present(alertC, animated: true, completion: {})
         } else {
-            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            present(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
     }
@@ -204,9 +228,9 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedCollectionButton() {
         if JFAccountModel.isLogin() {
-            navigationController?.pushViewController(JFCollectionTableViewController(style: UITableViewStyle.Plain), animated: true)
+            navigationController?.pushViewController(JFCollectionTableViewController(style: UITableViewStyle.plain), animated: true)
         } else {
-            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            present(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
     }
@@ -216,9 +240,9 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedCommentButton() {
         if JFAccountModel.isLogin() {
-            navigationController?.pushViewController(JFCommentListTableViewController(style: UITableViewStyle.Plain), animated: true)
+            navigationController?.pushViewController(JFCommentListTableViewController(style: UITableViewStyle.plain), animated: true)
         } else {
-            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            present(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
     }
@@ -228,9 +252,9 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
      */
     func didTappedInfoButton() {
         if JFAccountModel.isLogin() {
-            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.Grouped), animated: true)
+            navigationController?.pushViewController(JFEditProfileViewController(style: UITableViewStyle.grouped), animated: true)
         } else {
-            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            present(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
     }
@@ -239,15 +263,15 @@ extension JFProfileViewController: JFProfileHeaderViewDelegate {
 // MARK: - JFSetFontViewDelegate
 extension JFProfileViewController: JFSetFontViewDelegate {
     
-    func didChangeFontSize(fontSize: Int) {
+    func didChangeFontSize(_ fontSize: Int) {
         
     }
     
-    func didChangedFontName(fontName: String) {
+    func didChangedFontName(_ fontName: String) {
         
     }
     
-    func didChangedNightMode(on: Bool) {
+    func didChangedNightMode(_ on: Bool) {
         
     }
 }
@@ -255,16 +279,16 @@ extension JFProfileViewController: JFSetFontViewDelegate {
 // MARK: - UINavigationControllerDelegate, UIImagePickerControllerDelegate
 extension JFProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
         let newImage = image.resizeImageWithNewSize(CGSize(width: 108, height: 108))
         uploadUserAvatar(newImage)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     /**
@@ -272,21 +296,21 @@ extension JFProfileViewController: UINavigationControllerDelegate, UIImagePicker
      
      - parameter image: 头像图片
      */
-    func uploadUserAvatar(image: UIImage) {
+    func uploadUserAvatar(_ image: UIImage) {
         
         let imagePath = saveImageAndGetURL(image, imageName: "avatar.png")
         
         let parameters: [String : AnyObject] = [
-            "username" : JFAccountModel.shareAccount()!.username!,
-            "userid" : "\(JFAccountModel.shareAccount()!.id)",
-            "token" : JFAccountModel.shareAccount()!.token!,
-            "action" : "UploadAvatar",
+            "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
+            "userid" : "\(JFAccountModel.shareAccount()!.id)" as AnyObject,
+            "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
+            "action" : "UploadAvatar" as AnyObject,
             ]
         
         JFProgressHUD.showWithStatus("正在上传")
-        JFNetworkTool.shareNetworkTool.uploadUserAvatar("\(MODIFY_ACCOUNT_INFO)", imagePath: imagePath, parameters: parameters) { (success, result, error) in
+        JFNetworkTool.shareNetworkTool.uploadUserAvatar("\(MODIFY_ACCOUNT_INFO)", imagePath: imagePath, parameters: parameters) { (status, result, tipString) in
             print(result)
-            if success {
+            if status == .success {
                 JFProgressHUD.showInfoWithStatus("上传成功")
                 
                 // 更新用户信息并刷新tableView
@@ -302,14 +326,14 @@ extension JFProfileViewController: UINavigationControllerDelegate, UIImagePicker
     /**
      保存图片并获取保存的图片路径
      */
-    func saveImageAndGetURL(image: UIImage, imageName: NSString) -> NSURL {
+    func saveImageAndGetURL(_ image: UIImage, imageName: NSString) -> URL {
         
         let home = NSHomeDirectory() as NSString
-        let docPath = home.stringByAppendingPathComponent("Documents") as NSString;
-        let fullPath = docPath.stringByAppendingPathComponent(imageName as NSString as String);
-        let imageData: NSData = UIImageJPEGRepresentation(image, 0.5)!
-        imageData.writeToFile(fullPath as String, atomically: false)
-        return NSURL(fileURLWithPath: fullPath)
+        let docPath = home.appendingPathComponent("Documents") as NSString;
+        let fullPath = docPath.appendingPathComponent(imageName as NSString as String);
+        let imageData: Data = UIImageJPEGRepresentation(image, 0.5)!
+        try? imageData.write(to: URL(fileURLWithPath: fullPath as String), options: [])
+        return URL(fileURLWithPath: fullPath)
     }
     
 }

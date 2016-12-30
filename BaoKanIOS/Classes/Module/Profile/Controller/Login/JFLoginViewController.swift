@@ -8,6 +8,30 @@
 
 import UIKit
 import pop
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate {
     
@@ -21,33 +45,33 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
         effectView.frame = SCREEN_BOUNDS
         bgImageView.addSubview(effectView)
         
         // 设置保存的账号
-        usernameField.text = NSUserDefaults.standardUserDefaults().objectForKey("username") as? String
-        passwordField.text = NSUserDefaults.standardUserDefaults().objectForKey("password") as? String
+        usernameField.text = UserDefaults.standard.object(forKey: "username") as? String
+        passwordField.text = UserDefaults.standard.object(forKey: "password") as? String
         
         didChangeTextField(usernameField)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     // MARK: - JFRegisterViewControllerDelegate
-    func registerSuccess(username: String, password: String) {
+    func registerSuccess(_ username: String, password: String) {
         usernameField.text = username
         passwordField.text = password
         didChangeTextField(usernameField)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.didTappedLoginButton(self.loginButton)
         }
     }
@@ -55,32 +79,32 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     /**
      登录按钮点击事件
      */
-    @IBAction func didTappedLoginButton(button: JFLoginButton) {
+    @IBAction func didTappedLoginButton(_ button: JFLoginButton) {
         
-        view.userInteractionEnabled = false
+        view.isUserInteractionEnabled = false
         view.endEditing(true)
         
         // 开始动画
         button.startLoginAnimation()
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             
-            var parameters: [String : AnyObject]
+            var parameters: [String : Any]
             parameters = [
                 "username" : self.usernameField.text!,
                 "password" : self.passwordField.text!
             ]
             
             // 发送登录请求
-            JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (status, result, tipString) in
                 print(result)
-                if success {
+                if status == .success {
                     // 保存账号和密码
-                    NSUserDefaults.standardUserDefaults().setObject(self.usernameField.text, forKey: "username")
-                    NSUserDefaults.standardUserDefaults().setObject(self.passwordField.text, forKey: "password")
+                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
+                    UserDefaults.standard.set(self.passwordField.text, forKey: "password")
                     
                     if let successResult = result {
-                        let account = JFAccountModel(dict: successResult["data"].dictionaryObject!)
+                        let account = JFAccountModel(dict: successResult["data"].dictionaryObject! as [String : AnyObject])
                         // 更新用户本地数据
                         account.updateUserInfo()
                         self.didTappedBackButton()
@@ -89,52 +113,52 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
                 
                 // 结束动画
                 button.endLoginAnimation()
-                self.view.userInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
             }
         }
         
     }
     
-    @IBAction func didChangeTextField(sender: UITextField) {
+    @IBAction func didChangeTextField(_ sender: UITextField) {
         if usernameField.text?.characters.count > 5 && passwordField.text?.characters.count > 5 {
-            loginButton.enabled = true
+            loginButton.isEnabled = true
             loginButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
         } else {
-            loginButton.enabled = false
-            loginButton.backgroundColor = UIColor.grayColor()
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = UIColor.gray
         }
     }
     
     @IBAction func didTappedBackButton() {
         view.endEditing(true)
-        dismissViewControllerAnimated(true) {}
+        dismiss(animated: true) {}
     }
     
-    @IBAction func didTappedRegisterButton(sender: UIButton) {
+    @IBAction func didTappedRegisterButton(_ sender: UIButton) {
         let registerVc = JFRegisterViewController(nibName: "JFRegisterViewController", bundle: nil)
         registerVc.delegate = self
         navigationController?.pushViewController(registerVc, animated: true)
     }
     
-    @IBAction func didTappedForgotButton(sender: UIButton) {
+    @IBAction func didTappedForgotButton(_ sender: UIButton) {
         let forgotVc = JFForgotViewController(nibName: "JFForgotViewController", bundle: nil)
         navigationController?.pushViewController(forgotVc, animated: true)
     }
     
-    @IBAction func didTappedQQLoginButton(sender: UIButton) {
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeQQ, conditional: nil) { (state, user, error) in
-            if state == SSDKResponseState.Success {
-                self.SDKLoginHandle(user.nickname, avatar: user.rawData["figureurl_qq_2"] != nil ? user.rawData["figureurl_qq_2"]! as! String : user.icon, uid: user.uid, type: 1)
+    @IBAction func didTappedQQLoginButton(_ sender: UIButton) {
+        ShareSDK.getUserInfo(SSDKPlatformType.typeQQ, conditional: nil) { (state, user, error) in
+            if state == SSDKResponseState.success {
+                self.SDKLoginHandle((user?.nickname)!, avatar: user?.rawData["figureurl_qq_2"] != nil ? user?.rawData["figureurl_qq_2"]! as! String : (user?.icon)!, uid: (user?.uid)!, type: 1)
             } else {
                 self.didTappedBackButton()
             }
         }
     }
     
-    @IBAction func didTappedSinaLoginButton(sender: UIButton) {
-        ShareSDK.getUserInfo(SSDKPlatformType.TypeSinaWeibo, conditional: nil) { (state, user, error) in
-            if state == SSDKResponseState.Success {
-                self.SDKLoginHandle(user.nickname, avatar: user.rawData["avatar_hd"] != nil ? user.rawData["avatar_hd"]! as! String : user.icon, uid: user.uid, type: 2)
+    @IBAction func didTappedSinaLoginButton(_ sender: UIButton) {
+        ShareSDK.getUserInfo(SSDKPlatformType.typeSinaWeibo, conditional: nil) { (state, user, error) in
+            if state == SSDKResponseState.success {
+                self.SDKLoginHandle((user?.nickname)!, avatar: user?.rawData["avatar_hd"] != nil ? user?.rawData["avatar_hd"]! as! String : (user?.icon)!, uid: (user?.uid)!, type: 2)
             } else {
                 self.didTappedBackButton()
             }
@@ -148,10 +172,10 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
      - parameter avatar:   头像url
      - parameter uid:      唯一标识
      */
-    func SDKLoginHandle(nickname: String, avatar: String, uid: String, type: Int) {
+    func SDKLoginHandle(_ nickname: String, avatar: String, uid: String, type: Int) {
         
-        let string = uid.characters.count >= 12 ? (uid as NSString).substringToIndex(12) : uid
-        var lowerString = string.lowercaseString
+        let string = uid.characters.count >= 12 ? (uid as NSString).substring(to: 12) : uid
+        var lowerString = string.lowercased()
         lowerString = type == 1 ? "qq_\(lowerString)" : "wb_\(lowerString)"
         
         let parameters = [
@@ -162,8 +186,8 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             "nickname" : nickname,
             ]
         
-        JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
-            if success {
+        JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters as [String : AnyObject]?) { (status, result, tipString) in
+            if status == .success {
                 self.usernameField.text = lowerString
                 self.passwordField.text = string
                 self.didChangeTextField(self.passwordField)

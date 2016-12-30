@@ -13,7 +13,7 @@ class JFProfileCell: UITableViewCell {
     /// 是否显示分割线
     var showLineView: Bool = false {
         didSet {
-            settingLineView.hidden = !showLineView
+            settingLineView.isHidden = !showLineView
         }
     }
     
@@ -32,14 +32,14 @@ class JFProfileCell: UITableViewCell {
             }
             
             // 右边数据
-            selectionStyle = cellModel!.isKindOfClass(JFProfileCellArrowModel.self) ? .Default : .None
-            if cellModel!.isKindOfClass(JFProfileCellArrowModel.self) {
+            selectionStyle = cellModel!.isKind(of: JFProfileCellArrowModel.self) ? .default : .none
+            if cellModel!.isKind(of: JFProfileCellArrowModel.self) {
                 accessoryView = settingArrowView
-            } else if cellModel!.isKindOfClass(JFProfileCellSwitchModel.self) {
+            } else if cellModel!.isKind(of: JFProfileCellSwitchModel.self) {
                 let settingCellSwitch = cellModel as! JFProfileCellSwitchModel
-                settingSwitchView.on = settingCellSwitch.on
+                settingSwitchView.isOn = settingCellSwitch.on
                 accessoryView = settingSwitchView
-            } else if cellModel!.isKindOfClass(JFProfileCellLabelModel.self) {
+            } else if cellModel!.isKind(of: JFProfileCellLabelModel.self) {
                 let settingCellLabel = cellModel as! JFProfileCellLabelModel
                 settingRightLabel.text = settingCellLabel.text
                 accessoryView = settingRightLabel
@@ -69,28 +69,28 @@ class JFProfileCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         
-        textLabel?.font = UIFont.systemFontOfSize(14)
-        textLabel?.textColor = UIColor.blackColor()
+        textLabel?.font = UIFont.systemFont(ofSize: 14)
+        textLabel?.textColor = UIColor.black
         
-        detailTextLabel?.font = UIFont.systemFontOfSize(11)
-        detailTextLabel?.textColor = UIColor.blackColor()
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 11)
+        detailTextLabel?.textColor = UIColor.black
         
         contentView.addSubview(settingLineView)
     }
     
-    @objc private func didChangedSwitch(settingSwitch: UISwitch) {
+    @objc fileprivate func didChangedSwitch(_ settingSwitch: UISwitch) {
         // 修改本地存储的状态
-        NSUserDefaults.standardUserDefaults().setBool(settingSwitch.on, forKey: NIGHT_KEY)
+        UserDefaults.standard.set(settingSwitch.isOn, forKey: NIGHT_KEY)
     }
     
     // MARK: - 懒加载
     lazy var settingRightLabel: UILabel = {
         let settingRightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
-        settingRightLabel.textColor = UIColor.grayColor()
-        settingRightLabel.textAlignment = .Right
-        settingRightLabel.font = UIFont.systemFontOfSize(14)
+        settingRightLabel.textColor = UIColor.gray
+        settingRightLabel.textAlignment = .right
+        settingRightLabel.font = UIFont.systemFont(ofSize: 14)
         return settingRightLabel
     }()
     
@@ -101,13 +101,13 @@ class JFProfileCell: UITableViewCell {
     
     lazy var settingSwitchView: UISwitch = {
         let settingSwitchView = UISwitch()
-        settingSwitchView.addTarget(self, action: #selector(didChangedSwitch(_:)), forControlEvents: .ValueChanged)
+        settingSwitchView.addTarget(self, action: #selector(didChangedSwitch(_:)), for: .valueChanged)
         return settingSwitchView
     }()
     
     lazy var settingLineView: UIView = {
         let settingLineView = UIView()
-        settingLineView.backgroundColor = UIColor.blackColor()
+        settingLineView.backgroundColor = UIColor.black
         settingLineView.alpha = 0.1
         return settingLineView
     }()

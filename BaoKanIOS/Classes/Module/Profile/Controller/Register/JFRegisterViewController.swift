@@ -7,9 +7,33 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol JFRegisterViewControllerDelegate {
-    func registerSuccess(username: String, password: String)
+    func registerSuccess(_ username: String, password: String)
 }
 
 class JFRegisterViewController: UIViewController {
@@ -35,39 +59,39 @@ class JFRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
         effectView.frame = SCREEN_BOUNDS
         bgImageView.addSubview(effectView)
         
         didChangeTextField(usernameField)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    @IBAction func didChangeTextField(sender: UITextField) {
+    @IBAction func didChangeTextField(_ sender: UITextField) {
         if usernameField.text?.characters.count > 5 && passwordField1.text?.characters.count > 5 && passwordField2.text?.characters.count > 5 && emailField.text?.characters.count > 5 {
-            registerButton.enabled = true
+            registerButton.isEnabled = true
             registerButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
         } else {
-            registerButton.enabled = false
-            registerButton.backgroundColor = UIColor.grayColor()
+            registerButton.isEnabled = false
+            registerButton.backgroundColor = UIColor.gray
         }
     }
     
     @IBAction func didTappedBackButton() {
         view.endEditing(true)
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func didTappedLoginButton(sender: JFLoginButton) {
+    @IBAction func didTappedLoginButton(_ sender: JFLoginButton) {
         
         view.endEditing(true)
         
@@ -79,7 +103,7 @@ class JFRegisterViewController: UIViewController {
         // 开始动画
         sender.startLoginAnimation()
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             
             let parameters = [
                 "username" : self.usernameField.text!,
@@ -88,8 +112,8 @@ class JFRegisterViewController: UIViewController {
             ]
             
             // 发送登录请求
-            JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (success, result, error) in
-                if success {
+            JFNetworkTool.shareNetworkTool.post(REGISTER, parameters: parameters) { (status, result, tipString) in
+                if status == .success {
                     JFProgressHUD.showInfoWithStatus("注册成功，自动登录")
                     self.didTappedBackButton()
                     // 注册成功后回调成功

@@ -23,7 +23,7 @@ class JFTabBarController: UITabBarController {
     /**
      添加所有子控制器
      */
-    private func addAllChildViewController() {
+    fileprivate func addAllChildViewController() {
         // 新闻
         let newsVc = UIStoryboard.init(name: "JFNewsViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(newsVc, title: "资讯", imageName: "tabbar_icon_news")
@@ -35,10 +35,6 @@ class JFTabBarController: UITabBarController {
         // 热门
         let readVc = UIStoryboard.init(name: "JFHotsViewController", bundle: nil).instantiateInitialViewController()!
         addChildViewController(readVc, title: "热门", imageName: "tabbar_icon_reader")
-        
-        // 视频
-//        let bzoneVc = UIStoryboard.init(name: "JFVideoViewController", bundle: nil).instantiateInitialViewController()!
-//        addChildViewController(bzoneVc, title: "视频", imageName: "tabbar_icon_bar")
         
         // 我
         let profileVc = UIStoryboard.init(name: "JFProfileViewController", bundle: nil).instantiateInitialViewController()!
@@ -52,13 +48,13 @@ class JFTabBarController: UITabBarController {
      - parameter title:           标题
      - parameter imageName:       图片
      */
-    private func addChildViewController(childController: UIViewController, title: String, imageName: String) {
+    fileprivate func addChildViewController(_ childController: UIViewController, title: String, imageName: String) {
         childController.title = title
         childController.tabBarItem.title = title
         childController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
-        childController.tabBarItem.setTitleTextAttributes([NSFontAttributeName : UIFont.systemFontOfSize(12)], forState: UIControlState.Normal)
-        childController.tabBarItem.image = UIImage(named: "\(imageName)_normal")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        childController.tabBarItem.selectedImage = UIImage(named: "\(imageName)_highlight")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        childController.tabBarItem.setTitleTextAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: 12)], for: UIControlState())
+        childController.tabBarItem.image = UIImage(named: "\(imageName)_normal")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        childController.tabBarItem.selectedImage = UIImage(named: "\(imageName)_highlight")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         addChildViewController(childController)
     }
     

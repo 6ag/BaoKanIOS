@@ -9,7 +9,7 @@
 import UIKit
 
 protocol JFSearchKeyboardTableViewDelegate {
-    func didSelectedKeyboard(keyboard: String)
+    func didSelectedKeyboard(_ keyboard: String)
 }
 
 class JFSearchKeyboardTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
@@ -27,24 +27,24 @@ class JFSearchKeyboardTableView: UITableView, UITableViewDelegate, UITableViewDa
         super.init(frame: frame, style: style)
         self.delegate = self
         self.dataSource = self
-        self.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellIdentifier)
+        self.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchKeyboardmodels?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         cell.textLabel?.text = searchKeyboardmodels![indexPath.row].keyboard!
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         keyboardDelegate?.didSelectedKeyboard(searchKeyboardmodels![indexPath.row].keyboard!)
     }
 }

@@ -15,13 +15,13 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         
         let navBar = navigationBar
         navBar.barTintColor = NAVIGATIONBAR_WHITE_COLOR
-        navBar.translucent = false
-        navBar.barStyle = UIBarStyle.Black
-        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navBar.isTranslucent = false
+        navBar.barStyle = UIBarStyle.black
+        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navBar.shadowImage = UIImage()
         navBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor(red:0.173,  green:0.173,  blue:0.173, alpha:1),
-            NSFontAttributeName : UIFont.systemFontOfSize(18)
+            NSFontAttributeName : UIFont.systemFont(ofSize: 18)
         ]
         
         // 全屏返回手势
@@ -36,11 +36,11 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
         pan.delegate = self
         view.addGestureRecognizer(pan)
-        interactivePopGestureRecognizer?.enabled = false
+        interactivePopGestureRecognizer?.isEnabled = false
     }
     
     // MARK: - UIGestureRecognizerDelegate
-    func gestureRecognizerShouldBegin(gesture: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_ gesture: UIGestureRecognizer) -> Bool {
         if childViewControllers.count == 1 {
             return false
         } else {
@@ -54,7 +54,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
      - parameter viewController: 即将压入栈的控制器
      - parameter animated:       是否动画
      */
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
         } else {
@@ -65,8 +65,8 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         
         // 压入栈后创建返回按钮
         viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "top_navigation_back")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal),
-            style: UIBarButtonItemStyle.Done,
+            image: UIImage(named: "top_navigation_back")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
+            style: UIBarButtonItemStyle.done,
             target: self,
             action: #selector(back)
         )
@@ -75,8 +75,8 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     /**
      全局返回操作
      */
-    @objc private func back() {
-        popViewControllerAnimated(true)
+    @objc fileprivate func back() {
+        popViewController(animated: true)
     }
     
 }

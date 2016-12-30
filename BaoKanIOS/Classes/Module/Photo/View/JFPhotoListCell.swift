@@ -20,7 +20,7 @@ class JFPhotoListCell: UITableViewCell {
             let progressView = JFProgressView(frame: CGRect(x: SCREEN_WIDTH / 2 - radius, y: cellHeight / 2 - radius, width: radius * 2, height: radius * 2))
             progressView.radius = radius
             
-            iconView.yy_setImageWithURL(NSURL(string: postModel!.titlepic!), placeholder: nil, options: YYWebImageOptions.SetImageWithFadeAnimation, progress: { (receivedSize, expectedSize) in
+            iconView.yy_setImage(with: URL(string: postModel!.titlepic!), placeholder: nil, options: YYWebImageOptions.setImageWithFadeAnimation, progress: { (receivedSize, expectedSize) in
                 self.contentView.addSubview(progressView)
                 progressView.progress = CGFloat(receivedSize) / CGFloat(expectedSize)
                 }, transform: { (image, url) -> UIImage! in
@@ -36,7 +36,7 @@ class JFPhotoListCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         // 准备uI
         prepareUI()
@@ -49,9 +49,9 @@ class JFPhotoListCell: UITableViewCell {
     /**
      准备UI
      */
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         
-        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 3
         layer.masksToBounds = true
         
@@ -72,36 +72,36 @@ class JFPhotoListCell: UITableViewCell {
     }
     
     func cellOffset() -> CGFloat {
-        let centerToWindow = convertRect(bounds, toView: window)
-        let centerY = CGRectGetMidY(centerToWindow)
+        let centerToWindow = convert(bounds, to: window)
+        let centerY = centerToWindow.midY
         let windowCenter = window!.center
         let cellOffsetY = centerY - windowCenter.y
         let offsetDig = cellOffsetY / SCREEN_HEIGHT * 3
         postModel!.offsetY = -offsetDig * (SCREEN_HEIGHT / 1.7 - self.cellHeight) / 6
-        iconView.transform = CGAffineTransformMakeTranslation(0, postModel!.offsetY)
+        iconView.transform = CGAffineTransform(translationX: 0, y: postModel!.offsetY)
         return postModel!.offsetY
     }
     
     // MARK: - 懒加载
-    private lazy var iconView: UIImageView = {
+    fileprivate lazy var iconView: UIImageView = {
         let iconView = UIImageView()
-        iconView.contentMode = .ScaleAspectFill
+        iconView.contentMode = .scaleAspectFill
         iconView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: self.cellHeight)
         return iconView
     }()
     
-    private lazy var bottomBarView: UIView = {
+    fileprivate lazy var bottomBarView: UIView = {
         let bottomBarView = UIView(frame: CGRect(x: 0, y: self.cellHeight - 30, width: SCREEN_WIDTH, height: 30))
         bottomBarView.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
         return bottomBarView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    fileprivate lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.textColor = UIColor.white
         titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.font = UIFont.systemFontOfSize(15)
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
         titleLabel.frame = CGRect(x: 0, y: self.cellHeight - 30, width: SCREEN_WIDTH, height: 30)
         return titleLabel
     }()

@@ -24,39 +24,39 @@ class JFLoginButton: UIButton {
      开始登录动画
      */
     func startLoginAnimation() -> Void {
-        enabled = false
+        isEnabled = false
         buttonPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height), cornerRadius: frame.size.width * 0.5)
         circlePath = UIBezierPath(roundedRect: CGRect(x: frame.size.width * 0.5 - frame.size.height * 0.5, y: 0, width: frame.size.height, height: frame.size.height), cornerRadius: frame.size.height * 0.5)
         
-        maskLayer.path = buttonPath.CGPath
+        maskLayer.path = buttonPath.cgPath
         layer.mask = maskLayer
         
         isReverse = true
-        maskLayer.addAnimation(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
+        maskLayer.add(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
     }
     
     func endLoginAnimation() -> Void {
-        enabled = true
+        isEnabled = true
         isReverse = false
-        maskLayer.addAnimation(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
+        maskLayer.add(shapePathAnimationWithFromPath(buttonPath, toPath: circlePath), forKey: "pathAnimation")
     }
     
     func setupRotate() -> Void {
-        rotationPath = UIBezierPath(ovalInRect:CGRect(x: frame.size.width * 0.5 - frame.size.height * 0.5, y: 0, width: frame.size.height, height: frame.size.height))
+        rotationPath = UIBezierPath(ovalIn:CGRect(x: frame.size.width * 0.5 - frame.size.height * 0.5, y: 0, width: frame.size.height, height: frame.size.height))
         shapeLayer.frame = CGRect(x: frame.size.width * 0.5 - frame.size.height * 0.5, y: 0, width: frame.size.height, height: frame.size.height)
         shapeLayer.position = CGPoint(x: frame.size.height * 0.5, y: frame.size.height * 0.5)
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 3
-        shapeLayer.strokeColor = UIColor.yellowColor().CGColor
+        shapeLayer.strokeColor = UIColor.yellow.cgColor
         shapeLayer.lineCap = "round"
         shapeLayer.lineJoin = "round"
         shapeLayer.strokeStart = 0
         shapeLayer.strokeEnd = 0
-        shapeLayer.path = rotationPath.CGPath
+        shapeLayer.path = rotationPath.cgPath
         add = 0.005
         layer.addSublayer(shapeLayer)
         displayLink = CADisplayLink(target: self, selector: #selector(updateRotate))
-        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        displayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
     }
     
     func updateRotate() -> Void {
@@ -71,32 +71,32 @@ class JFLoginButton: UIButton {
         }
     }
     
-    func shapePathAnimationWithFromPath(fromPath: UIBezierPath, toPath: UIBezierPath) -> CAAnimation {
+    func shapePathAnimationWithFromPath(_ fromPath: UIBezierPath, toPath: UIBezierPath) -> CAAnimation {
         if isReverse {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
                 self.setupRotate()
             }
-            let toCircleAnimation = animationWithKeyPath("path", duration: 0.5, fromValue: fromPath.CGPath, toValue: toPath.CGPath)
+            let toCircleAnimation = animationWithKeyPath("path", duration: 0.5, fromValue: fromPath.cgPath, toValue: toPath.cgPath)
             return toCircleAnimation
         } else {
             removeLink()
-            let toButtonAnimation = animationWithKeyPath("path", duration: 0.5, fromValue: toPath.CGPath, toValue: fromPath.CGPath)
+            let toButtonAnimation = animationWithKeyPath("path", duration: 0.5, fromValue: toPath.cgPath, toValue: fromPath.cgPath)
             return toButtonAnimation
         }
     }
     
-    func animationWithKeyPath(keyPath: String, duration: CFTimeInterval, fromValue: AnyObject, toValue: AnyObject) -> CABasicAnimation {
+    func animationWithKeyPath(_ keyPath: String, duration: CFTimeInterval, fromValue: AnyObject, toValue: AnyObject) -> CABasicAnimation {
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = duration
         animation.fromValue = fromValue
         animation.toValue = toValue
-        animation.removedOnCompletion = false
+        animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         return animation
     }
     
     func removeLink() -> Void {
-        displayLink.removeFromRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        displayLink.remove(from: RunLoop.main, forMode: RunLoopMode.commonModes)
         displayLink.invalidate()
         shapeLayer.removeFromSuperlayer()
     }

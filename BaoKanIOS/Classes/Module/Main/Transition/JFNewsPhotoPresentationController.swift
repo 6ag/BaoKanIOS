@@ -13,7 +13,7 @@ class JFNewsPhotoPresentationController: UIPresentationController {
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
         
-        presentedView()?.frame = SCREEN_BOUNDS
+        presentedView?.frame = SCREEN_BOUNDS
     }
     
 }

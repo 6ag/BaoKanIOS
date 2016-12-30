@@ -9,9 +9,9 @@
 import UIKit
 
 protocol JFStarAndShareCellDelegate {
-    func didTappedQQButton(button: UIButton)
-    func didTappedWeixinButton(button: UIButton)
-    func didTappedFriendCircleButton(button: UIButton)
+    func didTappedQQButton(_ button: UIButton)
+    func didTappedWeixinButton(_ button: UIButton)
+    func didTappedFriendCircleButton(_ button: UIButton)
 }
 
 class JFStarAndShareCell: UITableViewCell {
@@ -51,21 +51,21 @@ class JFStarAndShareCell: UITableViewCell {
         #endif
     }
     
-    private func prepareButton(button: UIButton) {
+    fileprivate func prepareButton(_ button: UIButton) {
         button.layer.cornerRadius = 17
-        button.layer.borderColor = UIColor(white: 0.6, alpha: 0.4).CGColor
+        button.layer.borderColor = UIColor(white: 0.6, alpha: 0.4).cgColor
         button.layer.borderWidth = 0.3
     }
     
-    @IBAction func didTappedQQButton(sender: UIButton) {
+    @IBAction func didTappedQQButton(_ sender: UIButton) {
         delegate?.didTappedQQButton(sender)
     }
     
-    @IBAction func didTappedWeixinButton(sender: UIButton) {
+    @IBAction func didTappedWeixinButton(_ sender: UIButton) {
         delegate?.didTappedWeixinButton(sender)
     }
     
-    @IBAction func didTappedFriendCircleButton(sender: UIButton) {
+    @IBAction func didTappedFriendCircleButton(_ sender: UIButton) {
         delegate?.didTappedFriendCircleButton(sender)
     }
 }

@@ -12,10 +12,10 @@ import SVProgressHUD
 class JFProgressHUD: NSObject {
     
     class func setupHUD() {
-        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.Custom)
-        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.custom)
+        SVProgressHUD.setForegroundColor(UIColor.white)
         SVProgressHUD.setBackgroundColor(UIColor(white: 0.0, alpha: 0.8))
-        SVProgressHUD.setFont(UIFont.boldSystemFontOfSize(16))
+        SVProgressHUD.setFont(UIFont.boldSystemFont(ofSize: 16))
         SVProgressHUD.setMinimumDismissTimeInterval(2.0)
     }
     
@@ -23,24 +23,24 @@ class JFProgressHUD: NSObject {
         SVProgressHUD.show()
     }
     
-    class func showWithStatus(status: String) {
-        SVProgressHUD.showWithStatus(status)
+    class func showWithStatus(_ status: String) {
+        SVProgressHUD.show(withStatus: status)
     }
     
-    class func showInfoWithStatus(status: String) {
-        SVProgressHUD.showInfoWithStatus(status)
+    class func showInfoWithStatus(_ status: String) {
+        SVProgressHUD.showInfo(withStatus: status)
     }
     
-    class func showSuccessWithStatus(status: String) {
-        SVProgressHUD.showSuccessWithStatus(status)
+    class func showSuccessWithStatus(_ status: String) {
+        SVProgressHUD.showSuccess(withStatus: status)
     }
     
-    class func showErrorWithStatus(status: String) {
-        SVProgressHUD.showErrorWithStatus(status)
+    class func showErrorWithStatus(_ status: String) {
+        SVProgressHUD.showError(withStatus: status)
     }
     
     class func dismiss() {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             SVProgressHUD.dismiss()
         }
     }

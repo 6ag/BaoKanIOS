@@ -17,7 +17,7 @@ class JFDutyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         let html = "<!doctype html>" +
         "<head>" +
@@ -42,14 +42,14 @@ class JFDutyViewController: UIViewController {
         "</html>"
         
         let webView = (view as! UIWebView)
-        webView.dataDetectorTypes = .None
+        webView.dataDetectorTypes = UIDataDetectorTypes()
         webView.loadHTMLString(html, baseURL: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 

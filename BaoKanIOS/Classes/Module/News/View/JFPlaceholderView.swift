@@ -26,7 +26,7 @@ class JFPlaceholderView: UIView {
      
      - parameter text: 提示文字
      */
-    func noAnyData(text: String) {
+    func noAnyData(_ text: String) {
         imageView.stopAnimating()
         imageView.animationImages = nil
         
@@ -42,7 +42,7 @@ class JFPlaceholderView: UIView {
         var imageArray = [UIImage]()
         for index in 0..<25 {
             let imageName = String(format: "loading%02d.jpg", arguments: [index])
-            let image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("loading/\(imageName)", ofType: nil)!)!
+            let image = UIImage(contentsOfFile: Bundle.main.path(forResource: "loading/\(imageName)", ofType: nil)!)!
             imageArray.append(image)
         }
         
@@ -63,9 +63,9 @@ class JFPlaceholderView: UIView {
     
     /// 图片区域
     lazy var imageView: UIImageView = {
-        let image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("loading/loading00.jpg", ofType: nil)!)!
+        let image = UIImage(contentsOfFile: Bundle.main.path(forResource: "loading/loading00.jpg", ofType: nil)!)!
         let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(origin: CGPointZero, size: CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5))
+        imageView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5))
         imageView.center = CGPoint(x: SCREEN_WIDTH * 0.5, y: (SCREEN_HEIGHT - 104) * 0.49)
         return imageView
     }()
@@ -73,8 +73,8 @@ class JFPlaceholderView: UIView {
     /// 提示文字
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.textAlignment = .Center
-        titleLabel.frame = CGRect(x: 0, y: CGRectGetMaxY(self.imageView.frame) + 10, width: SCREEN_WIDTH, height: 30)
+        titleLabel.textAlignment = .center
+        titleLabel.frame = CGRect(x: 0, y: self.imageView.frame.maxY + 10, width: SCREEN_WIDTH, height: 30)
         titleLabel.textColor = UIColor(white: 0.3, alpha: 1)
         titleLabel.text = "正在拼命加载中"
         return titleLabel

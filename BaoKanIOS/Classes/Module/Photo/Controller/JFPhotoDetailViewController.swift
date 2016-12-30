@@ -9,6 +9,30 @@
 import UIKit
 import YYWebImage
 import pop
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class JFPhotoDetailViewController: UIViewController {
     
@@ -32,17 +56,17 @@ class JFPhotoDetailViewController: UIViewController {
             
             // 更新评论数量
             if model?.plnum != "0" {
-                self.bottomToolView.commentButton.setTitle(model!.plnum!, forState: UIControlState.Normal)
+                self.bottomToolView.commentButton.setTitle(model!.plnum!, for: UIControlState())
             }
             
             // 更新收藏状态
-            self.bottomToolView.collectionButton.selected = model?.havefava == "1"
+            self.bottomToolView.collectionButton.isSelected = model?.havefava == "1"
             
         }
     }
     
     /// 当前页显示的文字数据
-    private var currentPageData: (page: Int, text: String)? {
+    fileprivate var currentPageData: (page: Int, text: String)? {
         didSet {
             topTitleLabel.text = "\(currentPageData!.page) / \(photoModels.count)"
             captionLabel.text = "\(currentPageData!.text)"
@@ -54,10 +78,10 @@ class JFPhotoDetailViewController: UIViewController {
     var titleurl: String?
     
     // 导航栏/背景颜色 带透明的
-    private let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.7)
+    fileprivate let bgColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:0.7)
     
-    private let photoIdentifier = "photoDetail"
-    private var photoModels = [JFPhotoDetailModel]()
+    fileprivate let photoIdentifier = "photoDetail"
+    fileprivate var photoModels = [JFPhotoDetailModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,20 +89,20 @@ class JFPhotoDetailViewController: UIViewController {
         prepareUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
     /**
      滚动停止后调用，判断当然显示的第一张图片
      */
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let page = Int(scrollView.contentOffset.x / SCREEN_WIDTH)
         let model = photoModels[page]
@@ -95,11 +119,11 @@ class JFPhotoDetailViewController: UIViewController {
      - parameter classid: 当前子分类id
      - parameter id:      文章id
      */
-    func loadPhotoDetail(classid: Int, id: Int) {
+    func loadPhotoDetail(_ classid: Int, id: Int) {
         
         JFArticleDetailModel.loadNewsDetail(classid, id: id) { (articleDetailModel, error) in
             
-            guard let model = articleDetailModel where error == nil else {return}
+            guard let model = articleDetailModel, error == nil else {return}
             self.model = model
             
             self.scrollViewDidEndDecelerating(self.collectionView)
@@ -108,7 +132,7 @@ class JFPhotoDetailViewController: UIViewController {
     }
     
     // MARK: - 各种tap事件
-    @objc private func didTappedRightBarButtonItem(item: UIBarButtonItem) -> Void {
+    @objc fileprivate func didTappedRightBarButtonItem(_ item: UIBarButtonItem) -> Void {
         print("didTappedRightBarButtonItem")
         JFProgressHUD.showInfoWithStatus("举报成功，谢谢您的支持")
     }
@@ -116,7 +140,7 @@ class JFPhotoDetailViewController: UIViewController {
     /**
      准备UI
      */
-    @objc private func prepareUI() {
+    @objc fileprivate func prepareUI() {
         
         view.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
         automaticallyAdjustsScrollViewInsets = false
@@ -165,7 +189,7 @@ class JFPhotoDetailViewController: UIViewController {
     /**
      更新底部详情视图的高度
      */
-    private func updatebottomScrollViewConstraint() {
+    fileprivate func updatebottomScrollViewConstraint() {
         
         view.layoutIfNeeded()
         // 如果文字高度超过50，就可以滑动
@@ -174,20 +198,20 @@ class JFPhotoDetailViewController: UIViewController {
                 make.height.equalTo(70)
             }
             bottomScrollView.contentSize = CGSize(width: 0, height: captionLabel.height + 20)
-            bottomScrollView.scrollEnabled = true
+            bottomScrollView.isScrollEnabled = true
             
             // 重新约束背景
-            bottomBgView.snp_updateConstraints(closure: { (make) in
+            bottomBgView.snp_updateConstraints({ (make) in
                 make.height.equalTo(110)
             })
         } else {
             bottomScrollView.snp_updateConstraints { (make) in
                 make.height.equalTo(captionLabel.height + 20)
             }
-            bottomScrollView.scrollEnabled = false
+            bottomScrollView.isScrollEnabled = false
             
             // 重新约束背景 - 比滚动区域高度顶部高10 底部高30，加起来就是40
-            bottomBgView.snp_updateConstraints(closure: { (make) in
+            bottomBgView.snp_updateConstraints({ (make) in
                 make.height.equalTo(captionLabel.height + 60)
             })
         }
@@ -196,76 +220,76 @@ class JFPhotoDetailViewController: UIViewController {
     
     // MARK: - 懒加载
     /// 内容视图
-    private lazy var collectionView: UICollectionView = {
+    fileprivate lazy var collectionView: UICollectionView = {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.itemSize = CGSize(width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT)
-        myLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        myLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
         myLayout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH + 10, height: SCREEN_HEIGHT), collectionViewLayout: myLayout)
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.pagingEnabled = true
+        collectionView.isPagingEnabled = true
         collectionView.backgroundColor = UIColor(red:0.110,  green:0.102,  blue:0.110, alpha:1)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerClass(JFPhotoDetailCell.self, forCellWithReuseIdentifier: self.photoIdentifier)
+        collectionView.register(JFPhotoDetailCell.self, forCellWithReuseIdentifier: self.photoIdentifier)
         return collectionView
     }()
     
     /// 自定义导航栏
-    private lazy var navigationBarView: UIView = {
+    fileprivate lazy var navigationBarView: UIView = {
         let navigationBarView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
         navigationBarView.backgroundColor = self.bgColor
         
         // 导航栏右边举报按钮
-        let rightButton = UIButton(type: UIButtonType.Custom)
-        rightButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        rightButton.setTitle("举报", forState: UIControlState.Normal)
-        rightButton.setTitleColor(UIColor(red:0.545, green:0.545, blue:0.545, alpha:1), forState: UIControlState.Normal)
-        rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        let rightButton = UIButton(type: UIButtonType.custom)
+        rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        rightButton.setTitle("举报", for: UIControlState())
+        rightButton.setTitleColor(UIColor(red:0.545, green:0.545, blue:0.545, alpha:1), for: UIControlState())
+        rightButton.addTarget(self, action: #selector(didTappedRightBarButtonItem(_:)), for: UIControlEvents.touchUpInside)
         rightButton.frame = CGRect(x: SCREEN_WIDTH - 60, y: 20, width: 40, height: 40)
         navigationBarView.addSubview(rightButton)
         return navigationBarView
     }()
     
     /// 底部文字透明滚动视图
-    private lazy var bottomScrollView: UIScrollView = {
+    fileprivate lazy var bottomScrollView: UIScrollView = {
         let bottomScrollView = UIScrollView()
-        bottomScrollView.indicatorStyle = .White
-        bottomScrollView.backgroundColor = UIColor.clearColor()
+        bottomScrollView.indicatorStyle = .white
+        bottomScrollView.backgroundColor = UIColor.clear
         return bottomScrollView
     }()
     
     /// 底部背景视图
-    private lazy var bottomBgView: UIView = {
+    fileprivate lazy var bottomBgView: UIView = {
         let bottomBgView = UIView()
         bottomBgView.backgroundColor = self.bgColor
         return bottomBgView
     }()
     
     /// 文字描述
-    private lazy var captionLabel: UILabel = {
+    fileprivate lazy var captionLabel: UILabel = {
         let captionLabel = UILabel()
         captionLabel.textColor = UIColor(red:0.945,  green:0.945,  blue:0.945, alpha:1)
         captionLabel.numberOfLines = 0
-        captionLabel.font = UIFont.systemFontOfSize(14)
+        captionLabel.font = UIFont.systemFont(ofSize: 14)
         return captionLabel
     }()
     
     /// 底部工具条
-    private lazy var bottomToolView: JFPhotoBottomBar = {
-        let bottomToolView = NSBundle.mainBundle().loadNibNamed("JFPhotoBottomBar", owner: nil, options: nil).last as! JFPhotoBottomBar
+    fileprivate lazy var bottomToolView: JFPhotoBottomBar = {
+        let bottomToolView = Bundle.main.loadNibNamed("JFPhotoBottomBar", owner: nil, options: nil)?.last as! JFPhotoBottomBar
         bottomToolView.backgroundColor = self.bgColor
         bottomToolView.delegate = self
         return bottomToolView
     }()
     
     /// 顶部导航栏显示页码
-    private lazy var topTitleLabel: UILabel = {
+    fileprivate lazy var topTitleLabel: UILabel = {
         let topTitleLabel = UILabel()
-        topTitleLabel.textAlignment = .Center
+        topTitleLabel.textAlignment = .center
         topTitleLabel.textColor = UIColor(red:0.945,  green:0.945,  blue:0.945, alpha:1)
-        topTitleLabel.font = UIFont.systemFontOfSize(15)
+        topTitleLabel.font = UIFont.systemFont(ofSize: 15)
         return topTitleLabel
     }()
 }
@@ -273,13 +297,13 @@ class JFPhotoDetailViewController: UIViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension JFPhotoDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoModels.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier, forIndexPath: indexPath) as! JFPhotoDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdentifier, for: indexPath) as! JFPhotoDetailCell
         cell.delegate = self
         cell.urlString = photoModels[indexPath.item].bigpic
         return cell
@@ -292,15 +316,15 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
     /**
      返回
      */
-    func didTappedBackButton(button: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    func didTappedBackButton(_ button: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
     
     /**
      发布评论
      */
-    func didTappedEditButton(button: UIButton) {
-        let commentCommitView = NSBundle.mainBundle().loadNibNamed("JFCommentCommitView", owner: nil, options: nil).last as! JFCommentCommitView
+    func didTappedEditButton(_ button: UIButton) {
+        let commentCommitView = Bundle.main.loadNibNamed("JFCommentCommitView", owner: nil, options: nil)?.last as! JFCommentCommitView
         commentCommitView.delegate = self
         commentCommitView.show()
     }
@@ -308,8 +332,8 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
     /**
      评论列表
      */
-    func didTappedCommentButton(button: UIButton) {
-        let commentVc = JFCommentTableViewController(style: UITableViewStyle.Plain)
+    func didTappedCommentButton(_ button: UIButton) {
+        let commentVc = JFCommentTableViewController(style: UITableViewStyle.plain)
         commentVc.param = photoParam
         navigationController?.pushViewController(commentVc, animated: true)
     }
@@ -317,35 +341,39 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
     /**
      收藏
      */
-    func didTappedCollectButton(button: UIButton) {
+    func didTappedCollectButton(_ button: UIButton) {
         
         if JFAccountModel.isLogin() {
             let parameters: [String : AnyObject] = [
-                "username" : JFAccountModel.shareAccount()!.username!,
-                "userid" : JFAccountModel.shareAccount()!.id,
-                "token" : JFAccountModel.shareAccount()!.token!,
-                "classid" : photoParam!.classid,
-                "id" : photoParam!.id
+                "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
+                "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
+                "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
+                "classid" : photoParam!.classid as AnyObject,
+                "id" : photoParam!.id as AnyObject
             ]
             
-            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (status, result, tipString) in
                 
-                guard let successResult = result where success == true else {return}
+                if status != .success {
+                    return
+                }
+                
+                guard let successResult = result else {return}
                 if successResult["result"]["status"].intValue == 1 {
                     // 增加成功
                     JFProgressHUD.showSuccessWithStatus("收藏成功")
-                    button.selected = true
+                    button.isSelected = true
                     
                 } else if successResult["result"]["status"].intValue == 3 {
                     // 删除成功
                     JFProgressHUD.showSuccessWithStatus("取消收藏")
-                    button.selected = false
+                    button.isSelected = false
                 }
                 
                 jf_setupButtonSpringAnimation(button)
             }
         } else {
-            presentViewController(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
+            present(JFNavigationController(rootViewController: JFLoginViewController(nibName: "JFLoginViewController", bundle: nil)), animated: true, completion: {
             })
         }
     }
@@ -353,44 +381,44 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
     /**
      分享
      */
-    func didTappedShareButton(button: UIButton) {
+    func didTappedShareButton(_ button: UIButton) {
         
         guard let page = currentPageData?.page else {return}
         
         // 从缓存中获取标题图片
         let currentModel = photoModels[page - 1]
-        var image = YYImageCache.sharedCache().getImageForKey(currentModel.bigpic!)
+        var image = YYImageCache.shared().getImageForKey(currentModel.bigpic!)
         
         if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
             image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
         }
         
         let shareParames = NSMutableDictionary()
-        shareParames.SSDKSetupShareParamsByText(currentModel.caption,
+        shareParames.ssdkSetupShareParams(byText: currentModel.caption,
                                                 images : image,
-                                                url : NSURL(string: self.titleurl!.hasPrefix("http") ? self.titleurl! : "\(BASE_URL)\(self.titleurl!)"),
+                                                url : URL(string: self.titleurl!.hasPrefix("http") ? self.titleurl! : "\(BASE_URL)\(self.titleurl!)"),
                                                 title : currentModel.title,
-                                                type : SSDKContentType.Auto)
+                                                type : SSDKContentType.auto)
         
         let items = [
-            SSDKPlatformType.TypeQQ.rawValue,
-            SSDKPlatformType.TypeWechat.rawValue,
-            SSDKPlatformType.TypeSinaWeibo.rawValue
+            SSDKPlatformType.typeQQ.rawValue,
+            SSDKPlatformType.typeWechat.rawValue,
+            SSDKPlatformType.typeSinaWeibo.rawValue
         ]
         
-        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-            switch state {
-                
-            case SSDKResponseState.Success:
-                print("分享成功")
-            case SSDKResponseState.Fail:
-                print("分享失败,错误描述:\(error)")
-            case SSDKResponseState.Cancel:
-                print("取消分享")
-            default:
-                break
-            }
-        }
+//        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
+//            switch state {
+//                
+//            case SSDKResponseState.success:
+//                print("分享成功")
+//            case SSDKResponseState.fail:
+//                print("分享失败,错误描述:\(error)")
+//            case SSDKResponseState.cancel:
+//                print("取消分享")
+//            default:
+//                break
+//            }
+//        }
     }
     
     /**
@@ -398,31 +426,31 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      
      - parameter message: 评论信息
      */
-    func didTappedSendButtonWithMessage(message: String) {
+    func didTappedSendButtonWithMessage(_ message: String) {
         
         var parameters = [String : AnyObject]()
         
         if JFAccountModel.isLogin() {
             parameters = [
-                "classid" : photoParam!.classid,
-                "id" : photoParam!.id,
-                "userid" : JFAccountModel.shareAccount()!.id,
-                "nomember" : "0",
-                "username" : JFAccountModel.shareAccount()!.username!,
-                "token" : JFAccountModel.shareAccount()!.token!,
-                "saytext" : message
+                "classid" : photoParam!.classid as AnyObject,
+                "id" : photoParam!.id as AnyObject,
+                "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
+                "nomember" : "0" as AnyObject,
+                "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
+                "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
+                "saytext" : message as AnyObject
             ]
         } else {
             parameters = [
-                "classid" : photoParam!.classid,
-                "id" : photoParam!.id,
-                "nomember" : "1",
-                "saytext" : message
+                "classid" : photoParam!.classid as AnyObject,
+                "id" : photoParam!.id as AnyObject,
+                "nomember" : "1" as AnyObject,
+                "saytext" : message as AnyObject
             ]
         }
         
-        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters) { (success, result, error) in
-            if success {
+        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters) { (status, result, tipString) in
+            if status == .success {
                 self.loadPhotoDetail(Int(self.photoParam!.classid)!, id: Int(self.photoParam!.id)!)
             }
         }
@@ -435,26 +463,26 @@ extension JFPhotoDetailViewController: JFPhotoDetailCellDelegate {
     /**
      单击事件
      */
-    func didOneTappedPhotoDetailView(scrollView: UIScrollView) -> Void {
+    func didOneTappedPhotoDetailView(_ scrollView: UIScrollView) -> Void {
         
-        let alpha: CGFloat = UIApplication.sharedApplication().statusBarHidden == false ? 0 : 1
+        let alpha: CGFloat = UIApplication.shared.isStatusBarHidden == false ? 0 : 1
         
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             
             // 状态栏
-            UIApplication.sharedApplication().setStatusBarHidden(!UIApplication.sharedApplication().statusBarHidden, withAnimation: UIStatusBarAnimation.Slide)
+            UIApplication.shared.setStatusBarHidden(!UIApplication.shared.isStatusBarHidden, with: UIStatusBarAnimation.slide)
             
             // 隐藏和显示的平移效果
             if alpha == 0 {
-                self.bottomBgView.transform = CGAffineTransformTranslate(self.bottomBgView.transform, 0, 20)
-                self.bottomScrollView.transform = CGAffineTransformTranslate(self.bottomScrollView.transform, 0, 20)
-                self.bottomToolView.transform = CGAffineTransformTranslate(self.bottomToolView.transform, 0, 20)
-                self.navigationBarView.transform = CGAffineTransformTranslate(self.navigationBarView.transform, 0, -20)
+                self.bottomBgView.transform = self.bottomBgView.transform.translatedBy(x: 0, y: 20)
+                self.bottomScrollView.transform = self.bottomScrollView.transform.translatedBy(x: 0, y: 20)
+                self.bottomToolView.transform = self.bottomToolView.transform.translatedBy(x: 0, y: 20)
+                self.navigationBarView.transform = self.navigationBarView.transform.translatedBy(x: 0, y: -20)
             } else {
-                self.bottomBgView.transform = CGAffineTransformTranslate(self.bottomBgView.transform, 0, -20)
-                self.bottomScrollView.transform = CGAffineTransformTranslate(self.bottomScrollView.transform, 0, -20)
-                self.bottomToolView.transform = CGAffineTransformTranslate(self.bottomToolView.transform, 0, -20)
-                self.navigationBarView.transform = CGAffineTransformTranslate(self.navigationBarView.transform, 0, 20)
+                self.bottomBgView.transform = self.bottomBgView.transform.translatedBy(x: 0, y: -20)
+                self.bottomScrollView.transform = self.bottomScrollView.transform.translatedBy(x: 0, y: -20)
+                self.bottomToolView.transform = self.bottomToolView.transform.translatedBy(x: 0, y: -20)
+                self.navigationBarView.transform = self.navigationBarView.transform.translatedBy(x: 0, y: 20)
             }
             
             // 底部视图
@@ -464,20 +492,20 @@ extension JFPhotoDetailViewController: JFPhotoDetailCellDelegate {
             
             // 顶部导航栏
             self.navigationBarView.alpha = alpha
-        }) { (_) in
+        }, completion: { (_) in
             
-        }
+        }) 
     }
     
     /**
      双击事件
      */
-    func didDoubleTappedPhotoDetailView(scrollView: UIScrollView, touchPoint: CGPoint) -> Void {
+    func didDoubleTappedPhotoDetailView(_ scrollView: UIScrollView, touchPoint: CGPoint) -> Void {
         
         if scrollView.zoomScale <= 1.0 {
             let scaleX = touchPoint.x + scrollView.contentOffset.x
             let scaleY = touchPoint.y + scrollView.contentOffset.y
-            scrollView.zoomToRect(CGRect(x: scaleX, y: scaleY, width: 10, height: 10), animated: true)
+            scrollView.zoom(to: CGRect(x: scaleX, y: scaleY, width: 10, height: 10), animated: true)
         } else {
             scrollView.setZoomScale(1.0, animated: true)
         }
@@ -486,34 +514,34 @@ extension JFPhotoDetailViewController: JFPhotoDetailCellDelegate {
     /**
      长按保存图片
      */
-    func didLongPressPhotoDetailView(scrollView: UIScrollView, currentImage: UIImage?) {
+    func didLongPressPhotoDetailView(_ scrollView: UIScrollView, currentImage: UIImage?) {
         
         // 如果图片都还没加载出来，保存个毛线
         guard let image = currentImage else {return}
         
-        let alertC = UIAlertController(title: "保存图片到相册", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        let save = UIAlertAction(title: "保存", style: UIAlertActionStyle.Default) { (action) in
+        let alertC = UIAlertController(title: "保存图片到相册", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let save = UIAlertAction(title: "保存", style: UIAlertActionStyle.default) { (action) in
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(JFPhotoDetailViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
         }
-        let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel) { (action) in }
+        let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (action) in }
         alertC.addAction(save)
         alertC.addAction(cancel)
-        presentViewController(alertC, animated: true) {}
+        present(alertC, animated: true) {}
     }
     
     /**
      持续滑动中判断偏移量
      */
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x <= -30 {
-            navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewController(animated: true)
         }
     }
     
     /**
      保存图片到相册
      */
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if let _ = error {
             JFProgressHUD.showInfoWithStatus("保存失败")
         } else {

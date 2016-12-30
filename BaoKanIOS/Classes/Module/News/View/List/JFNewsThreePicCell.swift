@@ -15,19 +15,19 @@ class JFNewsThreePicCell: UITableViewCell {
         didSet {
             if postModel?.morepic?.count == 1 {
                 iconView1.image = nil
-                iconView1.yy_setImageWithURL(NSURL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
             } else if postModel?.morepic?.count == 2 {
                 iconView1.image = nil
                 iconView2.image = nil
-                iconView1.yy_setImageWithURL(NSURL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView2.yy_setImageWithURL(NSURL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView2.yy_setImage(with: URL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
             } else if postModel?.morepic?.count == 3 {
                 iconView1.image = nil
                 iconView2.image = nil
                 iconView3.image = nil
-                iconView1.yy_setImageWithURL(NSURL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView2.yy_setImageWithURL(NSURL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView3.yy_setImageWithURL(NSURL(string: postModel!.morepic![2]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView2.yy_setImage(with: URL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView3.yy_setImage(with: URL(string: postModel!.morepic![2]), placeholder: UIImage(named: "placeholder_logo"))
             }
             
             articleTitleLabel.text = postModel?.title!
@@ -53,9 +53,9 @@ class JFNewsThreePicCell: UITableViewCell {
     /**
      计算行高
      */
-    func getRowHeight(postModel: JFArticleListModel) -> CGFloat {
+    func getRowHeight(_ postModel: JFArticleListModel) -> CGFloat {
         self.postModel = postModel
         layoutIfNeeded()
-        return CGRectGetMaxY(timeLabel.frame) + 15
+        return timeLabel.frame.maxY + 15
     }
 }

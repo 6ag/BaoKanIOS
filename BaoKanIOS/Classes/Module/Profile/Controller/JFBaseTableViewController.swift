@@ -17,22 +17,22 @@ class JFBaseTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.sectionHeaderHeight = 0.01
-        tableView.separatorStyle = .None
-        tableView.registerClass(JFProfileCell.self, forCellReuseIdentifier: "profileCell")
+        tableView.separatorStyle = .none
+        tableView.register(JFProfileCell.self, forCellReuseIdentifier: "profileCell")
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return groupModels?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupModels![section].cells?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("profileCell") as! JFProfileCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! JFProfileCell
         let groupModel = groupModels![indexPath.section]
         let cellModel = groupModel.cells![indexPath.row]
         cell.cellModel = cellModel
@@ -40,16 +40,16 @@ class JFBaseTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return groupModels![section].footerTitle
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return groupModels![section].headerTitle
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let cellModel = groupModels![indexPath.section].cells![indexPath.row]
         
@@ -60,7 +60,7 @@ class JFBaseTableViewController: UITableViewController {
         }
         
         // 如果是箭头类型就跳转控制器
-        if cellModel .isKindOfClass(JFProfileCellArrowModel.self) {
+        if cellModel .isKind(of: JFProfileCellArrowModel.self) {
             let cellArrow = cellModel as! JFProfileCellArrowModel
             
             /// 目标控制器类

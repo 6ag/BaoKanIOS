@@ -16,18 +16,18 @@ class JFHotsViewController: UIViewController {
         view.addSubview(newsVc.view)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = NAVIGATIONBAR_RED_COLOR
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
-    @IBAction func didTappedSearchButton(sender: UIButton) {
+    @IBAction func didTappedSearchButton(_ sender: UIButton) {
         navigationController?.pushViewController(JFSearchViewController(), animated: true)
     }
     // MARK: - 懒加载

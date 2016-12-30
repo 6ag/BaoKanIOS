@@ -65,10 +65,10 @@ class JFArticleDetailModel: NSObject {
      */
     init(dict: [String : AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     
     /**
@@ -77,7 +77,7 @@ class JFArticleDetailModel: NSObject {
      - parameter value: 值
      - parameter key:   键
      */
-    override func setValue(value: AnyObject?, forKey key: String) {
+    override func setValue(_ value: Any?, forKey key: String) {
         if key == "morepic" {
             if let array = value as? [[String: AnyObject]] {
                 var morepicModels = [JFPhotoDetailModel]()
@@ -110,19 +110,19 @@ class JFArticleDetailModel: NSObject {
      - parameter type:      1为资讯列表 2为资讯幻灯片
      - parameter finished:  数据回调
      */
-    class func loadNewsDetail(classid: Int, id: Int, finished: (articleDetailModel: JFArticleDetailModel?, error: NSError?) -> ()) {
+    class func loadNewsDetail(_ classid: Int, id: Int, finished: @escaping (_ articleDetailModel: JFArticleDetailModel?, _ error: NSError?) -> ()) {
         
         JFNewsDALManager.shareManager.loadNewsDetail(classid, id: id) { (result, error) in
             
             // 请求失败
             if error != nil || result == nil {
-                finished(articleDetailModel: nil, error: error)
+                finished(nil, error)
                 return
             }
             
             // 正文数据
             let dict = result!.dictionaryObject
-            finished(articleDetailModel: JFArticleDetailModel(dict: dict!), error: nil)
+            finished(JFArticleDetailModel(dict: dict! as [String : AnyObject]), nil)
         }
     }
     
@@ -148,10 +148,10 @@ class JFOtherLinkModel: NSObject {
     
     init(dict: [String : AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
 
 /// 图库详情模型
@@ -171,9 +171,9 @@ class JFPhotoDetailModel: NSObject {
      */
     init(dict: [String: AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
 }

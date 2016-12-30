@@ -9,6 +9,30 @@
 import UIKit
 import SDCycleScrollView
 import MJRefresh
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
@@ -31,11 +55,11 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerClass(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
+        tableView.register(JFPhotoListCell.self, forCellReuseIdentifier: newsReuseIdentifier)
         tableView.rowHeight = 200
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
-        headerRefresh.lastUpdatedTimeLabel.hidden = true
+        headerRefresh?.lastUpdatedTimeLabel.isHidden = true
         tableView.mj_header = headerRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
     }
@@ -43,14 +67,14 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     /**
      下拉加载最新数据
      */
-    @objc private func updateNewData() {
+    @objc fileprivate func updateNewData() {
         loadNews(classid!, pageIndex: 1, method: 0)
     }
     
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData() {
+    @objc fileprivate func loadMoreData() {
         pageIndex += 1
         loadNews(classid!, pageIndex: pageIndex, method: 1)
     }
@@ -62,16 +86,21 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(classid: Int, pageIndex: Int, method: Int) {
+    fileprivate func loadNews(_ classid: Int, pageIndex: Int, method: Int) {
         
         JFArticleListModel.loadNewsList("photo", classid: classid, pageIndex: pageIndex, type: 1) { (articleListModels, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             
-            guard let list = articleListModels where error != true else {
+            guard let list = articleListModels else {
                 return
             }
+            
+            if error != nil {
+                return
+            }
+            
             
             if list.count == 0 {
                 self.tableView.mj_footer.endRefreshingWithNoMoreData()
@@ -102,33 +131,33 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(newsReuseIdentifier) as! JFPhotoListCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: newsReuseIdentifier) as! JFPhotoListCell
         cell.postModel = photoList[indexPath.row]
         cell.cellHeight = 200
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentListModel = photoList[indexPath.row]
         let detailVc = JFPhotoDetailViewController()
         detailVc.photoParam = (currentListModel.classid!, currentListModel.id!)
         navigationController?.pushViewController(detailVc, animated: true)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         (cell as! JFPhotoListCell).cellOffset()
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let array = tableView.visibleCells
         for cell in array {
             // 里面的图片跟随移动

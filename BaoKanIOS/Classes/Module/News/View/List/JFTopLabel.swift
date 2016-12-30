@@ -16,7 +16,7 @@ class JFTopLabel: UILabel {
             textColor = UIColor(red:1 * scale! + 0.95,  green:1 * scale! +  0.95,  blue:1 * scale! +  0.95, alpha:1)
             let minScale : CGFloat = 0.9
             let trueScale = minScale + (1 - minScale) * scale!
-            transform = CGAffineTransformMakeScale(trueScale, trueScale)
+            transform = CGAffineTransform(scaleX: trueScale, y: trueScale)
         }
     }
     
@@ -27,8 +27,8 @@ class JFTopLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textAlignment = NSTextAlignment.Center
-        font = UIFont.systemFontOfSize(20.0)
+        textAlignment = NSTextAlignment.center
+        font = UIFont.systemFont(ofSize: 20.0)
     }
     
 }

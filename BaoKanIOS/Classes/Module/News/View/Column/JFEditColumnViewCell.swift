@@ -9,13 +9,13 @@
 import UIKit
 
 protocol JFEditColumnViewCellDelegate {
-    func deleteItemWithIndexPath(indexPath: NSIndexPath) -> Void
+    func deleteItemWithIndexPath(_ indexPath: IndexPath) -> Void
 }
 
 class JFEditColumnViewCell: UICollectionViewCell {
     
     var delegate: JFEditColumnViewCellDelegate?
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,8 +30,8 @@ class JFEditColumnViewCell: UICollectionViewCell {
     /**
      准备UI
      */
-    private func prepareUI() {
-        contentView.backgroundColor = UIColor.clearColor()
+    fileprivate func prepareUI() {
+        contentView.backgroundColor = UIColor.clear
         contentView.addSubview(contentLabel)
         contentView.addSubview(deleteButton)
     }
@@ -39,21 +39,21 @@ class JFEditColumnViewCell: UICollectionViewCell {
     /**
      配置cell
      */
-    func configCell(dataArray: NSArray, withIndexPath indexPath: NSIndexPath) -> Void {
+    func configCell(_ dataArray: [[String : String]], withIndexPath indexPath: IndexPath) {
         self.indexPath = indexPath
-        contentLabel.hidden = false
-        contentLabel.text = dataArray[indexPath.row]["classname"] as? String
+        contentLabel.isHidden = false
+        contentLabel.text = dataArray[indexPath.row]["classname"]!
         
         if (indexPath.section == 0 && indexPath.row == 0) {
             contentLabel.textColor = UIColor.colorWithRGB(214, g: 39, b: 48)
             contentLabel.layer.masksToBounds = true
-            contentLabel.layer.borderColor = UIColor.clearColor().CGColor
+            contentLabel.layer.borderColor = UIColor.clear.cgColor
             contentLabel.layer.borderWidth = 0.0
         } else {
             contentLabel.textColor = UIColor.colorWithRGB(101, g: 101, b: 101)
             contentLabel.layer.masksToBounds = true
-            contentLabel.layer.cornerRadius = CGRectGetHeight(self.contentView.bounds) * 0.5
-            contentLabel.layer.borderColor = UIColor.colorWithRGB(211, g: 211, b: 211).CGColor;
+            contentLabel.layer.cornerRadius = self.contentView.bounds.height * 0.5
+            contentLabel.layer.borderColor = UIColor.colorWithRGB(211, g: 211, b: 211).cgColor;
             contentLabel.layer.borderWidth = 0.45
         }
     }
@@ -61,7 +61,7 @@ class JFEditColumnViewCell: UICollectionViewCell {
     /**
      点击了删除按钮
      */
-    func didTappedDeleteButton(button: UIButton) -> Void {
+    func didTappedDeleteButton(_ button: UIButton) {
         delegate?.deleteItemWithIndexPath(indexPath!)
     }
     
@@ -77,8 +77,8 @@ class JFEditColumnViewCell: UICollectionViewCell {
     lazy var contentLabel: UILabel = {
         let contentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.contentView.bounds.size.width, height: self.contentView.bounds.size.height))
         contentLabel.center = self.contentView.center
-        contentLabel.textAlignment = NSTextAlignment.Center
-        contentLabel.font = UIFont.systemFontOfSize(15)
+        contentLabel.textAlignment = NSTextAlignment.center
+        contentLabel.font = UIFont.systemFont(ofSize: 15)
         contentLabel.numberOfLines = 1
         contentLabel.adjustsFontSizeToFitWidth = true
         contentLabel.minimumScaleFactor = 0.1
@@ -87,8 +87,8 @@ class JFEditColumnViewCell: UICollectionViewCell {
     
     lazy var deleteButton: UIButton = {
         let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        deleteButton.setBackgroundImage(UIImage(named: "delete"), forState: UIControlState.Normal)
-        deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        deleteButton.setBackgroundImage(UIImage(named: "delete"), for: UIControlState())
+        deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(_:)), for: UIControlEvents.touchUpInside)
         return deleteButton
     }()
 }

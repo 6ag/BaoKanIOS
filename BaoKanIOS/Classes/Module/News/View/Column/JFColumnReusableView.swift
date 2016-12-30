@@ -9,17 +9,17 @@
 import UIKit
 
 enum ButtonState {
-    case StateComplish
-    case StateSortDelete
+    case stateComplish
+    case stateSortDelete
 }
 
 class JFColumnReusableView: UICollectionReusableView {
     
-    typealias ClickBlock = (state: ButtonState) -> ()
+    typealias ClickBlock = (_ state: ButtonState) -> ()
     var clickBlock: ClickBlock?
     var buttonHidden: Bool? {
         didSet {
-            clickButton.hidden = buttonHidden!
+            clickButton.isHidden = buttonHidden!
         }
     }
     
@@ -33,45 +33,45 @@ class JFColumnReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func clickWithBlock(clickBlock: ClickBlock) -> Void {
+    func clickWithBlock(_ clickBlock: @escaping ClickBlock) -> Void {
         self.clickBlock = clickBlock
     }
     
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         addSubview(titleLabel)
         addSubview(clickButton)
     }
     
     
-    func didTappedClickButton(button: UIButton) -> Void {
-        button.selected = !button.selected
-        if button.selected {
-            clickBlock!(state: ButtonState.StateSortDelete)
+    func didTappedClickButton(_ button: UIButton) -> Void {
+        button.isSelected = !button.isSelected
+        if button.isSelected {
+            clickBlock!(ButtonState.stateSortDelete)
         } else {
-            clickBlock!(state: ButtonState.StateComplish)
+            clickBlock!(ButtonState.stateComplish)
         }
     }
     
     // MARK: - 懒加载
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 200, height: self.bounds.size.height))
-        titleLabel.font = UIFont.systemFontOfSize(14)
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         titleLabel.textColor = UIColor.colorWithRGB(51, g: 51, b: 51)
         return titleLabel
     }()
     
     lazy var clickButton: UIButton = {
         let clickButton = UIButton(frame: CGRect(x: SCREEN_WIDTH - 100, y: 10, width: 60, height: 20))
-        clickButton.backgroundColor = UIColor.whiteColor()
+        clickButton.backgroundColor = UIColor.white
         clickButton.layer.masksToBounds = true
         clickButton.layer.cornerRadius = 10
-        clickButton.layer.borderColor = UIColor.colorWithRGB(214, g: 39, b: 48) .CGColor;
+        clickButton.layer.borderColor = UIColor.colorWithRGB(214, g: 39, b: 48) .cgColor;
         clickButton.layer.borderWidth = 0.7;
-        clickButton.setTitle("排序删除", forState: UIControlState.Normal)
-        clickButton.setTitle("完成", forState: UIControlState.Selected)
-        clickButton.titleLabel!.font = UIFont.systemFontOfSize(13)
-        clickButton.setTitleColor(UIColor.colorWithRGB(214, g: 39, b: 48), forState: UIControlState.Normal)
-        clickButton.addTarget(self, action: #selector(didTappedClickButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        clickButton.setTitle("排序删除", for: UIControlState())
+        clickButton.setTitle("完成", for: UIControlState.selected)
+        clickButton.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+        clickButton.setTitleColor(UIColor.colorWithRGB(214, g: 39, b: 48), for: UIControlState())
+        clickButton.addTarget(self, action: #selector(didTappedClickButton(_:)), for: UIControlEvents.touchUpInside)
         return clickButton
     }()
     

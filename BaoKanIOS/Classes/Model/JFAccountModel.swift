@@ -49,26 +49,30 @@ class JFAccountModel: NSObject, NSCoding {
     // KVC 字典转模型
     init(dict: [String: AnyObject]) {
         super.init()
-        setValuesForKeysWithDictionary(dict)
+        setValuesForKeys(dict)
     }
     
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
     /**
      每次打开app就检查一次用户是否有效
      */
-    class func checkUserInfo(finished: () -> ()) {
+    class func checkUserInfo(_ finished: @escaping () -> ()) {
         if isLogin() {
             // 已经登录并保存过信息，验证信息是否有效
             let parameters: [String : AnyObject] = [
-                "username" : JFAccountModel.shareAccount()!.username!,
-                "userid" : JFAccountModel.shareAccount()!.id,
-                "token" : JFAccountModel.shareAccount()!.token!
+                "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
+                "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
+                "token" : JFAccountModel.shareAccount()!.token! as AnyObject
             ]
             
-            JFNetworkTool.shareNetworkTool.post(GET_USERINFO, parameters: parameters, finished: { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.post(GET_USERINFO, parameters: parameters, finished: { (status, result, tipString) in
                 
-                guard let successResult = result where success == true else {
+                if status != .success {
+                    return
+                }
+                
+                guard let successResult = result else {
                     JFAccountModel.logout()
                     print("登录信息无效")
                     return
@@ -76,7 +80,7 @@ class JFAccountModel: NSObject, NSCoding {
                 
                 print("登录信息有效")
                 print(successResult)
-                let account = JFAccountModel(dict: successResult["data"].dictionaryObject!)
+                let account = JFAccountModel(dict: successResult["data"].dictionaryObject! as [String : AnyObject])
                 // 更新用户信息
                 account.updateUserInfo()
                 
@@ -97,13 +101,13 @@ class JFAccountModel: NSObject, NSCoding {
      注销清理
      */
     class func logout() {
-        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeQQ)
-        ShareSDK.cancelAuthorize(SSDKPlatformType.TypeSinaWeibo)
+        ShareSDK.cancelAuthorize(SSDKPlatformType.typeQQ)
+        ShareSDK.cancelAuthorize(SSDKPlatformType.typeSinaWeibo)
         
         // 清除内存中的账号对象和归档
         JFAccountModel.userAccount = nil
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(JFAccountModel.accountPath)
+            try FileManager.default.removeItem(atPath: JFAccountModel.accountPath)
         } catch {
             print("退出异常")
         }
@@ -125,17 +129,17 @@ class JFAccountModel: NSObject, NSCoding {
     }
     
     // 持久保存到内存中
-    private static var userAccount: JFAccountModel?
+    fileprivate static var userAccount: JFAccountModel?
     
     /// 归档账号的路径
-    static let accountPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last! + "/Account.plist"
+    static let accountPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! + "/Account.plist"
     
     /**
      获取用户对象 （这可不是单例哦，只是对象静态化了，保证在内存中不释放）
      */
     static func shareAccount() -> JFAccountModel? {
         if userAccount == nil {
-            userAccount = NSKeyedUnarchiver.unarchiveObjectWithFile(accountPath) as? JFAccountModel
+            userAccount = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? JFAccountModel
             return userAccount
         } else {
             return userAccount
@@ -143,33 +147,33 @@ class JFAccountModel: NSObject, NSCoding {
     }
     
     // MARK: - 归档和解档
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(token, forKey: "token")
-        aCoder.encodeInt(Int32(id), forKey: "id")
-        aCoder.encodeObject(username, forKey: "username")
-        aCoder.encodeObject(registerTime, forKey: "registerTime")
-        aCoder.encodeObject(email, forKey: "email")
-        aCoder.encodeObject(avatarUrl, forKey: "avatarUrl")
-        aCoder.encodeObject(groupName, forKey: "groupName")
-        aCoder.encodeObject(points, forKey: "points")
-        aCoder.encodeObject(saytext, forKey: "saytext")
-        aCoder.encodeObject(phone, forKey: "phone")
-        aCoder.encodeObject(qq, forKey: "qq")
-        aCoder.encodeObject(nickname, forKey: "nickname")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(token, forKey: "token")
+        aCoder.encodeCInt(Int32(id), forKey: "id")
+        aCoder.encode(username, forKey: "username")
+        aCoder.encode(registerTime, forKey: "registerTime")
+        aCoder.encode(email, forKey: "email")
+        aCoder.encode(avatarUrl, forKey: "avatarUrl")
+        aCoder.encode(groupName, forKey: "groupName")
+        aCoder.encode(points, forKey: "points")
+        aCoder.encode(saytext, forKey: "saytext")
+        aCoder.encode(phone, forKey: "phone")
+        aCoder.encode(qq, forKey: "qq")
+        aCoder.encode(nickname, forKey: "nickname")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        token = aDecoder.decodeObjectForKey("token") as? String
-        id = Int(aDecoder.decodeIntForKey("id"))
-        username = aDecoder.decodeObjectForKey("username") as? String
-        registerTime = aDecoder.decodeObjectForKey("registerTime") as? String
-        email = aDecoder.decodeObjectForKey("email") as? String
-        avatarUrl = aDecoder.decodeObjectForKey("avatarUrl") as? String
-        groupName = aDecoder.decodeObjectForKey("groupName") as? String
-        points = aDecoder.decodeObjectForKey("points") as? String
-        saytext = aDecoder.decodeObjectForKey("saytext") as? String
-        phone = aDecoder.decodeObjectForKey("phone") as? String
-        qq = aDecoder.decodeObjectForKey("qq") as? String
-        nickname = aDecoder.decodeObjectForKey("nickname") as? String
+        token = aDecoder.decodeObject(forKey: "token") as? String
+        id = Int(aDecoder.decodeCInt(forKey: "id"))
+        username = aDecoder.decodeObject(forKey: "username") as? String
+        registerTime = aDecoder.decodeObject(forKey: "registerTime") as? String
+        email = aDecoder.decodeObject(forKey: "email") as? String
+        avatarUrl = aDecoder.decodeObject(forKey: "avatarUrl") as? String
+        groupName = aDecoder.decodeObject(forKey: "groupName") as? String
+        points = aDecoder.decodeObject(forKey: "points") as? String
+        saytext = aDecoder.decodeObject(forKey: "saytext") as? String
+        phone = aDecoder.decodeObject(forKey: "phone") as? String
+        qq = aDecoder.decodeObject(forKey: "qq") as? String
+        nickname = aDecoder.decodeObject(forKey: "nickname") as? String
     }
 }

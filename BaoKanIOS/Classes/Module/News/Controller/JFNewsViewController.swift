@@ -21,14 +21,14 @@ class JFNewsViewController: UIViewController {
     var contentOffsetX: CGFloat = 0.0
     
     // 栏目数组
-    private var selectedArray: [[String : String]]?
-    private var optionalArray: [[String : String]]?
+    fileprivate var selectedArray: [[String : String]]?
+    fileprivate var optionalArray: [[String : String]]?
     
     /// 栏目管理控制器
-    private lazy var editColumnVc: JFEditColumnViewController = {
+    fileprivate lazy var editColumnVc: JFEditColumnViewController = {
         let editColumnVc = JFEditColumnViewController()
         editColumnVc.transitioningDelegate = self
-        editColumnVc.modalPresentationStyle = .Custom
+        editColumnVc.modalPresentationStyle = .custom
         return editColumnVc
     }()
     
@@ -39,28 +39,28 @@ class JFNewsViewController: UIViewController {
         // 准备视图
         prepareUI()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveRemoteNotificationOfJPush(_:)), name: "didReceiveRemoteNotificationOfJPush", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(columnViewWillDismiss(_:)), name: "columnViewWillDismiss", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveRemoteNotificationOfJPush(_:)), name: NSNotification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(columnViewWillDismiss(_:)), name: NSNotification.Name(rawValue: "columnViewWillDismiss"), object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     /**
      处理接收到的远程通知，跳转到指定的文章
      */
-    func didReceiveRemoteNotificationOfJPush(notification: NSNotification) -> Void {
+    func didReceiveRemoteNotificationOfJPush(_ notification: Notification) -> Void {
         
         if let userInfo = notification.userInfo {
             guard let classid = userInfo["classid"] as? String, let id = userInfo["id"] as? String, let type = userInfo["type"] as? String else {return}
@@ -81,16 +81,16 @@ class JFNewsViewController: UIViewController {
     /**
      栏目管理控制器即将消失
      */
-    func columnViewWillDismiss(notification: NSNotification) {
+    func columnViewWillDismiss(_ notification: Notification) {
         
-        UIView.animateWithDuration(0.5, animations: {
-            self.addButton.imageView!.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.5, animations: {
+            self.addButton.imageView!.transform = CGAffineTransform.identity
             }, completion: { (_) in
                 // 赋值重新排序后的栏目数据
                 self.selectedArray = self.editColumnVc.selectedArray
                 self.optionalArray = self.editColumnVc.optionalArray
-                NSUserDefaults.standardUserDefaults().setObject(self.selectedArray, forKey: "selectedArray")
-                NSUserDefaults.standardUserDefaults().setObject(self.optionalArray, forKey: "optionalArray")
+                UserDefaults.standard.set(self.selectedArray, forKey: "selectedArray")
+                UserDefaults.standard.set(self.optionalArray, forKey: "optionalArray")
                 
                 self.prepareUI()
                 
@@ -105,11 +105,11 @@ class JFNewsViewController: UIViewController {
     /**
      准备视图
      */
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         
         // 移除原有数据
         for subView in topScrollView.subviews {
-            if subView.isKindOfClass(JFTopLabel.classForCoder()) {
+            if subView.isKind(of: JFTopLabel.classForCoder()) {
                 subView.removeFromSuperview()
             }
         }
@@ -127,26 +127,26 @@ class JFNewsViewController: UIViewController {
     /**
      编辑分类按钮点击
      */
-    @IBAction func didTappedEditColumnButton(sender: UIButton) {
+    @IBAction func didTappedEditColumnButton(_ sender: UIButton) {
         
         editColumnVc.selectedArray = selectedArray
         editColumnVc.optionalArray = optionalArray
-        presentViewController(editColumnVc, animated: true, completion: {
+        present(editColumnVc, animated: true, completion: {
             
         })
         
-        UIView.animateWithDuration(0.5, animations: {
-            self.addButton.imageView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) - 0.01)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.addButton.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI) - 0.01)
         })
     }
     
     /**
      配置栏目
      */
-    private func setupColumn() {
+    fileprivate func setupColumn() {
         
-        let tempSelectedArray = NSUserDefaults.standardUserDefaults().objectForKey("selectedArray") as? [[String : String]]
-        let tempOptionalArray = NSUserDefaults.standardUserDefaults().objectForKey("optionalArray") as? [[String : String]]
+        let tempSelectedArray = UserDefaults.standard.object(forKey: "selectedArray") as? [[String : String]]
+        let tempOptionalArray = UserDefaults.standard.object(forKey: "optionalArray") as? [[String : String]]
         
         if tempSelectedArray != nil || tempOptionalArray != nil {
             selectedArray = tempSelectedArray != nil ? tempSelectedArray : [[String : String]]()
@@ -263,8 +263,8 @@ class JFNewsViewController: UIViewController {
             ]
             
             // 默认栏目保存
-            NSUserDefaults.standardUserDefaults().setObject(selectedArray, forKey: "selectedArray")
-            NSUserDefaults.standardUserDefaults().setObject(optionalArray, forKey: "optionalArray")
+            UserDefaults.standard.set(selectedArray, forKey: "selectedArray")
+            UserDefaults.standard.set(optionalArray, forKey: "optionalArray")
         }
         
     }
@@ -272,7 +272,7 @@ class JFNewsViewController: UIViewController {
     /**
      添加顶部标题栏和控制器
      */
-    private func addContent() {
+    fileprivate func addContent() {
         
         // 初始化栏目
         setupColumn()
@@ -286,18 +286,18 @@ class JFNewsViewController: UIViewController {
             label.text = selectedArray![i]["classname"]
             label.tag = i
             label.scale = i == 0 ? 1.0 : 0.0
-            label.userInteractionEnabled = true
+            label.isUserInteractionEnabled = true
             topScrollView.addSubview(label)
             
             // 利用layout来自适应各种长度的label
-            label.snp_makeConstraints(closure: { (make) -> Void in
+            label.snp_makeConstraints({ (make) -> Void in
                 make.left.equalTo(leftMargin + 15)
                 make.centerY.equalTo(topScrollView)
             })
             
             // 更新布局和左边距
             topScrollView.layoutIfNeeded()
-            leftMargin = CGRectGetMaxX(label.frame)
+            leftMargin = label.frame.maxX
             
             // 添加标签点击手势
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedTopLabel(_:))))
@@ -314,7 +314,7 @@ class JFNewsViewController: UIViewController {
         
         // 内容区域滚动范围
         contentScrollView.contentSize = CGSize(width: CGFloat(childViewControllers.count) * SCREEN_WIDTH, height: 0)
-        contentScrollView.pagingEnabled = true
+        contentScrollView.isPagingEnabled = true
         
         let lastLabel = topScrollView.subviews.last as! JFTopLabel
         // 设置顶部标签区域滚动范围
@@ -329,7 +329,7 @@ class JFNewsViewController: UIViewController {
      
      - parameter index: 控制器角标
      */
-    private func addContentViewController(index: Int) {
+    fileprivate func addContentViewController(_ index: Int) {
         
         // 获取需要展示的控制器
         let newsVc = childViewControllers[index] as! JFNewsTableViewController
@@ -347,7 +347,7 @@ class JFNewsViewController: UIViewController {
     /**
      顶部标签的点击事件
      */
-    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer) {
+    @objc fileprivate func didTappedTopLabel(_ gesture: UITapGestureRecognizer) {
         let titleLabel = gesture.view as! JFTopLabel
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
@@ -358,7 +358,7 @@ class JFNewsViewController: UIViewController {
 extension JFNewsViewController: UIScrollViewDelegate {
     
     // 滚动结束后触发 代码导致
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         
         // 滚动标题栏
@@ -415,17 +415,17 @@ extension JFNewsViewController: UIScrollViewDelegate {
     }
     
     // 滚动结束 手势导致
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
     // 开始拖拽视图
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         contentOffsetX = scrollView.contentOffset.x
     }
     
     // 正在滚动
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let value = (scrollView.contentOffset.x / scrollView.frame.width)
         
@@ -451,21 +451,21 @@ extension JFNewsViewController: UIViewControllerTransitioningDelegate {
     /**
      返回一个控制modal视图大小的对象
      */
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return JFPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return JFPresentationController(presentedViewController: presented, presenting: presenting)
     }
     
     /**
      返回一个控制器modal动画效果的对象
      */
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return JFPopoverModalAnimation()
     }
     
     /**
      返回一个控制dismiss动画效果的对象
      */
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return JFPopoverDismissAnimation()
     }
     

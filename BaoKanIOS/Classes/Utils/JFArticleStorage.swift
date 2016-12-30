@@ -18,7 +18,7 @@ class JFArticleStorage: NSObject {
      
      - returns: 返回文件的路径
      */
-    class func getFilePathForKey(key: String) -> String {
+    class func getFilePathForKey(_ key: String) -> String {
         return "\(getArticleImageCache().diskCache.path)/data/\(JFObjcTool.jf_md5(key))"
     }
     
@@ -29,7 +29,7 @@ class JFArticleStorage: NSObject {
      */
     class func getArticleImageCache() -> YYImageCache {
         // 返回自定义缓存对象
-        return YYImageCache.sharedCache()
+        return YYImageCache.shared()
     }
     
     

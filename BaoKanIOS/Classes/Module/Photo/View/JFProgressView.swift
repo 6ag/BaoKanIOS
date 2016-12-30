@@ -38,7 +38,7 @@ class JFProgressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         // 背景
         let trackPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius), radius: radius - lineWidth, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(M_PI * 2), clockwise: true)
@@ -50,7 +50,7 @@ class JFProgressView: UIView {
         let endAngle = CGFloat(M_PI * 2) * progress
         let progressPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius), radius: radius - lineWidth, startAngle: CGFloat(-M_PI_2), endAngle: endAngle, clockwise: true)
         progressPath.lineWidth = lineWidth
-        progressPath.lineCapStyle = CGLineCap.Round
+        progressPath.lineCapStyle = CGLineCap.round
         progressColor.setStroke()
         progressPath.stroke()
     }

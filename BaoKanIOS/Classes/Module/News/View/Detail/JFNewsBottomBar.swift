@@ -10,11 +10,11 @@ import UIKit
 import pop
 
 protocol JFNewsBottomBarDelegate {
-    func didTappedBackButton(button: UIButton)
-    func didTappedEditButton(button: UIButton)
-    func didTappedCollectButton(button: UIButton)
-    func didTappedShareButton(button: UIButton)
-    func didTappedCommentButton(button: UIButton)
+    func didTappedBackButton(_ button: UIButton)
+    func didTappedEditButton(_ button: UIButton)
+    func didTappedCollectButton(_ button: UIButton)
+    func didTappedShareButton(_ button: UIButton)
+    func didTappedCommentButton(_ button: UIButton)
 }
 
 class JFNewsBottomBar : UIView {
@@ -24,23 +24,23 @@ class JFNewsBottomBar : UIView {
     
     var delegate: JFNewsBottomBarDelegate?
     
-    @IBAction func didTappedBackButton(button: UIButton) {
+    @IBAction func didTappedBackButton(_ button: UIButton) {
         delegate?.didTappedBackButton(button)
     }
     
-    @IBAction func didTappedEditButton(button: UIButton) {
+    @IBAction func didTappedEditButton(_ button: UIButton) {
         delegate?.didTappedEditButton(button)
     }
     
-    @IBAction func didTappedCommentButton(button: UIButton) {
+    @IBAction func didTappedCommentButton(_ button: UIButton) {
         delegate?.didTappedCommentButton(button)
     }
     
-    @IBAction func didTappedCollectButton(button: UIButton) {
+    @IBAction func didTappedCollectButton(_ button: UIButton) {
         delegate?.didTappedCollectButton(button)
     }
     
-    @IBAction func didTappedShareButton(button: UIButton) {
+    @IBAction func didTappedShareButton(_ button: UIButton) {
         delegate?.didTappedShareButton(button)
     }
     

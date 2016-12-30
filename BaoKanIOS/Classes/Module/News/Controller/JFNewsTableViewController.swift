@@ -43,16 +43,16 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     /**
      准备tableView
      */
-    private func prepareTableView() {
+    fileprivate func prepareTableView() {
         
         view.addSubview(tableView)
         view.addSubview(placeholderView)
         placeholderView.startAnimation()
         
         // 注册cell
-        tableView.registerNib(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: newsNoPicCell)
-        tableView.registerNib(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: newsOnePicCell)
-        tableView.registerNib(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: newsThreePicCell)
+        tableView.register(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: newsNoPicCell)
+        tableView.register(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: newsOnePicCell)
+        tableView.register(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: newsThreePicCell)
         
         // 分割线颜色
         tableView.separatorColor = UIColor(red:0.9,  green:0.9,  blue:0.9, alpha:1)
@@ -65,12 +65,12 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     /**
      准备头部轮播
      */
-    private func prepareScrollView() {
+    fileprivate func prepareScrollView() {
         
         topScrollView = SDCycleScrollView(frame: CGRect(x:0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 0.3), delegate:self, placeholderImage:UIImage(named: "photoview_image_default_white"))
         topScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
         topScrollView.pageDotColor = NAVIGATIONBAR_RED_COLOR
-        topScrollView.currentPageDotColor = UIColor.blackColor()
+        topScrollView.currentPageDotColor = UIColor.black
         
         // 过滤无图崩溃
         var images = [String]()
@@ -92,7 +92,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
         tableView.tableHeaderView = topScrollView
     }
     
-    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
         
         let currentListModel = isGoodList[index]
         jumpToDetailViewControllerWith(currentListModel)
@@ -103,7 +103,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
      
      - parameter currentListModel: 模型
      */
-    private func jumpToDetailViewControllerWith(currentListModel: JFArticleListModel) {
+    fileprivate func jumpToDetailViewControllerWith(_ currentListModel: JFArticleListModel) {
 
         let articleDetailVc = JFNewsDetailViewController()
         articleDetailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
@@ -113,7 +113,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     /**
      下拉加载最新数据
      */
-    @objc private func updateNewData() {
+    @objc fileprivate func updateNewData() {
         // 有网络的时候下拉会自动清除缓存
         if true {
             JFArticleListModel.cleanCache(classid!)
@@ -128,7 +128,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData() {
+    @objc fileprivate func loadMoreData() {
         pageIndex += 1
         loadNews(classid!, pageIndex: pageIndex, method: 1)
     }
@@ -138,11 +138,15 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
      
      - parameter classid: 当前栏目id
      */
-    private func loadIsGood(classid: Int) {
+    fileprivate func loadIsGood(_ classid: Int) {
         
         JFArticleListModel.loadNewsList("news", classid: classid, pageIndex: pageIndex, type: 2) { (articleListModels, error) in
             
-            guard let list = articleListModels where error != true else {
+            guard let list = articleListModels else {
+                return
+            }
+            
+            if error != nil {
                 return
             }
             
@@ -161,14 +165,15 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(classid: Int, pageIndex: Int, method: Int) {
+    fileprivate func loadNews(_ classid: Int, pageIndex: Int, method: Int) {
         
         JFArticleListModel.loadNewsList("news", classid: classid, pageIndex: pageIndex, type: 1) { (articleListModels, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
+            self.placeholderView.removeAnimation()
             
-            guard let list = articleListModels where error != true else {
+            guard let list = articleListModels else {
                 return
             }
             
@@ -187,19 +192,18 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
             
             if method == 0 {
                 // 0下拉加载最新 - 会直接覆盖数据，用最新的10条数据
-                if Int(maxId) < Int(list[0].id!) {
+                if Int(maxId)! < Int(list[0].id!)! {
                     self.articleList = list
                 }
             } else {
                 // 1上拉加载更多 - 拼接数据
-                if Int(minId) > Int(list[0].id!) {
+                if Int(minId)! > Int(list[0].id!)! {
                     self.articleList = self.articleList + list
                 } else {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
             }
             
-            self.placeholderView.removeAnimation()
             self.tableView.reloadData()
         }
         
@@ -207,18 +211,18 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
     
     /// 内容区域
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 104), style: UITableViewStyle.Plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 104), style: UITableViewStyle.plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         tableView.separatorColor = UIColor(red:0.9,  green:0.9,  blue:0.9, alpha:1)
         return tableView
     }()
     
     /// 没有内容的时候的占位图
-    private lazy var placeholderView: JFPlaceholderView = {
+    fileprivate lazy var placeholderView: JFPlaceholderView = {
         let placeholderView = JFPlaceholderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 104))
-        placeholderView.backgroundColor = UIColor.whiteColor()
+        placeholderView.backgroundColor = UIColor.white
         return placeholderView
     }()
     
@@ -227,20 +231,20 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
 // MARK: - UITableViewDelegate UITableViewDatasource
 extension JFNewsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let postModel = articleList[indexPath.row]
         if postModel.titlepic == "" { // 无图
             if postModel.rowHeight == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: newsNoPicCell) as! JFNewsNoPicCell
                 let height = cell.getRowHeight(postModel)
                 postModel.rowHeight = height
             }
@@ -249,7 +253,7 @@ extension JFNewsTableViewController: UITableViewDataSource, UITableViewDelegate 
             return 96
         } else { // 多图
             if postModel.rowHeight == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: newsThreePicCell) as! JFNewsThreePicCell
                 let height = cell.getRowHeight(postModel)
                 postModel.rowHeight = height
             }
@@ -257,34 +261,34 @@ extension JFNewsTableViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let postModel = articleList[indexPath.row]
         
         if postModel.titlepic == "" { // 无图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsNoPicCell) as! JFNewsNoPicCell
             cell.postModel = postModel
             return cell
         } else if postModel.morepic?.count == 0 { // 单图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsOnePicCell) as! JFNewsOnePicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsOnePicCell) as! JFNewsOnePicCell
             cell.postModel = postModel
             return cell
         } else { // 多图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsThreePicCell) as! JFNewsThreePicCell
             cell.postModel = postModel
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // 取消cell选中状态
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // 跳转控制器
         let currentListModel = articleList[indexPath.row]

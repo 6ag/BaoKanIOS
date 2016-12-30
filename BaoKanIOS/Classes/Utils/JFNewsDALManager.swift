@@ -15,7 +15,7 @@ class JFNewsDALManager: NSObject {
     static let shareManager = JFNewsDALManager()
     
     /// 过期时间间隔 从缓存开始计时，单位秒 7天
-    private let timeInterval: NSTimeInterval = 86400 * 7
+    fileprivate let timeInterval: TimeInterval = 86400 * 7
     
     /**
      在退出到后台的时候，根据缓存时间自动清除过期的缓存数据
@@ -23,13 +23,13 @@ class JFNewsDALManager: NSObject {
     func clearCacheData() {
         
         // 计算过期时间
-        let overDate = NSDate(timeIntervalSinceNow: -timeInterval)
+        let overDate = Date(timeIntervalSinceNow: -timeInterval)
 //        print("时间低于 \(overDate) 的都清除")
         
         // 记录时间格式 2016-06-13 02:29:37
-        let df = NSDateFormatter()
+        let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let overString = df.stringFromDate(overDate)
+        let overString = df.string(from: overDate)
         
         // 生成sql语句
         let sql = "DELETE FROM \(NEWS_LIST_HOME_TOP) WHERE createTime < '\(overString)';" +
@@ -39,7 +39,7 @@ class JFNewsDALManager: NSObject {
             "DELETE FROM \(NEWS_CONTENT) WHERE createTime < '\(overString)';"
         
         JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) -> Void in
-            if db.executeStatements(sql) {
+            if (db?.executeStatements(sql))! {
 //                print("清除缓存数据成功")
             }
         }
@@ -55,11 +55,11 @@ extension JFNewsDALManager {
      - parameter keyboard: 关键词
      - parameter finished: 数据回调
      */
-    func loadSearchKeyListFromLocation(keyboard: String, finished: (success: Bool, result: [[String : AnyObject]]?, error: NSError?) -> ()) {
+    func loadSearchKeyListFromLocation(_ keyboard: String, finished: @escaping (_ success: Bool, _ result: [[String : AnyObject]]?, _ error: NSError?) -> ()) {
         
         // 字符不能少于1个
         if keyboard.characters.count == 0 {
-            finished(success: true, result: [[String : AnyObject]](), error: nil)
+            finished(true, [[String : AnyObject]](), nil)
             return
         }
         
@@ -69,22 +69,22 @@ extension JFNewsDALManager {
             
             var array = [[String : AnyObject]]()
             
-            let result = try! db.executeQuery(sql, values: nil)
-            while result.next() {
-                let keyboard = result.stringForColumn("keyboard")
-                let pinyin = result.stringForColumn("pinyin")
-                let num = result.intForColumn("num")
+            let result = try! db?.executeQuery(sql, values: nil)
+            while (result?.next())! {
+                let keyboard = result?.string(forColumn: "keyboard")
+                let pinyin = result?.string(forColumn: "pinyin")
+                let num = result?.int(forColumn: "num")
                 
                 let dict: [String : AnyObject] = [
-                    "keyboard" : keyboard,
-                    "pinyin" : pinyin,
-                    "num" : Int(num)
+                    "keyboard" : keyboard as AnyObject,
+                    "pinyin" : pinyin as AnyObject,
+                    "num" : Int(num!) as AnyObject
                 ]
                 
                 array.append(dict)
             }
             
-            finished(success: true, result: array, error: nil)
+            finished(true, array, nil)
         }
         
     }
@@ -96,37 +96,44 @@ extension JFNewsDALManager {
         
         JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) in
             
-            if db.executeStatements("DELETE FROM \(SEARCH_KEYBOARD);") {
+            if (db?.executeStatements("DELETE FROM \(SEARCH_KEYBOARD);"))! {
                 // print("清空表成功")
                 
-                JFNetworkTool.shareNetworkTool.loadSearchKeyListFromNetwork { (success, result, error) in
-                    
-                    guard let successResult = result where error == nil && success == true else {
-                        return
-                    }
-                    
-                    let array = successResult.arrayObject as! [[String : AnyObject]]
-                    let sql = "INSERT INTO \(SEARCH_KEYBOARD) (keyboard, pinyin, num) VALUES (?, ?, ?)"
-                    
-                    JFSQLiteManager.shareManager.dbQueue.inTransaction { (db, rollback) in
+                JFNetworkTool.shareNetworkTool.get(SEARCH_KEY_LIST, parameters: nil) { (status, result, tipString) in
+                    switch status {
+                    case .success:
+                        guard let successResult = result?["data"] else {
+                            return
+                        }
                         
-                        for dict in array {
+                        let array = successResult.arrayObject as! [[String : AnyObject]]
+                        let sql = "INSERT INTO \(SEARCH_KEYBOARD) (keyboard, pinyin, num) VALUES (?, ?, ?)"
+                        
+                        JFSQLiteManager.shareManager.dbQueue.inTransaction { (db, rollback) in
                             
-                            // 拼音有可能转换失败
-                            guard let pinyin = dict["pinyin"] as? String else {continue}
-                            let keyboard = dict["keyboard"] as! String
-                            let num = Int(dict["num"] as! String)!
-                            
-                            if db.executeUpdate(sql, withArgumentsInArray: [keyboard, pinyin, num]) {
-                                // print("缓存数据成功 - \(keyboard)")
-                            } else {
-                                // print("缓存数据失败 - \(keyboard)")
-                                rollback.memory = true
-                                break
+                            for dict in array {
+                                
+                                // 拼音有可能转换失败
+                                guard let pinyin = dict["pinyin"] as? String else {continue}
+                                let keyboard = dict["keyboard"] as! String
+                                let num = Int(dict["num"] as! String)!
+                                
+                                if (db?.executeUpdate(sql, withArgumentsIn: [keyboard, pinyin, num]))! {
+                                    // print("缓存数据成功 - \(keyboard)")
+                                } else {
+                                    // print("缓存数据失败 - \(keyboard)")
+                                    //                                rollback?.memory = true
+                                    break
+                                }
                             }
                         }
+                    case .unusual:
+                        break
+                    case .failure:
+                        break
                     }
                 }
+
             } else {
                 print("清空表失败")
             }
@@ -142,7 +149,7 @@ extension JFNewsDALManager {
      
      - parameter classid: 要清除的分类id
      */
-    func cleanCache(classid: Int) {
+    func cleanCache(_ classid: Int) {
         var sql = ""
         if classid == 0 {
             sql = "DELETE FROM \(NEWS_LIST_HOME_TOP); DELETE FROM \(NEWS_LIST_HOME_LIST);"
@@ -152,7 +159,7 @@ extension JFNewsDALManager {
         
         JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) in
             
-            if db.executeStatements(sql) {
+            if (db?.executeStatements(sql))! {
                 // print("清空表成功 classid = \(classid)")
             } else {
                 // print("清空表失败 classid = \(classid)")
@@ -168,30 +175,31 @@ extension JFNewsDALManager {
      - parameter type:      1为资讯列表 2为资讯幻灯片
      - parameter finished:  数据回调
      */
-    func loadNewsList(table: String, classid: Int, pageIndex: Int, type: Int, finished: (result: JSON?, error: NSError?) -> ()) {
+    func loadNewsList(_ table: String, classid: Int, pageIndex: Int, type: Int, finished: @escaping (_ result: JSON?, _ error: NSError?) -> ()) {
         
         // 先从本地加载数据
-        loadNewsListFromLocation(classid, pageIndex: pageIndex, type: type) { (success, result, error) in
+        loadNewsListFromLocation(classid, pageIndex: pageIndex, type: type) { (status, result, tipString) in
             
-            // 本地有数据直接返回
-            if success == true {
-                finished(result: result, error: nil)
-//                print("加载了本地数据 \(result)")
+            if status == .success {
+                finished(result, nil)
+                print("加载了本地数据 \(result)")
                 return
             }
             
             // 本地没有数据才从网络中加载
-            JFNetworkTool.shareNetworkTool.loadNewsListFromNetwork(table, classid: classid, pageIndex: pageIndex, type: type) { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.loadNewsListFromNetwork(table, classid: classid, pageIndex: pageIndex, type: type) { (status, result, tipString) in
                 
-                if success == false || error != nil || result == nil {
-                    finished(result: nil, error: error)
-                    return
+                switch status {
+                case .success:
+                    // 缓存数据到本地
+                    self.saveNewsListData(classid, data: result!["data"], type: type)
+                    finished(result!["data"], nil)
+                case .unusual:
+                    finished(nil, nil)
+                case .failure:
+                    finished(nil, nil)
                 }
                 
-                // 缓存数据到本地
-                self.saveNewsListData(classid, data: result!, type: type)
-                finished(result: result, error: nil)
-//                print("加载了远程数据 \(result)")
             }
         }
         
@@ -204,7 +212,7 @@ extension JFNewsDALManager {
      - parameter pageIndex: 加载分页
      - parameter finished:  数据回调
      */
-    private func loadNewsListFromLocation(classid: Int, pageIndex: Int, type: Int, finished: NetworkFinished) {
+    fileprivate func loadNewsListFromLocation(_ classid: Int, pageIndex: Int, type: Int, finished: @escaping NetworkFinished) {
         
         var sql = ""
         if type == 1 {
@@ -229,17 +237,17 @@ extension JFNewsDALManager {
             
             var array = [JSON]()
             
-            let result = try! db.executeQuery(sql, values: nil)
-            while result.next() {
-                let newsJson = result.stringForColumn("news")
-                let json = JSON.parse(newsJson)
+            let result = try! db?.executeQuery(sql, values: nil)
+            while (result?.next())! {
+                let newsJson = result?.string(forColumn: "news")
+                let json = JSON.parse(string: newsJson!)
                 array.append(json)
             }
             
             if array.count > 0 {
-                finished(success: true, result: JSON(array), error: nil)
+                finished(.success, JSON(array), nil)
             } else {
-                finished(success: false, result: nil, error: nil)
+                finished(.failure, nil, nil)
             }
             
         }
@@ -251,7 +259,7 @@ extension JFNewsDALManager {
      
      - parameter data: json数据
      */
-    private func saveNewsListData(saveClassid: Int, data: JSON, type: Int) {
+    fileprivate func saveNewsListData(_ saveClassid: Int, data: JSON, type: Int) {
         
         var sql = ""
         if type == 1 {
@@ -281,14 +289,14 @@ extension JFNewsDALManager {
                 let classid = Int(dict["classid"] as! String)!
                 
                 // 单条资讯json数据
-                let newsData = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(rawValue: 0))
-                let newsJson = String(data: newsData, encoding: NSUTF8StringEncoding)!
+                let newsData = try! JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 0))
+                let newsJson = String(data: newsData, encoding: String.Encoding.utf8)!
                 
-                if db.executeUpdate(sql, withArgumentsInArray: [classid, newsJson]) {
+                if (db?.executeUpdate(sql, withArgumentsIn: [classid, newsJson]))! {
 //                    print("缓存数据成功 - \(classid)")
                 } else {
 //                    print("缓存数据失败 - \(classid)")
-                    rollback.memory = true
+//                    rollback?.memory = true
                     break
                 }
             }
@@ -310,26 +318,29 @@ extension JFNewsDALManager {
      - parameter type:      1为资讯列表 2为资讯幻灯片
      - parameter finished:  数据回调
      */
-    func loadNewsDetail(classid: Int, id: Int, finished: (result: JSON?, error: NSError?) -> ()) {
+    func loadNewsDetail(_ classid: Int, id: Int, finished: @escaping (_ result: JSON?, _ error: NSError?) -> ()) {
         
-        loadNewsDetailFromLocation(classid, id: id) { (success, result, error) in
+        loadNewsDetailFromLocation(classid, id: id) { (status, result, tipString) in
             
             // 本地有数据直接返回
-            if success == true {
-                finished(result: result, error: nil)
+            if status == .success {
+                finished(result, nil)
                 return
             }
             
-            JFNetworkTool.shareNetworkTool.loadNewsDetailFromNetwork(classid, id: id, finished: { (success, result, error) in
+            JFNetworkTool.shareNetworkTool.loadNewsDetailFromNetwork(classid, id: id, finished: { (status, result, tipString) in
                 
-                if success == false || error != nil || result == nil {
-                    finished(result: nil, error: error)
-                    return
+                switch status {
+                case .success:
+                    // 缓存数据到本地
+                    self.saveNewsDetailData(classid, id: id, data: result!["data"])
+                    finished(result!["data"], nil)
+                case .unusual:
+                    finished(nil, nil)
+                case .failure:
+                    finished(nil, nil)
                 }
                 
-                // 缓存数据到本地
-                self.saveNewsDetailData(classid, id: id, data: result!)
-                finished(result: result, error: nil)
             })
             
         }
@@ -343,23 +354,23 @@ extension JFNewsDALManager {
      - parameter id:       资讯id
      - parameter finished: 数据回调
      */
-    private func loadNewsDetailFromLocation(classid: Int, id: Int, finished: NetworkFinished) {
+    fileprivate func loadNewsDetailFromLocation(_ classid: Int, id: Int, finished: @escaping NetworkFinished) {
         
         let sql = "SELECT * FROM \(NEWS_CONTENT) WHERE id=\(id) AND classid=\(classid) LIMIT 1;"
         
         JFSQLiteManager.shareManager.dbQueue.inDatabase { (db) in
             
-            let result = try! db.executeQuery(sql, values: nil)
-            while result.next() {
-                let newsJson = result.stringForColumn("news")
-                let json = JSON.parse(newsJson)
-                finished(success: true, result: json, error: nil)
-//                print("从缓存中取正文数据 \(json)")
-                result.close()
+            let result = try! db?.executeQuery(sql, values: nil)
+            while (result?.next())! {
+                let newsJson = result?.string(forColumn: "news")
+                let json = JSON.parse(string: newsJson!)
+                finished(.success, json, nil)
+                print("从缓存中取正文数据 \(json)")
+                result?.close()
                 return
             }
             
-            finished(success: false, result: nil, error: nil)
+            finished(.failure, nil, nil)
         }
     }
     
@@ -370,7 +381,7 @@ extension JFNewsDALManager {
      - parameter id:      资讯id
      - parameter data:    JSON数据 data = [content : ..., otherLink: [...]]
      */
-    private func saveNewsDetailData(classid: Int, id: Int, data: JSON) {
+    fileprivate func saveNewsDetailData(_ classid: Int, id: Int, data: JSON) {
         
         let sql = "INSERT INTO \(NEWS_CONTENT) (id, classid, news) VALUES (?, ?, ?)"
         
@@ -381,14 +392,14 @@ extension JFNewsDALManager {
             }
             
             // 单条资讯json数据
-            let newsData = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(rawValue: 0))
-            let newsJson = String(data: newsData, encoding: NSUTF8StringEncoding)!
+            let newsData = try! JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions(rawValue: 0))
+            let newsJson = String(data: newsData, encoding: String.Encoding.utf8)!
             
-            if db.executeUpdate(sql, withArgumentsInArray: [id, classid, newsJson]) {
+            if (db?.executeUpdate(sql, withArgumentsIn: [id, classid, newsJson]))! {
 //                print("缓存数据成功 - \(classid)")
             } else {
 //                print("缓存数据失败 - \(classid)")
-                rollback.memory = true
+                rollback?.pointee = true
             }
             
         }
@@ -399,16 +410,17 @@ extension JFNewsDALManager {
 // MARK: - 评论数据管理
 extension JFNewsDALManager {
     
-    func loadCommentList(classid: Int, id: Int, pageIndex: Int, pageSize: Int, finished: (result: JSON?, error: NSError?) -> ()) {
+    func loadCommentList(_ classid: Int, id: Int, pageIndex: Int, pageSize: Int, finished: @escaping (_ result: JSON?, _ error: NSError?) -> ()) {
         
         // 评论不做数据缓存，直接从网络请求
-        JFNetworkTool.shareNetworkTool.loadCommentListFromNetwork(classid, id: id, pageIndex: pageIndex, pageSize: pageSize) { (success, result, error) in
+        JFNetworkTool.shareNetworkTool.loadCommentListFromNetwork(classid, id: id, pageIndex: pageIndex, pageSize: pageSize) { (status, result, tipString) in
             
-            if success == false || error != nil || result == nil {
-                finished(result: nil, error: error)
-                return
+            if status == .success {
+                finished(result!["data"], nil)
+            } else {
+                finished(nil, nil)
             }
-            finished(result: result, error: nil)
+            
         }
     }
 }

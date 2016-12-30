@@ -33,9 +33,9 @@ class JFNewsNoPicCell: UITableViewCell {
     /**
      计算行高
      */
-    func getRowHeight(postModel: JFArticleListModel) -> CGFloat {
+    func getRowHeight(_ postModel: JFArticleListModel) -> CGFloat {
         self.postModel = postModel
         layoutIfNeeded()
-        return CGRectGetMaxY(timeLabel.frame) + 15
+        return timeLabel.frame.maxY + 15
     }
 }

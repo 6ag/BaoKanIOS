@@ -19,32 +19,32 @@ class JFCollectionTableViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "收藏"
-        tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: identifier)
+        tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: identifier)
         let headerRefresh = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(updateNewData))
-        headerRefresh.lastUpdatedTimeLabel.hidden = true
+        headerRefresh?.lastUpdatedTimeLabel.isHidden = true
         tableView.mj_header = headerRefresh
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
         
         tableView.mj_header.beginRefreshing()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     /**
      下拉加载最新数据
      */
-    @objc private func updateNewData() {
+    @objc fileprivate func updateNewData() {
         loadNews(1, method: 0)
     }
     
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData() {
+    @objc fileprivate func loadMoreData() {
         pageIndex += 1
         loadNews(pageIndex, method: 1)
     }
@@ -55,23 +55,23 @@ class JFCollectionTableViewController: UITableViewController {
      - parameter pageIndex:  当前页码
      - parameter method:     加载方式 0下拉加载最新 1上拉加载更多
      */
-    private func loadNews(pageIndex: Int, method: Int) {
+    fileprivate func loadNews(_ pageIndex: Int, method: Int) {
         
         let parameters: [String : AnyObject] = [
-            "username" : JFAccountModel.shareAccount()!.username!,
-            "userid" : JFAccountModel.shareAccount()!.id,
-            "token" : JFAccountModel.shareAccount()!.token!,
-            "pageIndex" : pageIndex
+            "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
+            "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
+            "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
+            "pageIndex" : pageIndex as AnyObject
         ]
         
-        JFNetworkTool.shareNetworkTool.get(GET_USER_FAVA, parameters: parameters) { (success, result, error) -> () in
+        JFNetworkTool.shareNetworkTool.get(GET_USER_FAVA, parameters: parameters) { (status, result, tipString) -> () in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
 //            print(result)
-            if success == true {
+            if status == .success {
                 if let successResult = result {
-                    let data = successResult["data"].arrayValue.reverse()
+                    let data = successResult["data"].arrayValue.reversed()
                     
                     let minId = self.articleList.last?.favaid ?? "0"
                     let maxId = self.articleList.first?.favaid ?? "0"
@@ -88,14 +88,14 @@ class JFCollectionTableViewController: UITableViewController {
                             "cid" : fava["cid"].stringValue
                         ]
                         
-                        let postModel = JFCollectionModel(dict: dict)
+                        let postModel = JFCollectionModel(dict: dict as [String : AnyObject])
                         
                         if method == 0 {
-                            if Int(maxId) < Int(postModel.favaid!) {
-                                self.articleList.insert(postModel, atIndex: 0)
+                            if Int(maxId)! < Int(postModel.favaid!)! {
+                                self.articleList.insert(postModel, at: 0)
                             }
                         } else {
-                            if Int(minId) > Int(postModel.favaid!) {
+                            if Int(minId)! > Int(postModel.favaid!)! {
                                 self.articleList.append(postModel)
                             }
                         }
@@ -105,7 +105,7 @@ class JFCollectionTableViewController: UITableViewController {
                     self.tableView.reloadData()
                     
                 } else {
-                    print("error:\(error)")
+                    print("error:\(tipString)")
                 }
                 
             }
@@ -114,23 +114,23 @@ class JFCollectionTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         cell.textLabel?.text = articleList[indexPath.row].title
-        cell.textLabel?.font = UIFont.systemFontOfSize(15)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if articleList[indexPath.row].tbname == "photo" {
             let currentListModel = articleList[indexPath.row]

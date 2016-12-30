@@ -24,21 +24,92 @@
 
 import UIKit
 
-public class IQTitleBarButtonItem: IQBarButtonItem {
+private var kIQBarTitleInvocationTarget     = "kIQBarTitleInvocationTarget"
+private var kIQBarTitleInvocationSelector   = "kIQBarTitleInvocationSelector"
+
+open class IQTitleBarButtonItem: IQBarButtonItem {
    
-    public var font : UIFont? {
+    open var font : UIFont? {
     
         didSet {
             if let unwrappedFont = font {
-                _titleLabel?.font = unwrappedFont
+                _titleButton?.titleLabel?.font = unwrappedFont
             } else {
-                _titleLabel?.font = UIFont.systemFontOfSize(13)
+                _titleButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             }
         }
     }
+
+    override open var title: String? {
+        didSet {
+                _titleButton?.setTitle(title, for: UIControlState())
+        }
+    }
     
-    private var _titleLabel : UILabel?
-    private var _titleView : UIView?
+    /**
+     selectableTextColor to be used for displaying button text when button is enabled.
+     */
+    open var selectableTextColor : UIColor? {
+        
+        didSet {
+            if let color = selectableTextColor {
+                _titleButton?.setTitleColor(color, for:UIControlState())
+            } else {
+                _titleButton?.setTitleColor(UIColor.init(colorLiteralRed: 0.0, green: 0.5, blue: 1.0, alpha: 1), for:UIControlState())
+            }
+        }
+    }
+
+    /**
+     Optional target & action to behave toolbar title button as clickable button
+     
+     @param target Target object.
+     @param action Target Selector.
+     */
+    open func setTitleTarget(_ target: AnyObject?, action: Selector?) {
+        titleInvocation = (target, action)
+    }
+    
+    /**
+     Customized Invocation to be called on title button action. titleInvocation is internally created using setTitleTarget:action: method.
+     */
+    open var titleInvocation : (target: AnyObject?, action: Selector?) {
+        get {
+            let target: AnyObject? = objc_getAssociatedObject(self, &kIQBarTitleInvocationTarget) as AnyObject?
+            var action : Selector?
+            
+            if let selectorString = objc_getAssociatedObject(self, &kIQBarTitleInvocationSelector) as? String {
+                action = NSSelectorFromString(selectorString)
+            }
+            
+            return (target: target, action: action)
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &kIQBarTitleInvocationTarget, newValue.target, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            
+            if let unwrappedSelector = newValue.action {
+                objc_setAssociatedObject(self, &kIQBarTitleInvocationSelector, NSStringFromSelector(unwrappedSelector), objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            } else {
+                objc_setAssociatedObject(self, &kIQBarTitleInvocationSelector, nil, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
+            
+            if (newValue.target == nil || newValue.action == nil)
+            {
+                self.isEnabled = false
+                _titleButton?.isEnabled = false
+                _titleButton?.removeTarget(nil, action: nil, for: .touchUpInside)
+            }
+            else
+            {
+                self.isEnabled = true
+                _titleButton?.isEnabled = true
+                _titleButton?.addTarget(newValue.target, action: newValue.action!, for: .touchUpInside)
+            }
+        }
+    }
+
+    fileprivate var _titleButton : UIButton?
+    fileprivate var _titleView : UIView?
 
     override init() {
         super.init()
@@ -46,24 +117,25 @@ public class IQTitleBarButtonItem: IQBarButtonItem {
     
     init(title : String?) {
 
-        self.init(title: nil, style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.init(title: nil, style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
         _titleView = UIView()
-        _titleView?.backgroundColor = UIColor.clearColor()
-        _titleView?.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        _titleView?.backgroundColor = UIColor.clear
+        _titleView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         
-        _titleLabel = UILabel()
-        _titleLabel?.numberOfLines = 0
-        _titleLabel?.textColor = UIColor.grayColor()
-        _titleLabel?.backgroundColor = UIColor.clearColor()
-        _titleLabel?.textAlignment = .Center
-        _titleLabel?.text = title
-        _titleLabel?.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
-        font = UIFont.systemFontOfSize(13.0)
-        _titleLabel?.font = self.font
-        _titleView?.addSubview(_titleLabel!)
+        _titleButton = UIButton(type: .system)
+        _titleButton?.isEnabled = false
+        _titleButton?.titleLabel?.numberOfLines = 3
+        _titleButton?.setTitleColor(UIColor.lightGray, for:.disabled)
+        _titleButton?.setTitleColor(UIColor.init(colorLiteralRed: 0.0, green: 0.5, blue: 1.0, alpha: 1), for:UIControlState())
+        _titleButton?.backgroundColor = UIColor.clear
+        _titleButton?.titleLabel?.textAlignment = .center
+        _titleButton?.setTitle(title, for: UIControlState())
+        _titleButton?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        font = UIFont.systemFont(ofSize: 13.0)
+        _titleButton?.titleLabel?.font = self.font
+        _titleView?.addSubview(_titleButton!)
         customView = _titleView
-        enabled = false
     }
 
     required public init?(coder aDecoder: NSCoder) {

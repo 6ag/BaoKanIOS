@@ -11,28 +11,28 @@ import UIKit
 class JFPopoverModalAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     // 动画时间
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
     
     // modal动画
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         // 获取到需要modal的控制器的view
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         toView.alpha = 0
         
         // 将需要modal的控制器的view添加到容器视图
-        transitionContext.containerView()?.addSubview(toView)
+        transitionContext.containerView.addSubview(toView)
         
         // 默认让视图在顶部
-        toView.transform = CGAffineTransformMakeTranslation(0, (SCREEN_HEIGHT + 64))
+        toView.transform = CGAffineTransform(translationX: 0, y: (SCREEN_HEIGHT + 64))
         
-        UIView.animateWithDuration(transitionDuration(nil), animations: { 
-            toView.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: transitionDuration(using: nil), animations: { 
+            toView.transform = CGAffineTransform.identity
             toView.alpha = 1
-            }) { (_) in
+            }, completion: { (_) in
                 transitionContext.completeTransition(true)
-        }
+        }) 
     }
 }

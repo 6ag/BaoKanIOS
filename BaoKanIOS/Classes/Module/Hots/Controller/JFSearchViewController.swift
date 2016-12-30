@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class JFSearchViewController: UIViewController {
 
@@ -25,7 +49,7 @@ class JFSearchViewController: UIViewController {
         
         view.backgroundColor = BACKGROUND_COLOR
         navigationItem.titleView = searchTextField
-        UIApplication.sharedApplication().keyWindow?.addSubview(searchKeyboardTableView)
+        UIApplication.shared.keyWindow?.addSubview(searchKeyboardTableView)
         searchKeyboardTableView.snp_makeConstraints { (make) in
             make.left.equalTo(70)
             make.top.equalTo(57)
@@ -35,21 +59,21 @@ class JFSearchViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = NAVIGATIONBAR_WHITE_COLOR
         navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         searchTextField.endEditing(true)
-        self.searchKeyboardTableView.snp_updateConstraints(closure: { (make) in
+        self.searchKeyboardTableView.snp_updateConstraints({ (make) in
             make.height.equalTo(0)
         })
         super.viewWillDisappear(animated)
@@ -62,7 +86,7 @@ class JFSearchViewController: UIViewController {
     /**
      准备tableView
      */
-    private func prepareTableView() {
+    fileprivate func prepareTableView() {
         
         view.addSubview(tableView)
         view.addSubview(placeholderView)
@@ -72,7 +96,7 @@ class JFSearchViewController: UIViewController {
     /**
      上拉加载更多数据
      */
-    @objc private func loadMoreData() {
+    @objc fileprivate func loadMoreData() {
         pageIndex += 1
         loadSearchResult(searchTextField.text!, pageIndex: pageIndex)
     }
@@ -83,14 +107,18 @@ class JFSearchViewController: UIViewController {
      - parameter keyboard:  关键词
      - parameter pageIndex: 页码
      */
-    private func loadSearchResult(keyboard: String, pageIndex: Int) {
+    fileprivate func loadSearchResult(_ keyboard: String, pageIndex: Int) {
         
         JFArticleListModel.loadSearchResult(keyboard, pageIndex: pageIndex) { (searchResultModels, error) in
             
             self.tableView.mj_footer.endRefreshing()
             
-            guard let list = searchResultModels where error != true else {
+            guard let list = searchResultModels else {
                 self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                return
+            }
+            
+            if error != nil {
                 return
             }
             
@@ -122,20 +150,25 @@ class JFSearchViewController: UIViewController {
      
      - parameter keyboard: 关键词
      */
-    private func loadSearchKeyboardList(keyboard: String) {
+    fileprivate func loadSearchKeyboardList(_ keyboard: String) {
         
         JFSearchKeyboardModel.loadSearchKeyList(keyboard) { (searchKeyboardModels, error) in
             
-            guard let list = searchKeyboardModels where error != true else {
-                self.searchKeyboardTableView.snp_updateConstraints(closure: { (make) in
+            guard let list = searchKeyboardModels else {
+                self.searchKeyboardTableView.snp_updateConstraints({ (make) in
                     make.height.equalTo(0)
                 })
                 return
             }
+            
+            if error != nil {
+                return
+            }
+            
             self.searchKeyboardTableView.searchKeyboardmodels = list
             
             // 更新高度
-            self.searchKeyboardTableView.snp_updateConstraints(closure: { (make) in
+            self.searchKeyboardTableView.snp_updateConstraints({ (make) in
                 make.height.equalTo(list.count * 44)
             })
             
@@ -147,7 +180,7 @@ class JFSearchViewController: UIViewController {
      
      - parameter currentListModel: 模型
      */
-    private func jumpToDetailViewControllerWith(currentListModel: JFArticleListModel) {
+    fileprivate func jumpToDetailViewControllerWith(_ currentListModel: JFArticleListModel) {
         
         // 如果是多图就跳转到图片浏览器
         if currentListModel.morepic?.count == 3 {
@@ -162,37 +195,37 @@ class JFSearchViewController: UIViewController {
     }
     
     /// 搜索框
-    private lazy var searchTextField: UISearchBar = {
+    fileprivate lazy var searchTextField: UISearchBar = {
         let searchTextField = UISearchBar(frame: CGRect(x: 20, y: 5, width: SCREEN_WIDTH - 40, height: 34))
-        searchTextField.searchBarStyle = .Minimal
+        searchTextField.searchBarStyle = .minimal
         searchTextField.delegate = self
         searchTextField.placeholder = "请输入关键词..."
         return searchTextField
     }()
     
     /// 内容区域
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
+    fileprivate lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         tableView.separatorColor = UIColor(red:0.9,  green:0.9,  blue:0.9, alpha:1)
-        tableView.registerNib(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: self.newsNoPicCell)
-        tableView.registerNib(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: self.newsOnePicCell)
-        tableView.registerNib(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: self.newsThreePicCell)
+        tableView.register(UINib(nibName: "JFNewsNoPicCell", bundle: nil), forCellReuseIdentifier: self.newsNoPicCell)
+        tableView.register(UINib(nibName: "JFNewsOnePicCell", bundle: nil), forCellReuseIdentifier: self.newsOnePicCell)
+        tableView.register(UINib(nibName: "JFNewsThreePicCell", bundle: nil), forCellReuseIdentifier: self.newsThreePicCell)
         tableView.mj_footer = setupFooterRefresh(self, action: #selector(loadMoreData))
         return tableView
     }()
     
     /// 没有内容的时候的占位图
-    private lazy var placeholderView: JFPlaceholderView = {
+    fileprivate lazy var placeholderView: JFPlaceholderView = {
         let placeholderView = JFPlaceholderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
-        placeholderView.backgroundColor = UIColor.whiteColor()
+        placeholderView.backgroundColor = UIColor.white
         return placeholderView
     }()
     
     /// 搜索关键词关联列表
-    private lazy var searchKeyboardTableView: JFSearchKeyboardTableView = {
+    fileprivate lazy var searchKeyboardTableView: JFSearchKeyboardTableView = {
         let searchKeyboardTableView = JFSearchKeyboardTableView()
         searchKeyboardTableView.keyboardDelegate = self
         return searchKeyboardTableView
@@ -203,12 +236,12 @@ class JFSearchViewController: UIViewController {
 extension JFSearchViewController: UISearchBarDelegate {
     
     // 已经改变搜索文字
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         loadSearchKeyboardList(searchBar.text!)
     }
     
     // 点击了搜索按钮
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchTextField.endEditing(true)
         prepareTableView()
@@ -219,7 +252,7 @@ extension JFSearchViewController: UISearchBarDelegate {
         loadSearchResult(searchBar.text!, pageIndex: pageIndex)
         
         // 更新关联视图高度
-        self.searchKeyboardTableView.snp_updateConstraints(closure: { (make) in
+        self.searchKeyboardTableView.snp_updateConstraints({ (make) in
             make.height.equalTo(0)
         })
     }
@@ -234,7 +267,7 @@ extension JFSearchViewController: JFSearchKeyboardTableViewDelegate {
      
      - parameter keyboard: 关键词
      */
-    func didSelectedKeyboard(keyboard: String) {
+    func didSelectedKeyboard(_ keyboard: String) {
         searchKeyboardTableView.snp_updateConstraints { (make) in
             make.height.equalTo(0)
         }
@@ -248,20 +281,20 @@ extension JFSearchViewController: JFSearchKeyboardTableViewDelegate {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension JFSearchViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let postModel = articleList[indexPath.row]
         if postModel.titlepic == "" { // 无图
             if postModel.rowHeight == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: newsNoPicCell) as! JFNewsNoPicCell
                 let height = cell.getRowHeight(postModel)
                 postModel.rowHeight = height
             }
@@ -274,7 +307,7 @@ extension JFSearchViewController: UITableViewDataSource, UITableViewDelegate {
             }
         } else { // 多图
             if postModel.rowHeight == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: newsThreePicCell) as! JFNewsThreePicCell
                 let height = cell.getRowHeight(postModel)
                 postModel.rowHeight = height
             }
@@ -282,33 +315,33 @@ extension JFSearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let postModel = articleList[indexPath.row]
         
         if postModel.titlepic == "" { // 无图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsNoPicCell) as! JFNewsNoPicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsNoPicCell) as! JFNewsNoPicCell
             cell.postModel = postModel
             return cell
         } else if postModel.morepic?.count == 0 { // 单图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsOnePicCell) as! JFNewsOnePicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsOnePicCell) as! JFNewsOnePicCell
             cell.postModel = postModel
             return cell
         } else { // 多图
-            let cell = tableView.dequeueReusableCellWithIdentifier(newsThreePicCell) as! JFNewsThreePicCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsThreePicCell) as! JFNewsThreePicCell
             cell.postModel = postModel
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // 取消cell选中状态
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // 跳转控制器
         let currentListModel = articleList[indexPath.row]

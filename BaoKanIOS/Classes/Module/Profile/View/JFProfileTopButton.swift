@@ -12,7 +12,7 @@ class JFProfileTopButton: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel?.textAlignment = .Center
+        titleLabel?.textAlignment = .center
     }
 
     override func layoutSubviews() {

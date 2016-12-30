@@ -32,9 +32,9 @@ extension UIImage {
      
      - returns: 返回缩放后的图片
      */
-    func resizeImageWithNewSize(newSize: CGSize) -> UIImage {
+    func resizeImageWithNewSize(_ newSize: CGSize) -> UIImage {
         
-        var rect = CGRectZero
+        var rect = CGRect.zero
         let oldSize = self.size
         
         if newSize.width / newSize.height > oldSize.width / oldSize.height {
@@ -51,12 +51,12 @@ extension UIImage {
         
         UIGraphicsBeginImageContext(newSize)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
+        context?.setFillColor(UIColor.clear.cgColor)
         UIRectFill(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        self.drawInRect(rect)
+        self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
 }

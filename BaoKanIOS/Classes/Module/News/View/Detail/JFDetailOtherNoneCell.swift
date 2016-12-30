@@ -31,10 +31,10 @@ class JFDetailOtherNoneCell: UITableViewCell {
     /**
      计算行高
      */
-    func getRowHeight(model: JFOtherLinkModel) -> CGFloat {
+    func getRowHeight(_ model: JFOtherLinkModel) -> CGFloat {
         self.model = model
         layoutIfNeeded()
-        return CGRectGetMaxY(showNumLabel.frame) + 15
+        return showNumLabel.frame.maxY + 15
     }
     
     

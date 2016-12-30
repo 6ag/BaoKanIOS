@@ -18,7 +18,7 @@ class JFPhotoViewController: UIViewController {
     /// 标签按钮旁的加号按钮
     @IBOutlet weak var addButton: UIButton!
     // 顶部标签数组
-    private var topTitles: [[String : String]]?
+    fileprivate var topTitles: [[String : String]]?
     
     // MARK: - 视图生命周期
     override func viewDidLoad() {
@@ -28,21 +28,21 @@ class JFPhotoViewController: UIViewController {
         prepareUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
     // MARK: - 各种自定义方法
     /**
      准备视图
      */
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         
         // 添加内容
         addContent()
@@ -51,7 +51,7 @@ class JFPhotoViewController: UIViewController {
     /**
      添加顶部标题栏和控制器
      */
-    private func addContent() {
+    fileprivate func addContent() {
         
         self.topTitles = [
             [
@@ -92,18 +92,18 @@ class JFPhotoViewController: UIViewController {
             label.text = topTitles![i]["classname"]
             label.tag = i
             label.scale = i == 0 ? 1.0 : 0.0
-            label.userInteractionEnabled = true
+            label.isUserInteractionEnabled = true
             topScrollView.addSubview(label)
             
             // 利用layout来自适应各种长度的label
-            label.snp_makeConstraints(closure: { (make) -> Void in
+            label.snp_makeConstraints({ (make) -> Void in
                 make.left.equalTo(leftMargin + 15)
                 make.centerY.equalTo(topScrollView)
             })
             
             // 更新布局和左边距
             topScrollView.layoutIfNeeded()
-            leftMargin = CGRectGetMaxX(label.frame)
+            leftMargin = label.frame.maxX
             
             // 添加标签点击手势
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedTopLabel(_:))))
@@ -123,7 +123,7 @@ class JFPhotoViewController: UIViewController {
         
         // 内容区域滚动范围
         contentScrollView.contentSize = CGSize(width: CGFloat(childViewControllers.count) * SCREEN_WIDTH, height: 0)
-        contentScrollView.pagingEnabled = true
+        contentScrollView.isPagingEnabled = true
         
         let lastLabel = topScrollView.subviews.last as! JFTopLabel
         // 设置顶部标签区域滚动范围
@@ -134,7 +134,7 @@ class JFPhotoViewController: UIViewController {
     /**
      顶部标签的点击事件
      */
-    @objc private func didTappedTopLabel(gesture: UITapGestureRecognizer) {
+    @objc fileprivate func didTappedTopLabel(_ gesture: UITapGestureRecognizer) {
         let titleLabel = gesture.view as! JFTopLabel
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(titleLabel.tag) * contentScrollView.frame.size.width, y: contentScrollView.contentOffset.y), animated: true)
     }
@@ -145,7 +145,7 @@ class JFPhotoViewController: UIViewController {
 extension JFPhotoViewController: UIScrollViewDelegate {
     
     // 滚动结束后触发 代码导致
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         
         // 滚动标题栏
@@ -174,12 +174,12 @@ extension JFPhotoViewController: UIScrollViewDelegate {
     }
     
     // 滚动结束 手势导致
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
     // 正在滚动
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let value = abs(scrollView.contentOffset.x / scrollView.frame.width)
         
         let leftIndex = Int(value)
