@@ -9,30 +9,6 @@
 import UIKit
 import SDCycleScrollView
 import MJRefresh
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelegate {
     
@@ -113,12 +89,12 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
             
             if method == 0 {
                 // 0下拉加载最新 - 会直接覆盖数据，用最新的10条数据
-                if Int(maxId) < Int(list[0].id!) {
+                if Int(maxId)! < Int(list[0].id!)! {
                     self.photoList = list
                 }
             } else {
                 // 1上拉加载更多 - 拼接数据
-                if Int(minId) > Int(list[0].id!) {
+                if Int(minId)! > Int(list[0].id!)! {
                     self.photoList = self.photoList + list
                 } else {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()

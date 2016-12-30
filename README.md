@@ -13,7 +13,20 @@
 
 ## 开发环境
 
-*XCode8.1* + *swift3.0* ，如果下载项目后，编译失败，请检查XCode版本是否满足。
+*XCode8.1* + *swift3.0* ，如果下载项目后，编译失败，请检查XCode版本是否满足。   
+**注意：**pod后，需要手动修改 `Pods/YYCache/YYDiskCache.m` 第171行，这是设置磁盘缓存文件的最小大小，如果设置20kb，新闻正文的小图将不能缓存到磁盘。
+
+将
+
+```objc
+return [self initWithPath:path inlineThreshold:1024 * 20];
+```
+
+改成
+
+```objc
+return [self initWithPath:path inlineThreshold:0];
+```
 
 ## AppStore
 

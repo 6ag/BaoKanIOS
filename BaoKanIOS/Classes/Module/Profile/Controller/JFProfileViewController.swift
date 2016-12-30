@@ -8,30 +8,6 @@
 
 import UIKit
 import YYWebImage
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFProfileViewController: JFBaseTableViewController {
     
@@ -107,37 +83,13 @@ class JFProfileViewController: JFBaseTableViewController {
         let group3CellModel2 = JFProfileCellArrowModel(title: "关于我们", icon: "setting_help_icon", destinationVc: JFAboutMeViewController.classForCoder())
         let group3CellModel3 = JFProfileCellArrowModel(title: "推荐给好友", icon: "setting_share_icon")
         group3CellModel3.operation = { () -> Void in
-            var image = UIImage(named: "launchScreen")
-            if image != nil && (image?.size.width > 300 || image?.size.height > 300) {
-                image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+            if JFShareItemModel.loadShareItems().count == 0 {
+                JFProgressHUD.showInfoWithStatus("没有可分享内容")
+                return
             }
             
-            let shareParames = NSMutableDictionary()
-            shareParames.ssdkSetupShareParams(byText: "爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
-                                                    images : image,
-                                                    url : URL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
-                                                    title : "爆侃网文",
-                                                    type : SSDKContentType.auto)
-            
-            let items = [
-                SSDKPlatformType.typeQQ.rawValue,
-                SSDKPlatformType.typeWechat.rawValue,
-                SSDKPlatformType.typeSinaWeibo.rawValue
-            ]
-            
-//            ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-//                switch state {
-//                    
-//                case SSDKResponseState.success:
-//                    print("分享成功")
-//                case SSDKResponseState.fail:
-//                    print("分享失败,错误描述:\(error)")
-//                case SSDKResponseState.cancel:
-//                    print("取消分享")
-//                default:
-//                    break
-//                }
-//            }
+            // 弹出分享视图
+            self.shareView.showShareView()
         }
 
         let group3CellModel4 = JFProfileCellLabelModel(title: "当前版本", icon: "setting_upload_icon", text: (Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String))
@@ -173,7 +125,7 @@ class JFProfileViewController: JFBaseTableViewController {
             headerView.avatarButton.yy_setBackgroundImage(with: URL(string: JFAccountModel.shareAccount()!.avatarUrl!), for: UIControlState(), options: YYWebImageOptions.allowBackgroundTask)
             headerView.nameLabel.text = JFAccountModel.shareAccount()!.nickname
         } else {
-            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), for: UIControlState())
+            headerView.avatarButton.setBackgroundImage(UIImage(named: "default－portrait"), for: .normal)
             headerView.nameLabel.text = "登录账号"
         }
     }
@@ -183,6 +135,13 @@ class JFProfileViewController: JFBaseTableViewController {
         headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: -(SCREEN_HEIGHT * 2 - 265), width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 2)
         return headerView
+    }()
+    
+    /// 分享视图
+    fileprivate lazy var shareView: JFShareView = {
+        let shareView = JFShareView()
+        shareView.delegate = self
+        return shareView
     }()
     
 }
@@ -336,4 +295,50 @@ extension JFProfileViewController: UINavigationControllerDelegate, UIImagePicker
         return URL(fileURLWithPath: fullPath)
     }
     
+}
+
+// MARK: - JFShareViewDelegate
+extension JFProfileViewController: JFShareViewDelegate {
+    
+    func share(type: JFShareType) {
+        
+        let platformType: SSDKPlatformType!
+        switch type {
+        case .qqFriend:
+            platformType = SSDKPlatformType.subTypeQZone // 尼玛，这竟然是反的。。ShareSDK bug
+        case .qqQzone:
+            platformType = SSDKPlatformType.subTypeQQFriend // 尼玛，这竟然是反的。。
+        case .weixinFriend:
+            platformType = SSDKPlatformType.subTypeWechatSession
+        case .friendCircle:
+            platformType = SSDKPlatformType.subTypeWechatTimeline
+        }
+        
+        // 从缓存中获取标题图片
+        var image = UIImage(named: "launchScreen")!
+        if image.size.width > 300 || image.size.height > 300 {
+            image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.ssdkSetupShareParams(byText: "爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
+                                          images : image,
+                                          url : URL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
+                                          title : "爆侃网文",
+                                          type : SSDKContentType.auto)
+        
+        ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in
+            switch state {
+            case SSDKResponseState.success:
+                print("分享成功")
+            case SSDKResponseState.fail:
+                print("授权失败,错误描述:\(error)")
+            case SSDKResponseState.cancel:
+                print("操作取消")
+            default:
+                break
+            }
+        }
+        
+    }
 }

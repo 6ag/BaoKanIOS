@@ -17,5 +17,13 @@ target 'BaoKanIOS' do
   pod 'SDCycleScrollView','~> 1.64'
   pod 'MJRefresh'
   pod 'FMDB'
+  
+  # ShareSDK
+  pod 'ShareSDK3'
+  pod 'MOBFoundation'
+  pod 'ShareSDK3/ShareSDKUI'
+  pod 'ShareSDK3/ShareSDKPlatforms/QQ'
+  pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
+  pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 
 end

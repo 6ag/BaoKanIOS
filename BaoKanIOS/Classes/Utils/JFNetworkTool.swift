@@ -250,3 +250,16 @@ extension JFNetworkTool {
     }
     
 }
+
+// MARK: - 网络工具方法
+extension JFNetworkTool {
+    
+    /**
+     获取当前网络状态
+     
+     - returns: 0未知 1WiFi 2WAN
+     */
+    func getCurrentNetworkState() -> Int {
+        return Reachability.forInternetConnection().currentReachabilityStatus().rawValue
+    }
+}

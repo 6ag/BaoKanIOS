@@ -11,9 +11,10 @@ import CoreData
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
     
     var window: UIWindow?
+    var hostReach: Reachability?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupRootViewController() // 配置控制器
@@ -22,8 +23,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupKeyBoardManager()    // 配置键盘管理
         setupShareSDK()           // 配置shareSDK
         setupJPush(launchOptions) // 配置JPUSH
+        setupReachability()       // 配置网络检测
         
         return true
+    }
+    
+    /**
+     配置网络检测
+     */
+    fileprivate func setupReachability() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+        hostReach = Reachability.forInternetConnection()
+        hostReach?.startNotifier()
+    }
+    
+    /**
+     监听网络状态改变
+     */
+    @objc func reachabilityChanged(_ notification: Notification) {
+        
+        guard let curReach = notification.object as? Reachability else {
+            return
+        }
+        
+        var networkState = 0
+        
+        switch curReach.currentReachabilityStatus() {
+        case NetworkStatus.init(0):
+            print("无网络")
+            networkState = 0
+        case NetworkStatus.init(1):
+            networkState = 1
+            print("WiFi")
+        case NetworkStatus.init(2):
+            networkState = 2
+            print("WAN")
+        default:
+            networkState = 3
+        }
+        
+        // 发出网络改变通知
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "networkStatusChanged"), object: nil, userInfo: ["networkState" : networkState])
+        
     }
     
     /**
@@ -54,35 +95,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      配置shareSDK
      */
-    fileprivate func setupShareSDK() -> Void {
+    fileprivate func setupShareSDK() {
         
-//        ShareSDK.registerApp(SHARESDK_APP_KEY,
-//                             activePlatforms: [
-//                                SSDKPlatformType.typeSinaWeibo.rawValue,
-//                                SSDKPlatformType.typeQQ.rawValue,
-//                                SSDKPlatformType.typeWechat.rawValue],
-//                             onImport: {(platform : SSDKPlatformType) -> Void in
-//                                switch platform {
-//                                case SSDKPlatformType.typeWechat:
-//                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
-//                                case SSDKPlatformType.typeQQ:
-//                                    ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
-//                                default:
-//                                    break
-//                                }},
-//                             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
-//                                switch platform {
-//                                case SSDKPlatformType.typeSinaWeibo:
-//                                    appInfo.ssdkSetupSinaWeibo(byAppKey: WB_APP_KEY, appSecret : WB_APP_SECRET, redirectUri : WB_REDIRECT_URL, authType : SSDKAuthTypeBoth)
-//                                case SSDKPlatformType.typeWechat:
-//                                    appInfo.ssdkSetupWeChat(byAppId: WX_APP_ID, appSecret: WX_APP_SECRET)
-//                                case SSDKPlatformType.typeQQ:
-//                                    appInfo.ssdkSetupQQ(byAppId: QQ_APP_ID, appKey: QQ_APP_KEY, authType: SSDKAuthTypeBoth)
-//                                default:
-//                                    break
-//                                }})
+        ShareSDK.registerApp(SHARESDK_APP_KEY, activePlatforms:[
+            SSDKPlatformType.typeQQ.rawValue,
+            SSDKPlatformType.typeWechat.rawValue],
+                             onImport: { (platform : SSDKPlatformType) in
+                                switch platform {
+                                case SSDKPlatformType.typeWechat:
+                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+                                case SSDKPlatformType.typeQQ:
+                                    ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
+                                default:
+                                    break
+                                }
+                                
+        }) { (platform : SSDKPlatformType, appInfo : NSMutableDictionary?) in
+            
+            switch platform {
+            case SSDKPlatformType.typeWechat:
+                // 微信
+                appInfo?.ssdkSetupWeChat(byAppId: WX_APP_ID, appSecret: WX_APP_SECRET)
+                
+            case SSDKPlatformType.typeQQ:
+                // QQ
+                appInfo?.ssdkSetupQQ(byAppId: QQ_APP_ID,
+                                     appKey : QQ_APP_KEY,
+                                     authType : SSDKAuthTypeBoth)
+            default:
+                break
+            }
+            
+        }
+        
+        
     }
-    
+
     /**
      配置键盘管理者
      */
@@ -139,7 +187,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      配置极光推送
      */
     fileprivate func setupJPush(_ launchOptions: [AnyHashable: Any]?) {
-        JPUSHService.register(forRemoteNotificationTypes: UIUserNotificationType.badge.rawValue | UIUserNotificationType.alert.rawValue | UIUserNotificationType.sound.rawValue, categories: nil)
+        
+        if #available(iOS 10.0, *){
+            let entiity = JPUSHRegisterEntity()
+            entiity.types = Int(UNAuthorizationOptions.alert.rawValue |
+                UNAuthorizationOptions.badge.rawValue |
+                UNAuthorizationOptions.sound.rawValue)
+            JPUSHService.register(forRemoteNotificationConfig: entiity, delegate: self)
+        } else if #available(iOS 8.0, *) {
+            let types = UIUserNotificationType.badge.rawValue |
+                UIUserNotificationType.sound.rawValue |
+                UIUserNotificationType.alert.rawValue
+            JPUSHService.register(forRemoteNotificationTypes: types, categories: nil)
+        } else {
+            let type = UIRemoteNotificationType.badge.rawValue |
+                UIRemoteNotificationType.sound.rawValue |
+                UIRemoteNotificationType.alert.rawValue
+            JPUSHService.register(forRemoteNotificationTypes: type, categories: nil)
+        }
         JPUSHService.setup(withOption: launchOptions, appKey: JPUSH_APP_KEY, channel: JPUSH_CHANNEL, apsForProduction: JPUSH_IS_PRODUCTION)
         JPUSHService.crashLogON()
         
@@ -148,19 +213,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /**
-     发送通知
+     如果app是未启动状态，点击了通知。在launchOptions会携带通知数据
      */
     @objc fileprivate func sendNotification(_ launchOptions: [AnyHashable: Any]?) {
-        if let options = launchOptions {
-            let userInfo = options[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]
-            if let info = userInfo {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: info)
-            }
+        if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: userInfo)
         }
     }
     
     /**
-     传递deviceToken注册远程通知
+     注册 DeviceToken
      */
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         JPUSHService.registerDeviceToken(deviceToken)
@@ -174,20 +236,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /**
+     将要显示
+    */
+    @available(iOS 10.0, *)
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
+        let userInfo = notification.request.content.userInfo
+        if let trigger = notification.request.trigger {
+            if trigger.isKind(of: UNPushNotificationTrigger.classForCoder()) {
+                JPUSHService.handleRemoteNotification(userInfo)
+            }
+        }
+        completionHandler(Int(UNAuthorizationOptions.alert.rawValue))
+    }
+    
+    /**
+     已经收到消息
+    */
+    @available(iOS 10.0, *)
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
+        let userInfo = response.notification.request.content.userInfo
+        if let trigger = response.notification.request.trigger {
+            if trigger.isKind(of: UNPushNotificationTrigger.classForCoder()) {
+                JPUSHService.handleRemoteNotification(userInfo)
+                // 处理远程通知
+                remoteNotificationHandler(userInfo: userInfo)
+            }
+        }
+        completionHandler()
+        
+    }
+    
+    /**
      iOS7后接收到远程通知
      */
-    private func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         JPUSHService.handleRemoteNotification(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
         
-        if application.applicationState == .background || application.applicationState == .inactive {
-            application.applicationIconBadgeNumber = 0
+        // 处理远程通知
+        remoteNotificationHandler(userInfo: userInfo)
+    }
+    
+    /// 处理远程通知
+    ///
+    /// - Parameter userInfo: 通知数据
+    private func remoteNotificationHandler(userInfo: [AnyHashable : Any]) {
+        
+        if UIApplication.shared.applicationState == .background || UIApplication.shared.applicationState == .inactive {
+            UIApplication.shared.applicationIconBadgeNumber = 0
             NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: userInfo)
-        } else if application.applicationState == .active {
-            application.applicationIconBadgeNumber = 0
+        } else if UIApplication.shared.applicationState == .active {
+            UIApplication.shared.applicationIconBadgeNumber = 0
             
-            let message = userInfo["aps"]!["alert"] as! String
+            let message = (userInfo as [AnyHashable : AnyObject])["aps"]!["alert"] as! String
             let alertC = UIAlertController(title: "收到新的消息", message: message, preferredStyle: UIAlertControllerStyle.alert)
             let confrimAction = UIAlertAction(title: "查看", style: UIAlertActionStyle.destructive, handler: { (action) in
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: userInfo)
@@ -199,13 +301,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             alertC.addAction(cancelAction)
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)
         }
-    }
-    
-    /**
-     接收到本地通知
-     */
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        JPUSHService.showLocalNotification(atFront: notification, identifierKey: nil)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

@@ -268,6 +268,13 @@ class JFPhotoDetailViewController: UIViewController {
         topTitleLabel.font = UIFont.systemFont(ofSize: 15)
         return topTitleLabel
     }()
+    
+    /// 分享视图
+    fileprivate lazy var shareView: JFShareView = {
+        let shareView = JFShareView()
+        shareView.delegate = self
+        return shareView
+    }()
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -359,42 +366,13 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      */
     func didTappedShareButton(_ button: UIButton) {
         
-        guard let page = currentPageData?.page else {return}
-        
-        // 从缓存中获取标题图片
-        let currentModel = photoModels[page - 1]
-        var image = YYImageCache.shared().getImageForKey(currentModel.bigpic!)!
-        
-        if image.size.width > 300.0 || image.size.height > 300.0 {
-            image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
+        if JFShareItemModel.loadShareItems().count == 0 {
+            JFProgressHUD.showInfoWithStatus("没有可分享内容")
+            return
         }
         
-        let shareParames = NSMutableDictionary()
-        shareParames.ssdkSetupShareParams(byText: currentModel.caption,
-                                                images : image,
-                                                url : URL(string: self.titleurl!.hasPrefix("http") ? self.titleurl! : "\(BASE_URL)\(self.titleurl!)"),
-                                                title : currentModel.title,
-                                                type : SSDKContentType.auto)
-        
-        let items = [
-            SSDKPlatformType.typeQQ.rawValue,
-            SSDKPlatformType.typeWechat.rawValue,
-            SSDKPlatformType.typeSinaWeibo.rawValue
-        ]
-        
-//        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-//            switch state {
-//                
-//            case SSDKResponseState.success:
-//                print("分享成功")
-//            case SSDKResponseState.fail:
-//                print("分享失败,错误描述:\(error)")
-//            case SSDKResponseState.cancel:
-//                print("取消分享")
-//            default:
-//                break
-//            }
-//        }
+        // 弹出分享视图
+        shareView.showShareView()
     }
     
     /**
@@ -430,6 +408,56 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
                 self.loadPhotoDetail(Int(self.photoParam!.classid)!, id: Int(self.photoParam!.id)!)
             }
         }
+    }
+}
+
+// MARK: - JFShareViewDelegate
+extension JFPhotoDetailViewController: JFShareViewDelegate {
+    
+    func share(type: JFShareType) {
+        
+        let platformType: SSDKPlatformType!
+        switch type {
+        case .qqFriend:
+            platformType = SSDKPlatformType.subTypeQZone // 尼玛，这竟然是反的。。ShareSDK bug
+        case .qqQzone:
+            platformType = SSDKPlatformType.subTypeQQFriend // 尼玛，这竟然是反的。。
+        case .weixinFriend:
+            platformType = SSDKPlatformType.subTypeWechatSession
+        case .friendCircle:
+            platformType = SSDKPlatformType.subTypeWechatTimeline
+        }
+        
+        guard let page = currentPageData?.page else {return}
+        
+        // 从缓存中获取标题图片
+        let currentModel = photoModels[page - 1]
+        var image = YYImageCache.shared().getImageForKey(currentModel.bigpic!)!
+        
+        if image.size.width > 300.0 || image.size.height > 300.0 {
+            image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
+        }
+        
+        let shareParames = NSMutableDictionary()
+        shareParames.ssdkSetupShareParams(byText: currentModel.caption,
+                                          images : image,
+                                          url : URL(string: self.titleurl!.hasPrefix("http") ? self.titleurl! : "\(BASE_URL)\(self.titleurl!)"),
+                                          title : currentModel.title,
+                                          type : SSDKContentType.auto)
+        
+        ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in
+            switch state {
+            case SSDKResponseState.success:
+                print("分享成功")
+            case SSDKResponseState.fail:
+                print("授权失败,错误描述:\(error)")
+            case SSDKResponseState.cancel:
+                print("操作取消")
+            default:
+                break
+            }
+        }
+        
     }
 }
 

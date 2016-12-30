@@ -60,7 +60,7 @@ class JFNewsViewController: UIViewController {
     /**
      处理接收到的远程通知，跳转到指定的文章
      */
-    func didReceiveRemoteNotificationOfJPush(_ notification: Notification) -> Void {
+    func didReceiveRemoteNotificationOfJPush(_ notification: Notification) {
         
         if let userInfo = notification.userInfo {
             guard let classid = userInfo["classid"] as? String, let id = userInfo["id"] as? String, let type = userInfo["type"] as? String else {return}

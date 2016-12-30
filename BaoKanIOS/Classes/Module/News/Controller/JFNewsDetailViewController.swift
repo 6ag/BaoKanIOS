@@ -275,6 +275,13 @@ class JFNewsDetailViewController: UIViewController {
         footerView.addSubview(moreCommentButton)
         return footerView
     }()
+    
+    /// 分享视图
+    fileprivate lazy var shareView: JFShareView = {
+        let shareView = JFShareView()
+        shareView.delegate = self
+        return shareView
+    }()
 }
 
 // MARK: - tableView相关
@@ -609,28 +616,13 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      */
     func didTappedShareButton(_ button: UIButton) {
         
-        guard let shareParames = getShareParameters() else {
+        if JFShareItemModel.loadShareItems().count == 0 {
+            JFProgressHUD.showInfoWithStatus("没有可分享内容")
             return
         }
         
-        let items = [
-            SSDKPlatformType.typeQQ.rawValue,
-            SSDKPlatformType.typeWechat.rawValue,
-            SSDKPlatformType.typeSinaWeibo.rawValue
-        ]
-        
-//        ShareSDK.showShareActionSheet(nil, items: items, shareParams: shareParames) { (state : SSDKResponseState, platform: SSDKPlatformType, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!, end: Bool) in
-//            switch state {
-//            case SSDKResponseState.success:
-//                print("分享成功")
-//            case SSDKResponseState.fail:
-//                print("分享失败,错误描述:\(error)")
-//            case SSDKResponseState.cancel:
-//                print("取消分享")
-//            default:
-//                break
-//            }
-//        }
+        // 弹出分享视图
+        shareView.showShareView()
         
     }
     
@@ -893,24 +885,25 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
     /**
      根据类型分享
      */
-    fileprivate func shareWithType(_ type: SSDKPlatformType) {
+    fileprivate func shareWithType(_ platformType: SSDKPlatformType) {
         
         guard let shareParames = getShareParameters() else {
             return
         }
         
-//        ShareSDK.share(type, parameters: shareParames) { (state : SSDKResponseState, userData : [AnyHashable: Any]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
-//            switch state {
-//            case SSDKResponseState.success:
-//                print("分享成功")
-//            case SSDKResponseState.fail:
-//                print("分享失败,错误描述:\(error)")
-//            case SSDKResponseState.cancel:
-//                print("取消分享")
-//            default:
-//                break
-//            }
-//        }
+        ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in
+            switch state {
+            case SSDKResponseState.success:
+                print("分享成功")
+            case SSDKResponseState.fail:
+                print("授权失败,错误描述:\(error)")
+            case SSDKResponseState.cancel:
+                print("操作取消")
+            default:
+                break
+            }
+        }
+        
     }
     
     /**
@@ -933,6 +926,7 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
     func didTappedFriendCircleButton(_ button: UIButton) {
         shareWithType(SSDKPlatformType.subTypeWechatTimeline)
     }
+    
 }
 
 // MARK: - 评论相关
@@ -1021,3 +1015,42 @@ extension JFNewsDetailViewController: UIViewControllerTransitioningDelegate {
     }
     
 }
+
+// MARK: - JFShareViewDelegate
+extension JFNewsDetailViewController: JFShareViewDelegate {
+    
+    func share(type: JFShareType) {
+        
+        let platformType: SSDKPlatformType!
+        switch type {
+        case .qqFriend:
+            platformType = SSDKPlatformType.subTypeQZone // 尼玛，这竟然是反的。。ShareSDK bug
+        case .qqQzone:
+            platformType = SSDKPlatformType.subTypeQQFriend // 尼玛，这竟然是反的。。
+        case .weixinFriend:
+            platformType = SSDKPlatformType.subTypeWechatSession
+        case .friendCircle:
+            platformType = SSDKPlatformType.subTypeWechatTimeline
+        }
+        
+        guard let shareParames = getShareParameters() else {
+            return
+        }
+        
+        ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in
+            switch state {
+            case SSDKResponseState.success:
+                print("分享成功")
+            case SSDKResponseState.fail:
+                print("授权失败,错误描述:\(error)")
+            case SSDKResponseState.cancel:
+                print("操作取消")
+            default:
+                break
+            }
+        }
+        
+    }
+}
+
+

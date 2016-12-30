@@ -10,6 +10,74 @@ import UIKit
 import pop
 import MJRefresh
 
+/// 基于iPhone6垂直方向适配
+///
+/// - Parameter size: iPhone6垂直方向尺寸
+/// - Returns: 其他型号尺寸
+func layoutVertical(iPhone6: CGFloat) -> CGFloat {
+    
+    var newHeight: CGFloat = 0
+    
+    switch iPhoneModel.getCurrentModel() {
+    case .iPhone5:
+        newHeight = iPhone6 * (568.0 / 667.0)
+    case .iPhone6:
+        newHeight = iPhone6
+    case .iPhone6p:
+        newHeight = iPhone6 * (736.0 / 667.0)
+    default:
+        newHeight = iPhone6 * (1024.0 / 667.0 * 0.9)
+    }
+    
+    return newHeight
+    
+}
+
+/// 基于iPhone6水平方向适配
+///
+/// - Parameter iPhone6: iPhone6水平方向尺寸
+/// - Returns: 其他型号尺寸
+func layoutHorizontal(iPhone6: CGFloat) -> CGFloat {
+    
+    var newWidth: CGFloat = 0
+    
+    switch iPhoneModel.getCurrentModel() {
+    case .iPhone5:
+        newWidth = iPhone6 * (320.0 / 375.0)
+    case .iPhone6:
+        newWidth = iPhone6
+    case .iPhone6p:
+        newWidth = iPhone6 * (414.0 / 375.0)
+    default:
+        newWidth = iPhone6 * (768.0 / 375.0 * 0.9)
+    }
+    
+    return newWidth
+    
+}
+
+/// 基于iPhone6字体的屏幕适配
+///
+/// - Parameter iPhone6: iPhone字体大小
+/// - Returns: 其他型号字体
+func layoutFont(iPhone6: CGFloat) -> CGFloat {
+    
+    var newFont: CGFloat = 0
+    
+    switch iPhoneModel.getCurrentModel() {
+    case .iPhone5:
+        newFont = iPhone6 * (320.0 / 375.0)
+    case .iPhone6:
+        newFont = iPhone6
+    case .iPhone6p:
+        newFont = iPhone6 * (414.0 / 375.0)
+    default:
+        newFont = iPhone6 * 1.2
+    }
+    
+    return newFont
+}
+
 /**
  手机型号枚举
  */
