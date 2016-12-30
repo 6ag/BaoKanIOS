@@ -1,0 +1,45 @@
+@font-face {
+    font-family: '汉仪旗黑';
+    src: url('../HYQiHei-50J.ttf');
+}
+
+* {
+    padding:0px;
+    margin:0px;
+}
+
+#container {
+    width: 92%;
+    margin-left: 4%;
+    margin-top: 10px
+}
+
+.title {
+    text-align: left;
+    font-size: 20px;
+    color: #3c3c3c;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.time {
+    text-align: left;
+    font-size: 13px;
+    color: #BDBDBD;
+    margin-top: 5px;
+    margin-bottom: 10px
+}
+
+#content {
+    color: #3c3c3c;
+    letter-spacing: 1px;
+}
+
+#content p {
+    margin: 0px 0px 15px 0px;
+}
+
+#content img {
+    display: block;
+    margin: 20px auto;
+}

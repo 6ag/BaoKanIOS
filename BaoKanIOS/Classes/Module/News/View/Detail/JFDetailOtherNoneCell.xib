@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JFDetailOtherNoneCell" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="这是一段文字" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pet-du-Fum" userLabel="title">
+                    <rect key="frame" x="12" y="15" width="102" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="312" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGV-mK-W32" userLabel="shownum">
+                    <rect key="frame" x="339" y="51" width="21" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_list_look" translatesAutoresizingMaskIntoConstraints="NO" id="ouI-Mg-rSW">
+                    <rect key="frame" x="321" y="51" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="14" id="MNl-Ya-tK4"/>
+                        <constraint firstAttribute="height" constant="14" id="XtI-GD-gTQ"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vCL-wi-mAn">
+                    <rect key="frame" x="15" y="73" width="360" height="1"/>
+                    <color key="backgroundColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="lhv-3f-Via"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="未解之谜网" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLR-QN-gHj" userLabel="befrom">
+                    <rect key="frame" x="12" y="51" width="60" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CLR-QN-gHj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="0eD-iM-aSu"/>
+                <constraint firstAttribute="trailing" secondItem="vCL-wi-mAn" secondAttribute="trailing" id="743-NS-5U7"/>
+                <constraint firstItem="pet-du-Fum" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="BVp-u9-Vpr"/>
+                <constraint firstItem="ouI-Mg-rSW" firstAttribute="centerY" secondItem="aGV-mK-W32" secondAttribute="centerY" id="R5A-yI-SRt"/>
+                <constraint firstItem="CLR-QN-gHj" firstAttribute="top" secondItem="pet-du-Fum" secondAttribute="bottom" constant="15" id="Sap-ZV-e4t"/>
+                <constraint firstItem="vCL-wi-mAn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="bqM-Yv-vHe"/>
+                <constraint firstAttribute="bottom" secondItem="vCL-wi-mAn" secondAttribute="bottom" id="c7Q-v5-gOR"/>
+                <constraint firstItem="aGV-mK-W32" firstAttribute="centerY" secondItem="CLR-QN-gHj" secondAttribute="centerY" id="l9Q-Yv-SOT"/>
+                <constraint firstItem="pet-du-Fum" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="lrU-zV-2BX"/>
+                <constraint firstItem="aGV-mK-W32" firstAttribute="leading" secondItem="ouI-Mg-rSW" secondAttribute="trailing" constant="4" id="oLQ-ey-X5j"/>
+                <constraint firstAttribute="trailing" secondItem="aGV-mK-W32" secondAttribute="trailing" constant="15" id="zVZ-PO-PSx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="articleTitleLabel" destination="pet-du-Fum" id="sio-M5-PNI"/>
+                <outlet property="befromLabel" destination="CLR-QN-gHj" id="xx5-gw-Egn"/>
+                <outlet property="showNumLabel" destination="aGV-mK-W32" id="NRe-ao-M0M"/>
+            </connections>
+            <point key="canvasLocation" x="323.5" y="284"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="news_list_look" width="13" height="13"/>
+    </resources>
+</document>

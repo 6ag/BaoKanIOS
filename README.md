@@ -7,6 +7,7 @@
 图库详情使用传统新闻客户端的图片浏览器，可以隐藏/显示UI，缩放图片，保存图片，多种手势操作。
 集成推送、第三方分享、第三方登录等SDK，项目代码注释清晰，适合swift新手参考。
 
+<<<<<<< HEAD
 ### 重大改版
 
 此项目开发分支为 `coding` 分支， `master` 分支已经不更新。  
@@ -15,6 +16,11 @@
 重要的事情说三遍！
 
 项目最新测试代码在 [六阿哥客户端](https://github.com/6ag/LiuAGeIOS) ，两个项目基础代码大部分相同，学习建议参考 [六阿哥客户端](https://github.com/6ag/LiuAGeIOS) 。
+=======
+### Android端
+
+[BaoKanAndroid](https://github.com/6ag/BaoKanAndroid)
+>>>>>>> coding
 
 ### 开发环境
 

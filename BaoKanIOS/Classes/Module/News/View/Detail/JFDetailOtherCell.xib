@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JFDetailOtherCell" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xon-pA-OSK">
+                    <rect key="frame" x="15" y="15" width="120" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="QHp-mq-mso"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一段文字" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pet-du-Fum" userLabel="title">
+                    <rect key="frame" x="145" y="15" width="220" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="312" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGV-mK-W32" userLabel="shownum">
+                    <rect key="frame" x="339" y="70" width="21" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_list_look" translatesAutoresizingMaskIntoConstraints="NO" id="ouI-Mg-rSW">
+                    <rect key="frame" x="321" y="70" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="14" id="0i8-WR-yaJ"/>
+                        <constraint firstAttribute="height" constant="14" id="4Rh-o3-k8m"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vCL-wi-mAn">
+                    <rect key="frame" x="15" y="99" width="360" height="1"/>
+                    <color key="backgroundColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="lhv-3f-Via"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="未解之谜网" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLR-QN-gHj" userLabel="befrom">
+                    <rect key="frame" x="145" y="70" width="60" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ouI-Mg-rSW" firstAttribute="centerY" secondItem="aGV-mK-W32" secondAttribute="centerY" id="3TY-8q-7TD"/>
+                <constraint firstAttribute="trailing" secondItem="vCL-wi-mAn" secondAttribute="trailing" id="743-NS-5U7"/>
+                <constraint firstItem="xon-pA-OSK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="79A-KK-Lrt"/>
+                <constraint firstAttribute="bottom" secondItem="xon-pA-OSK" secondAttribute="bottom" constant="15" id="8if-qm-jo2"/>
+                <constraint firstItem="CLR-QN-gHj" firstAttribute="bottom" secondItem="xon-pA-OSK" secondAttribute="bottom" id="FJm-7I-nTq"/>
+                <constraint firstItem="pet-du-Fum" firstAttribute="leading" secondItem="xon-pA-OSK" secondAttribute="trailing" constant="10" id="Hzc-iX-Cfl"/>
+                <constraint firstItem="xon-pA-OSK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="JZT-Of-Ndd"/>
+                <constraint firstItem="pet-du-Fum" firstAttribute="top" secondItem="xon-pA-OSK" secondAttribute="top" id="M9s-TS-mIY"/>
+                <constraint firstItem="aGV-mK-W32" firstAttribute="leading" secondItem="ouI-Mg-rSW" secondAttribute="trailing" constant="4" id="Tcf-u2-swz"/>
+                <constraint firstAttribute="trailing" secondItem="aGV-mK-W32" secondAttribute="trailing" constant="15" id="XmH-7l-CIA"/>
+                <constraint firstItem="vCL-wi-mAn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="bqM-Yv-vHe"/>
+                <constraint firstAttribute="bottom" secondItem="vCL-wi-mAn" secondAttribute="bottom" id="c7Q-v5-gOR"/>
+                <constraint firstItem="CLR-QN-gHj" firstAttribute="leading" secondItem="xon-pA-OSK" secondAttribute="trailing" constant="10" id="eAw-EB-Mna"/>
+                <constraint firstAttribute="trailing" secondItem="pet-du-Fum" secondAttribute="trailing" constant="10" id="ibF-Pp-2Hf"/>
+                <constraint firstItem="aGV-mK-W32" firstAttribute="bottom" secondItem="xon-pA-OSK" secondAttribute="bottom" id="rER-d4-uxh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="articleTitleLabel" destination="pet-du-Fum" id="sio-M5-PNI"/>
+                <outlet property="befromLabel" destination="CLR-QN-gHj" id="xx5-gw-Egn"/>
+                <outlet property="iconImageView" destination="xon-pA-OSK" id="fSP-dh-g0o"/>
+                <outlet property="showNumLabel" destination="aGV-mK-W32" id="NRe-ao-M0M"/>
+            </connections>
+            <point key="canvasLocation" x="360.5" y="304"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="news_list_look" width="13" height="13"/>
+    </resources>
+</document>

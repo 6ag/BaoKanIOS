@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cz2-8r-xDr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="meX-Pa-P36">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cz2-8r-xDr" customClass="JFNavigationController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ip-dm-jsb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TMq-FC-I6h" kind="relationship" relationship="rootViewController" id="WG7-P0-sn6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pai-o2-o7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="390" y="456.33802816901402"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="RcX-sb-my3">
+            <objects>
+                <tableViewController id="TMq-FC-I6h" customClass="JFProfileViewController" customModule="BaoKanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="TTu-KR-Xdq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="TMq-FC-I6h" id="yiF-iJ-tCv"/>
+                            <outlet property="delegate" destination="TMq-FC-I6h" id="a2M-2G-9vM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bwL-Bi-vuT"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EN4-7Y-5XI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1389.375" y="456.33802816901402"/>
+        </scene>
+    </scenes>
+</document>

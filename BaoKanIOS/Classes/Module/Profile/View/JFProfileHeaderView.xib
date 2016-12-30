@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JFProfileHeaderView" customModule="BaoKanIOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsS-JR-Dap" userLabel="menu">
+                    <rect key="frame" x="0.0" y="435" width="375" height="65"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvA-R7-jJE" userLabel="item1">
+                            <rect key="frame" x="0.0" y="0.0" width="125" height="65"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgd-fn-ej1" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="收藏" image="profile_topbar_collection">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTappedCollectionButton" destination="iN0-l3-epB" eventType="touchUpInside" id="q1R-Cm-sd8"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="leading" secondItem="PvA-R7-jJE" secondAttribute="leading" id="6vg-cm-mQf"/>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="centerX" secondItem="PvA-R7-jJE" secondAttribute="centerX" id="BSu-A5-dLb"/>
+                                <constraint firstAttribute="bottom" secondItem="Qgd-fn-ej1" secondAttribute="bottom" id="lWB-GX-Zh2"/>
+                                <constraint firstAttribute="trailing" secondItem="Qgd-fn-ej1" secondAttribute="trailing" id="m8s-wW-ldf"/>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="centerY" secondItem="PvA-R7-jJE" secondAttribute="centerY" id="mcg-ZY-DKb"/>
+                                <constraint firstItem="Qgd-fn-ej1" firstAttribute="top" secondItem="PvA-R7-jJE" secondAttribute="top" id="ms7-2R-Cj2"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="6vg-cm-mQf"/>
+                                    <exclude reference="lWB-GX-Zh2"/>
+                                    <exclude reference="m8s-wW-ldf"/>
+                                    <exclude reference="ms7-2R-Cj2"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="6vg-cm-mQf"/>
+                                    <exclude reference="BSu-A5-dLb"/>
+                                    <include reference="lWB-GX-Zh2"/>
+                                    <include reference="m8s-wW-ldf"/>
+                                    <exclude reference="mcg-ZY-DKb"/>
+                                    <include reference="ms7-2R-Cj2"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CI-Go-PGc" userLabel="item2">
+                            <rect key="frame" x="125" y="0.0" width="125" height="65"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSh-ZB-j0c" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="评论" image="profile_topbar_comment">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTappedCommentButton" destination="iN0-l3-epB" eventType="touchUpInside" id="8Ai-Ve-Abi"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="centerX" secondItem="3CI-Go-PGc" secondAttribute="centerX" id="AZg-bb-QOr"/>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="centerY" secondItem="3CI-Go-PGc" secondAttribute="centerY" id="GH6-YD-mwN"/>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="top" secondItem="3CI-Go-PGc" secondAttribute="top" id="KgD-yc-pX5"/>
+                                <constraint firstAttribute="trailing" secondItem="wSh-ZB-j0c" secondAttribute="trailing" id="MjW-3g-gYg"/>
+                                <constraint firstItem="wSh-ZB-j0c" firstAttribute="leading" secondItem="3CI-Go-PGc" secondAttribute="leading" id="wRm-df-w1X"/>
+                                <constraint firstAttribute="bottom" secondItem="wSh-ZB-j0c" secondAttribute="bottom" id="z9X-dJ-bfJ"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="KgD-yc-pX5"/>
+                                    <exclude reference="MjW-3g-gYg"/>
+                                    <exclude reference="wRm-df-w1X"/>
+                                    <exclude reference="z9X-dJ-bfJ"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <exclude reference="AZg-bb-QOr"/>
+                                    <exclude reference="GH6-YD-mwN"/>
+                                    <include reference="KgD-yc-pX5"/>
+                                    <include reference="MjW-3g-gYg"/>
+                                    <include reference="wRm-df-w1X"/>
+                                    <include reference="z9X-dJ-bfJ"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-9a-cew" userLabel="item3">
+                            <rect key="frame" x="250" y="0.0" width="125" height="65"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="788-jF-aZR" customClass="JFProfileTopButton" customModule="BaoKanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="37" y="22" width="50" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="资料" image="profile_topbar_info">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTappedInfoButton" destination="iN0-l3-epB" eventType="touchUpInside" id="TyS-5P-UXS"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="788-jF-aZR" secondAttribute="trailing" id="B2E-Cv-VrG"/>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="leading" secondItem="zFW-9a-cew" secondAttribute="leading" id="BUD-FK-5Qa"/>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="centerX" secondItem="zFW-9a-cew" secondAttribute="centerX" id="J3v-Hr-aaT"/>
+                                <constraint firstAttribute="bottom" secondItem="788-jF-aZR" secondAttribute="bottom" id="N0s-CL-rRo"/>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="top" secondItem="zFW-9a-cew" secondAttribute="top" id="TkH-NN-2Sd"/>
+                                <constraint firstItem="788-jF-aZR" firstAttribute="centerY" secondItem="zFW-9a-cew" secondAttribute="centerY" id="aCU-XP-dyf"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="B2E-Cv-VrG"/>
+                                    <exclude reference="BUD-FK-5Qa"/>
+                                    <exclude reference="N0s-CL-rRo"/>
+                                    <exclude reference="TkH-NN-2Sd"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="B2E-Cv-VrG"/>
+                                    <include reference="BUD-FK-5Qa"/>
+                                    <exclude reference="J3v-Hr-aaT"/>
+                                    <include reference="N0s-CL-rRo"/>
+                                    <include reference="TkH-NN-2Sd"/>
+                                    <exclude reference="aCU-XP-dyf"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="zFW-9a-cew" firstAttribute="leading" secondItem="3CI-Go-PGc" secondAttribute="trailing" id="Ggs-Ss-D7y"/>
+                        <constraint firstItem="3CI-Go-PGc" firstAttribute="top" secondItem="rsS-JR-Dap" secondAttribute="top" id="JsA-Gb-ZY0"/>
+                        <constraint firstItem="zFW-9a-cew" firstAttribute="width" secondItem="PvA-R7-jJE" secondAttribute="width" id="LPe-o6-QhV"/>
+                        <constraint firstAttribute="height" constant="65" id="O1M-gg-cN9"/>
+                        <constraint firstItem="zFW-9a-cew" firstAttribute="top" secondItem="rsS-JR-Dap" secondAttribute="top" id="OD5-QQ-uTY"/>
+                        <constraint firstItem="3CI-Go-PGc" firstAttribute="width" secondItem="PvA-R7-jJE" secondAttribute="width" id="Q8q-1u-C8b"/>
+                        <constraint firstAttribute="bottom" secondItem="PvA-R7-jJE" secondAttribute="bottom" id="U2B-B9-hOC"/>
+                        <constraint firstItem="PvA-R7-jJE" firstAttribute="top" secondItem="rsS-JR-Dap" secondAttribute="top" id="ULO-pU-v3R"/>
+                        <constraint firstAttribute="trailing" secondItem="zFW-9a-cew" secondAttribute="trailing" id="YDv-du-Lm2"/>
+                        <constraint firstAttribute="bottom" secondItem="3CI-Go-PGc" secondAttribute="bottom" id="f5l-uu-8ZE"/>
+                        <constraint firstAttribute="bottom" secondItem="zFW-9a-cew" secondAttribute="bottom" id="lVB-fN-9vn"/>
+                        <constraint firstItem="3CI-Go-PGc" firstAttribute="leading" secondItem="PvA-R7-jJE" secondAttribute="trailing" id="mqh-NA-ZIR"/>
+                        <constraint firstItem="PvA-R7-jJE" firstAttribute="leading" secondItem="rsS-JR-Dap" secondAttribute="leading" id="sPt-3D-A1Z"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="登录账号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZQ-BM-nPr">
+                    <rect key="frame" x="157" y="387" width="60" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4U-ni-wQF">
+                    <rect key="frame" x="152" y="302" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="Ndb-Hs-dr2"/>
+                        <constraint firstAttribute="width" constant="70" id="gTn-zh-KNc"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="default－portrait"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="35"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didTappedAvatarButton" destination="iN0-l3-epB" eventType="touchUpInside" id="Ki4-0g-Aiw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.83921568627450982" green="0.23137254901960785" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rsS-JR-Dap" secondAttribute="trailing" id="67V-uu-lf8"/>
+                <constraint firstItem="CZQ-BM-nPr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Fd-ID-F6k"/>
+                <constraint firstItem="M4U-ni-wQF" firstAttribute="centerX" secondItem="CZQ-BM-nPr" secondAttribute="centerX" id="SXi-wG-sa0"/>
+                <constraint firstAttribute="bottom" secondItem="rsS-JR-Dap" secondAttribute="bottom" id="d5G-de-bXh"/>
+                <constraint firstItem="CZQ-BM-nPr" firstAttribute="top" secondItem="M4U-ni-wQF" secondAttribute="bottom" constant="15" id="k6v-eC-6ol"/>
+                <constraint firstItem="rsS-JR-Dap" firstAttribute="top" secondItem="CZQ-BM-nPr" secondAttribute="bottom" constant="30" id="pu0-Gh-jSA"/>
+                <constraint firstItem="rsS-JR-Dap" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tvW-EA-OXO"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="avatarButton" destination="M4U-ni-wQF" id="XMv-Q6-Q6z"/>
+                <outlet property="nameLabel" destination="CZQ-BM-nPr" id="nLR-EU-8qG"/>
+            </connections>
+            <point key="canvasLocation" x="456.5" y="288"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="default－portrait" width="36" height="36"/>
+        <image name="profile_topbar_collection" width="22" height="22"/>
+        <image name="profile_topbar_comment" width="22" height="22"/>
+        <image name="profile_topbar_info" width="22" height="22"/>
+    </resources>
+</document>
