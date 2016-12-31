@@ -31,6 +31,10 @@ return [self initWithPath:path inlineThreshold:1024 * 20];
 return [self initWithPath:path inlineThreshold:0];
 ```
 
+## 项目结构
+
+![image](https://github.com/6ag/BaoKanIOS/blob/master/project.png)
+
 ## AppStore
 
 <a target='_blank' href='https://itunes.apple.com/app/id1115587250'>
