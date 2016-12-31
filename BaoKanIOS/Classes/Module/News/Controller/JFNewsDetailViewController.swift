@@ -171,11 +171,11 @@ class JFNewsDetailViewController: UIViewController {
         view.addSubview(bottomBarView)
         view.addSubview(activityView)
         
-        topBarView.snp_makeConstraints { (make) in
+        topBarView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(0)
             make.height.equalTo(20)
         }
-        bottomBarView.snp_makeConstraints { (make) in
+        bottomBarView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(45)
         }
@@ -575,21 +575,17 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
     func didTappedCollectButton(_ button: UIButton) {
         
         if JFAccountModel.isLogin() {
-            let parameters: [String : AnyObject] = [
-                "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
-                "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
-                "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
-                "classid" : articleParam!.classid as AnyObject,
-                "id" : articleParam!.id as AnyObject
+            let parameters: [String : Any] = [
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "token" : JFAccountModel.shareAccount()!.token!,
+                "classid" : articleParam!.classid,
+                "id" : articleParam!.id
             ]
             
             JFNetworkTool.shareNetworkTool.post(ADD_DEL_FAVA, parameters: parameters) { (status, result, tipString) in
                 
-                if status != .success {
-                    return
-                }
-                
-                guard let successResult = result else {return}
+                guard let successResult = result, status == .success else {return}
                 
                 if successResult["result"]["status"].intValue == 1 {
                     // 增加成功
@@ -633,24 +629,25 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
      */
     func didTappedSendButtonWithMessage(_ message: String) {
         
-        var parameters = [String : AnyObject]()
+        var parameters = [String : Any]()
         
+        // 如果已经登录就使用登录的用户信息发送评论
         if JFAccountModel.isLogin() {
             parameters = [
-                "classid" : articleParam!.classid as AnyObject,
-                "id" : articleParam!.id as AnyObject,
-                "userid" : JFAccountModel.shareAccount()!.id as AnyObject,
-                "nomember" : "0" as AnyObject,
-                "username" : JFAccountModel.shareAccount()!.username! as AnyObject,
-                "token" : JFAccountModel.shareAccount()!.token! as AnyObject,
-                "saytext" : message as AnyObject
+                "classid" : articleParam!.classid,
+                "id" : articleParam!.id,
+                "userid" : JFAccountModel.shareAccount()!.id,
+                "nomember" : "0",
+                "username" : JFAccountModel.shareAccount()!.username!,
+                "token" : JFAccountModel.shareAccount()!.token!,
+                "saytext" : message
             ]
         } else {
             parameters = [
-                "classid" : articleParam!.classid as AnyObject,
-                "id" : articleParam!.id as AnyObject,
-                "nomember" : "1" as AnyObject,
-                "saytext" : message as AnyObject
+                "classid" : articleParam!.classid,
+                "id" : articleParam!.id,
+                "nomember" : "1",
+                "saytext" : message
             ]
         }
         
@@ -723,13 +720,13 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
      */
     func webViewDidFinishLoad(_ webView: UIWebView) {
         
+        autolayoutWebView()
         if !webView.isLoading {
             if let allphoto = model?.allphoto {
-                // 加载图片 - 从缓存中获取图片的本地绝对路径，发送给webView显示
+                // 加载正文图片 - 从缓存中获取图片的本地绝对路径，发送给webView显示
+                // 因为需要执行js代码，所以尽量在webView加载完成后调用
                 getImageFromDownloaderOrDiskByImageUrlArray(allphoto)
             }
-            
-            autolayoutWebView()
         }
     }
     
@@ -836,14 +833,16 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
                         return image
                     }, completion: { (image, url, type, stage, error) in
                         
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-                            // 确保已经下载完成并没有出错 - 这样做其实已经修改了YYWebImage的磁盘缓存策略。默认YYWebImage缓存文件时超过20kb的文件才会存储为文件，所以需要在 YYDiskCache.m的171行修改
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.15 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+                            // 确保已经下载完成并没有出错
+                            // 这样做其实已经修改了YYWebImage的磁盘缓存策略。默认YYWebImage缓存文件时超过20kb的文件才会存储为文件，所以需要在 YYDiskCache.m的171行修改
                             guard let _ = image, error == nil else {return}
                             let imagePath = JFArticleStorage.getFilePathForKey(imageString)
                             // 发送图片占位标识和本地绝对路径给webView
                             self.bridge?.send("replaceimage\(imageString)~\(imagePath)")
                             print("图片缓存完成，发送给js \(imagePath)")
                         }
+                        
                 })
             }
             
@@ -853,8 +852,8 @@ extension JFNewsDetailViewController: UIWebViewDelegate {
     
 }
 
-// MARK: - 分享相关
-extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
+// MARK: - 分享相关 - 这是正文中心的三个按钮和底部分享视图的分享事件
+extension JFNewsDetailViewController: JFStarAndShareCellDelegate, JFShareViewDelegate {
     
     /**
      获取文章分享参数
@@ -907,24 +906,46 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate {
     }
     
     /**
-     点击QQ
+     点击QQ分享
      */
     func didTappedQQButton(_ button: UIButton) {
         shareWithType(SSDKPlatformType.subTypeQQFriend)
     }
     
     /**
-     点击了微信
+     点击了微信分享
      */
     func didTappedWeixinButton(_ button: UIButton) {
         shareWithType(SSDKPlatformType.subTypeWechatSession)
     }
     
     /**
-     点击了朋友圈
+     点击了朋友圈分享
      */
     func didTappedFriendCircleButton(_ button: UIButton) {
         shareWithType(SSDKPlatformType.subTypeWechatTimeline)
+    }
+    
+    /// 底部弹出的分享视图的分享按钮点击事件
+    ///
+    /// - Parameter type: 需要分享的类型
+    func share(type: JFShareType) {
+        
+        let platformType: SSDKPlatformType!
+        switch type {
+        case .qqFriend:
+            platformType = SSDKPlatformType.subTypeQZone // 尼玛，这竟然是反的。。ShareSDK bug
+        case .qqQzone:
+            platformType = SSDKPlatformType.subTypeQQFriend // 尼玛，这竟然是反的。。
+        case .weixinFriend:
+            platformType = SSDKPlatformType.subTypeWechatSession
+        case .friendCircle:
+            platformType = SSDKPlatformType.subTypeWechatTimeline
+        }
+        
+        // 立即分享
+        shareWithType(platformType)
+        
     }
     
 }
@@ -990,7 +1011,7 @@ extension JFNewsDetailViewController: JFCommentCellDelegate {
     }
 }
 
-// MARK: - 栏目管理自定义转场动画事件
+// MARK: - 正文图片浏览器转场动画
 extension JFNewsDetailViewController: UIViewControllerTransitioningDelegate {
     
     /**
@@ -1014,43 +1035,6 @@ extension JFNewsDetailViewController: UIViewControllerTransitioningDelegate {
         return JFNewsPhotoDismissAnimation()
     }
     
-}
-
-// MARK: - JFShareViewDelegate
-extension JFNewsDetailViewController: JFShareViewDelegate {
-    
-    func share(type: JFShareType) {
-        
-        let platformType: SSDKPlatformType!
-        switch type {
-        case .qqFriend:
-            platformType = SSDKPlatformType.subTypeQZone // 尼玛，这竟然是反的。。ShareSDK bug
-        case .qqQzone:
-            platformType = SSDKPlatformType.subTypeQQFriend // 尼玛，这竟然是反的。。
-        case .weixinFriend:
-            platformType = SSDKPlatformType.subTypeWechatSession
-        case .friendCircle:
-            platformType = SSDKPlatformType.subTypeWechatTimeline
-        }
-        
-        guard let shareParames = getShareParameters() else {
-            return
-        }
-        
-        ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in
-            switch state {
-            case SSDKResponseState.success:
-                print("分享成功")
-            case SSDKResponseState.fail:
-                print("授权失败,错误描述:\(error)")
-            case SSDKResponseState.cancel:
-                print("操作取消")
-            default:
-                break
-            }
-        }
-        
-    }
 }
 
 

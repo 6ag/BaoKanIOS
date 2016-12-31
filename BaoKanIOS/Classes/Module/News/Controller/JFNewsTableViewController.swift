@@ -92,6 +92,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
         tableView.tableHeaderView = topScrollView
     }
     
+    /// 轮播图点击事件
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
         
         let currentListModel = isGoodList[index]
@@ -105,6 +106,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
      */
     fileprivate func jumpToDetailViewControllerWith(_ currentListModel: JFArticleListModel) {
 
+        // 新闻内容页
         let articleDetailVc = JFNewsDetailViewController()
         articleDetailVc.articleParam = (currentListModel.classid!, currentListModel.id!)
         navigationController?.pushViewController(articleDetailVc, animated: true)
@@ -114,14 +116,16 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
      下拉加载最新数据
      */
     @objc fileprivate func updateNewData() {
+        
         // 有网络的时候下拉会自动清除缓存
-        if true {
+        if JFNetworkTool.shareNetworkTool.getCurrentNetworkState() != 0 {
             JFArticleListModel.cleanCache(classid!)
         }
         
+        // 加载新闻列表数据
         loadNews(classid!, pageIndex: 1, method: 0)
         
-        // 只有下拉的时候才去加载幻灯片数据
+        // 只有下拉的时候才去加载更新轮播图数据
         loadIsGood(classid!)
     }
     
@@ -142,11 +146,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
         
         JFArticleListModel.loadNewsList("news", classid: classid, pageIndex: pageIndex, type: 2) { (articleListModels, error) in
             
-            guard let list = articleListModels else {
-                return
-            }
-            
-            if error != nil {
+            guard let list = articleListModels, error == nil else {
                 return
             }
             
@@ -173,7 +173,7 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
             self.tableView.mj_footer.endRefreshing()
             self.placeholderView.removeAnimation()
             
-            guard let list = articleListModels else {
+            guard let list = articleListModels, error == nil else {
                 return
             }
             
@@ -190,14 +190,17 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
             let maxId = self.articleList.first?.id ?? "0"
             let minId = self.articleList.last?.id ?? "0"
             
+            // 新数据里最大的id
+            let newMaxId = Int(list[0].id!)!
+            
             if method == 0 {
                 // 0下拉加载最新 - 会直接覆盖数据，用最新的10条数据
-                if Int(maxId)! < Int(list[0].id!)! {
+                if Int(maxId)! < newMaxId {
                     self.articleList = list
                 }
             } else {
                 // 1上拉加载更多 - 拼接数据
-                if Int(minId)! > Int(list[0].id!)! {
+                if Int(minId)! > newMaxId {
                     self.articleList = self.articleList + list
                 } else {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()

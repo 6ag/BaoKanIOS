@@ -254,7 +254,7 @@ extension JFModifyInfoTableViewController: UINavigationControllerDelegate, UIIma
         
         JFProgressHUD.showWithStatus("正在上传")
         JFNetworkTool.shareNetworkTool.uploadUserAvatar("\(MODIFY_ACCOUNT_INFO)", imagePath: imagePath, parameters: parameters) { (status, result, tipString) in
-            print(result)
+            print(result ?? "")
             if status == .success {
                 JFProgressHUD.showInfoWithStatus("上传成功")
                 

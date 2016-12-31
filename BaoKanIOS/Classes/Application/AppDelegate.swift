@@ -152,6 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
      */
     fileprivate func setupRootViewController() {
         window = UIWindow(frame: UIScreen.main.bounds)
+        // 是否是新版本，新版本就进新特性里
         if isNewVersion() {
             window?.rootViewController =  JFNewFeatureViewController()
             JFAccountModel.logout()
@@ -165,22 +166,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
      判断是否是新版本
      */
     fileprivate func isNewVersion() -> Bool {
-        // 获取当前的版本号
-        let versionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        print(versionString)
         
-        let currentVersion = Double(versionString)!
+        // 获取当前的版本号
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         
         // 获取到之前的版本号
         let sandboxVersionKey = "sandboxVersionKey"
-        let sandboxVersion = UserDefaults.standard.double(forKey: sandboxVersionKey)
+        let sandboxVersion = UserDefaults.standard.string(forKey: sandboxVersionKey)
         
         // 保存当前版本号
         UserDefaults.standard.set(currentVersion, forKey: sandboxVersionKey)
         UserDefaults.standard.synchronize()
         
-        // 对比
-        return currentVersion > sandboxVersion
+        // 当前版本和沙盒版本不一致就是新版本
+        return currentVersion != sandboxVersion
     }
     
     /**
@@ -263,7 +262,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
             }
         }
         completionHandler()
-        
     }
     
     /**
@@ -284,19 +282,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
     private func remoteNotificationHandler(userInfo: [AnyHashable : Any]) {
         
         if UIApplication.shared.applicationState == .background || UIApplication.shared.applicationState == .inactive {
-            UIApplication.shared.applicationIconBadgeNumber = 0
             NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: userInfo)
         } else if UIApplication.shared.applicationState == .active {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-            
             let message = (userInfo as [AnyHashable : AnyObject])["aps"]!["alert"] as! String
             let alertC = UIAlertController(title: "收到新的消息", message: message, preferredStyle: UIAlertControllerStyle.alert)
             let confrimAction = UIAlertAction(title: "查看", style: UIAlertActionStyle.destructive, handler: { (action) in
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "didReceiveRemoteNotificationOfJPush"), object: nil, userInfo: userInfo)
             })
-            let cancelAction = UIAlertAction(title: "忽略", style: UIAlertActionStyle.default, handler: { (action) in
-                
-            })
+            let cancelAction = UIAlertAction(title: "忽略", style: UIAlertActionStyle.default, handler: nil)
             alertC.addAction(confrimAction)
             alertC.addAction(cancelAction)
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)

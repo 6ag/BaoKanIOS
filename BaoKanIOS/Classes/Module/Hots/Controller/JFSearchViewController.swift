@@ -7,30 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFSearchViewController: UIViewController {
 
@@ -50,7 +26,7 @@ class JFSearchViewController: UIViewController {
         view.backgroundColor = BACKGROUND_COLOR
         navigationItem.titleView = searchTextField
         UIApplication.shared.keyWindow?.addSubview(searchKeyboardTableView)
-        searchKeyboardTableView.snp_makeConstraints { (make) in
+        searchKeyboardTableView.snp.makeConstraints { (make) in
             make.left.equalTo(70)
             make.top.equalTo(57)
             make.right.equalTo(-SCREEN_WIDTH * 0.05)
@@ -73,7 +49,7 @@ class JFSearchViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         searchTextField.endEditing(true)
-        self.searchKeyboardTableView.snp_updateConstraints({ (make) in
+        self.searchKeyboardTableView.snp.updateConstraints({ (make) in
             make.height.equalTo(0)
         })
         super.viewWillDisappear(animated)
@@ -132,8 +108,11 @@ class JFSearchViewController: UIViewController {
             
             // id越大，文章越新
             let minId = self.articleList.last?.id ?? "0"
+            
+            // 新数据里最大的id
+            let newMaxId = Int(list[0].id!)!
 
-            if Int(minId) > Int(list[0].id!) {
+            if Int(minId)! > newMaxId {
                 self.articleList = self.articleList + list
             } else {
                 self.articleList = list
@@ -155,7 +134,7 @@ class JFSearchViewController: UIViewController {
         JFSearchKeyboardModel.loadSearchKeyList(keyboard) { (searchKeyboardModels, error) in
             
             guard let list = searchKeyboardModels else {
-                self.searchKeyboardTableView.snp_updateConstraints({ (make) in
+                self.searchKeyboardTableView.snp.updateConstraints({ (make) in
                     make.height.equalTo(0)
                 })
                 return
@@ -168,7 +147,7 @@ class JFSearchViewController: UIViewController {
             self.searchKeyboardTableView.searchKeyboardmodels = list
             
             // 更新高度
-            self.searchKeyboardTableView.snp_updateConstraints({ (make) in
+            self.searchKeyboardTableView.snp.updateConstraints({ (make) in
                 make.height.equalTo(list.count * 44)
             })
             
@@ -252,9 +231,10 @@ extension JFSearchViewController: UISearchBarDelegate {
         loadSearchResult(searchBar.text!, pageIndex: pageIndex)
         
         // 更新关联视图高度
-        self.searchKeyboardTableView.snp_updateConstraints({ (make) in
+        self.searchKeyboardTableView.snp.updateConstraints({ (make) in
             make.height.equalTo(0)
         })
+        
     }
     
 }
@@ -268,7 +248,7 @@ extension JFSearchViewController: JFSearchKeyboardTableViewDelegate {
      - parameter keyboard: 关键词
      */
     func didSelectedKeyboard(_ keyboard: String) {
-        searchKeyboardTableView.snp_updateConstraints { (make) in
+        searchKeyboardTableView.snp.updateConstraints { (make) in
             make.height.equalTo(0)
         }
         

@@ -7,30 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate {
     
@@ -73,7 +49,7 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
     // MARK: - 各种排序处理方法
     func sortItem(_ pan: UIPanGestureRecognizer) -> Void {
         let cell = pan.view as! JFEditColumnViewCell
-        let cellIndexPath = collectionView.indexPath(for: cell)
+        let cellIndexPath = collectionView.indexPath(for: cell)!
         
         // 开始 获取所以cell的attributes
         if pan.state == UIGestureRecognizerState.began {
@@ -96,10 +72,10 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
             let rect = CGRect(x: attributes.center.x - 6, y: attributes.center.y - 6, width: 12, height: 12)
             
             if rect.contains(CGPoint(x: pan.view!.center.x, y: pan.view!.center.y)) && cellIndexPath != attributes.indexPath {
-                if cellIndexPath?.row > attributes.indexPath.row {
+                if cellIndexPath.row > attributes.indexPath.row {
                     //后面跟前面交换
                     //交替操作0 1 2 3 变成（3<->2 3<->1 3<->0）
-                    for index in ((attributes.indexPath.row + 1)...cellIndexPath!.row).reversed() {
+                    for index in ((attributes.indexPath.row + 1)...cellIndexPath.row).reversed() {
                         let temp = selectedArray![index]
                         selectedArray![index] = selectedArray![index - 1]
                         selectedArray![index - 1] = temp
@@ -107,7 +83,7 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
                 } else {
                     //前面跟后面交换
                     //交替操作0 1 2 3 变成（0<->1 0<->2 0<->3）
-                    for index in cellIndexPath!.row ..< attributes.indexPath.row {
+                    for index in cellIndexPath.row ..< attributes.indexPath.row {
                         let temp = selectedArray![index]
                         selectedArray![index] = selectedArray![index + 1]
                         selectedArray![index + 1] = temp
@@ -115,7 +91,7 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
                 }
                 
                 isChange = true
-                collectionView.moveItem(at: cellIndexPath!, to: attributes.indexPath)
+                collectionView.moveItem(at: cellIndexPath, to: attributes.indexPath)
             } else {
                 isChange = false
             }
@@ -124,10 +100,10 @@ class JFEditColumnViewController: UIViewController, JFEditColumnViewCellDelegate
         
         if pan.state == UIGestureRecognizerState.ended {
             if !isChange {
-                cell.center = collectionView.layoutAttributesForItem(at: cellIndexPath!)!.center
+                cell.center = collectionView.layoutAttributesForItem(at: cellIndexPath)!.center
             }
         }
-        
+
         
     }
     

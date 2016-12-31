@@ -87,14 +87,17 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
             let maxId = self.photoList.first?.id ?? "0"
             let minId = self.photoList.last?.id ?? "0"
             
+            // 新数据里最大的id
+            let newMaxId = Int(list[0].id!)!
+            
             if method == 0 {
                 // 0下拉加载最新 - 会直接覆盖数据，用最新的10条数据
-                if Int(maxId)! < Int(list[0].id!)! {
+                if Int(maxId)! < newMaxId {
                     self.photoList = list
                 }
             } else {
                 // 1上拉加载更多 - 拼接数据
-                if Int(minId)! > Int(list[0].id!)! {
+                if Int(minId)! > newMaxId {
                     self.photoList = self.photoList + list
                 } else {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
@@ -130,14 +133,14 @@ class JFPhotoTableViewController: UITableViewController, SDCycleScrollViewDelega
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as! JFPhotoListCell).cellOffset()
+        _ = (cell as! JFPhotoListCell).cellOffset()
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let array = tableView.visibleCells
         for cell in array {
             // 里面的图片跟随移动
-            (cell as! JFPhotoListCell).cellOffset()
+           _ = (cell as! JFPhotoListCell).cellOffset()
         }
         
     }

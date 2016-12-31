@@ -134,11 +134,11 @@ class JFPhotoDetailCell: UICollectionViewCell {
         contentView.addSubview(scrollView)
         contentView.addSubview(indicator)
         
-        scrollView.snp_makeConstraints { (make) in
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
         
-        indicator.snp_makeConstraints { (make) in
+        indicator.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
     }

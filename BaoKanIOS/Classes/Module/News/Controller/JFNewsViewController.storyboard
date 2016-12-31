@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hz5-hD-UIz">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hz5-hD-UIz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--新闻-->
@@ -14,18 +17,18 @@
                         <viewControllerLayoutGuide type="bottom" id="fuU-RQ-tUC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rwb-V9-5e0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoview_image_default_white" translatesAutoresizingMaskIntoConstraints="NO" id="HvU-g6-pnF">
-                                <rect key="frame" x="0.0" y="265" width="600" height="70"/>
+                                <rect key="frame" x="0.0" y="298.5" width="375" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Xk1-DA-fQL"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-2X-T8b">
-                                <rect key="frame" x="560" y="64" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="335" y="64" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Myr-FY-0Ym"/>
                                     <constraint firstAttribute="width" constant="40" id="kmt-ii-9xV"/>
@@ -36,22 +39,22 @@
                                 </connections>
                             </button>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-EV-o5G" userLabel="contentScrollView">
-                                <rect key="frame" x="0.0" y="104" width="600" height="496"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="mqn-Xd-dLs" id="nNF-bf-4ZL"/>
                                 </connections>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-ZM-xaJ" userLabel="topScrollView">
-                                <rect key="frame" x="0.0" y="64" width="560" height="40"/>
-                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="64" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.23921568630000001" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cvn-BJ-qt9"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUp-nw-st3" userLabel="top">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.83137254901960778" green="0.23921568627450979" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.83137254901960778" green="0.23921568627450979" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="jq8-Eb-S0i"/>
                                 </constraints>
@@ -67,7 +70,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="FHU-EV-o5G" firstAttribute="top" secondItem="fNF-2X-T8b" secondAttribute="bottom" id="04j-Wk-wpa"/>
                             <constraint firstItem="V3q-ZM-xaJ" firstAttribute="leading" secondItem="rwb-V9-5e0" secondAttribute="leading" id="2Oa-Ga-56e"/>

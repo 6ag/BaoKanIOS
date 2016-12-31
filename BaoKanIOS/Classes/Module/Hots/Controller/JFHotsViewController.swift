@@ -30,6 +30,7 @@ class JFHotsViewController: UIViewController {
     @IBAction func didTappedSearchButton(_ sender: UIButton) {
         navigationController?.pushViewController(JFSearchViewController(), animated: true)
     }
+    
     // MARK: - 懒加载
     lazy var newsVc: JFNewsTableViewController = {
         let newsVc = JFNewsTableViewController()

@@ -127,11 +127,11 @@ class JFNewFeatureCell: UICollectionViewCell {
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         startButton.translatesAutoresizingMaskIntoConstraints = false
         
-        backgroundImageView.snp_makeConstraints { (make) in
+        backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
         }
         
-        startButton.snp_makeConstraints { (make) in
+        startButton.snp.makeConstraints { (make) in
             make.centerX.equalTo(contentView)
             make.bottom.equalTo(-100)
             make.size.equalTo(CGSize(width: 140, height: 40))

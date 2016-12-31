@@ -11,6 +11,12 @@
 		B204F35B1D12A25E00B8A87C /* JFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */; };
 		B214FA981D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B214FA961D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift */; };
 		B214FA991D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B214FA971D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib */; };
+		B21839F71E177F180016B472 /* JFNewsPhotoDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F11E177F180016B472 /* JFNewsPhotoDismissAnimation.swift */; };
+		B21839F81E177F180016B472 /* JFNewsPhotoModalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F21E177F180016B472 /* JFNewsPhotoModalAnimation.swift */; };
+		B21839F91E177F180016B472 /* JFNewsPhotoPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F31E177F180016B472 /* JFNewsPhotoPresentationController.swift */; };
+		B21839FA1E177F180016B472 /* JFPopoverDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F41E177F180016B472 /* JFPopoverDismissAnimation.swift */; };
+		B21839FB1E177F180016B472 /* JFPopoverModalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F51E177F180016B472 /* JFPopoverModalAnimation.swift */; };
+		B21839FC1E177F180016B472 /* JFPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21839F61E177F180016B472 /* JFPresentationController.swift */; };
 		B24B96F61D460ADC004B8BBE /* JFSearchKeyboardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B96F51D460ADC004B8BBE /* JFSearchKeyboardTableView.swift */; };
 		B24B96F81D460B10004B8BBE /* JFPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24B96F71D460B10004B8BBE /* JFPlaceholderView.swift */; };
 		B267FE421E16B25E00B1C1F7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B267FE411E16B25E00B1C1F7 /* Reachability.m */; };
@@ -25,12 +31,6 @@
 		B28A0ECF1D34CEDC00C387C7 /* JFHotsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */; };
 		B28A0ED01D34CEDC00C387C7 /* JFHotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ECE1D34CEDC00C387C7 /* JFHotsViewController.swift */; };
 		B28A0ED21D34D41E00C387C7 /* loading in Resources */ = {isa = PBXBuildFile; fileRef = B28A0ED11D34D41E00C387C7 /* loading */; };
-		B28A0EDA1D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED41D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift */; };
-		B28A0EDB1D34D59100C387C7 /* JFNewsPhotoModalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED51D34D59100C387C7 /* JFNewsPhotoModalAnimation.swift */; };
-		B28A0EDC1D34D59100C387C7 /* JFNewsPhotoPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED61D34D59100C387C7 /* JFNewsPhotoPresentationController.swift */; };
-		B28A0EDD1D34D59100C387C7 /* JFPopoverDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED71D34D59100C387C7 /* JFPopoverDismissAnimation.swift */; };
-		B28A0EDE1D34D59100C387C7 /* JFPopoverModalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED81D34D59100C387C7 /* JFPopoverModalAnimation.swift */; };
-		B28A0EDF1D34D59100C387C7 /* JFPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ED91D34D59100C387C7 /* JFPresentationController.swift */; };
 		B28A0EE11D34E74C00C387C7 /* JFCloseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0EE01D34E74C00C387C7 /* JFCloseDetailView.swift */; };
 		B28A0EE31D34F7F400C387C7 /* JFSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0EE21D34F7F400C387C7 /* JFSearchViewController.swift */; };
 		B28A0EE61D34FA3B00C387C7 /* JFSearchKeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0EE51D34FA3B00C387C7 /* JFSearchKeyboardModel.swift */; };
@@ -146,6 +146,12 @@
 		B204F35A1D12A25E00B8A87C /* JFCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFCommentCell.xib; sourceTree = "<group>"; };
 		B214FA961D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFDetailOtherNoneCell.swift; sourceTree = "<group>"; };
 		B214FA971D4B3480006A9DD6 /* JFDetailOtherNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JFDetailOtherNoneCell.xib; sourceTree = "<group>"; };
+		B21839F11E177F180016B472 /* JFNewsPhotoDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoDismissAnimation.swift; sourceTree = "<group>"; };
+		B21839F21E177F180016B472 /* JFNewsPhotoModalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoModalAnimation.swift; sourceTree = "<group>"; };
+		B21839F31E177F180016B472 /* JFNewsPhotoPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoPresentationController.swift; sourceTree = "<group>"; };
+		B21839F41E177F180016B472 /* JFPopoverDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPopoverDismissAnimation.swift; sourceTree = "<group>"; };
+		B21839F51E177F180016B472 /* JFPopoverModalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPopoverModalAnimation.swift; sourceTree = "<group>"; };
+		B21839F61E177F180016B472 /* JFPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPresentationController.swift; sourceTree = "<group>"; };
 		B24B96F51D460ADC004B8BBE /* JFSearchKeyboardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFSearchKeyboardTableView.swift; sourceTree = "<group>"; };
 		B24B96F71D460B10004B8BBE /* JFPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPlaceholderView.swift; sourceTree = "<group>"; };
 		B267FE401E16B25E00B1C1F7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -161,12 +167,6 @@
 		B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFHotsViewController.storyboard; sourceTree = "<group>"; };
 		B28A0ECE1D34CEDC00C387C7 /* JFHotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFHotsViewController.swift; sourceTree = "<group>"; };
 		B28A0ED11D34D41E00C387C7 /* loading */ = {isa = PBXFileReference; lastKnownFileType = folder; path = loading; sourceTree = "<group>"; };
-		B28A0ED41D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoDismissAnimation.swift; sourceTree = "<group>"; };
-		B28A0ED51D34D59100C387C7 /* JFNewsPhotoModalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoModalAnimation.swift; sourceTree = "<group>"; };
-		B28A0ED61D34D59100C387C7 /* JFNewsPhotoPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNewsPhotoPresentationController.swift; sourceTree = "<group>"; };
-		B28A0ED71D34D59100C387C7 /* JFPopoverDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPopoverDismissAnimation.swift; sourceTree = "<group>"; };
-		B28A0ED81D34D59100C387C7 /* JFPopoverModalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPopoverModalAnimation.swift; sourceTree = "<group>"; };
-		B28A0ED91D34D59100C387C7 /* JFPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFPresentationController.swift; sourceTree = "<group>"; };
 		B28A0EE01D34E74C00C387C7 /* JFCloseDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFCloseDetailView.swift; sourceTree = "<group>"; };
 		B28A0EE21D34F7F400C387C7 /* JFSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFSearchViewController.swift; sourceTree = "<group>"; };
 		B28A0EE51D34FA3B00C387C7 /* JFSearchKeyboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFSearchKeyboardModel.swift; sourceTree = "<group>"; };
@@ -337,6 +337,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B21839F01E177F180016B472 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				B21839F11E177F180016B472 /* JFNewsPhotoDismissAnimation.swift */,
+				B21839F21E177F180016B472 /* JFNewsPhotoModalAnimation.swift */,
+				B21839F31E177F180016B472 /* JFNewsPhotoPresentationController.swift */,
+				B21839F41E177F180016B472 /* JFPopoverDismissAnimation.swift */,
+				B21839F51E177F180016B472 /* JFPopoverModalAnimation.swift */,
+				B21839F61E177F180016B472 /* JFPresentationController.swift */,
+			);
+			name = Transition;
+			path = BaoKanIOS/Classes/Module/Main/Controller/Transition;
+			sourceTree = SOURCE_ROOT;
+		};
 		B24B96F41D460AC9004B8BBE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,19 +377,6 @@
 				B28A0EE21D34F7F400C387C7 /* JFSearchViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B28A0ED31D34D59100C387C7 /* Transition */ = {
-			isa = PBXGroup;
-			children = (
-				B28A0ED41D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift */,
-				B28A0ED51D34D59100C387C7 /* JFNewsPhotoModalAnimation.swift */,
-				B28A0ED61D34D59100C387C7 /* JFNewsPhotoPresentationController.swift */,
-				B28A0ED71D34D59100C387C7 /* JFPopoverDismissAnimation.swift */,
-				B28A0ED81D34D59100C387C7 /* JFPopoverModalAnimation.swift */,
-				B28A0ED91D34D59100C387C7 /* JFPresentationController.swift */,
-			);
-			path = Transition;
 			sourceTree = "<group>";
 		};
 		B28A0EE41D34FA2F00C387C7 /* Model */ = {
@@ -475,7 +476,6 @@
 		B29B5C5E1D1126F500C5AC8F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				B28A0ED31D34D59100C387C7 /* Transition */,
 				B29B5C5F1D1126F500C5AC8F /* Controller */,
 			);
 			path = Main;
@@ -504,6 +504,7 @@
 		B29B5C641D1126F500C5AC8F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B21839F01E177F180016B472 /* Transition */,
 				B29B5D891D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift */,
 				B29B5C651D1126F500C5AC8F /* JFCommentTableViewController.swift */,
 				B29B5C661D1126F500C5AC8F /* JFEditColumnViewController.swift */,
@@ -650,6 +651,8 @@
 				B29B5C961D1126F500C5AC8F /* Collection */,
 				B29B5C981D1126F500C5AC8F /* Comment */,
 				B29B5C9A1D1126F500C5AC8F /* Forgot */,
+				B29B5CA71D1126F500C5AC8F /* Login */,
+				B29B5CAA1D1126F500C5AC8F /* Register */,
 				B29B5C9D1D1126F500C5AC8F /* Info */,
 				B29B5CA11D1126F500C5AC8F /* JFAboutMeViewController.swift */,
 				B29B5CA21D1126F500C5AC8F /* JFBaseTableViewController.swift */,
@@ -657,8 +660,6 @@
 				B29B5CA41D1126F500C5AC8F /* JFProfileFeedbackViewController.swift */,
 				B29B5CA51D1126F500C5AC8F /* JFProfileViewController.storyboard */,
 				B29B5CA61D1126F500C5AC8F /* JFProfileViewController.swift */,
-				B29B5CA71D1126F500C5AC8F /* Login */,
-				B29B5CAA1D1126F500C5AC8F /* Register */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -867,7 +868,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 35PE24U644;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -984,6 +985,7 @@
 				B29B5D641D1126F500C5AC8F /* WebViewJavascriptBridge.m in Sources */,
 				B29B5D451D1126F500C5AC8F /* JFInfoHeaderView.swift in Sources */,
 				B29B5CFE1D1126F500C5AC8F /* JFCommon.swift in Sources */,
+				B21839F91E177F180016B472 /* JFNewsPhotoPresentationController.swift in Sources */,
 				B29B5D4A1D1126F500C5AC8F /* JFProfileTopButton.swift in Sources */,
 				B28A0ED01D34CEDC00C387C7 /* JFHotsViewController.swift in Sources */,
 				B29B5D9C1D1136AA00C5AC8F /* JFStarAndShareCell.swift in Sources */,
@@ -999,7 +1001,6 @@
 				B29B5D481D1126F500C5AC8F /* JFProfileHeaderView.swift in Sources */,
 				B29B5D531D1126F500C5AC8F /* JFNetworkTool.swift in Sources */,
 				B29B5D371D1126F500C5AC8F /* JFProfileFeedbackViewController.swift in Sources */,
-				B28A0EDD1D34D59100C387C7 /* JFPopoverDismissAnimation.swift in Sources */,
 				B29B5D2F1D1126F500C5AC8F /* JFForgotViewController.swift in Sources */,
 				B29B5DA41D1137C700C5AC8F /* JFNewsDALManager.swift in Sources */,
 				B29B5D021D1126F500C5AC8F /* UIView+Extension.swift in Sources */,
@@ -1013,6 +1014,7 @@
 				B29B5D091D1126F500C5AC8F /* JFEditColumnViewController.swift in Sources */,
 				B29B5CFC1D1126F500C5AC8F /* api.swift in Sources */,
 				B29B5D261D1126F500C5AC8F /* JFPhotoViewController.swift in Sources */,
+				B21839FB1E177F180016B472 /* JFPopoverModalAnimation.swift in Sources */,
 				B28A0EE11D34E74C00C387C7 /* JFCloseDetailView.swift in Sources */,
 				B29B5D471D1126F500C5AC8F /* JFProfileCell.swift in Sources */,
 				B28A0EE31D34F7F400C387C7 /* JFSearchViewController.swift in Sources */,
@@ -1026,7 +1028,6 @@
 				B29B5D351D1126F500C5AC8F /* JFBaseTableViewController.swift in Sources */,
 				B29B5D0F1D1126F500C5AC8F /* JFCommentModel.swift in Sources */,
 				B29B5D401D1126F500C5AC8F /* JFProfileCellArrowModel.swift in Sources */,
-				B28A0EDF1D34D59100C387C7 /* JFPresentationController.swift in Sources */,
 				B29B5D971D1136AA00C5AC8F /* JFNewsBottomBar.swift in Sources */,
 				B29B5D951D1136AA00C5AC8F /* JFDetailOtherCell.swift in Sources */,
 				B29B5D221D1126F500C5AC8F /* JFTopLabel.swift in Sources */,
@@ -1040,16 +1041,13 @@
 				B29B5D0E1D1126F500C5AC8F /* JFArticleDetailModel.swift in Sources */,
 				B29B5D2A1D1126F500C5AC8F /* JFPhotoDetailCell.swift in Sources */,
 				B29B5D2E1D1126F500C5AC8F /* JFCommentListTableViewController.swift in Sources */,
-				B28A0EDA1D34D59100C387C7 /* JFNewsPhotoDismissAnimation.swift in Sources */,
 				B267FE4C1E16B8E100B1C1F7 /* JFShareItemModel.swift in Sources */,
 				B29B5DA31D1137C700C5AC8F /* JFArticleStorage.swift in Sources */,
 				B29B5D001D1126F500C5AC8F /* String+Extension.swift in Sources */,
 				B29B5D121D1126F500C5AC8F /* JFEditColumnViewCell.swift in Sources */,
 				B29B5D541D1126F500C5AC8F /* JFProgressHUD.swift in Sources */,
 				B29B5D421D1126F500C5AC8F /* JFProfileCellLabelModel.swift in Sources */,
-				B28A0EDE1D34D59100C387C7 /* JFPopoverModalAnimation.swift in Sources */,
 				B29B5D331D1126F500C5AC8F /* JFModifySafeTableViewController.swift in Sources */,
-				B28A0EDC1D34D59100C387C7 /* JFNewsPhotoPresentationController.swift in Sources */,
 				B29B5D0D1D1126F500C5AC8F /* JFNewsViewController.swift in Sources */,
 				B29B5D0A1D1126F500C5AC8F /* JFNewsDetailViewController.swift in Sources */,
 				B29B5D231D1126F500C5AC8F /* JFPhotoDetailViewController.swift in Sources */,
@@ -1059,16 +1057,19 @@
 				B267FE421E16B25E00B1C1F7 /* Reachability.m in Sources */,
 				B29B5D461D1126F500C5AC8F /* JFLoginButton.swift in Sources */,
 				B29B5CFF1D1126F500C5AC8F /* Color+Extension.swift in Sources */,
+				B21839FA1E177F180016B472 /* JFPopoverDismissAnimation.swift in Sources */,
 				B29B5D2B1D1126F500C5AC8F /* JFPhotoListCell.swift in Sources */,
 				B29B5D051D1126F500C5AC8F /* JFNavigationController.swift in Sources */,
 				B29B5D361D1126F500C5AC8F /* JFDutyViewController.swift in Sources */,
 				B24B96F81D460B10004B8BBE /* JFPlaceholderView.swift in Sources */,
 				B29B5D321D1126F500C5AC8F /* JFModifyInfoTableViewController.swift in Sources */,
+				B21839F81E177F180016B472 /* JFNewsPhotoModalAnimation.swift in Sources */,
 				B29B5D0B1D1126F500C5AC8F /* JFNewsTableViewController.swift in Sources */,
+				B21839FC1E177F180016B472 /* JFPresentationController.swift in Sources */,
 				B29B5D281D1126F500C5AC8F /* JFPhotoBottomBar.swift in Sources */,
 				B29B5D201D1126F500C5AC8F /* JFNewsThreePicCell.swift in Sources */,
+				B21839F71E177F180016B472 /* JFNewsPhotoDismissAnimation.swift in Sources */,
 				B29B5D071D1126F500C5AC8F /* JFTabBarController.swift in Sources */,
-				B28A0EDB1D34D59100C387C7 /* JFNewsPhotoModalAnimation.swift in Sources */,
 				B29B5D411D1126F500C5AC8F /* JFProfileCellGroupModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1179,8 +1180,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BaoKanIOS/BaoKanIOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 35PE24U644;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
@@ -1192,8 +1193,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e367b40-a20a-4e1f-ade8-9a2624f6fbc7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC: cn.6ag.*";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1207,8 +1208,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BaoKanIOS/BaoKanIOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 35PE24U644;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BaoKanIOS/Info.plist;
@@ -1220,8 +1221,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.6ag.BaoKanIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e367b40-a20a-4e1f-ade8-9a2624f6fbc7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC: cn.6ag.*";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BaoKanIOS/Classes/Application/BaoKanIOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

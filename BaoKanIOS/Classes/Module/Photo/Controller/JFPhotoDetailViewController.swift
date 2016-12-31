@@ -129,31 +129,31 @@ class JFPhotoDetailViewController: UIViewController {
         bottomScrollView.addSubview(captionLabel)
         navigationBarView.addSubview(topTitleLabel)
         
-        topTitleLabel.snp_makeConstraints { (make) in
+        topTitleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(navigationBarView)
             make.top.equalTo(20)
             make.size.equalTo(CGSize(width: 80, height: 40))
         }
         
-        bottomToolView.snp_makeConstraints { (make) in
+        bottomToolView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(45)
         }
         
-        bottomBgView.snp_makeConstraints { (make) in
+        bottomBgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.bottom.equalTo(bottomToolView.snp_top)
+            make.bottom.equalTo(bottomToolView.snp.top)
             make.height.equalTo(40)
         }
         
-        bottomScrollView.snp_makeConstraints { (make) in
+        bottomScrollView.snp.makeConstraints { (make) in
             make.left.equalTo(12)
             make.width.equalTo(SCREEN_WIDTH - 24)
-            make.bottom.equalTo(bottomToolView.snp_top).offset(-30)
+            make.bottom.equalTo(bottomToolView.snp.top).offset(-30)
             make.height.equalTo(40)
         }
         
-        captionLabel.snp_makeConstraints { (make) in
+        captionLabel.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.width.equalTo(SCREEN_WIDTH - 30)
             make.top.equalTo(10)
@@ -170,24 +170,24 @@ class JFPhotoDetailViewController: UIViewController {
         view.layoutIfNeeded()
         // 如果文字高度超过50，就可以滑动
         if captionLabel.height > 50 {
-            bottomScrollView.snp_updateConstraints { (make) in
+            bottomScrollView.snp.updateConstraints { (make) in
                 make.height.equalTo(70)
             }
             bottomScrollView.contentSize = CGSize(width: 0, height: captionLabel.height + 20)
             bottomScrollView.isScrollEnabled = true
             
             // 重新约束背景
-            bottomBgView.snp_updateConstraints({ (make) in
+            bottomBgView.snp.updateConstraints({ (make) in
                 make.height.equalTo(110)
             })
         } else {
-            bottomScrollView.snp_updateConstraints { (make) in
+            bottomScrollView.snp.updateConstraints { (make) in
                 make.height.equalTo(captionLabel.height + 20)
             }
             bottomScrollView.isScrollEnabled = false
             
             // 重新约束背景 - 比滚动区域高度顶部高10 底部高30，加起来就是40
-            bottomBgView.snp_updateConstraints({ (make) in
+            bottomBgView.snp.updateConstraints({ (make) in
                 make.height.equalTo(captionLabel.height + 60)
             })
         }
@@ -300,7 +300,7 @@ extension JFPhotoDetailViewController: JFCommentCommitViewDelegate, JFPhotoBotto
      返回
      */
     func didTappedBackButton(_ button: UIButton) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     /**
@@ -538,7 +538,7 @@ extension JFPhotoDetailViewController: JFPhotoDetailCellDelegate {
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x <= -30 {
-            navigationController?.popViewController(animated: true)
+            _ = navigationController?.popViewController(animated: true)
         }
     }
     

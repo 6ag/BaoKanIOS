@@ -62,7 +62,12 @@ class JFNewsViewController: UIViewController {
      */
     func didReceiveRemoteNotificationOfJPush(_ notification: Notification) {
         
+        // 清除角标
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        JPUSHService.resetBadge()
+        
         if let userInfo = notification.userInfo {
+            print("准备处理通知 userInfo = \(userInfo)")
             guard let classid = userInfo["classid"] as? String, let id = userInfo["id"] as? String, let type = userInfo["type"] as? String else {return}
             
             if type == "photo" {
@@ -131,9 +136,7 @@ class JFNewsViewController: UIViewController {
         
         editColumnVc.selectedArray = selectedArray
         editColumnVc.optionalArray = optionalArray
-        present(editColumnVc, animated: true, completion: {
-            
-        })
+        present(editColumnVc, animated: true, completion: nil)
         
         UIView.animate(withDuration: 0.5, animations: {
             self.addButton.imageView!.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI) - 0.01)
@@ -290,7 +293,7 @@ class JFNewsViewController: UIViewController {
             topScrollView.addSubview(label)
             
             // 利用layout来自适应各种长度的label
-            label.snp_makeConstraints({ (make) -> Void in
+            label.snp.makeConstraints({ (make) in
                 make.left.equalTo(leftMargin + 15)
                 make.centerY.equalTo(topScrollView)
             })
@@ -410,6 +413,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
             index2 = 0
         }
         
+        // 这样做可以预加载 增加用户体验
         addContentViewController(index1)
         addContentViewController(index2)
     }
@@ -445,7 +449,7 @@ extension JFNewsViewController: UIScrollViewDelegate {
 
 }
 
-// MARK: - 栏目管理自定义转场动画事件
+// MARK: - 栏目管理自定义转场动画
 extension JFNewsViewController: UIViewControllerTransitioningDelegate {
     
     /**

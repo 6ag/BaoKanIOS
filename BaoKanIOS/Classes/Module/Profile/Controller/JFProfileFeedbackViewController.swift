@@ -80,7 +80,7 @@ class JFProfileFeedbackViewController: JFBaseTableViewController {
                 // 返回上一级控制器
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)) {
                     _ = self.navigationController?.popViewController(animated: true)
-
+                    
                 }
                 
             }
