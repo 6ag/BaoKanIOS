@@ -651,7 +651,7 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
             ]
         }
         
-        JFNetworkTool.shareNetworkTool.get(SUBMIT_COMMENT, parameters: parameters) { (status, result, tipString) in
+        JFNetworkTool.shareNetworkTool.post(SUBMIT_COMMENT, parameters: parameters) { (status, result, tipString) in
             if status == .success {
                 // 加载数据
                 self.loadCommentList(Int(self.articleParam!.classid)!, id: Int(self.articleParam!.id)!)
