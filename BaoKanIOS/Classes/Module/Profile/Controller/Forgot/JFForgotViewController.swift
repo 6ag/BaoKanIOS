@@ -38,13 +38,17 @@ class JFForgotViewController: UIViewController {
     }
     
     @IBAction func didChangeTextField(_ sender: UITextField) {
-        if (usernameField.text?.characters.count)! > 5 && (emailField.text?.characters.count)! > 5 {
-            retrieveButton.isEnabled = true
-            retrieveButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
-        } else {
-            retrieveButton.isEnabled = false
-            retrieveButton.backgroundColor = UIColor.gray
+        if let username = usernameField.text {
+            if let email = emailField.text {
+                if username.characters.count > 5 && email.characters.count > 5 {
+                    retrieveButton.isEnabled = true
+                    retrieveButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
+                    return
+                }
+            }
         }
+        retrieveButton.isEnabled = false
+        retrieveButton.backgroundColor = UIColor.gray
     }
     
     @IBAction func didTappedBackButton() {

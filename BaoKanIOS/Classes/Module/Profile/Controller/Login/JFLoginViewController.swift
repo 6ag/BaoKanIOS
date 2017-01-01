@@ -8,30 +8,6 @@
 
 import UIKit
 import pop
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate {
     
@@ -97,7 +73,7 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
             
             // 发送登录请求
             JFNetworkTool.shareNetworkTool.post(LOGIN, parameters: parameters) { (status, result, tipString) in
-                print(result)
+                
                 if status == .success {
                     // 保存账号和密码
                     UserDefaults.standard.set(self.usernameField.text, forKey: "username")
@@ -120,13 +96,18 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
     }
     
     @IBAction func didChangeTextField(_ sender: UITextField) {
-        if usernameField.text?.characters.count > 5 && passwordField.text?.characters.count > 5 {
-            loginButton.isEnabled = true
-            loginButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
-        } else {
-            loginButton.isEnabled = false
-            loginButton.backgroundColor = UIColor.gray
+        if let username = usernameField.text {
+            if let password = passwordField.text {
+                if username.characters.count > 5 && password.characters.count > 5 {
+                    loginButton.isEnabled = true
+                    loginButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
+                    return
+                }
+            }
         }
+        loginButton.isEnabled = false
+        loginButton.backgroundColor = UIColor.gray
+        
     }
     
     @IBAction func didTappedBackButton() {

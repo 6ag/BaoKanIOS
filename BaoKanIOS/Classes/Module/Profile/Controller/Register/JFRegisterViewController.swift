@@ -7,30 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 protocol JFRegisterViewControllerDelegate {
     func registerSuccess(_ username: String, password: String)
@@ -77,18 +53,27 @@ class JFRegisterViewController: UIViewController {
     }
     
     @IBAction func didChangeTextField(_ sender: UITextField) {
-        if usernameField.text?.characters.count > 5 && passwordField1.text?.characters.count > 5 && passwordField2.text?.characters.count > 5 && emailField.text?.characters.count > 5 {
-            registerButton.isEnabled = true
-            registerButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
-        } else {
-            registerButton.isEnabled = false
-            registerButton.backgroundColor = UIColor.gray
+        if let username = usernameField.text {
+            if let password1 = passwordField1.text {
+                if let password2 = passwordField2.text {
+                    if let email = emailField.text {
+                        if username.characters.count > 5 && password1.characters.count > 5 && password2.characters.count > 5 && email.characters.count > 5 {
+                            registerButton.isEnabled = true
+                            registerButton.backgroundColor = UIColor(red: 32/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1)
+                            return
+                        }
+                    }
+                }
+            }
         }
+        registerButton.isEnabled = false
+        registerButton.backgroundColor = UIColor.gray
+        
     }
     
     @IBAction func didTappedBackButton() {
         view.endEditing(true)
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didTappedLoginButton(_ sender: JFLoginButton) {

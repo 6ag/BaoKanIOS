@@ -44,6 +44,7 @@ extension JFNetworkTool {
     func get(_ APIString: String, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        print("APIString = \(APIString)")
         Alamofire.request(APIString, method: .get, parameters: parameters, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }
@@ -60,6 +61,7 @@ extension JFNetworkTool {
     func post(_ APIString: String, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        print("APIString = \(APIString)")
         Alamofire.request(APIString, method: .post, parameters: parameters, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }
