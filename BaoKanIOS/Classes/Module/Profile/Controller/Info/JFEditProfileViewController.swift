@@ -62,7 +62,7 @@ class JFEditProfileViewController: JFBaseTableViewController {
         let action1 = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (action) in
             JFAccountModel.logout()
             JFProgressHUD.showSuccessWithStatus("退出成功")
-            self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
         let action2 = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (action) in
             

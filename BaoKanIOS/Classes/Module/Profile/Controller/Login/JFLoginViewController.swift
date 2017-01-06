@@ -85,6 +85,11 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
                         account.updateUserInfo()
                         self.didTappedBackButton()
                     }
+                } else if result != nil {
+                    guard let result = result else {
+                        return
+                    }
+                    JFProgressHUD.showInfoWithStatus(result["data"].dictionaryValue["info"]!.stringValue)
                 }
                 
                 // 结束动画

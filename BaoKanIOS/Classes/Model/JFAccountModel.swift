@@ -68,7 +68,9 @@ class JFAccountModel: NSObject, NSCoding {
             
             JFNetworkTool.shareNetworkTool.post(GET_USERINFO, parameters: parameters, finished: { (status, result, tipString) in
                 
+                // 更新失败则注销登录
                 if status != .success {
+                    JFAccountModel.logout()
                     return
                 }
                 

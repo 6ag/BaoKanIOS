@@ -109,18 +109,18 @@ class JFNewsPhotoBrowserViewController: UIViewController {
         bottomToolView.addSubview(bottomTitleLabel)
         bottomToolView.addSubview(bottomSaveButton)
         
-        bottomToolView.snp_makeConstraints { (make) in
+        bottomToolView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(45)
         }
         
-        bottomTitleLabel.snp_makeConstraints { (make) in
+        bottomTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(10)
             make.width.equalTo(SCREEN_WIDTH - 50)
         }
         
-        bottomSaveButton.snp_makeConstraints { (make) in
+        bottomSaveButton.snp.makeConstraints { (make) in
             make.top.equalTo(7.5)
             make.right.equalTo(-10)
             make.size.equalTo(CGSize(width: 25, height: 25))
@@ -128,7 +128,7 @@ class JFNewsPhotoBrowserViewController: UIViewController {
         
         // 更新底部工具条高度
         view.layoutIfNeeded()
-        bottomToolView.snp_updateConstraints { (make) in
+        bottomToolView.snp.updateConstraints { (make) in
             make.height.equalTo(bottomTitleLabel.height + 20)
         }
         
