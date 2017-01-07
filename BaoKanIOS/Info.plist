@@ -56,7 +56,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>10</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -98,6 +98,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>App需要您的同意,才能访问媒体资料库</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App需要您的同意,才能访问相机</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要您的同意,才能访问相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -124,14 +130,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <!-- 相册 -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>App需要您的同意,才能访问相册</string>
-    <!-- 相机 -->
-    <key>NSCameraUsageDescription</key>
-    <string>App需要您的同意,才能访问相机</string>
-    <!-- 媒体资料库 --> 
-    <key>NSAppleMusicUsageDescription</key> 
-    <string>App需要您的同意,才能访问媒体资料库</string>
 </dict>
 </plist>
