@@ -222,7 +222,7 @@ let QQ_APP_KEY = "WfKZYbDH68l7s9AU"
 /// 微博
 let WB_APP_KEY = "2664017296"
 let WB_APP_SECRET = "6c5b97909709e89a72c0f949cc23f5f0"
-let WB_REDIRECT_URL = "https://blog.6ag.cn"
+let WB_REDIRECT_URL = "http://www.baokan.tv"
 
 /// 极光推送
 let JPUSH_APP_KEY = "8e0c2d457d44144fd2a6dc52"

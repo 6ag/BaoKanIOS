@@ -98,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
     fileprivate func setupShareSDK() {
         
         ShareSDK.registerApp(SHARESDK_APP_KEY, activePlatforms:[
+            SSDKPlatformType.typeSinaWeibo.rawValue,
             SSDKPlatformType.typeQQ.rawValue,
             SSDKPlatformType.typeWechat.rawValue],
                              onImport: { (platform : SSDKPlatformType) in
@@ -106,6 +107,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
                                     ShareSDKConnector.connectWeChat(WXApi.classForCoder())
                                 case SSDKPlatformType.typeQQ:
                                     ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
+                                case SSDKPlatformType.typeSinaWeibo:
+                                    ShareSDKConnector.connectWeibo(WeiboSDK.classForCoder())
                                 default:
                                     break
                                 }
@@ -122,6 +125,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, JPUSHRegisterDelegate {
                 appInfo?.ssdkSetupQQ(byAppId: QQ_APP_ID,
                                      appKey : QQ_APP_KEY,
                                      authType : SSDKAuthTypeBoth)
+            case SSDKPlatformType.typeSinaWeibo:
+                appInfo?.ssdkSetupSinaWeibo(byAppKey: WB_APP_KEY,
+                                            appSecret: WB_APP_SECRET,
+                                            redirectUri: WB_REDIRECT_URL,
+                                            authType: SSDKAuthTypeBoth)
             default:
                 break
             }

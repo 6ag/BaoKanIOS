@@ -20,6 +20,9 @@
 //微信SDK头文件
 #import "WXApi.h"
 
+//新浪微博SDK头文件
+#import "WeiboSDK.h"
+
 #import "WebViewJavascriptBridge.h"
 #import "JFNoHighlightedButton.h"
 #import "JFObjcTool.h"

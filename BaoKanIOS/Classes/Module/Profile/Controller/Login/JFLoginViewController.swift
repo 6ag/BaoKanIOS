@@ -160,6 +160,8 @@ class JFLoginViewController: UIViewController, JFRegisterViewControllerDelegate 
      */
     func SDKLoginHandle(_ nickname: String, avatar: String, uid: String, type: Int) {
         
+        print("nickname = \(nickname) avatar = \(avatar) uid = \(uid)")
+        
         let string = uid.characters.count >= 12 ? (uid as NSString).substring(to: 12) : uid
         var lowerString = string.lowercased()
         lowerString = type == 1 ? "qq_\(lowerString)" : "wb_\(lowerString)"

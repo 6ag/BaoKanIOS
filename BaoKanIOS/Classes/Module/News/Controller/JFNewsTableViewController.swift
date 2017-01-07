@@ -187,27 +187,24 @@ class JFNewsTableViewController: UIViewController, SDCycleScrollViewDelegate {
             }
             
             // id越大，文章越新
-            let maxId = self.articleList.first?.id ?? "0"
             let minId = self.articleList.last?.id ?? "0"
             
             // 新数据里最大的id
             let newMaxId = Int(list[0].id!)!
             
             if method == 0 {
-                // 0下拉加载最新 - 会直接覆盖数据，用最新的10条数据
-                if Int(maxId)! < newMaxId {
-                    self.articleList = list
-                }
+                self.articleList = list
+                self.tableView.reloadData()
             } else {
                 // 1上拉加载更多 - 拼接数据
                 if Int(minId)! > newMaxId {
                     self.articleList = self.articleList + list
+                    self.tableView.reloadData()
                 } else {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
             }
             
-            self.tableView.reloadData()
         }
         
     }
