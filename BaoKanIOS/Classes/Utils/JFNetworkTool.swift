@@ -28,7 +28,7 @@ class JFNetworkTool: NSObject {
     
     /// 网络工具类单例
     static let shareNetworkTool = JFNetworkTool()
-
+    
 }
 
 // MARK: - 基础请求方法
@@ -104,26 +104,40 @@ extension JFNetworkTool {
      - parameter finished:   完成回调
      */
     func uploadUserAvatar(_ APIString: String, imagePath: URL, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
+        print("APIString=\(APIString)")
         
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let headers = ["content-type" : "multipart/form-data"]
+        // 字符串转data型
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            
             for (key, value) in parameters! {
-//                multipartFormData.append(value.data(using: String.Encoding.utf8), withName: key)
+                let data = (value as AnyObject).data!(using: String.Encoding.utf8.rawValue)!
+                multipartFormData.append(data, withName: key)
             }
+            
             // 文件流方式上传图片 - 后端根据tempName进行操作上传文件
             multipartFormData.append(imagePath, withName: "file")
-            
-        }, to: APIString, encodingCompletion: { (encodingResult) in
-//            switch encodingResult {
-//            case .Success(let upload, _, _):
-//                upload.responseJSON { response in
-//                    finished(success: true, result: nil, error: nil)
-//                }
-//            case .Failure(let encodingError):
-//                print(encodingError)
-//                finished(false, nil, nil)
-//            }
+        },
+                         to: APIString,
+                         headers: headers,
+                         encodingCompletion: { encodingResult in
+                            switch encodingResult {
+                            case .success(let upload, _, _):
+                                upload.responseJSON { response in
+                                    if let data = response.data {
+                                        let json = JSON(data: data)
+                                        finished(.success, json, nil)
+                                    } else {
+                                        JFProgressHUD.showInfoWithStatus("您的网络不给力哦")
+                                        finished(.failure, nil, response.result.error?.localizedDescription)
+                                    }
+                                }
+                            case .failure(let encodingError):
+                                print(encodingError)
+                                JFProgressHUD.showInfoWithStatus("您的网络不给力哦")
+                                finished(.failure, nil, encodingError.localizedDescription)
+                            }
         })
-        
     }
     
     /**
