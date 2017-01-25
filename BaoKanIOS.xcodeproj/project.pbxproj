@@ -120,7 +120,6 @@
 		B29B5D741D11290800C5AC8F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D731D11290800C5AC8F /* Security.framework */; };
 		B29B5D761D11291F00C5AC8F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D751D11291F00C5AC8F /* SystemConfiguration.framework */; };
 		B29B5D781D11292900C5AC8F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D771D11292900C5AC8F /* CoreTelephony.framework */; };
-		B29B5D7A1D11293600C5AC8F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D791D11293600C5AC8F /* CoreFoundation.framework */; };
 		B29B5D7C1D11293E00C5AC8F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D7B1D11293E00C5AC8F /* CFNetwork.framework */; };
 		B29B5D7E1D11294400C5AC8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D7D1D11294400C5AC8F /* libz.tbd */; };
 		B29B5D821D11299D00C5AC8F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D811D11299D00C5AC8F /* libstdc++.tbd */; };
@@ -168,6 +167,11 @@
 		B267FE511E16CF3F00B1C1F7 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		B2758C961E38361A00672532 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		B2758C981E38363600672532 /* UIImageViewWebImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewWebImage.swift; sourceTree = "<group>"; };
+		B2758CE71E38547000672532 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B2758CE91E38547900672532 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B2758CEB1E38548700672532 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		B2758CED1E38572F00672532 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B2758CEF1E38574800672532 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFHotsViewController.storyboard; sourceTree = "<group>"; };
 		B28A0ECE1D34CEDC00C387C7 /* JFHotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFHotsViewController.swift; sourceTree = "<group>"; };
 		B28A0ED11D34D41E00C387C7 /* loading */ = {isa = PBXFileReference; lastKnownFileType = folder; path = loading; sourceTree = "<group>"; };
@@ -301,7 +305,6 @@
 				B29B5D821D11299D00C5AC8F /* libstdc++.tbd in Frameworks */,
 				B29B5D7C1D11293E00C5AC8F /* CFNetwork.framework in Frameworks */,
 				B267FE461E16B75400B1C1F7 /* jpush-ios-3.0.0.a in Frameworks */,
-				B29B5D7A1D11293600C5AC8F /* CoreFoundation.framework in Frameworks */,
 				B29B5D781D11292900C5AC8F /* CoreTelephony.framework in Frameworks */,
 				B267FE451E16B75400B1C1F7 /* jcore-ios-1.0.0.a in Frameworks */,
 				B29B5D761D11291F00C5AC8F /* SystemConfiguration.framework in Frameworks */,
@@ -321,6 +324,11 @@
 		126A5A0847F71F8A2228F12A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2758CEF1E38574800672532 /* QuartzCore.framework */,
+				B2758CED1E38572F00672532 /* UIKit.framework */,
+				B2758CEB1E38548700672532 /* CoreText.framework */,
+				B2758CE91E38547900672532 /* MobileCoreServices.framework */,
+				B2758CE71E38547000672532 /* Accelerate.framework */,
 				B267FE511E16CF3F00B1C1F7 /* libresolv.tbd */,
 				B267FE4E1E16C34400B1C1F7 /* UserNotifications.framework */,
 				B29B5D811D11299D00C5AC8F /* libstdc++.tbd */,

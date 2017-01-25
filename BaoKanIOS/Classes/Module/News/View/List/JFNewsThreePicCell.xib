@@ -101,7 +101,7 @@
                     <constraint firstAttribute="trailing" secondItem="8lG-72-axZ" secondAttribute="trailing" constant="15" id="kaz-lY-BEz"/>
                     <constraint firstItem="8lG-72-axZ" firstAttribute="top" secondItem="xSg-Yp-hNB" secondAttribute="top" id="n81-9F-btK"/>
                     <constraint firstItem="g8O-6a-yp1" firstAttribute="centerY" secondItem="gJ2-8x-pcN" secondAttribute="centerY" id="n9L-Sl-OgD"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="swU-jX-mpa" secondAttribute="trailing" constant="15" id="vY5-wr-xaI"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="swU-jX-mpa" secondAttribute="trailing" constant="10" id="vY5-wr-xaI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

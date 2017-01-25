@@ -32,23 +32,23 @@ class JFInfoHeaderView: UIView {
         addSubview(levelLabel)
         addSubview(pointsLabel)
         
-        avatarImageView.snp_makeConstraints { (make) in
+        avatarImageView.snp.makeConstraints { (make) in
             make.left.equalTo(MARGIN)
             make.centerY.equalTo(self)
             make.size.equalTo(CGSize(width: 50, height: 50))
         }
         
-        usernameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(avatarImageView.snp_right).offset(20)
+        usernameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(avatarImageView.snp.right).offset(20)
             make.top.equalTo(avatarImageView).offset(2)
         }
         
-        levelLabel.snp_makeConstraints { (make) in
+        levelLabel.snp.makeConstraints { (make) in
             make.left.equalTo(usernameLabel)
             make.bottom.equalTo(avatarImageView).offset(-2)
         }
         
-        pointsLabel.snp_makeConstraints { (make) in
+        pointsLabel.snp.makeConstraints { (make) in
             make.top.equalTo(avatarImageView)
             make.right.equalTo(-MARGIN)
         }

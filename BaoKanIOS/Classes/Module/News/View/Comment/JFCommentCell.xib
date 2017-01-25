@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,12 +24,6 @@
                             <constraint firstAttribute="height" constant="25" id="Umc-hC-NIl"/>
                             <constraint firstAttribute="width" constant="25" id="cJN-sS-vKw"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <real key="value" value="12.5"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYE-iE-0cR">
                         <rect key="frame" x="51" y="21" width="40" height="20"/>
@@ -38,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DQ-y4-mGp">
-                        <rect key="frame" x="51" y="69" width="306" height="20"/>
+                        <rect key="frame" x="51" y="69" width="39.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -91,7 +85,7 @@
                     <constraint firstItem="hpD-w9-pLB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="nTH-NJ-eVH"/>
                     <constraint firstItem="LYE-iE-0cR" firstAttribute="centerY" secondItem="hpD-w9-pLB" secondAttribute="centerY" id="ncC-Kw-6jK"/>
                     <constraint firstItem="RC5-NI-Pd0" firstAttribute="top" secondItem="LYE-iE-0cR" secondAttribute="top" id="ujL-ms-hDs"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="6DQ-y4-mGp" secondAttribute="trailing" constant="10" id="vpL-ag-3Ds"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="6DQ-y4-mGp" secondAttribute="trailing" constant="10" id="vpL-ag-3Ds"/>
                     <constraint firstItem="LYE-iE-0cR" firstAttribute="leading" secondItem="hpD-w9-pLB" secondAttribute="trailing" constant="8" id="y1S-aU-nhl"/>
                     <constraint firstAttribute="trailing" secondItem="81S-QC-j0r" secondAttribute="trailing" id="yVa-4L-RFh"/>
                     <constraint firstItem="esp-GF-hwC" firstAttribute="top" secondItem="LYE-iE-0cR" secondAttribute="top" id="zlM-6f-TmC"/>

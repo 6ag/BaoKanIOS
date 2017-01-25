@@ -314,7 +314,6 @@ extension JFProfileViewController: JFShareViewDelegate {
             platformType = SSDKPlatformType.subTypeWechatTimeline
         }
         
-        // 从缓存中获取标题图片
         var image = UIImage(named: "launchScreen")!
         if image.size.width > 300 || image.size.height > 300 {
             image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
@@ -323,8 +322,8 @@ extension JFProfileViewController: JFShareViewDelegate {
         let shareParames = NSMutableDictionary()
         shareParames.ssdkSetupShareParams(byText: "爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
                                           images : image,
-                                          url : URL(string:"https://itunes.apple.com/cn/app/id\(APPLE_ID)"),
-                                          title : "爆侃网文",
+                                          url : URL(string:"http://www.baokan.tv/wapapp/index.html"),
+                                          title : "爆侃网文让您的网文之路不再孤单！",
                                           type : SSDKContentType.auto)
         
         ShareSDK.share(platformType, parameters: shareParames) { (state, _, entity, error) in

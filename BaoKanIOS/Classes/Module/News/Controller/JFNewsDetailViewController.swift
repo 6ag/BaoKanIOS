@@ -19,6 +19,9 @@ class JFNewsDetailViewController: UIViewController {
     /// 文章详情请求参数
     var articleParam: (classid: String, id: String)?
     
+    /// 是否是分享文章
+    var isShareArticle = true
+    
     /// 详情页面模型
     var model: JFArticleDetailModel? {
         didSet {
@@ -86,14 +89,8 @@ class JFNewsDetailViewController: UIViewController {
      */
     func saveAdImage(_ longPress: UILongPressGestureRecognizer) {
         if longPress.state == .began {
-            let alertC = UIAlertController(title: "保存图片到相册", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-            let save = UIAlertAction(title: "保存", style: UIAlertActionStyle.default) { (action) in
-                UIImageWriteToSavedPhotosAlbum(self.adImageView.image!, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-            }
-            let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (action) in }
-            alertC.addAction(save)
-            alertC.addAction(cancel)
-            present(alertC, animated: true) {}
+            isShareArticle = false
+            shareView.showShareView()
         }
     }
     
@@ -612,6 +609,7 @@ extension JFNewsDetailViewController: JFNewsBottomBarDelegate, JFCommentCommitVi
             return
         }
         
+        isShareArticle = true
         // 弹出分享视图
         shareView.showShareView()
         
@@ -861,20 +859,34 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate, JFShareViewDel
         
         guard let currentModel = model, let picUrl = model?.titlepic, var titleurl = model?.titleurl else {return nil}
         
-        var image = YYImageCache.shared().getImageForKey(picUrl)
-        if image != nil && (image!.size.width > 300.0 || image!.size.height > 300.0) {
-            image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+        let shareParames = NSMutableDictionary()
+        if isShareArticle {
+            var image = YYImageCache.shared().getImageForKey(picUrl)
+            if image != nil && (image!.size.width > 300.0 || image!.size.height > 300.0) {
+                image = image?.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image!.size.height / image!.size.width))
+            }
+            
+            // 判断标题url是否带baseurl
+            titleurl = currentModel.titleurl!.hasPrefix("http") ? titleurl : "\(BASE_URL)\(titleurl)"
+            
+            shareParames.ssdkSetupShareParams(byText: currentModel.smalltext,
+                                              images : image,
+                                              url : URL(string: titleurl),
+                                              title : currentModel.title,
+                                              type : SSDKContentType.auto)
+        } else {
+            var image = UIImage(named: "launchScreen")!
+            if image.size.width > 300 || image.size.height > 300 {
+                image = image.resizeImageWithNewSize(CGSize(width: 300, height: 300 * image.size.height / image.size.width))
+            }
+            
+            shareParames.ssdkSetupShareParams(byText: "爆侃网文精心打造网络文学互动平台，专注最新文学市场动态，聚焦第一手网文圈资讯！",
+                                              images : image,
+                                              url : URL(string:"http://www.baokan.tv/wapapp/index.html"),
+                                              title : "爆侃网文让您的网文之路不再孤单！",
+                                              type : SSDKContentType.auto)
         }
         
-        // 判断标题url是否带baseurl
-        titleurl = currentModel.titleurl!.hasPrefix("http") ? titleurl : "\(BASE_URL)\(titleurl)"
-        
-        let shareParames = NSMutableDictionary()
-        shareParames.ssdkSetupShareParams(byText: currentModel.smalltext,
-                                                images : image,
-                                                url : URL(string: titleurl),
-                                                title : currentModel.title,
-                                                type : SSDKContentType.auto)
         return shareParames
     }
     
@@ -906,6 +918,7 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate, JFShareViewDel
      点击QQ分享
      */
     func didTappedQQButton(_ button: UIButton) {
+        isShareArticle = true
         shareWithType(SSDKPlatformType.subTypeQQFriend)
     }
     
@@ -913,6 +926,7 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate, JFShareViewDel
      点击了微信分享
      */
     func didTappedWeixinButton(_ button: UIButton) {
+        isShareArticle = true
         shareWithType(SSDKPlatformType.subTypeWechatSession)
     }
     
@@ -920,6 +934,7 @@ extension JFNewsDetailViewController: JFStarAndShareCellDelegate, JFShareViewDel
      点击了朋友圈分享
      */
     func didTappedFriendCircleButton(_ button: UIButton) {
+        isShareArticle = true
         shareWithType(SSDKPlatformType.subTypeWechatTimeline)
     }
     

@@ -25,11 +25,12 @@ class JFCommentCell: UITableViewCell {
     
     var commentModel: JFCommentModel? {
         didSet {
-            avatarImageView.yy_setImage(with: URL(string: commentModel!.userpic!), options: YYWebImageOptions.ignorePlaceHolder)
-            usernameLabel.text = commentModel!.plnickname!
-            timeLabel.text = commentModel!.saytime!
-            contentLabel.text = commentModel!.saytext!
-            starButton.setTitle("\(commentModel!.zcnum)", for: UIControlState())
+            guard let commentModel = commentModel else { return }
+            avatarImageView.setAvatarImage(urlString: commentModel.userpic, placeholderImage: UIImage(named: "default－portrait"))
+            usernameLabel.text = commentModel.plnickname
+            timeLabel.text = commentModel.saytime
+            contentLabel.text = commentModel.saytext
+            starButton.setTitle("\(commentModel.zcnum)", for: UIControlState())
         }
     }
     

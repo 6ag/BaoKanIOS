@@ -44,7 +44,7 @@ extension JFNetworkTool {
     func get(_ APIString: String, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        print("APIString = \(APIString)")
+//        print("APIString = \(APIString)")
         Alamofire.request(APIString, method: .get, parameters: parameters, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }
@@ -61,7 +61,7 @@ extension JFNetworkTool {
     func post(_ APIString: String, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        print("APIString = \(APIString)")
+//        print("APIString = \(APIString)")
         Alamofire.request(APIString, method: .post, parameters: parameters, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }
@@ -77,7 +77,7 @@ extension JFNetworkTool {
         
         switch response.result {
         case .success(let value):
-            print(value)
+//            print(value)
             let json = JSON(value)
             if json["err_msg"].string == "success" {
                 finished(.success, json, nil)
@@ -104,7 +104,7 @@ extension JFNetworkTool {
      - parameter finished:   完成回调
      */
     func uploadUserAvatar(_ APIString: String, imagePath: URL, parameters: [String : Any]?, finished: @escaping NetworkFinished) {
-        print("APIString=\(APIString)")
+//        print("APIString=\(APIString)")
         
         let headers = ["content-type" : "multipart/form-data"]
         // 字符串转data型

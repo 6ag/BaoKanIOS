@@ -20,6 +20,7 @@ class JFNewsOnePicCell: UITableViewCell {
             timeLabel.text = postModel.newstimeString
             commentLabel.text = postModel.plnum
             showNumLabel.text = postModel.onclick
+            
         }
     }
     

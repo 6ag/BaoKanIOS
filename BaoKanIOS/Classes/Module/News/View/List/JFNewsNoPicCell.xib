@@ -69,7 +69,7 @@
                     <constraint firstItem="yYm-NK-qEd" firstAttribute="leading" secondItem="saO-Pr-PwB" secondAttribute="trailing" constant="3" id="cXY-gl-Fa4"/>
                     <constraint firstItem="saO-Pr-PwB" firstAttribute="leading" secondItem="wJp-UV-yQZ" secondAttribute="trailing" constant="8" id="fGq-Us-pwb"/>
                     <constraint firstItem="saO-Pr-PwB" firstAttribute="leading" secondItem="5ek-NR-7Yd" secondAttribute="trailing" constant="8" id="fWE-AM-SGN"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aVY-09-LP1" secondAttribute="trailing" constant="15" id="z6N-0j-Rcy"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aVY-09-LP1" secondAttribute="trailing" constant="10" id="z6N-0j-Rcy"/>
                     <constraint firstItem="yYm-NK-qEd" firstAttribute="centerY" secondItem="saO-Pr-PwB" secondAttribute="centerY" id="zkl-yN-fRk"/>
                 </constraints>
                 <variation key="default">

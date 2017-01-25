@@ -182,7 +182,7 @@ extension JFNewsDALManager {
             
             if status == .success {
                 finished(result, nil)
-                print("加载了本地数据 \(result)")
+//                print("加载了本地数据 \(result)")
                 return
             }
             
@@ -365,7 +365,7 @@ extension JFNewsDALManager {
                 let newsJson = result?.string(forColumn: "news")
                 let json = JSON.parse(string: newsJson!)
                 finished(.success, json, nil)
-                print("从缓存中取正文数据 \(json)")
+//                print("从缓存中取正文数据 \(json)")
                 result?.close()
                 return
             }

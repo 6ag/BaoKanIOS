@@ -111,7 +111,7 @@ class JFNewsPhotoBrowserViewController: UIViewController {
         
         bottomToolView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
-            make.height.equalTo(45)
+            make.height.equalTo(60)
         }
         
         bottomTitleLabel.snp.makeConstraints { (make) in
