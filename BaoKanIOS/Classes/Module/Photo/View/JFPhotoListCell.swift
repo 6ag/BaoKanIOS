@@ -46,6 +46,18 @@ class JFPhotoListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // 离屏渲染 - 异步绘制
+        layer.drawsAsynchronously = true
+        
+        // 栅格化 - 异步绘制之后，会生成一张独立的图像，cell在屏幕上滚动的时候，本质滚动的是这张图片
+        layer.shouldRasterize = true
+        
+        // 使用栅格化，需要指定分辨率
+        layer.rasterizationScale = UIScreen.main.scale
+    }
+    
     /**
      准备UI
      */

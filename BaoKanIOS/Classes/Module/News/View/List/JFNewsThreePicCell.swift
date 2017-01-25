@@ -13,27 +13,30 @@ class JFNewsThreePicCell: UITableViewCell {
     
     var postModel: JFArticleListModel? {
         didSet {
-            if postModel?.morepic?.count == 1 {
+            guard let postModel = postModel else { return }
+            
+            // 防止数据问题出此下策
+            if postModel.morepic?.count == 1 {
                 iconView1.image = nil
-                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
-            } else if postModel?.morepic?.count == 2 {
+                iconView1.setImage(urlString: postModel.morepic?[0] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+            } else if postModel.morepic?.count == 2 {
                 iconView1.image = nil
                 iconView2.image = nil
-                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView2.yy_setImage(with: URL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
-            } else if postModel?.morepic?.count == 3 {
+                iconView1.setImage(urlString: postModel.morepic?[0] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+                iconView2.setImage(urlString: postModel.morepic?[1] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+            } else if postModel.morepic?.count == 3 {
                 iconView1.image = nil
                 iconView2.image = nil
                 iconView3.image = nil
-                iconView1.yy_setImage(with: URL(string: postModel!.morepic![0]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView2.yy_setImage(with: URL(string: postModel!.morepic![1]), placeholder: UIImage(named: "placeholder_logo"))
-                iconView3.yy_setImage(with: URL(string: postModel!.morepic![2]), placeholder: UIImage(named: "placeholder_logo"))
+                iconView1.setImage(urlString: postModel.morepic?[0] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+                iconView2.setImage(urlString: postModel.morepic?[1] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+                iconView3.setImage(urlString: postModel.morepic?[2] ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
             }
             
-            articleTitleLabel.text = postModel?.title!
-            timeLabel.text = postModel?.newstimeString
-            commentLabel.text = postModel?.plnum!
-            showNumLabel.text = postModel?.onclick!
+            articleTitleLabel.text = postModel.title
+            timeLabel.text = postModel.newstimeString
+            commentLabel.text = postModel.plnum
+            showNumLabel.text = postModel.onclick
         }
     }
     
@@ -44,11 +47,6 @@ class JFNewsThreePicCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var showNumLabel: UILabel!
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        articleTitleLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 30
-    }
     
     /**
      计算行高
@@ -58,4 +56,17 @@ class JFNewsThreePicCell: UITableViewCell {
         layoutIfNeeded()
         return timeLabel.frame.maxY + 15
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // 离屏渲染 - 异步绘制
+        layer.drawsAsynchronously = true
+        
+        // 栅格化 - 异步绘制之后，会生成一张独立的图像，cell在屏幕上滚动的时候，本质滚动的是这张图片
+        layer.shouldRasterize = true
+        
+        // 使用栅格化，需要指定分辨率
+        layer.rasterizationScale = UIScreen.main.scale
+    }
+    
 }

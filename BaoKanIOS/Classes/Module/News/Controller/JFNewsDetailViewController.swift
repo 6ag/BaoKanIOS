@@ -61,7 +61,7 @@ class JFNewsDetailViewController: UIViewController {
         super.viewDidLoad()
         
         adImageView.isUserInteractionEnabled = true
-        adImageView.image = UIImage(named: "temp_ad")
+        adImageView.image = UIImage(named: "temp_ad")?.redrawImage(size: adImageView.bounds.size)
         adImageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(saveAdImage(_:))))
         
         setupWebViewJavascriptBridge()
@@ -423,24 +423,19 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    // 预估高度
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
-    }
-    
     // 组头高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 1
+            return 0.1
         case 1:
             return 10
         case 2:
-            return otherLinks.count == 0 ? 1 : 30
+            return otherLinks.count == 0 ? 0.1 : 30
         case 3:
-            return commentList.count == 0 ? 1 : 35
+            return commentList.count == 0 ? 0.1 : 35
         default:
-            return 1
+            return 0.1
         }
     }
     
@@ -448,15 +443,15 @@ extension JFNewsDetailViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 1
+            return 0.1
         case 1:
             return 20
         case 2:
-            return otherLinks.count == 0 ? 1 : 15
+            return otherLinks.count == 0 ? 0.1 : 15
         case 3:
-            return commentList.count == 10 ? 100 : 20
+            return commentList.count == 10 ? 100 : (commentList.count > 0 ? 20 : 0.1)
         default:
-            return 1
+            return 0.1
         }
     }
     

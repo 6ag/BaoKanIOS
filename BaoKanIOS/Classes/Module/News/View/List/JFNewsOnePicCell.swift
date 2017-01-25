@@ -13,19 +13,14 @@ class JFNewsOnePicCell: UITableViewCell {
     
     var postModel: JFArticleListModel? {
         didSet {
+            guard let postModel = postModel else { return }
             iconView.image = nil
-            iconView.yy_setImage(with: URL(string: postModel!.titlepic!), placeholder: UIImage(named: "placeholder_logo"))
-            articleTitleLabel.text = postModel?.title!
-            timeLabel.text = postModel?.newstimeString
-            commentLabel.text = postModel?.plnum!
-            showNumLabel.text = postModel?.onclick!
+            iconView.setImage(urlString: postModel.titlepic ?? "", placeholderImage: UIImage(named: "placeholder_logo"))
+            articleTitleLabel.text = postModel.title
+            timeLabel.text = postModel.newstimeString
+            commentLabel.text = postModel.plnum
+            showNumLabel.text = postModel.onclick
         }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // 图片宽度固定
-        articleTitleLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 133
     }
     
     @IBOutlet weak var iconView: UIImageView!
@@ -34,4 +29,15 @@ class JFNewsOnePicCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var showNumLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // 离屏渲染 - 异步绘制
+        layer.drawsAsynchronously = true
+        
+        // 栅格化 - 异步绘制之后，会生成一张独立的图像，cell在屏幕上滚动的时候，本质滚动的是这张图片
+        layer.shouldRasterize = true
+        
+        // 使用栅格化，需要指定分辨率
+        layer.rasterizationScale = UIScreen.main.scale
+    }
 }

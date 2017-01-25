@@ -28,6 +28,8 @@
 		B267FE4D1E16C32300B1C1F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B5D7F1D11298E00C5AC8F /* CoreGraphics.framework */; };
 		B267FE4F1E16C34400B1C1F7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B267FE4E1E16C34400B1C1F7 /* UserNotifications.framework */; };
 		B267FE521E16CF3F00B1C1F7 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B267FE511E16CF3F00B1C1F7 /* libresolv.tbd */; };
+		B2758C971E38361A00672532 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2758C961E38361A00672532 /* UIImageExtension.swift */; };
+		B2758C991E38363600672532 /* UIImageViewWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2758C981E38363600672532 /* UIImageViewWebImage.swift */; };
 		B28A0ECF1D34CEDC00C387C7 /* JFHotsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */; };
 		B28A0ED01D34CEDC00C387C7 /* JFHotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A0ECE1D34CEDC00C387C7 /* JFHotsViewController.swift */; };
 		B28A0ED21D34D41E00C387C7 /* loading in Resources */ = {isa = PBXBuildFile; fileRef = B28A0ED11D34D41E00C387C7 /* loading */; };
@@ -164,6 +166,8 @@
 		B267FE4E1E16C34400B1C1F7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B267FE501E16C35F00B1C1F7 /* BaoKanIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BaoKanIOS.entitlements; sourceTree = "<group>"; };
 		B267FE511E16CF3F00B1C1F7 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		B2758C961E38361A00672532 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		B2758C981E38363600672532 /* UIImageViewWebImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewWebImage.swift; sourceTree = "<group>"; };
 		B28A0ECD1D34CEDC00C387C7 /* JFHotsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JFHotsViewController.storyboard; sourceTree = "<group>"; };
 		B28A0ECE1D34CEDC00C387C7 /* JFHotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFHotsViewController.swift; sourceTree = "<group>"; };
 		B28A0ED11D34D41E00C387C7 /* loading */ = {isa = PBXFileReference; lastKnownFileType = folder; path = loading; sourceTree = "<group>"; };
@@ -445,6 +449,8 @@
 		B29B5C551D1126F500C5AC8F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B2758C981E38363600672532 /* UIImageViewWebImage.swift */,
+				B2758C961E38361A00672532 /* UIImageExtension.swift */,
 				B29B5C561D1126F500C5AC8F /* Color+Extension.swift */,
 				B29B5C571D1126F500C5AC8F /* String+Extension.swift */,
 				B29B5C581D1126F500C5AC8F /* UIImage+Extension.swift */,
@@ -1005,6 +1011,7 @@
 				B29B5DA41D1137C700C5AC8F /* JFNewsDALManager.swift in Sources */,
 				B29B5D021D1126F500C5AC8F /* UIView+Extension.swift in Sources */,
 				B24B96F61D460ADC004B8BBE /* JFSearchKeyboardTableView.swift in Sources */,
+				B2758C971E38361A00672532 /* UIImageExtension.swift in Sources */,
 				B29B5D2C1D1126F500C5AC8F /* JFProgressView.swift in Sources */,
 				B29B5D8A1D11366D00C5AC8F /* JFNewsPhotoBrowserViewController.swift in Sources */,
 				B214FA981D4B3480006A9DD6 /* JFDetailOtherNoneCell.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				B29B5D361D1126F500C5AC8F /* JFDutyViewController.swift in Sources */,
 				B24B96F81D460B10004B8BBE /* JFPlaceholderView.swift in Sources */,
 				B29B5D321D1126F500C5AC8F /* JFModifyInfoTableViewController.swift in Sources */,
+				B2758C991E38363600672532 /* UIImageViewWebImage.swift in Sources */,
 				B21839F81E177F180016B472 /* JFNewsPhotoModalAnimation.swift in Sources */,
 				B29B5D0B1D1126F500C5AC8F /* JFNewsTableViewController.swift in Sources */,
 				B21839FC1E177F180016B472 /* JFPresentationController.swift in Sources */,

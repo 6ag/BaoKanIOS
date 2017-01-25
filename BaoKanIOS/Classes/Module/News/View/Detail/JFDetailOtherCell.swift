@@ -20,15 +20,15 @@ class JFDetailOtherCell: UITableViewCell {
         didSet {
             if let titlepic = model?.titlepic {
                 iconImageView.isHidden = false
-                model!.titlepic = model!.titlepic!.hasPrefix("http") ? model!.titlepic! : "http://www.baokan.name\(model!.titlepic!)"
-                iconImageView.yy_setImage(with: URL(string: model!.titlepic!), placeholder: UIImage(named: "list_placeholder"))
+                model?.titlepic = model?.titlepic?.hasPrefix("http") == true ? titlepic : "http://www.baokan.name\(titlepic)"
+                iconImageView.setImage(urlString: titlepic, placeholderImage: UIImage(named: "placeholder_logo"))
             } else {
                 iconImageView.isHidden = true
             }
             
-            articleTitleLabel.text = model!.title!
-            befromLabel.text = model!.classname!
-            showNumLabel.text = model!.onclick!
+            articleTitleLabel.text = model?.title
+            befromLabel.text = model?.classname
+            showNumLabel.text = model?.onclick
         }
     }
 }
