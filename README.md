@@ -10,12 +10,6 @@
 
 集成推送、第三方分享、第三方登录等SDK，项目代码注释清晰，适合swift新手参考。
 
-## AppStore
-
-<a target='_blank' href='https://itunes.apple.com/app/id1115587250'>
-<img src='http://ww2.sinaimg.cn/large/0060lm7Tgw1f1hgrs1ebwj308102q0sp.jpg' width='144' height='49' />
-</a>
-
 ## 相关链接
 
 + [BaoKanAndroid 本项目Android端](https://github.com/6ag/BaoKanAndroid)
